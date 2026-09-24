@@ -828,6 +828,13 @@ footer.site a:hover{color:#fff}
       if(msg) msg.textContent = (pendingBookFiles.length? "✓ "+pendingBookFiles.length+" file"+(pendingBookFiles.length>1?"s":"")+" ready to send with your request. ":"") + (big.length? "Too large to upload here: "+big.join(", ")+". Reply to our email with it attached.":"");
       ub.value=""; }); };
   }
+  // GUIDE OPENED: any click on a /guides/*.pdf link is recorded on the lead
+  // (only once we know who they are). Latest open + a running count.
+  document.addEventListener("click", function(e){
+    var a = e.target.closest && e.target.closest('a[href^="/guides/"]'); if(!a || !(who.email||who.phone)) return;
+    var n = (parseInt(localStorage.getItem("wdd_guide_opens")||"0",10)||0)+1; try{ localStorage.setItem("wdd_guide_opens", String(n)); }catch(_){}
+    sendLead(null,{extra:{guide_opened_at:new Date().toISOString(), guide_opened_edition:(a.getAttribute("href").split("/").pop()||"").replace(".pdf",""), guide_open_count:String(n)}});
+  }, true);
   // Fire-and-forget: the visitor never waits on the CRM. One retry.
   function sendLead(action, f){
     var r = state.region ? REGIONS[state.region] : null;
@@ -1074,9 +1081,10 @@ footer.site a:hover{color:#fff}
       s.flags.map(function(f){return '<div class="flag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L1 21h22L12 2z" fill="#C4561A"/><rect x="11" y="9" width="2" height="6" fill="#fff"/><rect x="11" y="16.5" width="2" height="2" fill="#fff"/></svg><div><b>'+f[0]+'</b><div class="muted" style="font-size:15px">'+f[1]+'</div></div></div>'}).join("")+
       '<div class="grid2" style="margin-top:18px">'+
         '<div class="panel"><div class="eyebrow">Local rules · '+r.name+'</div>'+r.rules.map(function(x){return '<p style="margin:10px 0 0"><b>'+x[0]+':</b> '+x[1]+'</p>'}).join("")+'</div>'+
-        '<div class="panel"><div class="eyebrow">Total cost estimate (sample)</div>'+(hi?'<div class="est" style="font-family:var(--display);font-stretch:85%;font-weight:800;font-size:36px;margin-top:8px">$'+lo+'k – $'+hi+'k</div><p class="muted" style="margin:4px 0 0;font-size:14px">For the structures that need attention. The real ranges come from local permit data for your city.</p>':'<p style="margin-top:10px">Nothing needs work right now. We\'ll remind you to re-score after storm season.</p>')+'</div>'+
+        '<div class="panel"><div class="eyebrow">Total cost estimate (sample)</div>'+(hi?'<div class="est" style="font-family:var(--display);font-stretch:85%;font-weight:800;font-size:36px;margin-top:8px">$'+lo+'k – $'+hi+'k</div><p class="muted" style="margin:4px 0 0;font-size:14px">For the structures that need attention.</p>':'<p style="margin-top:10px">Nothing needs work right now. We\'ll remind you to re-score after storm season.</p>')+'</div>'+
       '</div>'+
       '<div class="panel" style="margin-top:16px;display:flex;gap:14px;align-items:center;flex-wrap:wrap"><div style="flex:1;min-width:220px"><b>Add photos, plans, permits or drawings</b><div class="muted" style="font-size:14px">They go straight to the inspector with your report. Any file type, up to 6 MB each.</div><div class="fine" data-upmsg style="margin-top:6px"></div></div><label class="btn btn-ghost btn-sm" style="cursor:pointer">Add files<input type="file" multiple data-upload hidden></label></div>';
+    full += '<p class="fine" style="margin:14px 0 0;max-width:80ch"><b>About these numbers:</b> estimates are planning ranges based on typical South Florida projects and the answers you gave. They are not a quote or a bid. Actual cost depends on what the inspection finds, access, permits, engineering and materials. Your Shore Score is a screening, not an engineering inspection or certification.</p>';
     var head =
       '<div class="panel"><div class="report-top"><div class="gauge">'+gauge(s.overall,b[2])+'<div class="num">'+s.overall+'</div><div class="lbl">Shore Score / 100</div></div>'+
       '<div><span class="pill '+b[1]+'">'+b[0]+'</span><h2 style="margin:10px 0 6px">'+(state.addr?esc(state.addr):"Your property")+'</h2><p class="muted" style="margin:0">'+(state.segment==="com"?"Commercial":"Residential")+' · '+r.name+' · '+state.structs.map(function(k){return NAMES[k]}).join(" + ")+' · Confidence: Medium</p>'+

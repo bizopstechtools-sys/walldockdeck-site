@@ -1,0 +1,45 @@
+// Run: node scripts/check-sendlead.mjs index.html  — behavioural check of sendLead (vet 2026-09-24). Fails 8 checks on the pre-vet site.
+// Behavioural check of sendLead against a stubbed browser.
+import fs from "node:fs";
+const html = fs.readFileSync(process.argv[2],"utf8");
+const js = html.match(/<script>([\s\S]*)<\/script>/)[1];
+const start = js.indexOf("  function fnv(str)"); const end = js.indexOf("  function $(s)");
+const chunk = js.slice(start, end > start ? end : undefined);
+const store = {}; const posts = [];
+globalThis.localStorage = { getItem:k=>store[k]??null, setItem:(k,v)=>store[k]=v, removeItem:k=>delete store[k] };
+globalThis.document = { addEventListener(){}, querySelector(){return null}, querySelectorAll(){return []} };
+globalThis.sessionStorage = { getItem:()=>null, setItem:()=>{} };
+globalThis.location = { hash:"#/report", search:"" };
+let status = 200;
+globalThis.fetch = async (u,o)=>{ posts.push({keep:o.keepalive, body:JSON.parse(o.body)}); return {ok:status<400,status}; };
+const ctx = `var state={segment:"com",structs:["seawall"],relation:"owner",addr:"1 Bay St"};var REGIONS={};var NAMES={seawall:"Seawall"};var INTENTS={};
+var TMG={url:"u"}; function consentText(){return "c"} function $(){return null}
+var who;`;
+const fnNames = ["loadWho","saveWho","extIdFor","sendLead","postLead"];
+const f = new Function(ctx + chunk + "\nwho=loadWho();return {" + fnNames.map(n=>`${n}:typeof ${n}==='function'?${n}:null`).join(",") + ", getWho:()=>who, setWho:w=>{who=w}};");
+const api = f(); let fails=0; const ok=(c,m)=>{console.log((c?"PASS ":"FAIL ")+m); if(!c) fails++;};
+for (const n of fnNames) ok(api[n], n+" defined");
+await api.sendLead("guide_download",{name:"A",email:"a@x.com",phone:"",consent:true,addr:"1 Bay Street"});
+const first = posts[0].body;
+ok(first.property_type==="Commercial" && first.consent_given==="yes", "action post carries the form");
+await api.sendLead(null,{extra:{guide_opened_at:"t"}});
+const nul = posts[1].body;
+ok(!("property_type" in nul) && !("consent_given" in nul) && !("services_requested" in nul) && !("page" in nul), "null-action post has no page defaults: "+Object.keys(nul).join(","));
+ok(nul.external_id===first.external_id && nul.email==="a@x.com", "null-action post attaches to the same lead");
+await api.sendLead("score_report",{name:"A",email:"a@x.com",phone:"",consent:true,addr:"1 Bay St"});
+ok(posts[2].body.external_id===first.external_id, "same person, address typed differently → same lead");
+await api.sendLead("inspection_request",{name:"B",email:"b@y.com",phone:"",consent:true,addr:"1 Bay St"});
+ok(posts[3].body.external_id!==first.external_id && posts[3].body.email==="b@y.com", "different person → different lead");
+await api.sendLead("inspection_request",{name:"",email:"",phone:"3055550000",consent:true,addr:"1 Bay St"});
+ok(!("email" in posts[4].body), "action post never borrows a remembered email");
+const big = "x".repeat(70000);
+await api.sendLead(null,{files:[{name:"p.pdf",data:big}]});
+ok(posts.at(-1).keep===false, "upload post is NOT keepalive (64KB limit)");
+ok(posts[1].keep===true, "small post keeps keepalive");
+let n=posts.length; status=429; await api.sendLead(null,{extra:{guide_opened_at:"t2"}});
+ok(posts.length-n===1, "429 is not retried");
+n=posts.length; status=503; globalThis.setTimeout=(fn)=>fn(); await api.sendLead(null,{extra:{guide_opened_at:"t3"}});
+ok(posts.length-n===2, "5xx retried once");
+store.wdd_who = JSON.stringify({email:"old@x.com",ts:Date.now()-31*24*3600e3});
+ok(!api.loadWho().email && !store.wdd_who, "who expires after 30 days");
+process.exit(fails?1:0);

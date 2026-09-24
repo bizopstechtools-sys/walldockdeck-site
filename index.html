@@ -777,13 +777,18 @@ footer.site a:hover{color:#fff}
   };
   function fnv(str){ var h=0x811c9dc5; for(var i=0;i<str.length;i++){ h^=str.charCodeAt(i); h=Math.imul(h,0x01000193)>>>0; } return h.toString(36); }
   function normAddr(a){ return String(a||"").toLowerCase().replace(/[^a-z0-9]/g,""); }
-  function loadWho(){ try{ return JSON.parse(localStorage.getItem("wdd_who")||"{}"); }catch(e){ return {}; } }
-  function saveWho(w){ try{ localStorage.setItem("wdd_who", JSON.stringify(w)); }catch(e){} }
+  // Remembered for 30 days on this browser, then forgotten (shared computers).
+  var WHO_TTL = 30*24*3600*1000;
+  function loadWho(){ try{ var w=JSON.parse(localStorage.getItem("wdd_who")||"{}"); if(!w.ts || Date.now()-w.ts>WHO_TTL){ localStorage.removeItem("wdd_who"); return {}; } return w; }catch(e){ return {}; } }
+  function saveWho(w){ try{ w.ts=Date.now(); localStorage.setItem("wdd_who", JSON.stringify(w)); }catch(e){} }
   var who = loadWho();   // {name,email,phone,consent,extId,addr}
   // property + owner, never the property alone (a new owner is a new lead)
   function extIdFor(addr, email, phone){
     var owner = String(email||"").trim().toLowerCase() || String(phone||"").replace(/\D/g,"");
-    if(who.extId && who.addrKey===normAddr(addr) && who.ownerKey===owner) return who.extId;
+    // Same person on this browser keeps ONE lead even if they type the address
+    // differently between steps ("St" vs "Street"). A different email/phone is
+    // a different person → a new lead.
+    if(who.extId && owner && who.ownerKey===owner) return who.extId;
     var id = "wdd:"+fnv(normAddr(addr)||"noaddr")+":"+fnv(owner||String(Date.now()));
     who.extId=id; who.addrKey=normAddr(addr); who.ownerKey=owner; return id;
   }
@@ -820,8 +825,12 @@ footer.site a:hover{color:#fff}
     var msg=root.querySelector("[data-upmsg]");
     var up=root.querySelector("[data-upload]");
     if(up) up.onchange=function(){ readFiles(up.files, function(ok,big){
-      for(var i=0;i<ok.length;i+=4){ sendLead(null,{name:who.name,email:who.email,phone:who.phone,files:ok.slice(i,i+4),extra:{files_note:"Uploaded from the report"}}); }
-      if(msg) msg.textContent = (ok.length? "✓ "+ok.length+" file"+(ok.length>1?"s":"")+" sent to your inspector. ":"") + (big.length? "Too large to upload here: "+big.join(", ")+". Reply to our email with it attached.":"");
+      if(msg && ok.length) msg.textContent = "Uploading "+ok.length+" file"+(ok.length>1?"s":"")+"…";
+      var sends=[]; for(var i=0;i<ok.length;i+=4){ sends.push(sendLead(null,{files:ok.slice(i,i+4),extra:{files_note:"Uploaded from the report"}})); }
+      Promise.all(sends).then(function(results){
+        var failed = results.some(function(res){ return !res || !res.ok; });
+        if(msg) msg.textContent = (ok.length ? (failed ? "Some files didn't upload. Reply to our email with them attached. " : "✓ "+ok.length+" file"+(ok.length>1?"s":"")+" sent to your inspector. ") : "") + (big.length? "Too large to upload here: "+big.join(", ")+". Reply to our email with it attached.":"");
+      });
       up.value=""; }); };
     var ub=root.querySelector("[data-upload-book]");
     if(ub) ub.onchange=function(){ readFiles(ub.files, function(ok,big){ pendingBookFiles=pendingBookFiles.concat(ok).slice(0,8);
@@ -838,17 +847,29 @@ footer.site a:hover{color:#fff}
   // Fire-and-forget: the visitor never waits on the CRM. One retry.
   function sendLead(action, f){
     var r = state.region ? REGIONS[state.region] : null;
-    var p = Object.assign({
-      full_name: f.name||who.name||"",
-      email: f.email||who.email||"",
-      phone: f.phone||who.phone||"",
-      property_address: f.addr||state.addr||who.addr||"",
+    var p;
+    if(!action){
+      // A follow-up signal (guide opened, files added) is NOT a form: send only
+      // who this is + the new facts. Re-sending page defaults here overwrote a
+      // real lead's answers (Commercial → Residential, consent yes → no).
+      p = Object.assign({ full_name: who.name||"", email: who.email||"", phone: who.phone||"" }, f.extra||{});
+      p.external_id = who.extId || extIdFor(who.addr||"", who.email, who.phone);
+      if(f.files && f.files.length) p.__attachments = f.files;
+      Object.keys(p).forEach(function(k){ if(p[k]===""||p[k]==null) delete p[k]; });
+      if(!p.email && !p.phone) return Promise.resolve(); // nobody known yet — nothing to attach it to
+      return postLead(p);
+    }
+    p = Object.assign({
+      full_name: f.name||"",
+      email: f.email||"",
+      phone: f.phone||"",
+      property_address: f.addr||state.addr||"",
       region: r ? r.name : "",
       guide_edition: state.region||"",
       property_type: (f.segment||state.segment)==="com" ? "Commercial" : "Residential",
       relationship: state.relation||"",
       services_requested: (f.structs||state.structs||[]).map(function(k){return NAMES[k]}).join(", "),
-      lead_source_action: action||"",
+      lead_source_action: action,
       intent: state.intent ? INTENTS[state.intent].t : "",
       page: location.hash||"#/",
       consent_given: f.consent ? "yes" : "no",
@@ -857,13 +878,22 @@ footer.site a:hover{color:#fff}
     }, utm(), f.extra||{});
     p.external_id = extIdFor(p.property_address, p.email, p.phone);
     if(f.files && f.files.length) p.__attachments = f.files;
-    who.name=p.full_name; who.email=p.email; who.phone=p.phone; who.addr=p.property_address; if(f.consent) who.consent=true; saveWho(who);
+    who.name=p.full_name||who.name; who.email=p.email||who.email; who.phone=p.phone||who.phone; who.addr=p.property_address||who.addr; if(f.consent) who.consent=true; saveWho(who);
     Object.keys(p).forEach(function(k){ if(p[k]===""||p[k]==null) delete p[k]; });
+    return postLead(p);
+  }
+  function postLead(p){
     var body = JSON.stringify(p);
+    // keepalive lets a post survive the visitor navigating away — but browsers
+    // REJECT keepalive bodies over 64 KB, which silently dropped every upload.
+    var keep = body.length < 60000;
     function post(retry){
-      return fetch(TMG.url,{method:"POST",headers:{"content-type":"application/json"},body:body,keepalive:true,mode:"cors"})
-        .then(function(res){ if(!res.ok && retry) return new Promise(function(ok){setTimeout(ok,1500)}).then(function(){return post(false)}); return res; })
-        .catch(function(){ if(retry) return new Promise(function(ok){setTimeout(ok,1500)}).then(function(){return post(false)}); });
+      var again = function(){ return new Promise(function(ok){setTimeout(ok,1500)}).then(function(){return post(false)}); };
+      return fetch(TMG.url,{method:"POST",headers:{"content-type":"application/json"},body:body,keepalive:keep,mode:"cors"})
+        // Retry only what a retry can fix: a network failure or a server error.
+        // A 4xx (rate limit, too large, bad request) would just burn a slot.
+        .then(function(res){ if(res.status>=500 && retry) return again(); return res; })
+        .catch(function(){ if(retry) return again(); });
     }
     return post(true);
   }

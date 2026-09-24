@@ -804,6 +804,30 @@ footer.site a:hover{color:#fff}
     out.score_engine_version = "site-2026.09.1";
     return out;
   }
+  // FILES (photos, plans, permits, drawings). Any type; the intake caps each
+  // file at 6 MB and a send at 8 files / 14 MB, so we batch and say so.
+  var MAX_FILE = 6*1024*1024;
+  function readFiles(list, cb){
+    var ok=[], big=[], left=list.length; if(!left) return cb(ok,big);
+    Array.prototype.forEach.call(list, function(file, i){
+      if(file.size > MAX_FILE){ big.push(file.name); if(--left===0) cb(ok,big); return; }
+      var fr=new FileReader(); fr.onload=function(){ ok.push({key:"upload_"+Date.now().toString(36)+"_"+i, label:"Photo / document", kind:"file", dataUrl:fr.result, filename:file.name}); if(--left===0) cb(ok,big); };
+      fr.onerror=function(){ big.push(file.name); if(--left===0) cb(ok,big); }; fr.readAsDataURL(file);
+    });
+  }
+  var pendingBookFiles = [];
+  function bindUploads(root){
+    var msg=root.querySelector("[data-upmsg]");
+    var up=root.querySelector("[data-upload]");
+    if(up) up.onchange=function(){ readFiles(up.files, function(ok,big){
+      for(var i=0;i<ok.length;i+=4){ sendLead(null,{name:who.name,email:who.email,phone:who.phone,files:ok.slice(i,i+4),extra:{files_note:"Uploaded from the report"}}); }
+      if(msg) msg.textContent = (ok.length? "✓ "+ok.length+" file"+(ok.length>1?"s":"")+" sent to your inspector. ":"") + (big.length? "Too large to upload here: "+big.join(", ")+". Reply to our email with it attached.":"");
+      up.value=""; }); };
+    var ub=root.querySelector("[data-upload-book]");
+    if(ub) ub.onchange=function(){ readFiles(ub.files, function(ok,big){ pendingBookFiles=pendingBookFiles.concat(ok).slice(0,8);
+      if(msg) msg.textContent = (pendingBookFiles.length? "✓ "+pendingBookFiles.length+" file"+(pendingBookFiles.length>1?"s":"")+" ready to send with your request. ":"") + (big.length? "Too large to upload here: "+big.join(", ")+". Reply to our email with it attached.":"");
+      ub.value=""; }); };
+  }
   // Fire-and-forget: the visitor never waits on the CRM. One retry.
   function sendLead(action, f){
     var r = state.region ? REGIONS[state.region] : null;
@@ -817,7 +841,7 @@ footer.site a:hover{color:#fff}
       property_type: (f.segment||state.segment)==="com" ? "Commercial" : "Residential",
       relationship: state.relation||"",
       services_requested: (f.structs||state.structs||[]).map(function(k){return NAMES[k]}).join(", "),
-      lead_source_action: action,
+      lead_source_action: action||"",
       intent: state.intent ? INTENTS[state.intent].t : "",
       page: location.hash||"#/",
       consent_given: f.consent ? "yes" : "no",
@@ -825,6 +849,7 @@ footer.site a:hover{color:#fff}
       consent_timestamp: f.consent ? new Date().toISOString() : ""
     }, utm(), f.extra||{});
     p.external_id = extIdFor(p.property_address, p.email, p.phone);
+    if(f.files && f.files.length) p.__attachments = f.files;
     who.name=p.full_name; who.email=p.email; who.phone=p.phone; who.addr=p.property_address; if(f.consent) who.consent=true; saveWho(who);
     Object.keys(p).forEach(function(k){ if(p[k]===""||p[k]==null) delete p[k]; });
     var body = JSON.stringify(p);
@@ -1051,7 +1076,7 @@ footer.site a:hover{color:#fff}
         '<div class="panel"><div class="eyebrow">Local rules · '+r.name+'</div>'+r.rules.map(function(x){return '<p style="margin:10px 0 0"><b>'+x[0]+':</b> '+x[1]+'</p>'}).join("")+'</div>'+
         '<div class="panel"><div class="eyebrow">Total cost estimate (sample)</div>'+(hi?'<div class="est" style="font-family:var(--display);font-stretch:85%;font-weight:800;font-size:36px;margin-top:8px">$'+lo+'k – $'+hi+'k</div><p class="muted" style="margin:4px 0 0;font-size:14px">For the structures that need attention. The real ranges come from local permit data for your city.</p>':'<p style="margin-top:10px">Nothing needs work right now. We\'ll remind you to re-score after storm season.</p>')+'</div>'+
       '</div>'+
-      '<div class="panel" style="margin-top:16px;display:flex;gap:14px;align-items:center;flex-wrap:wrap"><div style="flex:1;min-width:220px"><b>Add photos for a more accurate score</b><div class="muted" style="font-size:14px">Our AI photo check reviews your wall, dock or deck, and confidence goes up to High.</div></div><button class="btn btn-ghost btn-sm" type="button">Upload photos</button></div>';
+      '<div class="panel" style="margin-top:16px;display:flex;gap:14px;align-items:center;flex-wrap:wrap"><div style="flex:1;min-width:220px"><b>Add photos, plans, permits or drawings</b><div class="muted" style="font-size:14px">They go straight to the inspector with your report. Any file type, up to 6 MB each.</div><div class="fine" data-upmsg style="margin-top:6px"></div></div><label class="btn btn-ghost btn-sm" style="cursor:pointer">Add files<input type="file" multiple data-upload hidden></label></div>';
     var head =
       '<div class="panel"><div class="report-top"><div class="gauge">'+gauge(s.overall,b[2])+'<div class="num">'+s.overall+'</div><div class="lbl">Shore Score / 100</div></div>'+
       '<div><span class="pill '+b[1]+'">'+b[0]+'</span><h2 style="margin:10px 0 6px">'+(state.addr?esc(state.addr):"Your property")+'</h2><p class="muted" style="margin:0">'+(state.segment==="com"?"Commercial":"Residential")+' · '+r.name+' · '+state.structs.map(function(k){return NAMES[k]}).join(" + ")+' · Confidence: Medium</p>'+
@@ -1086,6 +1111,7 @@ footer.site a:hover{color:#fff}
       sendLead("score_report",{name:n,email:e,phone:p,consent:c,extra:scoreFields()});
       state.unlocked=true; renderReport();
     };
+    bindUploads(el);
     el.querySelectorAll("[data-mode]").forEach(function(x){x.onclick=function(){state.mode=x.dataset.mode; renderReport();}});
     el.querySelectorAll("[data-dockinfo]").forEach(function(x){x.onclick=function(){state.dockInfo = x.dataset.dockinfo==="1"; renderReport();}});
     el.querySelectorAll("[data-dockadd]").forEach(function(x){x.onclick=function(){if(state.structs.indexOf("dock")<0) state.structs.push("dock"); state.dockQ="include"; state.dockInfo=false; renderReport();}});
@@ -1124,10 +1150,11 @@ footer.site a:hover{color:#fff}
       '<div class="row2"><div class="field"><label for="dName">Full name</label><input id="dName" autocomplete="name" value="'+esc(who.name||"")+'"></div><div class="field"><label for="dPhone">Mobile phone</label><input id="dPhone" autocomplete="tel" inputmode="tel" value="'+esc(who.phone||"")+'"></div></div>'+
       '<div class="field"><label for="dEmail">Email</label><input id="dEmail" autocomplete="email" inputmode="email" value="'+esc(who.email||"")+'"></div>'+
       '<label class="consent"><input type="checkbox" id="dConsent"><span id="dConsentText">'+consentText(r)+'</span></label>'+
-      '<button class="btn btn-cta" style="width:100%" id="dBook">'+(bk.mode==="pick"?"Request my inspection":"Request a call")+'</button><p class="fine" id="dErr" style="color:var(--act);margin:8px 0 0"></p>'+
+      '<div class="field"><span class="flabel">Photos, plans, permits or drawings (optional)</span><label class="btn btn-ghost btn-sm" style="cursor:pointer;margin-top:6px">Add files<input type="file" multiple data-upload-book hidden></label><div class="fine" data-upmsg style="margin-top:6px"></div></div><button class="btn btn-cta" style="width:100%" id="dBook">'+(bk.mode==="pick"?"Request my inspection":"Request a call")+'</button><p class="fine" id="dErr" style="color:var(--act);margin:8px 0 0"></p>'+
       '<p class="skip">Want to know your score first? <a href="#/start">Take the 2-minute Health Check</a></p></div>';
     el.querySelectorAll("[data-bseg]").forEach(function(x){x.onclick=function(){bk.segment=x.dataset.bseg; renderBook();}});
     el.querySelectorAll("[data-bs]").forEach(function(x){x.onclick=function(){var s=x.dataset.bs,i=bk.structs.indexOf(s); if(i>-1){if(bk.structs.length>1) bk.structs.splice(i,1);} else bk.structs.push(s); renderBook();}});
+    bindUploads(el);
     el.querySelectorAll("[data-mode]").forEach(function(x){x.onclick=function(){bk.mode=x.dataset.mode; renderBook();}});
     el.querySelectorAll("[data-slot]").forEach(function(x){x.onclick=function(){bk.slot=x.dataset.slot; el.querySelectorAll("[data-slot]").forEach(function(y){y.setAttribute("aria-pressed", y===x)});}});
     var bdi=$("#bDockInfo"); if(bdi) bdi.onchange=function(){bk.dockInfo=bdi.checked};
@@ -1139,12 +1166,14 @@ footer.site a:hover{color:#fff}
       if(!state.region){ $("#dErr").textContent="Choose a region."; return; }
       if(!$("#dName").value.trim()||!$("#dPhone").value.trim()||!$("#bAddr").value.trim()){ $("#dErr").textContent="Add your name, phone and property address."; return; }
       state.addr=$("#bAddr").value.trim();
-      sendLead("inspection_request",{name:$("#dName").value.trim(),email:$("#dEmail").value.trim(),phone:$("#dPhone").value.trim(),consent:$("#dConsent").checked,segment:bk.segment,structs:bk.structs,addr:state.addr,extra:{
+      sendLead("inspection_request",{name:$("#dName").value.trim(),email:$("#dEmail").value.trim(),phone:$("#dPhone").value.trim(),consent:$("#dConsent").checked,segment:bk.segment,structs:bk.structs,addr:state.addr,files:pendingBookFiles.slice(0,4),extra:{
         booking_mode: bk.mode==="pick" ? "Picked a time" : "Call me to schedule",
         booking_slot: bk.mode==="pick" ? (bk.slot||"") : "",
         booking_best_time: $("#bBest2") ? $("#bBest2").value : "",
         dock_info_requested: bk.dockInfo ? "yes" : "no"
       }});
+      if(pendingBookFiles.length>4){ var rest=pendingBookFiles.slice(4); setTimeout(function(){ sendLead(null,{files:rest}); },2500); }
+      pendingBookFiles=[];
       bk.done=true; renderBook(); window.scrollTo(0,0);
     };
   }

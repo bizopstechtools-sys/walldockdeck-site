@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="WallDockDeck: find out what your seawall, dock or deck needs, what it costs and what your city requires. Free check for the Florida Keys, Miami-Dade, Broward and Palm Beach.">
+<title>WallDockDeck | Free Shore Score + Waterfront Guide for South Florida</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  color-scheme: light;
+  --ground:#F4F7F8; --surface:#FFFFFF; --ink:#0B2536; --ink-2:#4A6070; --ink-3:#7A8C98;
+  --line:#D8E1E6; --navy:#0B2536; --navy-2:#123549; --on-navy:#E8F1F5; --on-navy-2:#9FB7C4;
+  --teal:#0F7482; --teal-soft:#E0EFF1; --cta:#E0701A; --cta-hover:#C85F10;
+  --good:#2E7D4F; --good-soft:#E3F2E8; --watch:#9A7400; --watch-soft:#FBF2D6;
+  --risk:#C4561A; --risk-soft:#FCE9DD; --act:#B3261E; --act-soft:#FBE3E1;
+  --display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --body:"Source Sans 3",-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --r:8px;
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;margin:0}
+a{color:var(--teal)}
+button,input,select{font:inherit}
+:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:20px}
+h1,h2,h3{font-family:var(--display);font-stretch:85%;line-height:1.05;letter-spacing:-.01em;text-wrap:balance;margin:0}
+h1{font-size:clamp(38px,6vw,64px);font-weight:750}
+h2{font-size:clamp(28px,3.6vw,40px);font-weight:700}
+h3{font-size:22px;font-weight:650}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)}
+.muted{color:var(--ink-2)}
+.proto{background:#FFF4E6;color:#7A3E00;font-size:13px;text-align:center;padding:6px 16px;border-bottom:1px solid #F3D9B8}
+
+/* nav */
+header.site{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:env(safe-area-inset-top,0px);z-index:20}
+.nav{display:flex;align-items:center;gap:20px;height:66px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);flex:none}
+.logo svg{width:34px;height:34px;flex:none}
+.logo b{font-family:var(--display);font-stretch:80%;font-weight:800;font-size:22px;letter-spacing:-.01em}
+.logo b span{color:var(--teal)}
+.links{display:flex;gap:16px}
+.links a{color:var(--ink);text-decoration:none;font-weight:600;font-size:15px;padding:6px 0;border-bottom:2px solid transparent;white-space:nowrap}
+.links a:hover,.links a.on{border-bottom-color:var(--teal)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.region-pick select{border:1px solid var(--line);border-radius:6px;padding:7px 8px;background:var(--surface);color:var(--ink);font-weight:600;font-size:14px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:var(--r);padding:12px 20px;font-weight:700;cursor:pointer;text-decoration:none;font-size:16px;white-space:nowrap}
+.btn-cta{background:var(--cta);color:#fff}
+.btn-cta:hover{background:var(--cta-hover)}
+.btn-ghost{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--ink-2)}
+.btn-navy{background:var(--navy);color:#fff}
+.btn-navy:hover{background:var(--navy-2)}
+.btn-light{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.45)}
+.btn-light:hover{border-color:#fff}
+.btn-sm{padding:9px 14px;font-size:14px}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.menu-btn{display:none}
+
+/* hero */
+.hero{background:var(--navy);color:var(--on-navy);position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;opacity:.18;
+  background:repeating-radial-gradient(ellipse at 88% 120%, transparent 0 26px, rgba(159,183,196,.55) 26px 27px);}
+.hero .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px;padding-block:64px 72px;align-items:center}
+.hero .eyebrow{color:#7FC6CF}
+.hero p.lede{font-size:19px;color:var(--on-navy-2);max-width:54ch;margin:18px 0 0}
+.startcard{background:var(--surface);color:var(--ink);border-radius:12px;padding:24px;box-shadow:0 20px 50px rgba(0,0,0,.28)}
+.startcard h3{margin-bottom:4px}
+.entry{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0 14px}
+.entrybtn{display:grid;gap:4px;justify-items:start;text-align:left;border:1.5px solid var(--line);border-radius:10px;padding:16px;background:var(--surface);cursor:pointer;color:var(--ink);transition:border-color .15s, background .15s}
+.entrybtn:hover{border-color:var(--cta);background:#FFF7F0}
+.entrybtn svg{width:34px;height:34px;margin-bottom:4px}
+.entrybtn b{font-family:var(--display);font-stretch:85%;font-size:21px}
+.entrybtn span{font-size:14px;color:var(--ink-2)}
+.entrybtn i{font-style:normal;font-weight:700;color:var(--cta);font-size:14px;margin-top:6px}
+.intents{display:grid;gap:8px;margin:16px 0 12px}
+.intentbtn{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:center;text-align:left;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--surface);cursor:pointer;color:var(--ink)}
+.intentbtn:hover{border-color:var(--cta);background:#FFF7F0}
+.intentbtn b{font-size:16.5px;display:block}
+.intentbtn span{font-size:13.5px;color:var(--ink-2)}
+.intentbtn i{font-style:normal;color:var(--cta);font-weight:800}
+.intentbtn svg{width:30px;height:30px}
+.or{display:flex;align-items:center;gap:10px;color:var(--ink-3);font-size:13px;margin:4px 0 12px}
+.or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
+.field{display:grid;gap:6px;margin-bottom:12px}
+.field label,.flabel{font-size:14px;font-weight:600}
+.field input,.field select,.field textarea{border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;background:var(--surface);color:var(--ink);width:100%}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:8px 14px;font-weight:600;cursor:pointer;color:var(--ink);display:inline-flex;gap:6px;align-items:center;font-size:15px}
+.chip[aria-pressed="true"]{border-color:var(--teal);background:var(--teal-soft);color:var(--teal)}
+.fine{font-size:13px;color:var(--ink-3)}
+.lede-big{font-size:21px!important;color:var(--on-navy)!important;line-height:1.5}
+.lede-big b{color:#fff}
+.gets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:26px}
+.gets > div{display:grid;grid-template-columns:26px 1fr;gap:10px;align-items:start;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:12px;font-size:14px;color:var(--on-navy-2)}
+.gets svg{width:24px;height:24px}
+.gets b{display:block;color:#fff;font-family:var(--display);font-stretch:85%;font-size:19px;line-height:1.1;margin-bottom:2px}
+.cardsub{font-weight:700;color:var(--teal);font-size:15px;margin:2px 0 4px}
+.dockq{margin-top:22px;border-top:1px solid var(--line);padding-top:18px}
+.estline{font-variant-numeric:tabular-nums;font-weight:700;font-size:14px;color:var(--ink);background:var(--ground);border-radius:6px;padding:6px 8px;margin-top:4px}
+.planbox{margin-top:16px;border:1.5px dashed var(--teal);background:var(--teal-soft);border-radius:12px;padding:18px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.planbox > div{flex:1;min-width:240px}
+.inline-check{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:start;border:1px dashed var(--teal);background:var(--teal-soft);border-radius:8px;padding:10px 12px;margin:4px 0 14px;font-size:15px}
+.inline-check input{width:18px;height:18px;margin-top:2px;accent-color:var(--teal)}
+
+section.band{padding-block:64px}
+.band.alt{background:var(--surface);border-block:1px solid var(--line)}
+.head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:28px}
+.head p{margin:8px 0 0;max-width:60ch}
+
+/* region cards */
+.regions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.rcard{background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;color:var(--ink);transition:border-color .15s}
+.rcard:hover{border-color:var(--teal)}
+.rmap{height:92px;background:var(--teal-soft);position:relative}
+.rmap svg{position:absolute;inset:0;width:100%;height:100%}
+.rbody{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.rbody .county{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.rbody p{margin:0;font-size:14.5px;color:var(--ink-2);flex:1}
+.rbody .go{font-weight:700;color:var(--teal);font-size:14px;text-decoration:none}
+.rbody .btn{width:100%}
+
+/* services */
+.services{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.scard{border:1px solid var(--line);border-radius:10px;padding:22px;background:var(--surface);display:flex;flex-direction:column;gap:10px}
+.scard svg{width:44px;height:44px}
+.scard ul{margin:0;padding-left:18px;color:var(--ink-2);font-size:15px}
+.scard .actions{margin-top:auto;padding-top:8px;display:grid;gap:8px}
+.scard .actions a.link{font-weight:700;text-decoration:none;font-size:14px}
+.bundle{margin-top:16px;background:var(--navy);color:var(--on-navy);border-radius:10px;padding:18px 22px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.bundle p{margin:0;flex:1;min-width:240px}
+.bundle b{color:#fff}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;counter-reset:s}
+.steps > div{border-top:3px solid var(--teal);padding-top:14px}
+.steps > div::before{counter-increment:s;content:"Step " counter(s);font-family:var(--mono);font-size:12px;color:var(--teal);letter-spacing:.06em}
+.steps h3{margin:6px 0}
+.steps p{margin:0;color:var(--ink-2)}
+
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center}
+.trust{display:grid;gap:14px}
+.trust > div{display:grid;grid-template-columns:28px 1fr;gap:12px}
+.trust svg{width:24px;height:24px;margin-top:2px}
+.trust p{margin:2px 0 0;color:var(--ink-2);font-size:15px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:24px}
+
+/* global CTA band */
+.ctaband{background:var(--teal);color:#fff}
+.ctaband .wrap{display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding-block:32px}
+.ctaband h2{font-size:30px;flex:1;min-width:260px}
+.ctaband p{margin:6px 0 0;color:#D6EEF1;font-weight:400;font-family:var(--body);font-size:16px;letter-spacing:0}
+
+/* region page */
+.rhero{background:var(--navy);color:var(--on-navy)}
+.rhero .wrap{padding-block:44px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:32px;align-items:center}
+.crumbs{font-size:13px;color:var(--on-navy-2);margin-bottom:10px}
+.crumbs a{color:var(--on-navy-2)}
+.rulebox{border-left:4px solid var(--teal);background:var(--teal-soft);border-radius:0 8px 8px 0;padding:14px 16px}
+.rulebox b{display:block;margin-bottom:2px}
+.citylist{display:flex;flex-wrap:wrap;gap:8px}
+.citylist a{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:6px 12px;text-decoration:none;color:var(--ink);font-weight:600;font-size:14px}
+.citylist a:hover{border-color:var(--teal)}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.issue{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px}
+.issue b{font-family:var(--display);font-stretch:85%;font-size:19px}
+.issue p{margin:4px 0 0;color:var(--ink-2);font-size:15px}
+.costs{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.costs td{padding:12px 0}
+.costs tr + tr{border-top:1px solid var(--line)}
+.costs td:last-child{text-align:right;color:var(--ink-3);font-family:var(--mono);font-size:13px}
+.stack{display:grid;gap:12px}
+
+/* learn */
+.cats{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.articles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.acard{background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:var(--ink);transition:border-color .15s}
+.acard:hover{border-color:var(--teal)}
+.acard .thumb{height:110px;background:var(--teal-soft);position:relative;overflow:hidden}
+.acard .thumb svg{position:absolute;inset:0;width:100%;height:100%}
+.acard .body{padding:16px;display:grid;gap:8px;align-content:start;flex:1}
+.acard h3{font-size:20px}
+.acard .meta{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--teal)}
+.acard p{margin:0;color:var(--ink-2);font-size:14.5px}
+.tag{display:inline-block;font-size:12px;font-weight:600;color:var(--ink-2);background:var(--ground);border:1px solid var(--line);border-radius:4px;padding:1px 7px;margin-right:4px}
+.article{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:40px;align-items:start}
+.prose{max-width:68ch;font-size:17.5px;line-height:1.7}
+.prose h2{font-size:30px;margin:34px 0 10px}
+.prose p{margin:0 0 16px}
+.prose ul{padding-left:20px;margin:0 0 16px}
+.inline-cta{border:1px solid var(--line);border-left:4px solid var(--cta);background:var(--surface);border-radius:0 10px 10px 0;padding:18px 20px;margin:26px 0;display:grid;gap:10px}
+.inline-cta b{font-family:var(--display);font-stretch:85%;font-size:22px}
+.sidebar{position:sticky;top:calc(env(safe-area-inset-top,0px) + 86px);display:grid;gap:14px}
+.sidebar .panel{padding:20px}
+.sidebar .btn{width:100%}
+
+/* wizard */
+.wiz{max-width:760px;margin:0 auto;padding-block:40px 64px}
+.progress{display:flex;gap:6px;margin-bottom:8px}
+.progress i{flex:1;height:6px;border-radius:3px;background:var(--line)}
+.progress i.done{background:var(--teal)}
+.stepname{font-family:var(--mono);font-size:12px;color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:18px}
+.qcard{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:28px}
+.qcard h2{font-size:30px;margin-bottom:6px}
+.opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:20px}
+.opt{text-align:left;border:1.5px solid var(--line);background:var(--surface);border-radius:10px;padding:16px;cursor:pointer;display:grid;gap:4px;color:var(--ink)}
+.opt b{font-size:17px}
+.opt span{font-size:14px;color:var(--ink-2)}
+.opt[aria-pressed="true"]{border-color:var(--teal);background:var(--teal-soft)}
+.opts.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.opt svg{width:36px;height:36px;margin-bottom:6px}
+.wiz-nav{display:flex;justify-content:space-between;gap:12px;margin-top:20px;flex-wrap:wrap}
+.checks{display:grid;gap:8px;margin-top:10px}
+.checks label{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:start;padding:10px 12px;border:1px solid var(--line);border-radius:8px;cursor:pointer}
+.checks input{width:18px;height:18px;margin-top:2px;accent-color:var(--teal)}
+.checks .rf{font-family:var(--mono);font-size:11px;color:var(--act);margin-left:6px}
+.struct-block{margin-top:22px}
+.struct-block h3{display:flex;align-items:center;gap:10px}
+.struct-block h3 svg{width:26px;height:26px}
+.row2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.detected{display:flex;align-items:center;gap:8px;margin-top:4px;font-size:14px;color:var(--good)}
+.skip{font-size:14px;margin-top:14px;text-align:center}
+
+/* report */
+.report-top{display:grid;grid-template-columns:260px minmax(0,1fr);gap:28px;align-items:center}
+.gauge{position:relative;width:240px;height:150px;margin:0 auto}
+.gauge svg{width:240px;height:150px}
+.gauge .num{position:absolute;left:0;right:0;top:62px;text-align:center;font-family:var(--display);font-stretch:85%;font-weight:800;font-size:56px;line-height:1}
+.gauge .lbl{position:absolute;left:0;right:0;top:122px;text-align:center;font-size:13px;color:var(--ink-2)}
+.pill{display:inline-block;font-family:var(--mono);font-size:12px;font-weight:500;padding:3px 10px;border-radius:999px;letter-spacing:.04em}
+.b-ready{background:var(--good-soft);color:var(--good)}
+.b-watch{background:var(--watch-soft);color:var(--watch)}
+.b-risk{background:var(--risk-soft);color:var(--risk)}
+.b-act{background:var(--act-soft);color:var(--act)}
+.subs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:22px}
+.sub{border:1px solid var(--line);border-radius:10px;padding:16px;background:var(--surface);display:grid;gap:6px;align-content:start}
+.sub .top{display:flex;justify-content:space-between;align-items:center}
+.sub .val{font-family:var(--display);font-stretch:85%;font-weight:800;font-size:36px;line-height:1}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%}
+.sub ul{margin:4px 0 0;padding-left:18px;font-size:14px;color:var(--ink-2)}
+.flag{margin-top:18px;border:1px solid #F0C9A8;background:var(--risk-soft);border-radius:10px;padding:14px 16px;display:grid;grid-template-columns:24px 1fr;gap:12px}
+.flag svg{width:22px;height:22px}
+.locked{position:relative}
+.locked .blur{filter:blur(6px);pointer-events:none;user-select:none}
+.gate{position:absolute;inset:0;display:grid;place-items:center;padding:12px}
+.gate .qcard{max-width:520px;width:100%;box-shadow:0 18px 40px rgba(11,37,54,.18)}
+.consent{display:grid;grid-template-columns:22px 1fr;gap:10px;font-size:13px;color:var(--ink-2);margin:6px 0 14px}
+.consent input{width:18px;height:18px;margin-top:2px;accent-color:var(--teal)}
+.slots{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:12px 0}
+.slot{border:1px solid var(--line);border-radius:8px;padding:10px;background:var(--surface);cursor:pointer;text-align:center;font-size:14px;color:var(--ink)}
+.slot b{display:block;font-size:15px}
+.slot[aria-pressed="true"]{border-color:var(--teal);background:var(--teal-soft)}
+.est{font-variant-numeric:tabular-nums}
+.done-card{text-align:center;padding:40px 24px}
+.done-card svg{width:56px;height:56px}
+.payoff{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,.6fr);gap:16px;margin-top:18px}
+.guide{background:var(--navy);color:var(--on-navy);border-radius:12px;padding:22px;display:grid;gap:10px;align-content:start}
+.guide .cover{height:120px;border-radius:6px;background:linear-gradient(160deg,#123549,#0F7482);display:grid;place-items:center;color:#fff;font-family:var(--display);font-stretch:80%;font-weight:800;font-size:18px;text-align:center;padding:10px;line-height:1.1}
+.mode{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+
+.guideband{display:grid;grid-template-columns:220px minmax(0,1fr) minmax(0,.9fr);gap:32px;align-items:center;background:var(--navy);color:var(--on-navy);border-radius:14px;padding:28px}
+.book3d{width:200px;aspect-ratio:3/4;max-width:100%;border-radius:4px 10px 10px 4px;background:linear-gradient(160deg,#123549 0%,#0F7482 100%);box-shadow:8px 10px 0 rgba(0,0,0,.25), inset 6px 0 0 rgba(255,255,255,.12);padding:18px 16px;display:flex;flex-direction:column;justify-content:space-between;color:#fff;position:relative;overflow:hidden}
+.book3d::after{content:"";position:absolute;left:-20%;right:-20%;bottom:-30px;height:90px;background:repeating-radial-gradient(ellipse at 50% 100%, transparent 0 10px, rgba(255,255,255,.18) 10px 11px)}
+.book3d small{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#9FDDE4}
+.book3d b{font-family:var(--display);font-stretch:80%;font-weight:800;font-size:22px;line-height:1.02}
+.book3d .ed{font-family:var(--display);font-stretch:85%;font-weight:700;font-size:15px;background:#E0701A;color:#fff;border-radius:4px;padding:4px 8px;align-self:flex-start;position:relative;z-index:1}
+.guideband h2{color:#fff;font-size:34px}
+.guideband ul{margin:12px 0 0;padding-left:18px;color:var(--on-navy-2)}
+.guideband ul b{color:#fff}
+.gform{background:var(--surface);color:var(--ink);border-radius:12px;padding:20px}
+.gform .field{margin-bottom:10px}
+.guidepanel{display:grid;grid-template-columns:110px 1fr;gap:16px;align-items:center}
+.guidepanel .book3d{width:110px;padding:10px;box-shadow:5px 6px 0 rgba(0,0,0,.2)}
+.guidepanel .book3d b{font-size:13px}
+.guidepanel .book3d small{font-size:8px}
+.guidepanel .book3d .ed{font-size:10px;padding:2px 5px}
+footer.site{background:var(--navy);color:var(--on-navy-2);padding-block:48px 32px}
+.fgrid{display:grid;grid-template-columns:1.3fr repeat(5,1fr);gap:24px}
+footer.site h4{color:#fff;font-family:var(--display);font-stretch:85%;font-size:17px;margin:0 0 10px}
+footer.site a{color:var(--on-navy-2);text-decoration:none;display:block;font-size:14px;padding:3px 0}
+footer.site a:hover{color:#fff}
+.legal{border-top:1px solid var(--navy-2);margin-top:32px;padding-top:18px;font-size:13px}
+
+[data-view]{display:none}
+[data-view].show{display:block}
+
+@media (max-width:1240px){
+  .links{display:none}
+  .links.open{display:flex;flex-direction:column;position:absolute;top:66px;left:0;right:0;background:var(--surface);border-bottom:1px solid var(--line);padding:12px 20px;gap:4px}
+  .menu-btn{display:inline-flex}
+  .hero .wrap,.rhero .wrap,.split,.article,.payoff{grid-template-columns:1fr}
+  .guideband{grid-template-columns:160px minmax(0,1fr)}
+  .guideband .gform{grid-column:1 / -1}
+  .sidebar{position:static}
+  .regions{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .articles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fgrid{grid-template-columns:1fr 1fr 1fr}
+}
+@media (max-width:640px){
+  .nav{gap:10px}
+  .nav-right .hide-sm,.region-pick{display:none}
+  .logo b{font-size:20px}
+  .regions,.services,.steps,.grid2,.subs,.opts,.opts.three,.row2,.articles,.entry,.mode,.gets{grid-template-columns:1fr}
+  .lede-big{font-size:18px!important}
+  .guideband{grid-template-columns:1fr;padding:20px}
+  .guideband .book3d{width:150px}
+  .report-top{grid-template-columns:1fr}
+  .slots{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .qcard{padding:20px}
+  .fgrid{grid-template-columns:1fr 1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+
+
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="logo" href="#/" aria-label="WallDockDeck home">
+      <svg viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="7" fill="#0B2536"/><rect x="7" y="8" width="5" height="18" rx="1" fill="#7FC6CF"/><rect x="14.5" y="14" width="12.5" height="3.5" rx="1" fill="#fff"/><rect x="14.5" y="20" width="12.5" height="3.5" rx="1" fill="#E0701A"/><path d="M5 28.5c3-1.6 6-1.6 9 0s6 1.6 9 0 6-1.6 7 0" stroke="#7FC6CF" stroke-width="1.6" fill="none"/></svg>
+      <b>Wall<span>Dock</span>Deck</b>
+    </a>
+    <nav class="links" id="links" aria-label="Main">
+      <a href="#/service/seawall">Seawalls</a>
+      <a href="#/service/dock">Docks &amp; Lifts</a>
+      <a href="#/service/deck">Decks</a>
+      <a href="#/regions">Regions</a>
+      <a href="#/learn">Guides</a>
+      <a href="#/associations">HOAs &amp; Marinas</a>
+    </nav>
+    <div class="nav-right">
+      <div class="region-pick">
+        <select id="regionSel" aria-label="Your region" autocomplete="off">
+          <option value="" selected>Choose a region</option>
+          <option value="keys">Florida Keys</option>
+          <option value="miami">Miami-Dade</option>
+          <option value="broward">Broward</option>
+          <option value="palm">Palm Beach</option>
+        </select>
+      </div>
+      <a class="btn btn-ghost btn-sm hide-sm" href="#/book">Book inspection</a>
+      <a class="btn btn-cta btn-sm hide-sm" href="#/start">Score My Shore</a>
+      <button class="btn btn-ghost btn-sm menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">Menu</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- HOME -->
+<div data-view="home">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <div class="eyebrow">Seawalls · Docks &amp; Lifts · Decks — Keys to Palm Beach</div>
+        <h1>Seawall, dock or deck problem? Start here.</h1>
+        <p class="lede lede-big">Find out <b>what it needs, what it costs, and what your city requires</b> — free, in about 2 minutes, based on your address. <b>If something's wrong, we'll book a free on-site inspection to take a closer look.</b></p>
+        <div class="gets">
+          <div><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#E0701A"/><path d="M7 12.5l3 3 7-7" stroke="#fff" stroke-width="2.4" fill="none"/></svg><div><b>Know where you stand</b>A condition score for each structure</div></div>
+          <div><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#E0701A"/><path d="M7 12.5l3 3 7-7" stroke="#fff" stroke-width="2.4" fill="none"/></svg><div><b>Know what it costs</b>Repair, replace or new-build ranges for your city</div></div>
+          <div><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#E0701A"/><path d="M7 12.5l3 3 7-7" stroke="#fff" stroke-width="2.4" fill="none"/></svg><div><b>Know the local rules</b>What your city requires at your address</div></div>
+        </div>
+      </div>
+      <div class="startcard">
+        <h3>What brings you here today?</h3>
+        <div class="cardsub">Free · About 2 minutes · Seawalls, docks &amp; lifts, decks</div>
+        <div class="intents" id="heroIntents"></div>
+        <div class="or">or</div>
+        <a class="btn btn-ghost" style="width:100%" href="#/book">Book a free on-site inspection</a>
+        <p class="fine" style="margin:10px 0 0;text-align:center">✓ Free &nbsp; ✓ No obligation &nbsp; ✓ Estimates included</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt">
+    <div class="wrap">
+      <div class="head"><div><div class="eyebrow">What we score &amp; estimate</div><h2>Your wall, your dock, your deck: one connected system.</h2><p class="muted">Every free Health Check gives you a <b>Shore Score and a cost estimate</b> for each structure. If we see something wrong, we'll book a free on-site inspection to take a closer look.</p></div></div>
+      <div class="services" id="serviceCards"></div>
+      <div class="bundle"><p><b>Why we score all three together:</b> replacing a seawall usually means the dock comes off, and soil loss behind a wall can undermine deck footings. Your report flags these links so you can plan the work once.</p><div class="btn-row"><button class="btn btn-cta" data-score="seawall,dock,deck">Score + estimate all three</button><a class="btn btn-light" href="#/book">Book a free inspection</a></div></div>
+    </div>
+  </section>
+
+  <section class="band" style="padding-bottom:0">
+    <div class="wrap">
+      <div class="guideband">
+        <div class="book3d" aria-hidden="true"><small>Free guide</small><b>The South Florida Waterfront Owner's Guide</b><span class="ed" data-edname>Your area edition</span></div>
+        <div>
+          <div class="eyebrow" style="color:#7FC6CF">Free ebook · Specific to your address</div>
+          <h2 style="margin-top:6px">Get the free guide for your area.</h2>
+          <ul>
+            <li><b>The rules for your address:</b> seawall height, dock and permit basics</li>
+            <li><b>Typical costs in your city</b> for seawalls, docks, lifts and decks</li>
+            <li><b>7 costly mistakes</b> to avoid before you repair or replace</li>
+          </ul>
+        </div>
+        <div class="gform">
+          <b style="font-family:var(--display);font-stretch:85%;font-size:21px">Send my free guide</b>
+          <div class="field" style="margin-top:10px"><label for="hgAddr">Property address</label><input id="hgAddr" placeholder="Street address, city" autocomplete="street-address"></div>
+          <div class="field"><label for="hgEmail">Email</label><input id="hgEmail" placeholder="you@example.com" autocomplete="email" inputmode="email"></div>
+          <button class="btn btn-cta" style="width:100%" id="hgGo">Get my free guide</button>
+          <p class="fine" style="margin:8px 0 0">Keys, Miami-Dade, Broward or Palm Beach edition, matched to your address.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="head"><div><div class="eyebrow">Local, not generic</div><h2>Four coastlines. Four sets of rules.</h2><p class="muted">Seawall height rules, flood exposure, dock permitting and costs are different in each region. Score a property there, or see the local rules and costs.</p></div></div>
+      <div class="regions" id="regionCards"></div>
+    </div>
+  </section>
+
+  <section class="band alt">
+    <div class="wrap">
+      <div class="head"><div><div class="eyebrow">How it works</div><h2>From address to inspection in minutes.</h2></div><div class="btn-row"><a class="btn btn-cta" href="#/start">Get my Shore Score</a><a class="btn btn-ghost" href="#/book">Book a free inspection</a></div></div>
+      <div class="steps">
+        <div><h3>Tell us about your shoreline</h3><p>Enter your address and answer a few yes/no questions about what you see.</p></div>
+        <div><h3>Get your score + estimates</h3><p>See a score for each structure, the local rules that apply, and a cost estimate for the work.</p></div>
+        <div><h3>We take a closer look</h3><p>If we see something wrong, we'll book a free on-site inspection to take a closer look. Pick a time, or have us call you.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap split">
+      <div>
+        <div class="eyebrow">Why owners trust us</div>
+        <h2 style="margin-bottom:18px">Straight answers about your shoreline.</h2>
+        <div class="trust">
+          <div><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#E3F2E8"/><path d="M7 12.5l3 3 7-7" stroke="#2E7D4F" stroke-width="2.2" fill="none"/></svg><div><b>Honest scores, explained</b><p>Every score shows what drove it, including fixes you can do yourself.</p></div></div>
+          <div><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#E3F2E8"/><path d="M7 12.5l3 3 7-7" stroke="#2E7D4F" stroke-width="2.2" fill="none"/></svg><div><b>A free closer look</b><p>If we see something wrong, we'll book a free on-site inspection. You'll always know who is coming out and when.</p></div></div>
+          <div><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#E3F2E8"/><path d="M7 12.5l3 3 7-7" stroke="#2E7D4F" stroke-width="2.2" fill="none"/></svg><div><b>Your report stays private</b><p>Only you decide whether to share it with a buyer, a realtor or your board.</p></div></div>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="panel">
+          <div class="eyebrow">Guides</div>
+          <h3 style="margin:6px 0 8px">Guides for waterfront owners</h3>
+          <p class="muted" style="margin:0 0 14px">Repair or replace? What do the local rules require? What does it cost? Plain-English answers, updated every week.</p>
+          <a class="btn btn-ghost" href="#/learn">Browse guides</a>
+        </div>
+        <div class="panel">
+          <div class="eyebrow">For HOAs &amp; Marinas</div>
+          <h3 style="margin:6px 0 8px">Associations, condos &amp; marinas</h3>
+          <p class="muted" style="margin:0 0 14px">Score an entire property, get a report ready for your board, and plan repairs with budget ranges.</p>
+          <div class="btn-row"><a class="btn btn-navy" href="#/start">Start a property check</a><a class="btn btn-ghost" href="#/associations">Learn more</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- START (entry chooser for header button) -->
+<div data-view="start">
+  <div class="wrap wiz">
+    <div class="qcard">
+      <div class="eyebrow">Free · About 2 minutes</div>
+      <h2 style="margin-top:6px">What brings you here today?</h2>
+      <p class="muted">We'll tailor your answers, your report and your cost estimate to why you're here.</p>
+      <div class="intents" id="startIntents" style="margin-top:18px"></div>
+      <p class="skip">Already know you want someone to look at it? <a href="#/book">Book a free on-site inspection</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- REGIONS INDEX -->
+<div data-view="regions">
+  <section class="rhero"><div class="wrap" style="grid-template-columns:1fr"><div><div class="crumbs"><a href="#/">Home</a> / Regions</div><h1>Choose your coastline</h1><p style="color:var(--on-navy-2);max-width:60ch;margin:12px 0 0">The Florida Keys, Miami-Dade, Broward and Palm Beach, each with its own rules and costs.</p></div></div></section>
+  <section class="band"><div class="wrap"><div class="regions" id="regionCards2"></div></div></section>
+</div>
+
+<!-- REGION PAGE -->
+<div data-view="region">
+  <section class="rhero"><div class="wrap">
+    <div>
+      <div class="crumbs"><a href="#/">Home</a> / <a href="#/regions">Regions</a> / <span id="rCrumb"></span></div>
+      <div class="eyebrow" id="rCounty" style="color:#7FC6CF"></div>
+      <h1 id="rTitle"></h1>
+      <p id="rLede" style="color:var(--on-navy-2);max-width:58ch;margin:12px 0 0;font-size:18px"></p>
+    </div>
+    <div class="startcard">
+      <h3>Score a <span id="rName2"></span> property</h3>
+      <div class="cardsub">Free score + cost estimates</div><div class="fine">Seawalls, Docks &amp; Boat Lifts, and Decks · local rules applied</div>
+      <a class="btn btn-cta" style="width:100%;margin:14px 0 8px" href="#/start">Start my free check</a>
+      <a class="btn btn-ghost" style="width:100%" href="#/book">Book a free on-site inspection</a>
+    </div>
+  </div></section>
+  <section class="band"><div class="wrap split" style="align-items:start">
+    <div>
+      <div class="eyebrow">Local rules</div>
+      <h2 style="margin:6px 0 16px">What applies here</h2>
+      <div id="rRules" class="stack"></div>
+      <p class="fine" style="margin-top:12px">Your report checks the exact rule for your city. Always confirm with your local building department.</p>
+      <div class="eyebrow" style="margin-top:28px">Typical costs</div>
+      <h2 style="margin:6px 0 16px">What projects run here</h2>
+      <div class="panel" style="padding:8px 20px"><table class="costs" id="rCosts"></table></div>
+      <p class="fine" style="margin-top:10px">Sample ranges for layout only. The real ranges will come from local permit records for each city.</p>
+    </div>
+    <div>
+      <div class="eyebrow">Common issues</div>
+      <h2 style="margin:6px 0 16px">What we see most</h2>
+      <div class="grid2" id="rIssues"></div>
+      <div class="panel" style="margin-top:16px">
+        <b>Seeing any of these?</b>
+        <p class="muted" style="margin:4px 0 12px">Get a free score and estimate in 2 minutes. If we see something wrong, we'll book a free on-site inspection to take a closer look.</p>
+        <div class="btn-row"><a class="btn btn-cta btn-sm" href="#/start">Score my property</a><a class="btn btn-ghost btn-sm" href="#/book">Book a free inspection</a></div>
+      </div>
+      <div class="panel guidepanel" style="margin-top:16px">
+        <div class="book3d" aria-hidden="true"><small>Free guide</small><b>Waterfront Owner's Guide</b><span class="ed" id="rEdTag"></span></div>
+        <div><b style="font-family:var(--display);font-stretch:85%;font-size:21px">Get the free <span id="rEdName"></span> edition</b><p class="muted" style="margin:4px 0 10px;font-size:15px">Local rules for your address, typical costs in your city, and 7 costly mistakes to avoid.</p><a class="btn btn-navy btn-sm" href="#/guide">Get my free guide</a></div>
+      </div>
+      <div class="eyebrow" style="margin-top:28px">Local guides</div>
+      <div class="stack" id="rArticles" style="margin-top:10px"></div>
+    </div>
+  </div></section>
+  <section class="band alt"><div class="wrap">
+    <div class="head"><div><div class="eyebrow">Cities we cover</div><h2>City guides</h2><p class="muted">Each city page has its own rules, typical costs and contractor availability.</p></div></div>
+    <div class="citylist" id="rCities"></div>
+  </div></section>
+</div>
+
+<!-- SERVICE PAGE -->
+<div data-view="service">
+  <section class="rhero"><div class="wrap">
+    <div>
+      <div class="crumbs"><a href="#/">Home</a> / <span id="sCrumb"></span></div>
+      <div class="eyebrow" style="color:#7FC6CF" id="sEyebrow"></div>
+      <h1 id="sTitle"></h1>
+      <p id="sLede" style="color:var(--on-navy-2);max-width:58ch;margin:12px 0 0;font-size:18px"></p>
+    </div>
+    <div class="startcard"><h3 id="sCardTitle"></h3><p class="fine" id="sCardSub"></p>
+      <button class="btn btn-cta" style="width:100%;margin:14px 0 8px" id="sStartBtn">Start my free check</button>
+      <a class="btn btn-ghost" style="width:100%" href="#/book">Book a free on-site inspection</a>
+    </div>
+  </div></section>
+  <section class="band"><div class="wrap">
+    <div class="head"><div><div class="eyebrow">Warning signs</div><h2>What to look for</h2></div><div class="btn-row"><a class="btn btn-cta" href="#/book">Book a free inspection</a></div></div>
+    <div class="grid2" id="sSigns"></div>
+    <div class="eyebrow" style="margin-top:36px">Guides</div>
+    <div class="articles" id="sArticles" style="margin-top:12px"></div>
+  </div></section>
+</div>
+
+<!-- LEARN INDEX -->
+<div data-view="learn">
+  <section class="rhero"><div class="wrap">
+    <div><div class="crumbs"><a href="#/">Home</a> / Guides</div><div class="eyebrow" style="color:#7FC6CF">Guides</div><h1>Waterfront owner guides</h1><p style="color:var(--on-navy-2);max-width:58ch;margin:12px 0 0;font-size:18px">Plain-English answers on seawalls, docks and decks: costs, local rules, permits, maintenance and storm prep for South Florida and the Keys.</p></div>
+    <div class="startcard"><div class="guidepanel"><div class="book3d" aria-hidden="true"><small>Free guide</small><b>Waterfront Owner's Guide</b><span class="ed">Your area edition</span></div><div><h3>Get the free guide for your area</h3><p class="fine" style="margin:4px 0 0">Local rules for your address, costs in your city, 7 costly mistakes.</p></div></div><a class="btn btn-cta" style="width:100%;margin-top:14px" href="#/guide">Get my free guide</a><a class="btn btn-ghost" style="width:100%;margin-top:8px" href="#/book">Book a free inspection</a></div>
+  </div></section>
+  <section class="band"><div class="wrap">
+    <div class="cats" id="cats"></div>
+    <div class="articles" id="articleGrid"></div>
+  </div></section>
+</div>
+
+<!-- ARTICLE -->
+<div data-view="article">
+  <div class="wrap" style="padding-block:36px 64px">
+    <div class="crumbs" style="color:var(--ink-3)"><a href="#/">Home</a> / <a href="#/learn">Guides</a> / Seawalls</div>
+    <div class="article">
+      <article>
+        <div class="eyebrow">Seawalls · 6 min read</div>
+        <h1 style="font-size:clamp(34px,5vw,52px);margin:8px 0 12px">5 warning signs your seawall is failing from behind</h1>
+        <p class="muted" style="margin:0 0 6px">Applies to: <span class="tag">Florida Keys</span><span class="tag">Miami-Dade</span><span class="tag">Broward</span><span class="tag">Palm Beach</span></p>
+        <div class="prose">
+          <p>Most seawall problems start on the land side, where water and soil move through and around the wall. By the time the wall visibly leans, the damage behind it is usually well along. These are the signs worth checking every few months and after every storm.</p>
+          <h2>1. Sinkholes or soft spots near the wall</h2>
+          <p>Soil washing out through joints or cracks leaves hollow spaces behind the wall. Look for depressions in the lawn, sunken pavers or soft ground within a few feet of the cap.</p>
+          <h2>2. Cracks or separation at the cap</h2>
+          <p>The concrete cap ties the wall together. Cracks running along the cap, or a gap opening between the cap and the panels, mean the wall is moving.</p>
+          <div class="inline-cta"><b>Seeing any of these?</b><span class="muted">Get your Shore Score in about 2 minutes. Your city's rules are applied automatically.</span><div class="btn-row"><button class="btn btn-cta btn-sm" data-score="seawall">Score my seawall</button><a class="btn btn-ghost btn-sm" href="#/book">Book a free inspection</a></div></div>
+          <h2>3. Water or sand coming through the joints</h2>
+          <p>At low tide, look for wet streaks, sand fans or small channels at the base of the wall. That's material leaving from behind it.</p>
+          <h2>4. Leaning, bowing or panels out of line</h2>
+          <p>Sight down the wall from one end. Any tilt toward the water, or panels stepping out of line, points to pressure behind the wall or failing anchors.</p>
+          <h2>5. Clogged or missing weep holes and rust stains</h2>
+          <p>Weep holes let water drain so pressure doesn't build up. Rust stains can mean the steel inside the concrete is corroding.</p>
+          <h2>What to do next</h2>
+          <ul><li>Photograph what you see, including a wide shot and close-ups.</li><li>Check your city's seawall height rule before you plan any repair.</li><li>Get it looked at before storm season. It's free.</li></ul>
+        </div>
+      </article>
+      <aside class="sidebar">
+        <div class="panel"><b style="font-family:var(--display);font-stretch:85%;font-size:22px">Get your Shore Score</b><p class="muted" style="margin:4px 0 12px;font-size:15px">Free · About 2 minutes · Includes the free guide</p><button class="btn btn-cta" data-score="seawall">Score my seawall</button></div>
+        <div class="panel"><div class="guidepanel" style="grid-template-columns:80px 1fr"><div class="book3d" aria-hidden="true" style="width:80px"><b style="font-size:10px">Owner's Guide</b><span class="ed" style="font-size:8px">Your area</span></div><div><b style="font-family:var(--display);font-stretch:85%;font-size:19px">Free guide for your area</b><p class="muted" style="margin:2px 0 0;font-size:14px">Rules and costs for your address.</p></div></div><a class="btn btn-ghost" style="margin-top:12px" href="#/guide">Get my free guide</a></div>
+        <div class="panel"><b style="font-family:var(--display);font-stretch:85%;font-size:22px">Free on-site inspection</b><p class="muted" style="margin:4px 0 12px;font-size:15px">We'll take a closer look. No obligation.</p><a class="btn btn-navy" href="#/book">Book a free inspection</a></div>
+        <div class="panel"><div class="eyebrow">Local rules</div><a href="#/region/broward" style="display:block;margin-top:8px">Broward rules &amp; costs</a><a href="#/region/miami" style="display:block">Miami-Dade rules &amp; costs</a><a href="#/region/palm" style="display:block">Palm Beach rules &amp; costs</a><a href="#/region/keys" style="display:block">Florida Keys rules &amp; costs</a></div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<!-- ASSOCIATIONS -->
+<div data-view="associations">
+  <section class="rhero"><div class="wrap">
+    <div>
+      <div class="crumbs"><a href="#/">Home</a> / For HOAs &amp; Marinas</div>
+      <div class="eyebrow" style="color:#7FC6CF">WallDockDeck for Associations &amp; Marinas</div>
+      <h1>Shoreline planning your board can act on.</h1>
+      <p style="color:var(--on-navy-2);max-width:58ch;margin:12px 0 0;font-size:18px">For HOAs, condo associations, marinas and commercial waterfront owners. Get the scope of every seawall, dock and deck on the property, see where the risk is, and schedule inspections with contractors who handle commercial work.</p>
+    </div>
+    <div class="startcard"><h3>Get your property's scope</h3><p class="fine">For boards, property managers and marina operators</p><a class="btn btn-cta" style="width:100%;margin-top:12px" href="#/start">Start a property check</a><a class="btn btn-ghost" style="width:100%;margin-top:8px" href="#/book">Book a free site inspection</a></div>
+  </div></section>
+  <section class="band"><div class="wrap">
+    <div class="services">
+      <div class="scard"><h3>Property-wide scoring</h3><p class="muted" style="margin:0">Score multiple walls, slips and decks in one pass, with a score for each structure and one for the whole property.</p></div>
+      <div class="scard"><h3>Board-ready reports</h3><p class="muted" style="margin:0">Clear findings, local rule checks and budget ranges, formatted to present at a board or owners' meeting.</p></div>
+      <div class="scard"><h3>Planned inspections</h3><p class="muted" style="margin:0">Commercial-qualified contractors, scheduled around residents, tenants and slip holders.</p></div>
+    </div>
+  </div></section>
+</div>
+
+<!-- GUIDE -->
+<div data-view="guide">
+  <div class="wrap wiz">
+    <div id="guideBody"></div>
+  </div>
+</div>
+
+<!-- BOOK -->
+<div data-view="book">
+  <div class="wrap wiz">
+    <div id="bookBody"></div>
+  </div>
+</div>
+
+<!-- SCORE WIZARD -->
+<div data-view="score">
+  <div class="wrap wiz">
+    <div class="progress" id="prog"></div>
+    <div class="stepname" id="stepName"></div>
+    <div id="wizBody"></div>
+  </div>
+</div>
+
+<!-- REPORT -->
+<div data-view="report">
+  <div class="wrap" style="max-width:1000px;padding-block:36px 64px">
+    <div class="crumbs" style="color:var(--ink-3)"><a href="#/">Home</a> / Your Shore Score</div>
+    <div id="reportBody"></div>
+  </div>
+</div>
+</main>
+
+<section class="ctaband" id="ctaBand">
+  <div class="wrap">
+    <h2>Know your shore before you spend.<p>Get your free Shore Score and cost estimates. If we see something wrong, we'll book a free inspection to take a closer look.</p></h2>
+    <div class="btn-row"><a class="btn btn-cta" href="#/start">Get my free Shore Score</a><a class="btn btn-light" href="#/book">Book a free inspection</a></div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <a class="logo" href="#/"><b style="color:#fff">Wall<span style="color:#7FC6CF">Dock</span>Deck</b></a>
+        <p style="font-size:14px;margin:10px 0 0;max-width:30ch">Shoreline guidance for South Florida and the Keys. Home of the free Score My Shore tool at ScoreMyShore.com.</p>
+      </div>
+      <div><h4>Get started</h4><a href="#/start">Score My Shore</a><a href="#/book">Book a free inspection</a><a href="#/guide">Free guide for your area</a><a href="#/learn">Guides</a><a href="#/associations">For HOAs &amp; Marinas</a></div>
+      <div><h4>Florida Keys</h4><a href="#/region/keys">Key West</a><a href="#/region/keys">Marathon</a><a href="#/region/keys">Islamorada</a><a href="#/region/keys">Key Largo</a></div>
+      <div><h4>Miami-Dade</h4><a href="#/region/miami">Miami Beach</a><a href="#/region/miami">Miami</a><a href="#/region/miami">Coral Gables</a><a href="#/region/miami">Key Biscayne</a></div>
+      <div><h4>Broward</h4><a href="#/region/broward">Fort Lauderdale</a><a href="#/region/broward">Hollywood</a><a href="#/region/broward">Pompano Beach</a><a href="#/region/broward">Lighthouse Point</a></div>
+      <div><h4>Palm Beach</h4><a href="#/region/palm">Boca Raton</a><a href="#/region/palm">Delray Beach</a><a href="#/region/palm">Palm Beach</a><a href="#/region/palm">Jupiter</a></div>
+    </div>
+    <div class="legal">On-site inspections and any work are performed by licensed partner contractors. Shore Scores are screenings based on public data and owner answers, not engineering inspections or certifications. · Privacy · Terms · Contractor partners · Referral partners</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var REGIONS = {
+    keys:{name:"Florida Keys",county:"Monroe County",exposure:14,
+      lede:"Open water, salt air and strict environmental rules. Docks and lifts in the Keys take the hardest beating in South Florida, and permits here take the most planning.",
+      card:"Open-water exposure and strict state rules for dock siting.",
+      rules:[["Dock siting","State rules for the Keys protect seagrass and coral. For example, larger docking facilities can't rely on dredging for access. Your report flags what may apply."],["Permits","Most seawall and dock work needs local, state and often federal (Army Corps) approval."]],
+      issues:[["Hardware corrosion","Salt air eats bolts, brackets and lift cables faster here."],["Piling damage","Marine borers and open-water wave action weaken wood pilings."],["Storm surge","Walls and docks take a direct hit in tropical storms."],["Deck fasteners","Connectors corrode, and railings loosen as a result."]],
+      cities:["Key West","Marathon","Islamorada","Key Largo","Big Pine Key","Tavernier","Cudjoe Key"],
+      lat:[[20,70],[60,50],[100,45],[150,38],[200,28],[250,22]]},
+    miami:{name:"Miami-Dade",county:"Miami-Dade County",exposure:10,
+      lede:"Bay-front and canal homes face king tides and rising water. Several cities have seawall height standards, and Miami Beach has one of the strictest.",
+      card:"Miami Beach: new seawalls must be built to 5.7 ft NAVD.",
+      rules:[["Miami Beach","New or substantially repaired seawalls must be built to 5.7 ft NAVD, or to 4 ft NAVD if designed to be raised to 5.7 ft later."],["Other cities","Height and permit rules vary by city. Your report matches the rule for your address."]],
+      issues:[["King tide overtopping","Water comes over low walls during high tides."],["Cap cracking","Concrete caps crack and pull away with age."],["Seepage","Water flowing through joints washes soil out from behind the wall."],["Dock-to-wall damage","Docks attached to failing walls start to shift."]],
+      cities:["Miami Beach","Miami","Coral Gables","Key Biscayne","North Miami","Aventura","Surfside","Bay Harbor Islands","Sunny Isles Beach"],
+      lat:[[30,20],[60,35],[90,30],[130,45],[170,40],[220,55]]},
+    broward:{name:"Broward",county:"Broward County",exposure:9,
+      lede:"Home to hundreds of miles of residential canals. Broward has a countywide seawall height standard, and Fort Lauderdale has a 2035 deadline.",
+      card:"Fort Lauderdale: 4 ft NAVD minimum by 2035.",
+      rules:[["Broward County","New seawalls must be at least 5 ft NAVD88."],["Fort Lauderdale","Minimum seawall height of 4 ft NAVD by 2035."]],
+      issues:[["Aging canal walls","Many older walls are near the end of their service life."],["Soil loss & sinkholes","Voids open up behind walls and threaten yards and decks."],["Low wall height","Walls below the new standards overtop during high tides."],["Lift & dock wear","Heavy boat lifts load the wall cap."]],
+      cities:["Fort Lauderdale","Hollywood","Pompano Beach","Lighthouse Point","Deerfield Beach","Hallandale Beach","Dania Beach","Wilton Manors"],
+      lat:[[30,30],[70,40],[110,35],[150,50],[200,45],[240,60]]},
+    palm:{name:"Palm Beach",county:"Palm Beach County",exposure:8,
+      lede:"Intracoastal estates, inlets and high-value waterfront. Rules vary from town to town, so we map each one to your address.",
+      card:"Rules vary by town. We match yours by address.",
+      rules:[["Town-by-town rules","Seawall height and permit rules differ across Palm Beach, Boca Raton, Jupiter and other towns. Your report checks the one for your address."],["Permits","Most seawall and dock work needs local and state approval, and often federal approval too."]],
+      issues:[["Intracoastal wakes","Boat traffic wears down walls and docks."],["Inlet exposure","Properties near inlets face stronger currents and surge."],["Deck safety","Older elevated decks show railing and ledger problems."],["Lift capacity","Larger boats outgrow older lifts."]],
+      cities:["Boca Raton","Delray Beach","Palm Beach","West Palm Beach","Jupiter","Boynton Beach","Lake Worth Beach","North Palm Beach","Palm Beach Gardens"],
+      lat:[[30,50],[70,42],[110,48],[160,36],[200,40],[250,30]]}
+  };
+  var SERVICES = {
+    seawall:{title:"Seawall inspection, repair & replacement",eyebrow:"Seawalls",lede:"Most seawalls fail from the land side, when water and soil work through the wall, not from waves hitting the front. Catch problems early, and plan around your city's height rules.",
+      bullets:["Cracks, cap separation, leaning","Soil loss and sinkholes behind the wall","City height rules (NAVD)"],
+      signs:[["Cracks or cap separation","The concrete cap pulls away from the panels."],["Leaning or bowing","The wall tilts toward the water."],["Sinkholes behind the wall","Soil is washing out through the wall."],["Water through joints","You see seepage at low tide."]]},
+    dock:{title:"Dock, pier & boat lift repair",eyebrow:"Docks & Lifts",lede:"Pilings, hardware and lifts wear out faster in salt water. A dock attached to your seawall also depends on the wall staying healthy.",
+      bullets:["Piling rot and marine borers","Corroded hardware, loose boards","Lift cables, motors, capacity"],
+      signs:[["Soft or split pilings","Look closely at the waterline."],["Wobble or sag","Sections move when you walk on them."],["Rusted hardware","Check bolts, brackets and cleats."],["Lift problems","Watch for frayed cables, motor noise, or a boat heavier than the lift is rated for."]]},
+    deck:{title:"Waterfront deck repair & rebuilds",eyebrow:"Decks",lede:"Salt air and moisture work on waterfront decks from below. Railings and structure are safety issues, so check them first.",
+      bullets:["Railing and stair safety","Joist, post and ledger rot","Salt-air fastener corrosion"],
+      signs:[["Loose railings","Railings should never wobble."],["Bouncy or soft spots","Can point to rotted joists."],["Ledger or post rot","Check where the deck meets the house and the ground."],["Corroded connectors","Look for rust at the hangers and screws."]]}
+  };
+  var ARTICLES = [
+    ["Seawalls","5 warning signs your seawall is failing from behind","What to check every few months and after every storm.","all","seawall",6],
+    ["Seawalls","Seawall repair vs. replacement: how to tell which you need","The questions that decide whether a patch will hold.","all","seawall",8],
+    ["Local rules","Fort Lauderdale's 2035 seawall height rule, explained","What 4 ft NAVD means for your wall and your plans.","broward","seawall",5],
+    ["Local rules","Miami Beach's 5.7 ft seawall standard: what owners need to know","When the rule applies and how to design for it.","miami","seawall",5],
+    ["Permits","Dock permits in the Florida Keys: what to expect","Why Keys dock projects need more planning.","keys","dock",7],
+    ["Costs","What a seawall project costs in South Florida","What drives the price, from materials to access.","all","seawall",7],
+    ["Docks & Lifts","Boat lift maintenance checklist for salt water","Cables, motors, bunks and capacity.","all","dock",5],
+    ["Decks","Is your waterfront deck safe? A railing and ledger check","The four checks that matter most.","all","deck",4],
+    ["Storm prep","After the storm: a 10-minute shoreline checklist","What to look at first, and what to photograph.","all","all",4],
+    ["Maintenance","Weep holes: the small detail that protects your seawall","How drainage keeps pressure off the wall.","all","seawall",4],
+    ["Commercial","HOA seawall planning: budgets and board approvals","How associations plan multi-year shoreline work.","all","all",6],
+    ["Local rules","Palm Beach County seawall rules, town by town","Why your address matters more than your county.","palm","seawall",6]
+  ];
+  var CHECKS = {
+    seawall:[["sw_cracks","Cracks in the wall or cap",12],["sw_cap","Cap pulling away from the wall",15,1],["sw_lean","Wall leaning or bowing",15,1],["sw_voids","Sinkholes or soil loss behind the wall",15,1],["sw_seep","Water or sand coming through joints",10],["sw_rust","Rust stains on the concrete",6],["sw_overtop","Water comes over the wall at high tide",10]],
+    dock:[["dk_piling","Soft, split or thinning pilings",15,1],["dk_move","Dock sways, sags or moves",15,1],["dk_boards","Loose, rotted or missing boards",10],["dk_hw","Rusted bolts, brackets or cleats",8],["dk_lift","Boat lift noise, frayed cables or slow motor",8],["dk_elec","Exposed or damaged wiring near the water",12,1]],
+    deck:[["de_rail","Railing wobbles or is loose",15,1],["de_soft","Soft or bouncy spots",15,1],["de_rot","Rot at posts, joists or the ledger",12,1],["de_fast","Rusted screws, hangers or connectors",8],["de_boards","Cracked, cupped or loose boards",6]]
+  };
+  var AGE_PEN = {"lt10":0,"10to25":8,"25to40":16,"gt40":24,"unknown":10};
+  var ICON = {
+    seawall:'<svg viewBox="0 0 44 44" aria-hidden="true"><rect width="44" height="44" rx="9" fill="#E0EFF1"/><rect x="10" y="9" width="8" height="26" rx="1.5" fill="#0F7482"/><path d="M20 30c4-2 8-2 12 0" stroke="#0F7482" stroke-width="2" fill="none"/><path d="M20 24c4-2 8-2 12 0" stroke="#7FC6CF" stroke-width="2" fill="none"/></svg>',
+    dock:'<svg viewBox="0 0 44 44" aria-hidden="true"><rect width="44" height="44" rx="9" fill="#E0EFF1"/><rect x="8" y="16" width="28" height="4" rx="1" fill="#0F7482"/><rect x="12" y="20" width="3" height="14" fill="#0F7482"/><rect x="29" y="20" width="3" height="14" fill="#0F7482"/><path d="M6 30c5-2 9-2 14 0s9 2 18 0" stroke="#7FC6CF" stroke-width="2" fill="none"/></svg>',
+    deck:'<svg viewBox="0 0 44 44" aria-hidden="true"><rect width="44" height="44" rx="9" fill="#E0EFF1"/><rect x="8" y="20" width="28" height="4" rx="1" fill="#E0701A"/><rect x="10" y="12" width="2.5" height="8" fill="#0F7482"/><rect x="31.5" y="12" width="2.5" height="8" fill="#0F7482"/><rect x="10" y="12" width="24" height="2.5" fill="#0F7482"/><rect x="12" y="24" width="3" height="10" fill="#0F7482"/><rect x="29" y="24" width="3" height="10" fill="#0F7482"/></svg>'
+  };
+  var INTENTS = {
+    notice:{t:"I got a notice or violation",s:"From the city, my HOA or my insurer",
+      icon:'<svg viewBox="0 0 30 30" aria-hidden="true"><rect width="30" height="30" rx="7" fill="#FBE3E1"/><rect x="9" y="7" width="12" height="16" rx="2" fill="#B3261E"/><g fill="#fff"><rect x="11" y="10" width="8" height="1.6"/><rect x="11" y="13.4" width="8" height="1.6"/><rect x="11" y="16.8" width="5" height="1.6"/></g></svg>',
+      lead:"Here's what your notice points to, what it takes to clear it, and what that usually costs."},
+    problem:{t:"Something looks wrong",s:"Cracks, sinkholes, leaning, movement",
+      icon:'<svg viewBox="0 0 30 30" aria-hidden="true"><rect width="30" height="30" rx="7" fill="#FCE9DD"/><path d="M15 6l9 16H6l9-16z" fill="#C4561A"/><rect x="14" y="12" width="2" height="6" fill="#fff"/><rect x="14" y="19" width="2" height="2" fill="#fff"/></svg>',
+      lead:"Here's how serious what you're seeing usually is, and what to do next."},
+    cost:{t:"I need a cost estimate",s:"Repair, replace or a new build",
+      icon:'<svg viewBox="0 0 30 30" aria-hidden="true"><rect width="30" height="30" rx="7" fill="#FBF2D6"/><circle cx="15" cy="15" r="7" fill="#9A7400"/><rect x="14.2" y="9.5" width="1.6" height="11" fill="#fff"/><path d="M17.6 12.2c-.6-.8-1.6-1.2-2.8-1.2-1.6 0-2.8.8-2.8 2s1.2 1.7 2.8 2 3 .8 3 2.1-1.3 2.1-3 2.1c-1.3 0-2.4-.5-3-1.4" stroke="#fff" stroke-width="1.3" fill="none"/></svg>',
+      lead:"Here's your cost range, what drives it, and what your city requires."},
+    buysell:{t:"I'm buying or selling",s:"Inspection period, disclosure, closing",
+      icon:'<svg viewBox="0 0 30 30" aria-hidden="true"><rect width="30" height="30" rx="7" fill="#E0EFF1"/><path d="M7 15l8-7 8 7v8H7z" fill="#0F7482"/><rect x="13" y="17" width="4" height="6" fill="#fff"/></svg>',
+      lead:"Here's what a buyer, seller or agent needs to know about this shoreline."},
+    upgrade:{t:"I want to add or upgrade",s:"New dock, bigger lift, rebuilt deck",
+      icon:'<svg viewBox="0 0 30 30" aria-hidden="true"><rect width="30" height="30" rx="7" fill="#E3F2E8"/><rect x="6" y="13" width="18" height="3" rx="1" fill="#2E7D4F"/><rect x="9" y="16" width="2.4" height="8" fill="#2E7D4F"/><rect x="18.6" y="16" width="2.4" height="8" fill="#2E7D4F"/><path d="M15 5v6M12 8h6" stroke="#2E7D4F" stroke-width="2"/></svg>',
+      lead:"Here's what your project involves: permits, cost range and what to check first."}
+  };
+  function intentButtons(){ return Object.keys(INTENTS).map(function(k){var x=INTENTS[k];
+    return '<button type="button" class="intentbtn" data-intent="'+k+'">'+x.icon+'<span><b>'+x.t+'</b><span>'+x.s+'</span></span><i>→</i></button>'}).join(""); }
+  var NAMES = {seawall:"Seawall",dock:"Dock & Boat Lift",deck:"Deck"};
+  var SHORT = {seawall:"seawall",dock:"dock or lift",deck:"deck"};
+
+  var state = {region:null, relation:"", intent:null, segment:null, who:"home", addr:"", structs:["seawall"], checks:{}, age:{seawall:"unknown",dock:"unknown",deck:"unknown"}, attached:true, step:0, unlocked:false, contact:{}, slot:null, mode:"pick", booked:false, dockQ:null, dockInfo:false,
+               book:{segment:"res",structs:["seawall"],mode:"pick",slot:null,done:false,dockInfo:false},
+               guide:{segment:"res",structs:["seawall"],email:"",done:false}};
+
+  // ── TOMONAGI INTAKE (WDD-2, 2026-09-24) ──────────────────────────────
+  // Every form on this site (guide, report unlock, both booking forms) posts
+  // to ONE Tomonagi intake form. One person = one lead: the same external_id
+  // is re-sent at every step and Tomonagi merges it (form.dedupe_key).
+  // lead_source_action says which step the person reached; the latest wins.
+  var TMG = {
+    url: "https://tomonagi.com/api/public/intake/wall-dock-deck",
+    guidePdf: function(region){ return "/guides/"+region+".pdf"; }
+  };
+  function fnv(str){ var h=0x811c9dc5; for(var i=0;i<str.length;i++){ h^=str.charCodeAt(i); h=Math.imul(h,0x01000193)>>>0; } return h.toString(36); }
+  function normAddr(a){ return String(a||"").toLowerCase().replace(/[^a-z0-9]/g,""); }
+  function loadWho(){ try{ return JSON.parse(localStorage.getItem("wdd_who")||"{}"); }catch(e){ return {}; } }
+  function saveWho(w){ try{ localStorage.setItem("wdd_who", JSON.stringify(w)); }catch(e){} }
+  var who = loadWho();   // {name,email,phone,consent,extId,addr}
+  // property + owner, never the property alone (a new owner is a new lead)
+  function extIdFor(addr, email, phone){
+    var owner = String(email||"").trim().toLowerCase() || String(phone||"").replace(/\D/g,"");
+    if(who.extId && who.addrKey===normAddr(addr) && who.ownerKey===owner) return who.extId;
+    var id = "wdd:"+fnv(normAddr(addr)||"noaddr")+":"+fnv(owner||String(Date.now()));
+    who.extId=id; who.addrKey=normAddr(addr); who.ownerKey=owner; return id;
+  }
+  function utm(){ var o={}; try{ var q=new URLSearchParams(location.search); ["utm_source","utm_medium","utm_campaign","utm_term","utm_content","gclid","fbclid"].forEach(function(k){ var v=q.get(k)||sessionStorage.getItem("wdd_"+k); if(v){ o[k]=v; sessionStorage.setItem("wdd_"+k,v); } }); }catch(e){} return o; }
+  utm();
+  var SITE_KEYS = {cracks:1};
+  function scoreFields(){
+    if(!state.region) return {};
+    var sc=score(), b=band(sc.overall), lo=0, hi=0, out={};
+    Object.keys(sc.subs).forEach(function(k){ var x=sc.subs[k], bb=band(x.v);
+      out[k+"_score"]=x.v; out[k+"_band"]=bb[0]; out[k+"_causes"]=x.causes.join("; ");
+      if(x.v<80){ lo+=EST[k][0]; hi+=EST[k][1]; out[k+"_estimate"]="$"+EST[k][0]+"k – $"+EST[k][1]+"k"; } });
+    out.shore_score=sc.overall; out.shore_band=b[0]; out.warning_signs=sc.signs;
+    out.estimate_total = hi ? "$"+lo+"k – $"+hi+"k" : "No work needed now";
+    out.cross_flags = sc.flags.map(function(f){return f[0]}).join(" | ");
+    out.signs_reported = Object.keys(state.checks).filter(function(k){return state.checks[k]}).map(function(k){ for(var s in CHECKS){ for(var i=0;i<CHECKS[s].length;i++){ if(CHECKS[s][i][0]===k) return CHECKS[s][i][1]; } } return k; }).join("; ");
+    out.structure_ages = Object.keys(state.age).filter(function(k){return state.structs.indexOf(k)>-1}).map(function(k){return NAMES[k]+": "+state.age[k]}).join("; ");
+    out.score_engine_version = "site-2026.09.1";
+    return out;
+  }
+  // Fire-and-forget: the visitor never waits on the CRM. One retry.
+  function sendLead(action, f){
+    var r = state.region ? REGIONS[state.region] : null;
+    var p = Object.assign({
+      full_name: f.name||who.name||"",
+      email: f.email||who.email||"",
+      phone: f.phone||who.phone||"",
+      property_address: f.addr||state.addr||who.addr||"",
+      region: r ? r.name : "",
+      guide_edition: state.region||"",
+      property_type: (f.segment||state.segment)==="com" ? "Commercial" : "Residential",
+      relationship: state.relation||"",
+      services_requested: (f.structs||state.structs||[]).map(function(k){return NAMES[k]}).join(", "),
+      lead_source_action: action,
+      intent: state.intent ? INTENTS[state.intent].t : "",
+      page: location.hash||"#/",
+      consent_given: f.consent ? "yes" : "no",
+      consent_text: f.consent ? consentText(r) : "",
+      consent_timestamp: f.consent ? new Date().toISOString() : ""
+    }, utm(), f.extra||{});
+    p.external_id = extIdFor(p.property_address, p.email, p.phone);
+    who.name=p.full_name; who.email=p.email; who.phone=p.phone; who.addr=p.property_address; if(f.consent) who.consent=true; saveWho(who);
+    Object.keys(p).forEach(function(k){ if(p[k]===""||p[k]==null) delete p[k]; });
+    var body = JSON.stringify(p);
+    function post(retry){
+      return fetch(TMG.url,{method:"POST",headers:{"content-type":"application/json"},body:body,keepalive:true,mode:"cors"})
+        .then(function(res){ if(!res.ok && retry) return new Promise(function(ok){setTimeout(ok,1500)}).then(function(){return post(false)}); return res; })
+        .catch(function(){ if(retry) return new Promise(function(ok){setTimeout(ok,1500)}).then(function(){return post(false)}); });
+    }
+    return post(true);
+  }
+
+
+  function $(s){return document.querySelector(s)}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+
+  var CITY_REGION = {};
+  Object.keys(REGIONS).forEach(function(k){REGIONS[k].cities.forEach(function(c){CITY_REGION[c.toLowerCase()]=k})});
+  function detectRegion(addr){
+    var a=(addr||"").toLowerCase();
+    for (var c in CITY_REGION){ if(a.indexOf(c)>-1) return CITY_REGION[c]; }
+    if(/\bkeys?\b/.test(a)) return "keys";
+    return null;
+  }
+  function setRegion(r){ if(!REGIONS[r]){ state.region=null; $("#regionSel").value=""; return; } state.region=r; $("#regionSel").value=r; }
+  function rName(){ return state.region ? REGIONS[state.region].name : null; }
+  function regionOptions(){ return '<option value=""'+(state.region?'':' selected')+'>Choose a region</option>'+Object.keys(REGIONS).map(function(k){return '<option value="'+k+'"'+(k===state.region?' selected':'')+'>'+REGIONS[k].name+'</option>'}).join(""); }
+
+  function startIntent(intent){ state.intent=intent||null; state.step=0; state.unlocked=false; state.booked=false; state.slot=null; go("#/score"); }
+  function startScore(segment, structs){
+    state.segment = segment || null;
+    state.who = segment==="res" ? "home" : (segment==="com" ? "assoc" : state.who);
+    if(structs) state.structs = structs;
+    state.step = 0; state.unlocked=false; state.booked=false; state.slot=null;
+    go("#/score");
+  }
+
+  // cards
+  function mapSvg(pts){
+    var d="M0 70 "+pts.map(function(p){return "L"+p[0]+" "+p[1]}).join(" ")+" L280 40 L280 92 L0 92 Z";
+    var lines="";
+    for(var i=1;i<5;i++){lines+='<path d="M0 '+(70-i*9)+' '+pts.map(function(p){return "L"+p[0]+" "+(p[1]-i*9)}).join(" ")+' L280 '+(40-i*9)+'" stroke="#9FCFD5" stroke-width="1" fill="none" opacity="'+(0.9-i*0.15)+'"/>'}
+    return '<svg viewBox="0 0 280 92" preserveAspectRatio="none" aria-hidden="true">'+lines+'<path d="'+d+'" fill="#C9DDD3"/><path d="M0 70 '+pts.map(function(p){return "L"+p[0]+" "+p[1]}).join(" ")+' L280 40" stroke="#0F7482" stroke-width="2" fill="none"/></svg>';
+  }
+  function renderRegionCards(el){
+    el.innerHTML = Object.keys(REGIONS).map(function(k){var r=REGIONS[k];
+      return '<div class="rcard"><div class="rmap">'+mapSvg(r.lat)+'</div><div class="rbody"><div class="county">'+r.county+'</div><h3>'+r.name+'</h3><p>'+r.card+'</p>'+
+        '<button class="btn btn-cta btn-sm" data-region-score="'+k+'">Score a '+r.name+' property</button>'+
+        '<a class="go" href="#/region/'+k+'">See '+r.name+' rules &amp; costs →</a></div></div>';
+    }).join("");
+  }
+  renderRegionCards($("#regionCards")); renderRegionCards($("#regionCards2"));
+
+  $("#serviceCards").innerHTML = ["seawall","dock","deck"].map(function(k){var s=SERVICES[k];
+    return '<div class="scard">'+ICON[k]+'<h3>'+({seawall:"Seawalls",dock:"Docks &amp; Boat Lifts",deck:"Waterfront Decks"})[k]+'</h3><ul>'+s.bullets.map(function(b){return '<li>'+b+'</li>'}).join("")+'</ul>'+
+      '<div class="actions"><span class="fine" style="color:var(--teal);font-weight:700">Free score + cost estimate</span><button class="btn btn-cta btn-sm" data-score="'+k+'">Score + estimate my '+SHORT[k]+'</button><a class="btn btn-ghost btn-sm" href="#/book">Book a free inspection</a><a class="link" href="#/service/'+k+'">'+s.eyebrow+' guide →</a></div></div>';
+  }).join("");
+
+  function thumbSvg(i){
+    var y=40+(i*7%30);
+    return '<svg viewBox="0 0 300 110" preserveAspectRatio="none" aria-hidden="true"><path d="M0 '+y+' C80 '+(y-18)+' 160 '+(y+16)+' 300 '+(y-6)+' L300 110 L0 110 Z" fill="#C9DDD3"/><path d="M0 '+(y-14)+' C80 '+(y-32)+' 160 '+(y+2)+' 300 '+(y-20)+'" stroke="#9FCFD5" fill="none"/><path d="M0 '+(y-28)+' C80 '+(y-46)+' 160 '+(y-12)+' 300 '+(y-34)+'" stroke="#9FCFD5" fill="none" opacity=".6"/></svg>';
+  }
+  function articleCard(a,i){
+    var reg = a[3]==="all" ? "All regions" : REGIONS[a[3]].name;
+    return '<a class="acard" href="#/article"><div class="thumb">'+thumbSvg(i)+'</div><div class="body"><div class="meta">'+a[0]+' · '+a[5]+' min</div><h3>'+a[1]+'</h3><p>'+a[2]+'</p><div><span class="tag">'+reg+'</span></div></div></a>';
+  }
+  var catSel="All";
+  function renderLearn(){
+    var cats=["All"].concat(ARTICLES.map(function(a){return a[0]}).filter(function(v,i,s){return s.indexOf(v)===i}));
+    $("#cats").innerHTML=cats.map(function(c){return '<button class="chip" data-cat="'+c+'" aria-pressed="'+(c===catSel)+'">'+c+'</button>'}).join("");
+    $("#articleGrid").innerHTML=ARTICLES.filter(function(a){return catSel==="All"||a[0]===catSel}).map(articleCard).join("");
+    document.querySelectorAll("[data-cat]").forEach(function(b){b.onclick=function(){catSel=b.dataset.cat; renderLearn();}});
+  }
+
+  function renderRegion(k){
+    var r=REGIONS[k]; if(!r) return; setRegion(k);
+    $("#rCrumb").textContent=r.name; $("#rCounty").textContent=r.county; $("#rTitle").textContent="Seawalls, docks & decks in "+r.name;
+    $("#rLede").textContent=r.lede; $("#rName2").textContent=r.name; $("#rEdName").textContent=r.name; $("#rEdTag").textContent=r.name+" edition";
+    $("#rRules").innerHTML=r.rules.map(function(x){return '<div class="rulebox"><b>'+x[0]+'</b>'+x[1]+'</div>'}).join("");
+    $("#rIssues").innerHTML=r.issues.map(function(x){return '<div class="issue"><b>'+x[0]+'</b><p>'+x[1]+'</p></div>'}).join("");
+    $("#rCosts").innerHTML=[["Seawall repair","per project"],["Seawall replacement","per linear foot"],["Dock or boat lift","per project"],["Waterfront deck","per sq ft"]].map(function(x){return '<tr><td><b>'+x[0]+'</b><div class="fine">'+x[1]+'</div></td><td>$ sample – $ sample</td></tr>'}).join("");
+    $("#rArticles").innerHTML=ARTICLES.filter(function(a){return a[3]===k||a[3]==="all"}).slice(0,4).map(function(a){return '<a href="#/article" style="font-weight:600">'+a[1]+' →</a>'}).join("");
+    $("#rCities").innerHTML=r.cities.map(function(c){return '<a href="#/region/'+k+'">'+c+'</a>'}).join("");
+  }
+  var curService="seawall";
+  function renderService(k){
+    var s=SERVICES[k]; if(!s) return; curService=k;
+    $("#sCrumb").textContent=s.eyebrow; $("#sEyebrow").textContent=s.eyebrow+(rName()?" · "+rName():" · Keys to Palm Beach"); $("#sTitle").textContent=s.title+(rName()?" in "+rName():" in South Florida & the Keys");
+    $("#sLede").textContent=s.lede; $("#sCardTitle").textContent="Score + estimate my "+SHORT[k]; $("#sCardSub").textContent="Free score + cost estimate · About 2 minutes · "+(rName()?rName()+" rules applied":"local rules applied");
+    $("#sSigns").innerHTML=s.signs.map(function(x){return '<div class="issue"><b>'+x[0]+'</b><p>'+x[1]+'</p></div>'}).join("");
+    $("#sArticles").innerHTML=ARTICLES.filter(function(a){return a[4]===k||a[4]==="all"}).slice(0,3).map(articleCard).join("");
+  }
+
+  // scoring (prototype, runs on the server in the real build)
+  function band(s){ if(s>=80) return ["Healthy","b-ready","#2E7D4F"]; if(s>=60) return ["Watch","b-watch","#9A7400"]; if(s>=40) return ["At Risk","b-risk","#C4561A"]; return ["Act Now","b-act","#B3261E"]; }
+  function score(){
+    var out={subs:{},overall:0,flags:[],signs:0}; var exp=REGIONS[state.region].exposure;
+    state.structs.forEach(function(s){
+      var v=100, red=false, causes=[];
+      CHECKS[s].forEach(function(c){ if(state.checks[c[0]]){ v-=c[2]; causes.push(c[1]); out.signs++; if(c[3]) red=true; } });
+      var ap=AGE_PEN[state.age[s]]||0; v-=ap; if(ap>=16) causes.push("Age of the structure");
+      v-=exp; causes.push("Local exposure ("+REGIONS[state.region].name+")");
+      v=Math.max(5,Math.round(v)); if(red) v=Math.min(v,39);
+      out.subs[s]={v:v,red:red,causes:causes};
+    });
+    var ks=Object.keys(out.subs), sum=0, min=100; ks.forEach(function(k){sum+=out.subs[k].v; min=Math.min(min,out.subs[k].v)});
+    out.overall = ks.length? Math.round(Math.min(sum/ks.length, min+15)) : 0;
+    var sw=out.subs.seawall;
+    if(sw && out.subs.dock && state.attached && sw.v<=59) out.flags.push(["Your dock is attached to a seawall that needs attention.","Replacing or repairing the wall usually means taking the dock off and putting it back. Plan both jobs together to save cost and permitting time."]);
+    if(sw && out.subs.deck && state.checks.sw_voids) out.flags.push(["Soil loss behind your wall can affect your deck.","Voids behind a seawall can undermine deck posts and footings. Have both checked in the same visit."]);
+    if(out.subs.deck && out.subs.deck.red) out.flags.unshift(["Limit use of your deck until it's inspected.","You reported a safety-related problem (a loose railing, soft spots or rot). Keep people off the affected area until a professional has looked at it."]);
+    return out;
+  }
+  var EST = {seawall:[18,45],dock:[12,38],deck:[9,28]};
+
+  // wizard
+  var STEP_LABEL={intent:"Why you're here",where:"Your property",what:"Your waterfront",see:"What you see"};
+  function steps(){ return state.intent ? ["where","what","see"] : ["intent","where","what","see"]; }
+  function renderWizard(){
+    var S=steps(); if(state.step>=S.length) state.step=S.length-1;
+    var key=S[state.step];
+    $("#prog").innerHTML=S.map(function(_,i){return '<i class="'+(i<=state.step?'done':'')+'"></i>'}).join("");
+    $("#stepName").textContent=(state.intent?INTENTS[state.intent].t:"Free check")+" · Step "+(state.step+1)+" of "+S.length+" · "+STEP_LABEL[key];
+    var b=$("#wizBody"), h="";
+    if(key==="intent"){
+      h='<div class="qcard"><h2>What brings you here today?</h2><p class="muted">We\'ll tailor your questions, report and estimate.</p><div class="intents" style="margin-top:16px">'+intentButtons()+'</div></div>';
+    } else if(key==="where"){
+      var det=detectRegion(state.addr);
+      h='<div class="qcard"><h2>Where is the property?</h2><p class="muted">We use the address to look up your flood zone, your city\'s rules and local costs.</p>'+
+        '<div class="flabel" style="margin-top:16px">This property is</div><div class="opts" style="margin:8px 0 6px">'+
+          '<button type="button" class="opt" data-seg="res" aria-pressed="'+(state.segment==="res")+'"><b>Residential</b><span>A home on the water</span></button>'+
+          '<button type="button" class="opt" data-seg="com" aria-pressed="'+(state.segment==="com")+'"><b>HOA / condo / marina / business</b><span>Board, manager or owner</span></button></div>'+
+        '<div class="field" style="margin-top:14px"><label for="wAddr">Street address</label><input id="wAddr" value="'+esc(state.addr)+'" placeholder="e.g. 1200 Isle of Venice Dr, Fort Lauderdale"></div>'+
+        '<div id="detWrap">'+(det?'<div class="detected">✓ '+REGIONS[det].name+' detected. Local rules applied.</div>':'')+'</div>'+
+        '<div class="field" style="margin-top:12px"><label for="wRegion">Region</label><select id="wRegion">'+regionOptions()+'</select></div>'+
+        '<div class="field"><label for="wRel">Your relationship to this property</label><select id="wRel">'+relOptions(state.relation)+'</select></div>'+
+        (state.relation==="recent_purchase"?'<div class="detected">✓ Welcome to the waterfront! We\'ll include what new owners should check first.</div>':'')+
+        (state.relation==="buying"?'<div class="detected">✓ Pre-purchase check: we\'ll flag what to ask before you close.</div>':'')+
+        '<p class="fine" id="wErr" style="color:var(--act);margin:0 0 8px"></p>'+
+        (state.segment==="com"?'<div class="row2"><div class="field"><label for="wOrg">Association or business name</label><input id="wOrg" placeholder="e.g. Harbor Isles HOA"></div><div class="field"><label for="wUnits">Units or slips</label><input id="wUnits" inputmode="numeric" placeholder="e.g. 48"></div></div>':'')+
+        (state.intent==="notice"?'<div class="field"><label for="wNotice">Who sent the notice?</label><select id="wNotice"><option value="">Choose one</option><option>City or county</option><option>HOA or condo association</option><option>Insurance company</option><option>Home inspector or engineer</option><option>Not sure</option></select></div><div class="field"><label for="wDeadline">Deadline on the notice (if any)</label><input id="wDeadline" placeholder="e.g. 60 days, or a date"></div>':'')+
+        (state.intent==="buysell"?'<div class="field"><label for="wClose">Closing or listing date (if set)</label><input id="wClose" placeholder="e.g. Oct 30"></div>':'')+
+        (state.intent==="upgrade"?'<div class="field"><label for="wPlan">What are you planning?</label><select id="wPlan"><option value="">Choose one</option><option>New dock</option><option>New or bigger boat lift</option><option>Rebuild or extend a deck</option><option>Raise or replace a seawall</option><option>Not sure yet</option></select></div>':'')+
+        '</div>';
+    } else if(key==="what"){
+      h='<div class="qcard"><h2>What\'s on the waterfront?</h2><p class="muted">Select everything that applies. They\'re scored together because they affect each other.</p><div class="opts three">'+
+        ["seawall","dock","deck"].map(function(s){var on=state.structs.indexOf(s)>-1;return '<button type="button" class="opt" data-struct="'+s+'" aria-pressed="'+on+'">'+ICON[s]+'<b>'+NAMES[s]+'</b><span>'+({seawall:"Concrete, vinyl, steel or rip-rap",dock:"Fixed, floating, pier, boat lift",deck:"Wood or composite, near the water"})[s]+'</span></button>'}).join("")+
+        '</div>'+(state.structs.indexOf("dock")>-1&&state.structs.indexOf("seawall")>-1?'<label class="consent" style="margin-top:16px;font-size:15px;color:var(--ink)"><input type="checkbox" id="wAttached" '+(state.attached?'checked':'')+'><span>The dock is attached to the seawall</span></label>':'')+
+        (state.structs.indexOf("dock")<0?'<div class="dockq"><div class="flabel">'+((state.relation==="recent_purchase"||state.relation==="buying")?'New owners often add or upgrade a dock or lift. Is there one at the property?':'Do you have a dock or boat lift?')+'</div><div class="opts" style="margin-top:10px">'+
+          dq("include","Yes, include it","Add it to my score, estimate and inspection")+
+          dq("skip","Yes, but skip it for now","Just score what I selected")+
+          dq("planning","No, but I\'m thinking about adding one","Send me free info on permits, costs and lift sizing")+
+          dq("no","No","")+
+        '</div></div>':'')+'</div>';
+    } else if(key==="see"){
+      h='<div class="qcard"><h2>What do you see?</h2><p class="muted">Check anything you\'ve noticed. Not sure? Leave it unchecked. You can add photos after your score.</p>'+
+        state.structs.map(function(s){
+          return '<div class="struct-block"><h3>'+ICON[s]+NAMES[s]+'</h3>'+
+            '<div class="field" style="margin-top:10px;max-width:320px"><label for="age_'+s+'">Approximate age</label><select id="age_'+s+'" data-age="'+s+'">'+[["lt10","Under 10 years"],["10to25","10–25 years"],["25to40","25–40 years"],["gt40","Over 40 years"],["unknown","Not sure"]].map(function(o){return '<option value="'+o[0]+'"'+(state.age[s]===o[0]?' selected':'')+'>'+o[1]+'</option>'}).join("")+'</select></div>'+
+            '<div class="checks">'+CHECKS[s].map(function(c){return '<label><input type="checkbox" data-check="'+c[0]+'" '+(state.checks[c[0]]?'checked':'')+'><span>'+c[1]+(c[3]?'<span class="rf">PRIORITY</span>':'')+'</span></label>'}).join("")+'</div></div>';
+        }).join("")+'</div>';
+    }
+    var last = state.step===S.length-1;
+    h+='<div class="wiz-nav">'+(state.step>0?'<button class="btn btn-ghost" id="wBack">Back</button>':'<a class="btn btn-ghost" href="#/">Cancel</a>')+
+       (key==="intent"?'':'<button class="btn btn-cta" id="wNext">'+(last?'See my Shore Score':'Continue')+'</button>')+'</div>'+
+       '<p class="skip">Rather talk to someone? <a href="#/book">Book a free on-site inspection</a></p>';
+    b.innerHTML=h;
+
+    b.querySelectorAll('[data-intent]').forEach(function(el){el.onclick=function(){ state.intent=el.dataset.intent; if(state.intent==="upgrade" && state.structs.indexOf("dock")<0) state.dockQ=null; state.step=0; renderWizard(); window.scrollTo(0,0); }});
+    b.querySelectorAll('[data-seg]').forEach(function(el){el.onclick=function(){state.segment=el.dataset.seg; state.who=state.segment==="res"?"home":"assoc"; renderWizard();}});
+    b.querySelectorAll('[data-opt="who"]').forEach(function(el){el.onclick=function(){state.who=el.dataset.val; renderWizard();}});
+    b.querySelectorAll('[data-struct]').forEach(function(el){el.onclick=function(){var s=el.dataset.struct,i=state.structs.indexOf(s); if(i>-1){ if(state.structs.length>1) state.structs.splice(i,1);} else state.structs.push(s); renderWizard();}});
+    b.querySelectorAll('[data-dq]').forEach(function(el){el.onclick=function(){state.dockQ=el.dataset.dq; if(state.dockQ==="include" && state.structs.indexOf("dock")<0){ state.structs.push("dock"); } state.dockInfo = state.dockQ==="planning"; renderWizard();}});
+    b.querySelectorAll('[data-check]').forEach(function(el){el.onchange=function(){state.checks[el.dataset.check]=el.checked}});
+    b.querySelectorAll('[data-age]').forEach(function(el){el.onchange=function(){state.age[el.dataset.age]=el.value}});
+    var wa=$("#wAddr"); if(wa) wa.oninput=function(){state.addr=wa.value; var d=detectRegion(wa.value); if(d){setRegion(d); $("#wRegion").value=d; $("#detWrap").innerHTML='<div class="detected">✓ '+REGIONS[d].name+' detected. Local rules applied.</div>';} else $("#detWrap").innerHTML="";};
+    var wr=$("#wRegion"); if(wr) wr.onchange=function(){setRegion(wr.value)};
+    var wl=$("#wRel"); if(wl) wl.onchange=function(){ state.relation=wl.value; state.addr=$("#wAddr").value; renderWizard(); };
+    var at=$("#wAttached"); if(at) at.onchange=function(){state.attached=at.checked};
+    var bk=$("#wBack"); if(bk) bk.onclick=function(){state.step--; renderWizard(); window.scrollTo(0,0);};
+    var nx=$("#wNext"); if(nx) nx.onclick=function(){ if(key==="where" && !state.segment){ $("#wErr").textContent="Tell us whether this is a home or a commercial property."; return; }
+      if(key==="where" && !state.relation){ $("#wErr").textContent="Tell us your relationship to the property."; $("#wRel").focus(); return; }
+      if(key==="where" && !state.region){ $("#wErr").textContent="Choose a region so we can apply your local rules and costs."; $("#wRegion").focus(); return; } if(!last){state.step++; renderWizard(); window.scrollTo(0,0);} else { state.unlocked=false; state.booked=false; go("#/report"); } };
+  }
+  function relOptions(sel){ var o=[["","Choose one"],["owner","Owner"],["recent_purchase","Recently purchased (last 12 months)"],["buying","Buying / under contract"],["family","Family member / co-owner"],["manager","Property manager / board member"],["tenant","Tenant"],["realtor","Realtor / agent"]]; return o.map(function(x){return '<option value="'+x[0]+'"'+(sel===x[0]?' selected':'')+'>'+x[1]+'</option>'}).join(""); }
+  function dq(val,title,sub){return '<button type="button" class="opt" data-dq="'+val+'" aria-pressed="'+(state.dockQ===val)+'"><b>'+title+'</b>'+(sub?'<span>'+sub+'</span>':'')+'</button>'}
+  function opt(group,val,title,sub){return '<button type="button" class="opt" data-opt="'+group+'" data-val="'+val+'" aria-pressed="'+(state[group]===val)+'"><b>'+title+'</b><span>'+sub+'</span></button>'}
+
+  function gauge(v,color){
+    var a=Math.PI*(1-v/100), r=96, cx=120, cy=120;
+    var x=cx+r*Math.cos(a), y=cy-r*Math.sin(a);
+    return '<svg viewBox="0 0 240 150" aria-hidden="true"><path d="M24 120 A96 96 0 0 1 216 120" stroke="#D8E1E6" stroke-width="16" fill="none" stroke-linecap="round"/>'+
+      '<path d="M24 120 A96 96 0 0 1 '+x.toFixed(1)+' '+y.toFixed(1)+'" stroke="'+color+'" stroke-width="16" fill="none" stroke-linecap="round"/></svg>';
+  }
+  function slotsHtml(sel){
+    var out=[], d=new Date(), n=0;
+    while(out.length<8){ d.setDate(d.getDate()+1); if(d.getDay()===0) continue;
+      var lab=d.toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"});
+      var t=(n++%2===0)?"9–11 AM":"1–3 PM"; var id="s"+out.length;
+      out.push('<button type="button" class="slot" data-slot="'+id+'" aria-pressed="'+(sel===id)+'"><b>'+lab+'</b>'+t+'</button>'); }
+    return out.join("");
+  }
+  function modeHtml(mode){
+    return '<div class="mode">'+
+      '<button type="button" class="opt" data-mode="pick" aria-pressed="'+(mode==="pick")+'"><b>Pick a time now</b><span>Choose a window that works</span></button>'+
+      '<button type="button" class="opt" data-mode="call" aria-pressed="'+(mode==="call")+'"><b>Call me to schedule</b><span>We\'ll call within one business day</span></button></div>';
+  }
+  function consentText(r){ return '(Optional) Yes, call and text me. I agree that WallDockDeck and its licensed inspection partner for '+(r?r.name:'my region')+', may call and text me at the number above about my Shore Score, inspection and related services, including messages sent with automated technology. Consent is not a condition of any purchase or service. Message frequency varies. Msg & data rates may apply. Reply STOP to opt out, HELP for help. See our Privacy Policy and SMS Terms.'; }
+
+  function planBox(r){
+    if(state.structs.indexOf("dock")>-1 || state.dockQ==="skip") return "";
+    if(state.dockInfo) return '<div class="planbox"><div><b>✓ Free dock &amp; boat lift info is on its way</b><div class="muted" style="font-size:15px">Permit basics for '+r.name+', typical costs for a new dock or lift, and how to size a lift for your boat.</div></div><button class="btn btn-ghost btn-sm" type="button" data-dockinfo="0">Undo</button></div>';
+    return '<div class="planbox"><div><b>Thinking about adding a dock or boat lift?</b><div class="muted" style="font-size:15px">Get free info: '+r.name+' permit basics, typical costs and lift sizing. Or add it to your inspection.</div></div><div class="btn-row"><button class="btn btn-navy btn-sm" type="button" data-dockinfo="1">Yes, send me free info</button><button class="btn btn-ghost btn-sm" type="button" data-dockadd="1">Add a dock to my inspection</button></div></div>';
+  }
+  function renderReport(){
+    if(!state.region){ state.step=0; go("#/score"); return; }
+    var r=REGIONS[state.region], s=score(), b=band(s.overall), el=$("#reportBody");
+    var subs=Object.keys(s.subs).map(function(k){var x=s.subs[k], bb=band(x.v);
+      return '<div class="sub"><div class="top"><b>'+NAMES[k]+'</b><span class="pill '+bb[1]+'">'+bb[0]+'</span></div><div class="val">'+x.v+'</div><div class="bar"><i style="width:'+x.v+'%;background:'+bb[2]+'"></i></div><div class="estline">'+(x.v<80?'Est. $'+EST[k][0]+'k – $'+EST[k][1]+'k (sample)':'No work needed now')+'</div><ul>'+x.causes.slice(0,4).map(function(c){return '<li>'+esc(c)+'</li>'}).join("")+'</ul></div>';}).join("");
+    var lo=0,hi=0; Object.keys(s.subs).forEach(function(k){ if(s.subs[k].v<80){lo+=EST[k][0];hi+=EST[k][1];} });
+    var full =
+      '<div class="subs">'+subs+'</div>'+
+      s.flags.map(function(f){return '<div class="flag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L1 21h22L12 2z" fill="#C4561A"/><rect x="11" y="9" width="2" height="6" fill="#fff"/><rect x="11" y="16.5" width="2" height="2" fill="#fff"/></svg><div><b>'+f[0]+'</b><div class="muted" style="font-size:15px">'+f[1]+'</div></div></div>'}).join("")+
+      '<div class="grid2" style="margin-top:18px">'+
+        '<div class="panel"><div class="eyebrow">Local rules · '+r.name+'</div>'+r.rules.map(function(x){return '<p style="margin:10px 0 0"><b>'+x[0]+':</b> '+x[1]+'</p>'}).join("")+'</div>'+
+        '<div class="panel"><div class="eyebrow">Total cost estimate (sample)</div>'+(hi?'<div class="est" style="font-family:var(--display);font-stretch:85%;font-weight:800;font-size:36px;margin-top:8px">$'+lo+'k – $'+hi+'k</div><p class="muted" style="margin:4px 0 0;font-size:14px">For the structures that need attention. The real ranges come from local permit data for your city.</p>':'<p style="margin-top:10px">Nothing needs work right now. We\'ll remind you to re-score after storm season.</p>')+'</div>'+
+      '</div>'+
+      '<div class="panel" style="margin-top:16px;display:flex;gap:14px;align-items:center;flex-wrap:wrap"><div style="flex:1;min-width:220px"><b>Add photos for a more accurate score</b><div class="muted" style="font-size:14px">Our AI photo check reviews your wall, dock or deck, and confidence goes up to High.</div></div><button class="btn btn-ghost btn-sm" type="button">Upload photos</button></div>';
+    var head =
+      '<div class="panel"><div class="report-top"><div class="gauge">'+gauge(s.overall,b[2])+'<div class="num">'+s.overall+'</div><div class="lbl">Shore Score / 100</div></div>'+
+      '<div><span class="pill '+b[1]+'">'+b[0]+'</span><h2 style="margin:10px 0 6px">'+(state.addr?esc(state.addr):"Your property")+'</h2><p class="muted" style="margin:0">'+(state.segment==="com"?"Commercial":"Residential")+' · '+r.name+' · '+state.structs.map(function(k){return NAMES[k]}).join(" + ")+' · Confidence: Medium</p>'+
+      (state.intent?'<p style="margin:10px 0 0;font-weight:600">'+INTENTS[state.intent].lead+'</p>':'')+
+      '<p style="margin:12px 0 0"><b>Your answers show '+s.signs+' warning sign'+(s.signs===1?'':'s')+'.</b> '+({"Healthy":"Your shoreline looks healthy. Keep up the maintenance and re-score after storms.","Watch":"A few items to watch. A free inspection can confirm them before they grow.","At Risk":"We see something wrong. Let\'s book a free on-site inspection to take a closer look.","Act Now":"We see signs that need attention now. Let\'s book a free on-site inspection this week."})[b[0]]+'</p>'+
+      (state.unlocked?'':'<div class="btn-row" style="margin-top:14px"><a class="btn btn-ghost btn-sm" href="#/book">Skip ahead: book a free inspection</a></div>')+
+      '</div></div></div>';
+
+    var gate =
+      '<div class="gate"><div class="qcard"><h3>Unlock your full report + free guide</h3><p class="muted" style="margin:4px 0 14px">See each structure\'s score, what drove it, the local rules and a budget range. We\'ll email you the report and <i>The South Florida Waterfront Owner\'s Guide</i>.</p>'+
+      '<div class="row2"><div class="field"><label for="cName">Full name</label><input id="cName" autocomplete="name" value="'+esc(who.name||"")+'"></div><div class="field"><label for="cPhone">Mobile phone</label><input id="cPhone" autocomplete="tel" inputmode="tel" value="'+esc(who.phone||"")+'"></div></div>'+
+      '<div class="field"><label for="cEmail">Email</label><input id="cEmail" autocomplete="email" inputmode="email" value="'+esc(who.email||"")+'"></div>'+
+      '<label class="consent"><input type="checkbox" id="cConsent"><span>'+consentText(r)+'</span></label>'+
+      '<button class="btn btn-cta" style="width:100%" id="unlock">Show my full report</button><p class="fine" id="gateErr" style="color:var(--act);margin:8px 0 0"></p></div></div>';
+
+    var book = state.booked ?
+      '<div class="panel done-card" style="margin-top:18px"><svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="27" fill="#E3F2E8"/><path d="M17 29l7 7 15-15" stroke="#2E7D4F" stroke-width="3.5" fill="none"/></svg><h2 style="margin:12px 0 6px">'+(state.mode==="call"?"We'll call you to schedule":"Inspection requested")+'</h2><p class="muted" style="max-width:52ch;margin:0 auto">'+(state.mode==="call"?"Expect a call within one business day to set up your free on-site inspection.":"We\'ll confirm your inspection time by phone.")+' Your report and guide are on the way to your inbox.</p></div>' :
+      '<div class="payoff">'+
+        '<div class="panel"><div class="eyebrow">Next step</div><h2 style="margin:6px 0 4px">Book your free on-site inspection</h2><p class="muted" style="margin:0">We\'ll take a closer look at what your score shows. No obligation.</p>'+
+        modeHtml(state.mode)+
+        (state.mode==="pick"?'<div class="slots">'+slotsHtml(state.slot)+'</div>':'<div class="field" style="margin-top:12px"><label for="bBest">Best time to call</label><select id="bBest"><option>Morning</option><option>Afternoon</option><option>Evening (before 8 PM)</option></select></div>')+
+        '<div class="field"><label for="bNote">Anything we should know? (gate code, boat on lift…)</label><input id="bNote"></div><button class="btn btn-cta" id="bookBtn">'+(state.mode==="pick"?"Request inspection":"Request a call")+'</button> <span class="fine" id="bookErr" style="color:var(--act)"></span></div>'+
+        '<div class="guide"><div class="cover">The South Florida Waterfront Owner\'s Guide<br><span style="font-size:13px;background:#E0701A;border-radius:4px;padding:2px 8px;margin-top:6px;display:inline-block">'+r.name+' edition</span></div><b style="color:#fff">Rules for your address, costs in your city, and 7 costly mistakes to avoid</b><span style="font-size:14px">It\'s also on its way to your inbox.</span><a class="btn btn-cta btn-sm" href="'+TMG.guidePdf(state.region)+'" target="_blank" rel="noopener">Download the guide (PDF)</a></div>'+
+      '</div>'+planBox(r);
+
+    el.innerHTML = head + (state.unlocked ? full + book : '<div class="locked" style="margin-top:18px;min-height:540px"><div class="blur">'+full+'</div>'+gate+'</div>');
+
+    var ub=$("#unlock"); if(ub) ub.onclick=function(){
+      var n=$("#cName").value.trim(), p=$("#cPhone").value.trim(), e=$("#cEmail").value.trim(), c=$("#cConsent").checked;
+      if(!n||!e){ $("#gateErr").textContent="Add your name and email to see the full report."; return; }
+      state.contact={name:n,phone:p,email:e,consent:c};
+      sendLead("score_report",{name:n,email:e,phone:p,consent:c,extra:scoreFields()});
+      state.unlocked=true; renderReport();
+    };
+    el.querySelectorAll("[data-mode]").forEach(function(x){x.onclick=function(){state.mode=x.dataset.mode; renderReport();}});
+    el.querySelectorAll("[data-dockinfo]").forEach(function(x){x.onclick=function(){state.dockInfo = x.dataset.dockinfo==="1"; renderReport();}});
+    el.querySelectorAll("[data-dockadd]").forEach(function(x){x.onclick=function(){if(state.structs.indexOf("dock")<0) state.structs.push("dock"); state.dockQ="include"; state.dockInfo=false; renderReport();}});
+    el.querySelectorAll("[data-slot]").forEach(function(x){x.onclick=function(){state.slot=x.dataset.slot; el.querySelectorAll("[data-slot]").forEach(function(y){y.setAttribute("aria-pressed", y===x)});}});
+    var bb=$("#bookBtn"); if(bb) bb.onclick=function(){
+      if(state.mode==="pick" && !state.slot){ $("#bookErr").textContent="Pick a time first."; return; }
+      if(!state.contact.phone){ $("#bookErr").textContent="To book, we need a phone number so we can confirm your time. Scroll up to add it."; return; }
+      sendLead("inspection_request",{name:state.contact.name,email:state.contact.email,phone:state.contact.phone,consent:state.contact.consent,extra:Object.assign(scoreFields(),{
+        booking_mode: state.mode==="pick" ? "Picked a time" : "Call me to schedule",
+        booking_slot: state.mode==="pick" ? (state.slot||"") : "",
+        booking_best_time: $("#bBest") ? $("#bBest").value : "",
+        booking_note: $("#bNote") ? $("#bNote").value.trim() : ""
+      })});
+      state.booked=true; renderReport();
+    };
+  }
+
+  // direct booking page
+  function renderBook(){
+    var r=state.region?REGIONS[state.region]:null, bk=state.book, el=$("#bookBody");
+    if(bk.done){
+      el.innerHTML='<div class="qcard done-card"><svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="27" fill="#E3F2E8"/><path d="M17 29l7 7 15-15" stroke="#2E7D4F" stroke-width="3.5" fill="none"/></svg><h2 style="margin:12px 0 6px">'+(bk.mode==="call"?"We'll call you to schedule":"Inspection requested")+'</h2><p class="muted" style="max-width:52ch;margin:0 auto">We\'ll '+(bk.mode==="call"?"call you within one business day to set it up.":"confirm your time by phone.")+' Want your free score and estimates too?</p><div class="btn-row" style="justify-content:center;margin-top:16px"><button class="btn btn-cta" data-entry="'+bk.segment+'">Get my Shore Score too</button><a class="btn btn-ghost" href="#/learn">Read the guides</a></div></div>';
+      bindEntry(el); return;
+    }
+    el.innerHTML='<div class="qcard"><div class="eyebrow">Free · No obligation</div><h2 style="margin-top:6px">Book a free on-site inspection</h2><p class="muted">We\'ll take a closer look at your seawall, dock or deck.</p>'+
+      '<div class="flabel" style="margin-top:18px">Property type</div><div class="opts" style="margin-top:8px">'+
+        '<button type="button" class="opt" data-bseg="res" aria-pressed="'+(bk.segment==="res")+'"><b>Residential</b><span>Homeowner</span></button>'+
+        '<button type="button" class="opt" data-bseg="com" aria-pressed="'+(bk.segment==="com")+'"><b>Commercial</b><span>HOA, condo, marina, business</span></button></div>'+
+      '<div class="field" style="margin-top:16px"><label for="bAddr">Property address</label><input id="bAddr" value="'+esc(state.addr)+'" placeholder="Street address, city"></div>'+
+      '<div class="field"><label for="bRegion">Region</label><select id="bRegion">'+regionOptions()+'</select></div>'+
+      '<div class="field"><label for="bRel">Your relationship to this property</label><select id="bRel">'+relOptions(state.relation)+'</select></div>'+
+      '<div class="field"><span class="flabel">What should they inspect?</span><div class="chips">'+["seawall","dock","deck"].map(function(s){return '<button type="button" class="chip" data-bs="'+s+'" aria-pressed="'+(bk.structs.indexOf(s)>-1)+'">'+NAMES[s]+'</button>'}).join("")+'</div></div>'+
+      (bk.structs.indexOf("dock")<0?'<label class="inline-check"><input type="checkbox" id="bDockInfo" '+(bk.dockInfo?'checked':'')+'><span><b>Thinking about adding a dock or boat lift?</b> Send me free info on permits, costs and lift sizing.</span></label>':'')+
+      '<div class="flabel" style="margin-top:6px">How would you like to schedule?</div>'+modeHtml(bk.mode)+
+      (bk.mode==="pick"?'<div class="slots">'+slotsHtml(bk.slot)+'</div>':'<div class="field" style="margin-top:12px"><label for="bBest2">Best time to call</label><select id="bBest2"><option>Morning</option><option>Afternoon</option><option>Evening (before 8 PM)</option></select></div>')+
+      '<div class="row2"><div class="field"><label for="dName">Full name</label><input id="dName" autocomplete="name" value="'+esc(who.name||"")+'"></div><div class="field"><label for="dPhone">Mobile phone</label><input id="dPhone" autocomplete="tel" inputmode="tel" value="'+esc(who.phone||"")+'"></div></div>'+
+      '<div class="field"><label for="dEmail">Email</label><input id="dEmail" autocomplete="email" inputmode="email" value="'+esc(who.email||"")+'"></div>'+
+      '<label class="consent"><input type="checkbox" id="dConsent"><span id="dConsentText">'+consentText(r)+'</span></label>'+
+      '<button class="btn btn-cta" style="width:100%" id="dBook">'+(bk.mode==="pick"?"Request my inspection":"Request a call")+'</button><p class="fine" id="dErr" style="color:var(--act);margin:8px 0 0"></p>'+
+      '<p class="skip">Want to know your score first? <a href="#/start">Take the 2-minute Health Check</a></p></div>';
+    el.querySelectorAll("[data-bseg]").forEach(function(x){x.onclick=function(){bk.segment=x.dataset.bseg; renderBook();}});
+    el.querySelectorAll("[data-bs]").forEach(function(x){x.onclick=function(){var s=x.dataset.bs,i=bk.structs.indexOf(s); if(i>-1){if(bk.structs.length>1) bk.structs.splice(i,1);} else bk.structs.push(s); renderBook();}});
+    el.querySelectorAll("[data-mode]").forEach(function(x){x.onclick=function(){bk.mode=x.dataset.mode; renderBook();}});
+    el.querySelectorAll("[data-slot]").forEach(function(x){x.onclick=function(){bk.slot=x.dataset.slot; el.querySelectorAll("[data-slot]").forEach(function(y){y.setAttribute("aria-pressed", y===x)});}});
+    var bdi=$("#bDockInfo"); if(bdi) bdi.onchange=function(){bk.dockInfo=bdi.checked};
+    $("#bAddr").oninput=function(){state.addr=this.value; var d=detectRegion(this.value); if(d){ setRegion(d); $("#bRegion").value=d; }};
+    $("#bRegion").onchange=function(){ setRegion(this.value); renderBookConsent(); };
+    $("#bRel").onchange=function(){ state.relation=this.value; };
+    $("#dBook").onclick=function(){
+      if(bk.mode==="pick" && !bk.slot){ $("#dErr").textContent="Pick a time first."; return; }
+      if(!state.region){ $("#dErr").textContent="Choose a region."; return; }
+      if(!$("#dName").value.trim()||!$("#dPhone").value.trim()||!$("#bAddr").value.trim()){ $("#dErr").textContent="Add your name, phone and property address."; return; }
+      state.addr=$("#bAddr").value.trim();
+      sendLead("inspection_request",{name:$("#dName").value.trim(),email:$("#dEmail").value.trim(),phone:$("#dPhone").value.trim(),consent:$("#dConsent").checked,segment:bk.segment,structs:bk.structs,addr:state.addr,extra:{
+        booking_mode: bk.mode==="pick" ? "Picked a time" : "Call me to schedule",
+        booking_slot: bk.mode==="pick" ? (bk.slot||"") : "",
+        booking_best_time: $("#bBest2") ? $("#bBest2").value : "",
+        dock_info_requested: bk.dockInfo ? "yes" : "no"
+      }});
+      bk.done=true; renderBook(); window.scrollTo(0,0);
+    };
+  }
+
+  function renderBookConsent(){ var t=$("#dConsentText"); if(t) t.textContent=consentText(state.region?REGIONS[state.region]:null); }
+  function renderGuide(){
+    var g=state.guide, r=state.region?REGIONS[state.region]:null, el=$("#guideBody");
+    if(g.done){
+      el.innerHTML='<div class="qcard done-card"><div style="display:flex;justify-content:center"><div class="book3d" aria-hidden="true" style="width:150px"><small>Free guide</small><b>Waterfront Owner\'s Guide</b><span class="ed">'+r.name+' edition</span></div></div><h2 style="margin:22px 0 6px">Your '+r.name+' edition is on its way</h2><p class="muted" style="max-width:52ch;margin:0 auto">Check your inbox. It covers the rules for '+(state.addr?esc(state.addr):'your address')+', typical costs in your city, and 7 costly mistakes to avoid.</p><div class="btn-row" style="justify-content:center;margin-top:18px"><button class="btn btn-cta" data-entry="'+g.segment+'">Get my free Shore Score + estimates</button><a class="btn btn-ghost" href="'+TMG.guidePdf(state.region)+'" target="_blank" rel="noopener">Download it now (PDF)</a><a class="btn btn-ghost" href="#/book">Book a free inspection</a></div></div>';
+      bindEntry(el); return;
+    }
+    el.innerHTML='<div class="qcard"><div class="guidepanel" style="grid-template-columns:130px 1fr"><div class="book3d" aria-hidden="true" style="width:130px"><small>Free guide</small><b>Waterfront Owner\'s Guide</b><span class="ed" id="gEd">'+(r?r.name+' edition':'Your area edition')+'</span></div><div><div class="eyebrow">Free ebook · Specific to your address</div><h2 style="margin-top:6px">Get the free guide for your area</h2><p class="muted" style="margin:6px 0 0">The South Florida Waterfront Owner\'s Guide, with the rules for your address, typical costs in your city, and 7 costly mistakes to avoid before you repair or replace.</p></div></div>'+
+      '<div class="field" style="margin-top:20px"><label for="gAddr">Property address</label><input id="gAddr" value="'+esc(state.addr)+'" placeholder="Street address, city" autocomplete="street-address"></div>'+
+      '<div class="field"><label for="gRegion">Region (sets your edition)</label><select id="gRegion">'+regionOptions()+'</select></div>'+
+      '<div class="field"><label for="gRel">Your relationship to this property</label><select id="gRel">'+relOptions(state.relation)+'</select></div>'+
+      '<div class="flabel">Property type</div><div class="opts" style="margin:8px 0 14px">'+
+        '<button type="button" class="opt" data-gseg="res" aria-pressed="'+(g.segment==="res")+'"><b>Residential</b><span>Homeowner</span></button>'+
+        '<button type="button" class="opt" data-gseg="com" aria-pressed="'+(g.segment==="com")+'"><b>Commercial</b><span>HOA, condo, marina, business</span></button></div>'+
+      '<div class="field"><span class="flabel">Include chapters for</span><div class="chips">'+["seawall","dock","deck"].map(function(k){return '<button type="button" class="chip" data-gs="'+k+'" aria-pressed="'+(g.structs.indexOf(k)>-1)+'">'+NAMES[k]+'</button>'}).join("")+'</div></div>'+
+      '<div class="row2"><div class="field"><label for="gName">First name</label><input id="gName" autocomplete="given-name" value="'+esc(who.name||"")+'"></div><div class="field"><label for="gEmail">Email</label><input id="gEmail" value="'+esc(g.email)+'" autocomplete="email" inputmode="email"></div></div>'+
+      '<div class="field"><label for="gPhone">Mobile phone (optional)</label><input id="gPhone" autocomplete="tel" inputmode="tel"></div>'+
+      '<label class="consent"><input type="checkbox" id="gConsent"><span id="gConsentText">'+consentText(r)+'</span></label>'+
+      '<button class="btn btn-cta" style="width:100%" id="gSend">Send my free guide</button><p class="fine" id="gErr" style="color:var(--act);margin:8px 0 0"></p>'+
+      '<p class="skip">Want your score too? <a href="#/start">Take the 2-minute Health Check</a> and the guide comes with it.</p></div>';
+    function syncEd(){ var rr=state.region?REGIONS[state.region]:null; $("#gEd").textContent=rr?rr.name+" edition":"Your area edition"; $("#gConsentText").textContent=consentText(rr); }
+    $("#gAddr").oninput=function(){ state.addr=this.value; var d=detectRegion(this.value); if(d){ setRegion(d); $("#gRegion").value=d; syncEd(); } };
+    $("#gRegion").onchange=function(){ setRegion(this.value); syncEd(); };
+    $("#gRel").onchange=function(){ state.relation=this.value; };
+    el.querySelectorAll("[data-gseg]").forEach(function(x){x.onclick=function(){g.segment=x.dataset.gseg; g.email=$("#gEmail").value; renderGuide();}});
+    el.querySelectorAll("[data-gs]").forEach(function(x){x.onclick=function(){var k=x.dataset.gs,i=g.structs.indexOf(k); if(i>-1){ if(g.structs.length>1) g.structs.splice(i,1);} else g.structs.push(k); x.setAttribute("aria-pressed", g.structs.indexOf(k)>-1);}});
+    $("#gSend").onclick=function(){
+      var em=$("#gEmail").value.trim(), ph=$("#gPhone").value.trim();
+      if(!$("#gAddr").value.trim()){ $("#gErr").textContent="Add your property address so we can match your edition."; return; }
+      if(!state.region){ $("#gErr").textContent="Choose a region."; return; }
+      if(!$("#gName").value.trim()||!em){ $("#gErr").textContent="Add your first name and email."; return; }
+      if(ph && !$("#gConsent").checked){ $("#gErr").textContent="Check the box so we can text you, or leave the phone blank."; return; }
+      state.addr=$("#gAddr").value.trim();
+      sendLead("guide_download",{name:$("#gName").value.trim(),email:em,phone:ph,consent:$("#gConsent").checked,segment:g.segment,structs:g.structs,addr:state.addr});
+      g.done=true; renderGuide(); window.scrollTo(0,0);
+    };
+  }
+
+  // shared entry bindings (work anywhere in the page)
+  function bindEntry(root){
+    root.querySelectorAll("[data-entry]").forEach(function(b){ b.onclick=function(){
+      var structs = b.dataset.svc ? [curService] : null;
+      startScore(b.dataset.entry, structs);
+    };});
+  }
+  document.addEventListener("click", function(e){
+    var t=e.target.closest("[data-score],[data-region-score]"); if(!t) return;
+    if(t.dataset.regionScore){ setRegion(t.dataset.regionScore); startScore(null, null); }
+    else startScore(null, t.dataset.score.split(","));
+  });
+
+  // router
+  function go(h){ if(location.hash===h) route(); else location.hash=h; }
+  function show(v){ document.querySelectorAll("[data-view]").forEach(function(x){x.classList.toggle("show", x.dataset.view===v)}); $("#ctaBand").hidden = ["score","report","book","start","guide"].indexOf(v)>-1; }
+  function route(){
+    var h=location.hash||"#/", p=h.replace(/^#\//,"").split("/");
+    document.querySelectorAll(".links a").forEach(function(a){a.classList.toggle("on", a.getAttribute("href")===h || (p[0]==="article" && a.getAttribute("href")==="#/learn"))});
+    $("#links").classList.remove("open"); $("#menuBtn").setAttribute("aria-expanded","false");
+    if(p[0]==="region"){ renderRegion(p[1]); show("region"); }
+    else if(p[0]==="regions"){ show("regions"); }
+    else if(p[0]==="service"){ renderService(p[1]); show("service"); }
+    else if(p[0]==="associations"){ show("associations"); }
+    else if(p[0]==="learn"){ renderLearn(); show("learn"); }
+    else if(p[0]==="article"){ show("article"); }
+    else if(p[0]==="start"){ show("start"); }
+    else if(p[0]==="book"){ state.book.done=false; renderBook(); show("book"); }
+    else if(p[0]==="guide"){ state.guide.done=false; renderGuide(); show("guide"); }
+    else if(p[0]==="score"){ renderWizard(); show("score"); }
+    else if(p[0]==="report"){ renderReport(); show("report"); }
+    else show("home");
+    window.scrollTo(0,0);
+  }
+  window.addEventListener("hashchange", route);
+
+  $("#regionSel").value = ""; // always start on "Choose a region" (stops browsers restoring an old pick)
+  $("#heroIntents").innerHTML=intentButtons();
+  $("#startIntents").innerHTML=intentButtons();
+  document.addEventListener("click", function(e){
+    var t=e.target.closest("#heroIntents [data-intent], #startIntents [data-intent]"); if(!t) return;
+    startIntent(t.dataset.intent);
+  });
+  var sBtn=$("#sStartBtn"); if(sBtn) sBtn.onclick=function(){ state.structs=[curService]; startIntent(null); };
+  bindEntry(document);
+  $("#hgAddr").oninput=function(){ var d=detectRegion(this.value); document.querySelectorAll("[data-edname]").forEach(function(x){ x.textContent = d ? REGIONS[d].name+" edition" : "Your area edition"; }); };
+  $("#hgGo").onclick=function(){ state.addr=$("#hgAddr").value.trim(); var d=detectRegion(state.addr); if(d) setRegion(d); state.guide.email=$("#hgEmail").value.trim(); go("#/guide"); };
+  $("#regionSel").onchange=function(){ state.region=this.value||null; var p=(location.hash||"").split("/"); if(p[1]==="region" && this.value) go("#/region/"+this.value); else if(p[1]==="book"){ renderBook(); } else if(p[1]==="guide"){ renderGuide(); } else if(p[1]==="score"){ renderWizard(); } else route(); };
+  $("#menuBtn").onclick=function(){var l=$("#links"); var o=l.classList.toggle("open"); this.setAttribute("aria-expanded",o);};
+
+  route();
+})();
+</script>
+
+</body>
+</html>

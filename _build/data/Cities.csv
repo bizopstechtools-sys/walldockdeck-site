@@ -1,0 +1,53 @@
+city,county,slug,tier,waterway,nearby,heightRuleStatus
+Fort Lauderdale,Broward,fort-lauderdale,1,,pompano-beach|hollywood|lighthouse-point|deerfield-beach,verified
+Miami Beach,Miami-Dade,miami-beach,1,,coral-gables|key-biscayne|miami|surfside,verified
+Boca Raton,Palm Beach,boca-raton,1,,delray-beach|jupiter|west-palm-beach|north-palm-beach,verified
+Pompano Beach,Broward,pompano-beach,1,,fort-lauderdale|hollywood|lighthouse-point|deerfield-beach,verified
+Hollywood,Broward,hollywood,1,,fort-lauderdale|pompano-beach|lighthouse-point|deerfield-beach,verified
+Key West,Monroe,key-west,1,,marathon|islamorada|key-largo|big-pine-key,not-started
+Delray Beach,Palm Beach,delray-beach,1,,boca-raton|jupiter|west-palm-beach|north-palm-beach,not-started
+Jupiter,Palm Beach,jupiter,1,,boca-raton|delray-beach|west-palm-beach|north-palm-beach,not-started
+Coral Gables,Miami-Dade,coral-gables,1,,miami-beach|key-biscayne|miami|surfside,not-started
+Key Biscayne,Miami-Dade,key-biscayne,1,,miami-beach|coral-gables|miami|surfside,not-started
+Lighthouse Point,Broward,lighthouse-point,2,,fort-lauderdale|pompano-beach|hollywood|deerfield-beach,not-started
+Deerfield Beach,Broward,deerfield-beach,2,,fort-lauderdale|pompano-beach|hollywood|lighthouse-point,not-started
+Dania Beach,Broward,dania-beach,2,,fort-lauderdale|pompano-beach|hollywood|lighthouse-point,not-started
+Hallandale Beach,Broward,hallandale-beach,2,,fort-lauderdale|pompano-beach|hollywood|lighthouse-point,not-started
+Lauderdale-by-the-Sea,Broward,lauderdale-by-the-sea,2,,fort-lauderdale|pompano-beach|hollywood|lighthouse-point,not-started
+Miami,Miami-Dade,miami,2,,miami-beach|coral-gables|key-biscayne|surfside,not-started
+Surfside,Miami-Dade,surfside,2,,miami-beach|coral-gables|key-biscayne|miami,not-started
+Aventura,Miami-Dade,aventura,2,,miami-beach|coral-gables|key-biscayne|miami,not-started
+Sunny Isles Beach,Miami-Dade,sunny-isles-beach,2,,miami-beach|coral-gables|key-biscayne|miami,not-started
+Bay Harbor Islands,Miami-Dade,bay-harbor-islands,2,,miami-beach|coral-gables|key-biscayne|miami,not-started
+Bal Harbour,Miami-Dade,bal-harbour,2,,miami-beach|coral-gables|key-biscayne|miami,not-started
+West Palm Beach,Palm Beach,west-palm-beach,2,,boca-raton|delray-beach|jupiter|north-palm-beach,not-started
+North Palm Beach,Palm Beach,north-palm-beach,2,,boca-raton|delray-beach|jupiter|west-palm-beach,not-started
+Palm Beach,Palm Beach,palm-beach,2,,boca-raton|delray-beach|jupiter|west-palm-beach,not-started
+Palm Beach Gardens,Palm Beach,palm-beach-gardens,2,,boca-raton|delray-beach|jupiter|west-palm-beach,not-started
+Boynton Beach,Palm Beach,boynton-beach,2,,boca-raton|delray-beach|jupiter|west-palm-beach,not-started
+Highland Beach,Palm Beach,highland-beach,2,,boca-raton|delray-beach|jupiter|west-palm-beach,not-started
+Marathon,Monroe,marathon,2,,key-west|islamorada|key-largo|big-pine-key,not-started
+Islamorada,Monroe,islamorada,2,,key-west|marathon|key-largo|big-pine-key,not-started
+Key Largo,Monroe,key-largo,2,,key-west|marathon|islamorada|big-pine-key,not-started
+Wilton Manors,Broward,wilton-manors,3,,fort-lauderdale|pompano-beach|hollywood|lighthouse-point,not-started
+Hillsboro Beach,Broward,hillsboro-beach,3,,fort-lauderdale|pompano-beach|hollywood|lighthouse-point,not-started
+Oakland Park,Broward,oakland-park,3,,fort-lauderdale|pompano-beach|hollywood|lighthouse-point,not-started
+Sea Ranch Lakes,Broward,sea-ranch-lakes,3,,fort-lauderdale|pompano-beach|hollywood|lighthouse-point,not-started
+North Bay Village,Miami-Dade,north-bay-village,3,,miami-beach|coral-gables|key-biscayne|miami,not-started
+Golden Beach,Miami-Dade,golden-beach,3,,miami-beach|coral-gables|key-biscayne|miami,not-started
+Palmetto Bay,Miami-Dade,palmetto-bay,3,,miami-beach|coral-gables|key-biscayne|miami,not-started
+Cutler Bay,Miami-Dade,cutler-bay,3,,miami-beach|coral-gables|key-biscayne|miami,not-started
+Miami Shores,Miami-Dade,miami-shores,3,,miami-beach|coral-gables|key-biscayne|miami,not-started
+Ocean Ridge,Palm Beach,ocean-ridge,3,,boca-raton|delray-beach|jupiter|west-palm-beach,not-started
+Gulf Stream,Palm Beach,gulf-stream,3,,boca-raton|delray-beach|jupiter|west-palm-beach,not-started
+Manalapan,Palm Beach,manalapan,3,,boca-raton|delray-beach|jupiter|west-palm-beach,not-started
+Tequesta,Palm Beach,tequesta,3,,boca-raton|delray-beach|jupiter|west-palm-beach,not-started
+Juno Beach,Palm Beach,juno-beach,3,,boca-raton|delray-beach|jupiter|west-palm-beach,not-started
+Riviera Beach,Palm Beach,riviera-beach,3,,boca-raton|delray-beach|jupiter|west-palm-beach,not-started
+Lantana,Palm Beach,lantana,3,,boca-raton|delray-beach|jupiter|west-palm-beach,not-started
+South Palm Beach,Palm Beach,south-palm-beach,3,,boca-raton|delray-beach|jupiter|west-palm-beach,not-started
+Lake Worth Beach,Palm Beach,lake-worth-beach,3,,boca-raton|delray-beach|jupiter|west-palm-beach,not-started
+Big Pine Key,Monroe,big-pine-key,3,,key-west|marathon|islamorada|key-largo,not-started
+Key Colony Beach,Monroe,key-colony-beach,3,,key-west|marathon|islamorada|key-largo,not-started
+Tavernier,Monroe,tavernier,3,,key-west|marathon|islamorada|key-largo,not-started
+Cudjoe Key,Monroe,cudjoe-key,3,,key-west|marathon|islamorada|key-largo,not-started

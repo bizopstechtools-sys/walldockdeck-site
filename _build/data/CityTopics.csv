@@ -1,0 +1,469 @@
+citySlug,topicSlug,title,question,headline_answer,unit,qualifier,detail_rows,source,verified_date,status,cluster,county,tier,views
+fort-lauderdale,seawall-height-requirement,Fort Lauderdale Seawall Height Requirement,How high does a seawall have to be in Fort Lauderdale?,5.0,ft NAVD88,"Minimum for new or substantially rehabilitated tidal flood barrier. Applications before Jan 1, 2035 may build to 4.0 ft NAVD88 if designed to be raised to 5.0 ft by Jan 1, 2050.","Minimum :: 5.0 ft NAVD88 | The 2035 path :: An application filed before 1 January 2035 may build to 4.0 ft NAVD88, if the wall is designed to be raised to 5.0 ft by 1 January 2050. | What triggers it :: A new tidal flood barrier, or substantial rehabilitation of an existing one. | Where the rule comes from :: Broward County Code Chapter 39, Article XXV, adopted locally by the city.",Broward County Code Ch. 39 Art. XXV; City of Fort Lauderdale ULDR 47-19,2026-09,verified,Compliance,Broward,1,0
+fort-lauderdale,seawall-permit,Seawall Permits in Fort Lauderdale,Do I need a permit to repair a seawall in Fort Lauderdale?,,,,,,,not-started,Compliance,Broward,1,0
+fort-lauderdale,flood-zone,Fort Lauderdale Flood Zone & Elevation Rules,"What flood zone is Fort Lauderdale in, and what does it require?",,,,,,,not-started,Compliance,Broward,1,0
+fort-lauderdale,dock-permit-size,Dock Permits & Size Limits in Fort Lauderdale,How big a dock can I build in Fort Lauderdale?,,,,,,,not-started,Dock,Broward,1,0
+fort-lauderdale,boat-lift-rules,Boat Lift Rules in Fort Lauderdale,What are the boat lift rules in Fort Lauderdale?,,,,,,,not-started,Dock,Broward,1,0
+fort-lauderdale,deck-requirements,Waterfront Deck Rules in Fort Lauderdale,What are the deck setback and railing rules in Fort Lauderdale?,,,,,,,not-started,Deck,Broward,1,0
+fort-lauderdale,licensed-contractors,Checking a Marine Contractor in Fort Lauderdale,How do I check a marine contractor in Fort Lauderdale?,,,,,,,not-started,Failing,Broward,1,0
+fort-lauderdale,storm-prep,Storm Prep for Fort Lauderdale Waterfront Owners,What are the storm and debris rules in Fort Lauderdale?,,,,,,,not-started,Failing,Broward,1,0
+miami-beach,seawall-height-requirement,Miami Beach Seawall Height Requirement,How high does a seawall have to be in Miami Beach?,5.7,ft NAVD88,"Required for a new seawall, or an existing one undergoing substantial improvement. A wall being repaired below that threshold may be built to 4.0 ft NAVD88, but only if it is designed and constructed to accommodate a future 5.7 ft.","Interim elevation :: 4.0 ft NAVD88, allowed only for repairs that are less than substantial, and only if the wall is built to accommodate a future 5.7 ft. | What counts as substantial :: Repairs costing $500 or more per linear foot. The threshold was raised from $300 in July 2025. | Datum :: NAVD88 — the North American Vertical Datum of 1988. A figure quoted in MLW is not the same number. | Current ordinance :: 2025-4754, adopted 23 July 2025, amending Chapter 54, Article III.","City of Miami Beach Code Sec. 54-62(a); Ordinance 2025-4754, adopted 23 July 2025",2026-09,verified,Compliance,Miami-Dade,1,0
+miami-beach,seawall-permit,Seawall Permits in Miami Beach,Do I need a permit to repair a seawall in Miami Beach?,,,,,,,not-started,Compliance,Miami-Dade,1,0
+miami-beach,flood-zone,Miami Beach Flood Zone & Elevation Rules,"What flood zone is Miami Beach in, and what does it require?",,,,,,,not-started,Compliance,Miami-Dade,1,0
+miami-beach,dock-permit-size,Dock Permits & Size Limits in Miami Beach,How big a dock can I build in Miami Beach?,,,,,,,not-started,Dock,Miami-Dade,1,0
+miami-beach,boat-lift-rules,Boat Lift Rules in Miami Beach,What are the boat lift rules in Miami Beach?,,,,,,,not-started,Dock,Miami-Dade,1,0
+miami-beach,deck-requirements,Waterfront Deck Rules in Miami Beach,What are the deck setback and railing rules in Miami Beach?,,,,,,,not-started,Deck,Miami-Dade,1,0
+miami-beach,licensed-contractors,Checking a Marine Contractor in Miami Beach,How do I check a marine contractor in Miami Beach?,,,,,,,not-started,Failing,Miami-Dade,1,0
+miami-beach,storm-prep,Storm Prep for Miami Beach Waterfront Owners,What are the storm and debris rules in Miami Beach?,,,,,,,not-started,Failing,Miami-Dade,1,0
+boca-raton,seawall-height-requirement,Boca Raton Seawall Height Requirement,How high does a seawall have to be in Boca Raton?,4.0 – 6.0,ft NAVD88,"Boca Raton sets a band, not a single number. Any new or replaced seawall or dock must reach 4.0 ft NAVD88 and must not exceed 6.0 ft NAVD88. The requirement lives in the city's Engineering Design Standards Manual rather than the ordinance, which is why it is hard to find.","Minimum :: 4.0 ft NAVD88, for any new or replaced seawall or dock, publicly or privately owned. | Maximum :: 6.0 ft NAVD88. | Build for more :: Standard 3 requires the wall to be designed and constructed so a further 12 to 18 inches can be added later and the wall stays structurally sound without altering it. | Watch the datum :: The city states its requirement in NAVD88. Contractor drawings in this area are sometimes written to MLW instead, and the two are not interchangeable. Ask which datum a quoted cap elevation refers to before you sign. | Where it is written :: Engineering Design Standards Manual section 7.7, Minimum Criteria for Waterway Features, updated January 2025. Chapter 22 of the Code of Ordinances covers marine structures generally. | Inspections :: A zoning location survey must be approved before the cap goes on, and a final engineer report with the cap elevation and photographs is required after construction.","City of Boca Raton Engineering Design Standards Manual § 7.7, Minimum Criteria for Waterway Features (updated January 2025); Code of Ordinances Ch. 22, Marine Structures",2026-09,verified,Compliance,Palm Beach,1,0
+boca-raton,seawall-permit,Seawall Permits in Boca Raton,Do I need a permit to repair a seawall in Boca Raton?,Yes,with staged inspections,"Boca inspects in a set order and one of them happens before the cap goes on. Miss it and the cap comes off, so the sequence matters more here than the paperwork does.","Inspection one, before the cap :: A zoning location survey showing the seawall wetface or bulkhead line, the property line and the pile locations. It must be approved before the structural cap and piling inspections can even be scheduled. | Inspection two, after construction :: A final engineer report giving the seawall cap elevation, confirming the work matches the permit drawings, with photographs of the finished wall. | If there is a dock or lift too :: A separate final marine structure survey, plus the location survey before framing. All three inspections apply when the job covers both. | What the plans must show :: The existing wetface or bulkhead line, the property line, the distance from the cap edge and from any marine structure to both, existing and proposed panels and piles, and the finished elevation of the top of the cap. | Where the rules live :: Chapter 22 of the Code of Ordinances for marine structures, and Engineering Design Standards Manual section 7.7 for the elevations. | Budget for a bond :: A 2026 contractor proposal for a Coral Gables property carried a $15,000 refundable city bond. Ask Boca early whether yours needs one, because it sits on top of the contract price.","City of Boca Raton, Seawalls and Marine Structures permitting guidance (Development Services, Zoning); Engineering Design Standards Manual § 7.7; Code of Ordinances Ch. 22",2026-09,verified,Compliance,Palm Beach,1,0
+boca-raton,flood-zone,Boca Raton Flood Zone & Elevation Rules,"What flood zone is Boca Raton in, and what does it require?",,,,,,,not-started,Compliance,Palm Beach,1,0
+boca-raton,dock-permit-size,Dock Permits & Size Limits in Boca Raton,How big a dock can I build in Boca Raton?,,,,,,,not-started,Dock,Palm Beach,1,0
+boca-raton,boat-lift-rules,Boat Lift Rules in Boca Raton,What are the boat lift rules in Boca Raton?,,,,,,,not-started,Dock,Palm Beach,1,0
+boca-raton,deck-requirements,Waterfront Deck Rules in Boca Raton,What are the deck setback and railing rules in Boca Raton?,,,,,,,not-started,Deck,Palm Beach,1,0
+boca-raton,licensed-contractors,Checking a Marine Contractor in Boca Raton,How do I check a marine contractor in Boca Raton?,,,,,,,not-started,Failing,Palm Beach,1,0
+boca-raton,storm-prep,Storm Prep for Boca Raton Waterfront Owners,What are the storm and debris rules in Boca Raton?,,,,,,,not-started,Failing,Palm Beach,1,0
+pompano-beach,seawall-height-requirement,Pompano Beach Seawall Height Requirement,How high does a seawall have to be in Pompano Beach?,5.0,ft NAVD88 minimum,"Pompano Beach sets both ends of the range. A tidal flood barrier must reach 5 ft NAVD88 and must not exceed 5 ft 10 in NAVD88, so a wall can be too high as well as too low.","Minimum :: 5 ft NAVD88 | Maximum :: 5 ft 10 in NAVD88. Both ends are enforced. | When an existing wall must be raised :: On substantial repair or rehabilitation, and when work on attached structures exceeds 50% of the barrier's cost. | How much of the wall :: The whole shoreline of the property, not only the section being repaired. | Alternatives :: A seawall is not required where another measure is an equally effective tidal flood barrier. Automatic systems are allowed if they do not need daily human intervention.","City of Pompano Beach Code of Ordinances § 151.05, Tidal Flood Barriers",2026-09,verified,Compliance,Broward,1,0
+pompano-beach,seawall-permit,Seawall Permits in Pompano Beach,Do I need a permit to repair a seawall in Pompano Beach?,,,,,,,not-started,Compliance,Broward,1,0
+pompano-beach,flood-zone,Pompano Beach Flood Zone & Elevation Rules,"What flood zone is Pompano Beach in, and what does it require?",,,,,,,not-started,Compliance,Broward,1,0
+pompano-beach,dock-permit-size,Dock Permits & Size Limits in Pompano Beach,How big a dock can I build in Pompano Beach?,,,,,,,not-started,Dock,Broward,1,0
+pompano-beach,boat-lift-rules,Boat Lift Rules in Pompano Beach,What are the boat lift rules in Pompano Beach?,,,,,,,not-started,Dock,Broward,1,0
+pompano-beach,deck-requirements,Waterfront Deck Rules in Pompano Beach,What are the deck setback and railing rules in Pompano Beach?,,,,,,,not-started,Deck,Broward,1,0
+pompano-beach,licensed-contractors,Checking a Marine Contractor in Pompano Beach,How do I check a marine contractor in Pompano Beach?,,,,,,,not-started,Failing,Broward,1,0
+pompano-beach,storm-prep,Storm Prep for Pompano Beach Waterfront Owners,What are the storm and debris rules in Pompano Beach?,,,,,,,not-started,Failing,Broward,1,0
+hollywood,seawall-height-requirement,Hollywood Seawall Height Requirement,How high does a seawall have to be in Hollywood?,4.0,ft NAVD88 until 2035,"Four feet NAVD88 for a barrier built before 1 January 2035, rising to five feet by 2050. The rule comes from the county, which required every Broward city to adopt it locally by February 2022.","Before 1 January 2035 :: 4 ft NAVD88 | By 2050 :: 5 ft NAVD88 | What triggers it :: A new barrier, or an existing one substantially improved by more than 50% in length or cost. | Where the rule comes from :: Broward County Code Chapter 39, Article XXV, Resiliency Standards for Tidal Flood Protection. | Worth knowing :: Building to 4 ft today means the wall has to come up again before 2050. Ask what it costs to build for 5 ft now.","Broward County Code Ch. 39, Art. XXV; City of Hollywood, Sea Walls & Other Tidal Flood Barriers guidance",2026-09,verified,Compliance,Broward,1,0
+hollywood,seawall-permit,Seawall Permits in Hollywood,Do I need a permit to repair a seawall in Hollywood?,,,,,,,not-started,Compliance,Broward,1,0
+hollywood,flood-zone,Hollywood Flood Zone & Elevation Rules,"What flood zone is Hollywood in, and what does it require?",,,,,,,not-started,Compliance,Broward,1,0
+hollywood,dock-permit-size,Dock Permits & Size Limits in Hollywood,How big a dock can I build in Hollywood?,,,,,,,not-started,Dock,Broward,1,0
+hollywood,boat-lift-rules,Boat Lift Rules in Hollywood,What are the boat lift rules in Hollywood?,,,,,,,not-started,Dock,Broward,1,0
+hollywood,deck-requirements,Waterfront Deck Rules in Hollywood,What are the deck setback and railing rules in Hollywood?,,,,,,,not-started,Deck,Broward,1,0
+hollywood,licensed-contractors,Checking a Marine Contractor in Hollywood,How do I check a marine contractor in Hollywood?,,,,,,,not-started,Failing,Broward,1,0
+hollywood,storm-prep,Storm Prep for Hollywood Waterfront Owners,What are the storm and debris rules in Hollywood?,,,,,,,not-started,Failing,Broward,1,0
+key-west,seawall-height-requirement,Key West Seawall Height Requirement,How high does a seawall have to be in Key West?,,,,,,,not-started,Compliance,Monroe,1,0
+key-west,seawall-permit,Seawall Permits in Key West,Do I need a permit to repair a seawall in Key West?,,,,,,,not-started,Compliance,Monroe,1,0
+key-west,flood-zone,Key West Flood Zone & Elevation Rules,"What flood zone is Key West in, and what does it require?",,,,,,,not-started,Compliance,Monroe,1,0
+key-west,dock-permit-size,Dock Permits & Size Limits in Key West,How big a dock can I build in Key West?,,,,,,,not-started,Dock,Monroe,1,0
+key-west,boat-lift-rules,Boat Lift Rules in Key West,What are the boat lift rules in Key West?,,,,,,,not-started,Dock,Monroe,1,0
+key-west,deck-requirements,Waterfront Deck Rules in Key West,What are the deck setback and railing rules in Key West?,,,,,,,not-started,Deck,Monroe,1,0
+key-west,licensed-contractors,Checking a Marine Contractor in Key West,How do I check a marine contractor in Key West?,,,,,,,not-started,Failing,Monroe,1,0
+key-west,storm-prep,Storm Prep for Key West Waterfront Owners,What are the storm and debris rules in Key West?,,,,,,,not-started,Failing,Monroe,1,0
+delray-beach,seawall-height-requirement,Delray Beach Seawall Height Requirement,How high does a seawall have to be in Delray Beach?,4.2,ft NAVD88 minimum,Delray Beach sets one minimum for every waterfront property and lets the maximum vary with your flood zone. Build below 5 ft and the wall must still be engineered so it can be extended to 5 ft later.,"Minimum, every property :: 4.2 ft NAVD88, whatever your flood zone. | Maximum, BFE 5.0 ft or higher :: The base flood elevation of the property, from the FEMA map. | Maximum, BFE of 4.0 ft :: 5 ft NAVD88. | Maximum, X zone outside the floodplain :: Must meet the definition of grade in Section 4.3.4(J)(2). | Build low, engineer high :: A wall built under 5 ft NAVD88 must be designed and constructed to accommodate a future extension to at least 5 ft. | What counts as substantial repair :: Work on more than 50% of the length of the structure, cap included, or any work changing the elevation along more than 50% of the length. Then the whole shoreline must meet the minimum. | Sellers must disclose :: Any contract to sell property in a tidally influenced area of Delray Beach, signed after 1 February 2022, must carry a tidal-flood-barrier disclosure in bold capitals of at least 14 point. | To get a permit :: A survey showing the seawall's location and elevation, plans sealed by a Florida registered engineer, and sign-off from the reviewing agencies first.","City of Delray Beach Land Development Regulations Sec. 7.1.7 and Table 7.1.7(D); Ordinance 23-21, adopted 11 January 2022",2026-09,verified,Compliance,Palm Beach,1,0
+delray-beach,seawall-permit,Seawall Permits in Delray Beach,Do I need a permit to repair a seawall in Delray Beach?,Yes,"building permit, engineer-sealed","A permit is required to build a new seawall or alter an existing one. Delray asks for three things before it will issue one, and the third is the one that catches people out — the outside agencies have to sign off first, and chasing them is your job, not the city's.","What the city needs :: A survey showing the seawall's location and elevation in relation to the adjoining land, water and channels. | Who draws the plans :: A professional engineer registered in Florida. The plans must be sealed. | The step people miss :: Approval from the applicable reviewing agencies before the building permit is issued. The code puts that on the applicant, not the city. | When the whole wall gets pulled in :: If the work counts as substantial repair, the minimum elevation applies to the continuous seawall along the entire shoreline, not just the stretch you are fixing. | Substantial repair, definition one :: Work on more than 50% of the length of the structure, seawall and cap included. | Substantial repair, definition two :: Any work that changes the elevation along more than 50% of the length. | Keeping it in repair :: A seawall is presumed to be in disrepair if it lets upland soil erode, lets material pass through, or lets tidal water run unimpeded onto neighbouring property. That falls under Chapter 100, Nuisances, Section 100.04.","City of Delray Beach Land Development Regulations Sec. 7.1.7(D) and (E); Ordinance 23-21, adopted 11 January 2022",2026-09,verified,Compliance,Palm Beach,1,0
+delray-beach,flood-zone,Delray Beach Flood Zone & Elevation Rules,"What flood zone is Delray Beach in, and what does it require?",,,,,,,not-started,Compliance,Palm Beach,1,0
+delray-beach,dock-permit-size,Dock Permits & Size Limits in Delray Beach,How big a dock can I build in Delray Beach?,,,,,,,not-started,Dock,Palm Beach,1,0
+delray-beach,boat-lift-rules,Boat Lift Rules in Delray Beach,What are the boat lift rules in Delray Beach?,,,,,,,not-started,Dock,Palm Beach,1,0
+delray-beach,deck-requirements,Waterfront Deck Rules in Delray Beach,What are the deck setback and railing rules in Delray Beach?,,,,,,,not-started,Deck,Palm Beach,1,0
+delray-beach,licensed-contractors,Checking a Marine Contractor in Delray Beach,How do I check a marine contractor in Delray Beach?,,,,,,,not-started,Failing,Palm Beach,1,0
+delray-beach,storm-prep,Storm Prep for Delray Beach Waterfront Owners,What are the storm and debris rules in Delray Beach?,,,,,,,not-started,Failing,Palm Beach,1,0
+jupiter,seawall-height-requirement,Jupiter Seawall Height Requirement,How high does a seawall have to be in Jupiter?,,,,,,,not-started,Compliance,Palm Beach,1,0
+jupiter,seawall-permit,Seawall Permits in Jupiter,Do I need a permit to repair a seawall in Jupiter?,,,,,,,not-started,Compliance,Palm Beach,1,0
+jupiter,flood-zone,Jupiter Flood Zone & Elevation Rules,"What flood zone is Jupiter in, and what does it require?",,,,,,,not-started,Compliance,Palm Beach,1,0
+jupiter,dock-permit-size,Dock Permits & Size Limits in Jupiter,How big a dock can I build in Jupiter?,,,,,,,not-started,Dock,Palm Beach,1,0
+jupiter,boat-lift-rules,Boat Lift Rules in Jupiter,What are the boat lift rules in Jupiter?,,,,,,,not-started,Dock,Palm Beach,1,0
+jupiter,deck-requirements,Waterfront Deck Rules in Jupiter,What are the deck setback and railing rules in Jupiter?,,,,,,,not-started,Deck,Palm Beach,1,0
+jupiter,licensed-contractors,Checking a Marine Contractor in Jupiter,How do I check a marine contractor in Jupiter?,,,,,,,not-started,Failing,Palm Beach,1,0
+jupiter,storm-prep,Storm Prep for Jupiter Waterfront Owners,What are the storm and debris rules in Jupiter?,,,,,,,not-started,Failing,Palm Beach,1,0
+coral-gables,seawall-height-requirement,Coral Gables Seawall Height Requirement,How high does a seawall have to be in Coral Gables?,,,,,,,not-started,Compliance,Miami-Dade,1,0
+coral-gables,seawall-permit,Seawall Permits in Coral Gables,Do I need a permit to repair a seawall in Coral Gables?,,,,,,,not-started,Compliance,Miami-Dade,1,0
+coral-gables,flood-zone,Coral Gables Flood Zone & Elevation Rules,"What flood zone is Coral Gables in, and what does it require?",,,,,,,not-started,Compliance,Miami-Dade,1,0
+coral-gables,dock-permit-size,Dock Permits & Size Limits in Coral Gables,How big a dock can I build in Coral Gables?,,,,,,,not-started,Dock,Miami-Dade,1,0
+coral-gables,boat-lift-rules,Boat Lift Rules in Coral Gables,What are the boat lift rules in Coral Gables?,,,,,,,not-started,Dock,Miami-Dade,1,0
+coral-gables,deck-requirements,Waterfront Deck Rules in Coral Gables,What are the deck setback and railing rules in Coral Gables?,,,,,,,not-started,Deck,Miami-Dade,1,0
+coral-gables,licensed-contractors,Checking a Marine Contractor in Coral Gables,How do I check a marine contractor in Coral Gables?,,,,,,,not-started,Failing,Miami-Dade,1,0
+coral-gables,storm-prep,Storm Prep for Coral Gables Waterfront Owners,What are the storm and debris rules in Coral Gables?,,,,,,,not-started,Failing,Miami-Dade,1,0
+key-biscayne,seawall-height-requirement,Key Biscayne Seawall Height Requirement,How high does a seawall have to be in Key Biscayne?,,,,,,,not-started,Compliance,Miami-Dade,1,0
+key-biscayne,seawall-permit,Seawall Permits in Key Biscayne,Do I need a permit to repair a seawall in Key Biscayne?,,,,,,,not-started,Compliance,Miami-Dade,1,0
+key-biscayne,flood-zone,Key Biscayne Flood Zone & Elevation Rules,"What flood zone is Key Biscayne in, and what does it require?",,,,,,,not-started,Compliance,Miami-Dade,1,0
+key-biscayne,dock-permit-size,Dock Permits & Size Limits in Key Biscayne,How big a dock can I build in Key Biscayne?,,,,,,,not-started,Dock,Miami-Dade,1,0
+key-biscayne,boat-lift-rules,Boat Lift Rules in Key Biscayne,What are the boat lift rules in Key Biscayne?,,,,,,,not-started,Dock,Miami-Dade,1,0
+key-biscayne,deck-requirements,Waterfront Deck Rules in Key Biscayne,What are the deck setback and railing rules in Key Biscayne?,,,,,,,not-started,Deck,Miami-Dade,1,0
+key-biscayne,licensed-contractors,Checking a Marine Contractor in Key Biscayne,How do I check a marine contractor in Key Biscayne?,,,,,,,not-started,Failing,Miami-Dade,1,0
+key-biscayne,storm-prep,Storm Prep for Key Biscayne Waterfront Owners,What are the storm and debris rules in Key Biscayne?,,,,,,,not-started,Failing,Miami-Dade,1,0
+lighthouse-point,seawall-height-requirement,Lighthouse Point Seawall Height Requirement,How high does a seawall have to be in Lighthouse Point?,,,,,,,not-started,Compliance,Broward,2,0
+lighthouse-point,seawall-permit,Seawall Permits in Lighthouse Point,Do I need a permit to repair a seawall in Lighthouse Point?,,,,,,,not-started,Compliance,Broward,2,0
+lighthouse-point,flood-zone,Lighthouse Point Flood Zone & Elevation Rules,"What flood zone is Lighthouse Point in, and what does it require?",,,,,,,not-started,Compliance,Broward,2,0
+lighthouse-point,dock-permit-size,Dock Permits & Size Limits in Lighthouse Point,How big a dock can I build in Lighthouse Point?,,,,,,,not-started,Dock,Broward,2,0
+lighthouse-point,boat-lift-rules,Boat Lift Rules in Lighthouse Point,What are the boat lift rules in Lighthouse Point?,,,,,,,not-started,Dock,Broward,2,0
+lighthouse-point,deck-requirements,Waterfront Deck Rules in Lighthouse Point,What are the deck setback and railing rules in Lighthouse Point?,,,,,,,not-started,Deck,Broward,2,0
+lighthouse-point,licensed-contractors,Checking a Marine Contractor in Lighthouse Point,How do I check a marine contractor in Lighthouse Point?,,,,,,,not-started,Failing,Broward,2,0
+lighthouse-point,storm-prep,Storm Prep for Lighthouse Point Waterfront Owners,What are the storm and debris rules in Lighthouse Point?,,,,,,,not-started,Failing,Broward,2,0
+deerfield-beach,seawall-height-requirement,Deerfield Beach Seawall Height Requirement,How high does a seawall have to be in Deerfield Beach?,,,,,,,not-started,Compliance,Broward,2,0
+deerfield-beach,seawall-permit,Seawall Permits in Deerfield Beach,Do I need a permit to repair a seawall in Deerfield Beach?,,,,,,,not-started,Compliance,Broward,2,0
+deerfield-beach,flood-zone,Deerfield Beach Flood Zone & Elevation Rules,"What flood zone is Deerfield Beach in, and what does it require?",,,,,,,not-started,Compliance,Broward,2,0
+deerfield-beach,dock-permit-size,Dock Permits & Size Limits in Deerfield Beach,How big a dock can I build in Deerfield Beach?,,,,,,,not-started,Dock,Broward,2,0
+deerfield-beach,boat-lift-rules,Boat Lift Rules in Deerfield Beach,What are the boat lift rules in Deerfield Beach?,,,,,,,not-started,Dock,Broward,2,0
+deerfield-beach,deck-requirements,Waterfront Deck Rules in Deerfield Beach,What are the deck setback and railing rules in Deerfield Beach?,,,,,,,not-started,Deck,Broward,2,0
+deerfield-beach,licensed-contractors,Checking a Marine Contractor in Deerfield Beach,How do I check a marine contractor in Deerfield Beach?,,,,,,,not-started,Failing,Broward,2,0
+deerfield-beach,storm-prep,Storm Prep for Deerfield Beach Waterfront Owners,What are the storm and debris rules in Deerfield Beach?,,,,,,,not-started,Failing,Broward,2,0
+dania-beach,seawall-height-requirement,Dania Beach Seawall Height Requirement,How high does a seawall have to be in Dania Beach?,,,,,,,not-started,Compliance,Broward,2,0
+dania-beach,seawall-permit,Seawall Permits in Dania Beach,Do I need a permit to repair a seawall in Dania Beach?,,,,,,,not-started,Compliance,Broward,2,0
+dania-beach,flood-zone,Dania Beach Flood Zone & Elevation Rules,"What flood zone is Dania Beach in, and what does it require?",,,,,,,not-started,Compliance,Broward,2,0
+dania-beach,dock-permit-size,Dock Permits & Size Limits in Dania Beach,How big a dock can I build in Dania Beach?,,,,,,,not-started,Dock,Broward,2,0
+dania-beach,boat-lift-rules,Boat Lift Rules in Dania Beach,What are the boat lift rules in Dania Beach?,,,,,,,not-started,Dock,Broward,2,0
+dania-beach,deck-requirements,Waterfront Deck Rules in Dania Beach,What are the deck setback and railing rules in Dania Beach?,,,,,,,not-started,Deck,Broward,2,0
+dania-beach,licensed-contractors,Checking a Marine Contractor in Dania Beach,How do I check a marine contractor in Dania Beach?,,,,,,,not-started,Failing,Broward,2,0
+dania-beach,storm-prep,Storm Prep for Dania Beach Waterfront Owners,What are the storm and debris rules in Dania Beach?,,,,,,,not-started,Failing,Broward,2,0
+hallandale-beach,seawall-height-requirement,Hallandale Beach Seawall Height Requirement,How high does a seawall have to be in Hallandale Beach?,,,,,,,not-started,Compliance,Broward,2,0
+hallandale-beach,seawall-permit,Seawall Permits in Hallandale Beach,Do I need a permit to repair a seawall in Hallandale Beach?,,,,,,,not-started,Compliance,Broward,2,0
+hallandale-beach,flood-zone,Hallandale Beach Flood Zone & Elevation Rules,"What flood zone is Hallandale Beach in, and what does it require?",,,,,,,not-started,Compliance,Broward,2,0
+hallandale-beach,dock-permit-size,Dock Permits & Size Limits in Hallandale Beach,How big a dock can I build in Hallandale Beach?,,,,,,,not-started,Dock,Broward,2,0
+hallandale-beach,boat-lift-rules,Boat Lift Rules in Hallandale Beach,What are the boat lift rules in Hallandale Beach?,,,,,,,not-started,Dock,Broward,2,0
+hallandale-beach,deck-requirements,Waterfront Deck Rules in Hallandale Beach,What are the deck setback and railing rules in Hallandale Beach?,,,,,,,not-started,Deck,Broward,2,0
+hallandale-beach,licensed-contractors,Checking a Marine Contractor in Hallandale Beach,How do I check a marine contractor in Hallandale Beach?,,,,,,,not-started,Failing,Broward,2,0
+hallandale-beach,storm-prep,Storm Prep for Hallandale Beach Waterfront Owners,What are the storm and debris rules in Hallandale Beach?,,,,,,,not-started,Failing,Broward,2,0
+lauderdale-by-the-sea,seawall-height-requirement,Lauderdale-by-the-Sea Seawall Height Requirement,How high does a seawall have to be in Lauderdale-by-the-Sea?,,,,,,,not-started,Compliance,Broward,2,0
+lauderdale-by-the-sea,seawall-permit,Seawall Permits in Lauderdale-by-the-Sea,Do I need a permit to repair a seawall in Lauderdale-by-the-Sea?,,,,,,,not-started,Compliance,Broward,2,0
+lauderdale-by-the-sea,flood-zone,Lauderdale-by-the-Sea Flood Zone & Elevation Rules,"What flood zone is Lauderdale-by-the-Sea in, and what does it require?",,,,,,,not-started,Compliance,Broward,2,0
+lauderdale-by-the-sea,dock-permit-size,Dock Permits & Size Limits in Lauderdale-by-the-Sea,How big a dock can I build in Lauderdale-by-the-Sea?,,,,,,,not-started,Dock,Broward,2,0
+lauderdale-by-the-sea,boat-lift-rules,Boat Lift Rules in Lauderdale-by-the-Sea,What are the boat lift rules in Lauderdale-by-the-Sea?,,,,,,,not-started,Dock,Broward,2,0
+lauderdale-by-the-sea,deck-requirements,Waterfront Deck Rules in Lauderdale-by-the-Sea,What are the deck setback and railing rules in Lauderdale-by-the-Sea?,,,,,,,not-started,Deck,Broward,2,0
+lauderdale-by-the-sea,licensed-contractors,Checking a Marine Contractor in Lauderdale-by-the-Sea,How do I check a marine contractor in Lauderdale-by-the-Sea?,,,,,,,not-started,Failing,Broward,2,0
+lauderdale-by-the-sea,storm-prep,Storm Prep for Lauderdale-by-the-Sea Waterfront Owners,What are the storm and debris rules in Lauderdale-by-the-Sea?,,,,,,,not-started,Failing,Broward,2,0
+miami,seawall-height-requirement,Miami Seawall Height Requirement,How high does a seawall have to be in Miami?,,,,,,,not-started,Compliance,Miami-Dade,2,0
+miami,seawall-permit,Seawall Permits in Miami,Do I need a permit to repair a seawall in Miami?,,,,,,,not-started,Compliance,Miami-Dade,2,0
+miami,flood-zone,Miami Flood Zone & Elevation Rules,"What flood zone is Miami in, and what does it require?",,,,,,,not-started,Compliance,Miami-Dade,2,0
+miami,dock-permit-size,Dock Permits & Size Limits in Miami,How big a dock can I build in Miami?,,,,,,,not-started,Dock,Miami-Dade,2,0
+miami,boat-lift-rules,Boat Lift Rules in Miami,What are the boat lift rules in Miami?,,,,,,,not-started,Dock,Miami-Dade,2,0
+miami,deck-requirements,Waterfront Deck Rules in Miami,What are the deck setback and railing rules in Miami?,,,,,,,not-started,Deck,Miami-Dade,2,0
+miami,licensed-contractors,Checking a Marine Contractor in Miami,How do I check a marine contractor in Miami?,,,,,,,not-started,Failing,Miami-Dade,2,0
+miami,storm-prep,Storm Prep for Miami Waterfront Owners,What are the storm and debris rules in Miami?,,,,,,,not-started,Failing,Miami-Dade,2,0
+surfside,seawall-height-requirement,Surfside Seawall Height Requirement,How high does a seawall have to be in Surfside?,,,,,,,not-started,Compliance,Miami-Dade,2,0
+surfside,seawall-permit,Seawall Permits in Surfside,Do I need a permit to repair a seawall in Surfside?,,,,,,,not-started,Compliance,Miami-Dade,2,0
+surfside,flood-zone,Surfside Flood Zone & Elevation Rules,"What flood zone is Surfside in, and what does it require?",,,,,,,not-started,Compliance,Miami-Dade,2,0
+surfside,dock-permit-size,Dock Permits & Size Limits in Surfside,How big a dock can I build in Surfside?,,,,,,,not-started,Dock,Miami-Dade,2,0
+surfside,boat-lift-rules,Boat Lift Rules in Surfside,What are the boat lift rules in Surfside?,,,,,,,not-started,Dock,Miami-Dade,2,0
+surfside,deck-requirements,Waterfront Deck Rules in Surfside,What are the deck setback and railing rules in Surfside?,,,,,,,not-started,Deck,Miami-Dade,2,0
+surfside,licensed-contractors,Checking a Marine Contractor in Surfside,How do I check a marine contractor in Surfside?,,,,,,,not-started,Failing,Miami-Dade,2,0
+surfside,storm-prep,Storm Prep for Surfside Waterfront Owners,What are the storm and debris rules in Surfside?,,,,,,,not-started,Failing,Miami-Dade,2,0
+aventura,seawall-height-requirement,Aventura Seawall Height Requirement,How high does a seawall have to be in Aventura?,,,,,,,not-started,Compliance,Miami-Dade,2,0
+aventura,seawall-permit,Seawall Permits in Aventura,Do I need a permit to repair a seawall in Aventura?,,,,,,,not-started,Compliance,Miami-Dade,2,0
+aventura,flood-zone,Aventura Flood Zone & Elevation Rules,"What flood zone is Aventura in, and what does it require?",,,,,,,not-started,Compliance,Miami-Dade,2,0
+aventura,dock-permit-size,Dock Permits & Size Limits in Aventura,How big a dock can I build in Aventura?,,,,,,,not-started,Dock,Miami-Dade,2,0
+aventura,boat-lift-rules,Boat Lift Rules in Aventura,What are the boat lift rules in Aventura?,,,,,,,not-started,Dock,Miami-Dade,2,0
+aventura,deck-requirements,Waterfront Deck Rules in Aventura,What are the deck setback and railing rules in Aventura?,,,,,,,not-started,Deck,Miami-Dade,2,0
+aventura,licensed-contractors,Checking a Marine Contractor in Aventura,How do I check a marine contractor in Aventura?,,,,,,,not-started,Failing,Miami-Dade,2,0
+aventura,storm-prep,Storm Prep for Aventura Waterfront Owners,What are the storm and debris rules in Aventura?,,,,,,,not-started,Failing,Miami-Dade,2,0
+sunny-isles-beach,seawall-height-requirement,Sunny Isles Beach Seawall Height Requirement,How high does a seawall have to be in Sunny Isles Beach?,,,,,,,not-started,Compliance,Miami-Dade,2,0
+sunny-isles-beach,seawall-permit,Seawall Permits in Sunny Isles Beach,Do I need a permit to repair a seawall in Sunny Isles Beach?,,,,,,,not-started,Compliance,Miami-Dade,2,0
+sunny-isles-beach,flood-zone,Sunny Isles Beach Flood Zone & Elevation Rules,"What flood zone is Sunny Isles Beach in, and what does it require?",,,,,,,not-started,Compliance,Miami-Dade,2,0
+sunny-isles-beach,dock-permit-size,Dock Permits & Size Limits in Sunny Isles Beach,How big a dock can I build in Sunny Isles Beach?,,,,,,,not-started,Dock,Miami-Dade,2,0
+sunny-isles-beach,boat-lift-rules,Boat Lift Rules in Sunny Isles Beach,What are the boat lift rules in Sunny Isles Beach?,,,,,,,not-started,Dock,Miami-Dade,2,0
+sunny-isles-beach,deck-requirements,Waterfront Deck Rules in Sunny Isles Beach,What are the deck setback and railing rules in Sunny Isles Beach?,,,,,,,not-started,Deck,Miami-Dade,2,0
+sunny-isles-beach,licensed-contractors,Checking a Marine Contractor in Sunny Isles Beach,How do I check a marine contractor in Sunny Isles Beach?,,,,,,,not-started,Failing,Miami-Dade,2,0
+sunny-isles-beach,storm-prep,Storm Prep for Sunny Isles Beach Waterfront Owners,What are the storm and debris rules in Sunny Isles Beach?,,,,,,,not-started,Failing,Miami-Dade,2,0
+bay-harbor-islands,seawall-height-requirement,Bay Harbor Islands Seawall Height Requirement,How high does a seawall have to be in Bay Harbor Islands?,,,,,,,not-started,Compliance,Miami-Dade,2,0
+bay-harbor-islands,seawall-permit,Seawall Permits in Bay Harbor Islands,Do I need a permit to repair a seawall in Bay Harbor Islands?,,,,,,,not-started,Compliance,Miami-Dade,2,0
+bay-harbor-islands,flood-zone,Bay Harbor Islands Flood Zone & Elevation Rules,"What flood zone is Bay Harbor Islands in, and what does it require?",,,,,,,not-started,Compliance,Miami-Dade,2,0
+bay-harbor-islands,dock-permit-size,Dock Permits & Size Limits in Bay Harbor Islands,How big a dock can I build in Bay Harbor Islands?,,,,,,,not-started,Dock,Miami-Dade,2,0
+bay-harbor-islands,boat-lift-rules,Boat Lift Rules in Bay Harbor Islands,What are the boat lift rules in Bay Harbor Islands?,,,,,,,not-started,Dock,Miami-Dade,2,0
+bay-harbor-islands,deck-requirements,Waterfront Deck Rules in Bay Harbor Islands,What are the deck setback and railing rules in Bay Harbor Islands?,,,,,,,not-started,Deck,Miami-Dade,2,0
+bay-harbor-islands,licensed-contractors,Checking a Marine Contractor in Bay Harbor Islands,How do I check a marine contractor in Bay Harbor Islands?,,,,,,,not-started,Failing,Miami-Dade,2,0
+bay-harbor-islands,storm-prep,Storm Prep for Bay Harbor Islands Waterfront Owners,What are the storm and debris rules in Bay Harbor Islands?,,,,,,,not-started,Failing,Miami-Dade,2,0
+bal-harbour,seawall-height-requirement,Bal Harbour Seawall Height Requirement,How high does a seawall have to be in Bal Harbour?,,,,,,,not-started,Compliance,Miami-Dade,2,0
+bal-harbour,seawall-permit,Seawall Permits in Bal Harbour,Do I need a permit to repair a seawall in Bal Harbour?,,,,,,,not-started,Compliance,Miami-Dade,2,0
+bal-harbour,flood-zone,Bal Harbour Flood Zone & Elevation Rules,"What flood zone is Bal Harbour in, and what does it require?",,,,,,,not-started,Compliance,Miami-Dade,2,0
+bal-harbour,dock-permit-size,Dock Permits & Size Limits in Bal Harbour,How big a dock can I build in Bal Harbour?,,,,,,,not-started,Dock,Miami-Dade,2,0
+bal-harbour,boat-lift-rules,Boat Lift Rules in Bal Harbour,What are the boat lift rules in Bal Harbour?,,,,,,,not-started,Dock,Miami-Dade,2,0
+bal-harbour,deck-requirements,Waterfront Deck Rules in Bal Harbour,What are the deck setback and railing rules in Bal Harbour?,,,,,,,not-started,Deck,Miami-Dade,2,0
+bal-harbour,licensed-contractors,Checking a Marine Contractor in Bal Harbour,How do I check a marine contractor in Bal Harbour?,,,,,,,not-started,Failing,Miami-Dade,2,0
+bal-harbour,storm-prep,Storm Prep for Bal Harbour Waterfront Owners,What are the storm and debris rules in Bal Harbour?,,,,,,,not-started,Failing,Miami-Dade,2,0
+west-palm-beach,seawall-height-requirement,West Palm Beach Seawall Height Requirement,How high does a seawall have to be in West Palm Beach?,,,,,,,not-started,Compliance,Palm Beach,2,0
+west-palm-beach,seawall-permit,Seawall Permits in West Palm Beach,Do I need a permit to repair a seawall in West Palm Beach?,,,,,,,not-started,Compliance,Palm Beach,2,0
+west-palm-beach,flood-zone,West Palm Beach Flood Zone & Elevation Rules,"What flood zone is West Palm Beach in, and what does it require?",,,,,,,not-started,Compliance,Palm Beach,2,0
+west-palm-beach,dock-permit-size,Dock Permits & Size Limits in West Palm Beach,How big a dock can I build in West Palm Beach?,,,,,,,not-started,Dock,Palm Beach,2,0
+west-palm-beach,boat-lift-rules,Boat Lift Rules in West Palm Beach,What are the boat lift rules in West Palm Beach?,,,,,,,not-started,Dock,Palm Beach,2,0
+west-palm-beach,deck-requirements,Waterfront Deck Rules in West Palm Beach,What are the deck setback and railing rules in West Palm Beach?,,,,,,,not-started,Deck,Palm Beach,2,0
+west-palm-beach,licensed-contractors,Checking a Marine Contractor in West Palm Beach,How do I check a marine contractor in West Palm Beach?,,,,,,,not-started,Failing,Palm Beach,2,0
+west-palm-beach,storm-prep,Storm Prep for West Palm Beach Waterfront Owners,What are the storm and debris rules in West Palm Beach?,,,,,,,not-started,Failing,Palm Beach,2,0
+north-palm-beach,seawall-height-requirement,North Palm Beach Seawall Height Requirement,How high does a seawall have to be in North Palm Beach?,,,,,,,not-started,Compliance,Palm Beach,2,0
+north-palm-beach,seawall-permit,Seawall Permits in North Palm Beach,Do I need a permit to repair a seawall in North Palm Beach?,,,,,,,not-started,Compliance,Palm Beach,2,0
+north-palm-beach,flood-zone,North Palm Beach Flood Zone & Elevation Rules,"What flood zone is North Palm Beach in, and what does it require?",,,,,,,not-started,Compliance,Palm Beach,2,0
+north-palm-beach,dock-permit-size,Dock Permits & Size Limits in North Palm Beach,How big a dock can I build in North Palm Beach?,,,,,,,not-started,Dock,Palm Beach,2,0
+north-palm-beach,boat-lift-rules,Boat Lift Rules in North Palm Beach,What are the boat lift rules in North Palm Beach?,,,,,,,not-started,Dock,Palm Beach,2,0
+north-palm-beach,deck-requirements,Waterfront Deck Rules in North Palm Beach,What are the deck setback and railing rules in North Palm Beach?,,,,,,,not-started,Deck,Palm Beach,2,0
+north-palm-beach,licensed-contractors,Checking a Marine Contractor in North Palm Beach,How do I check a marine contractor in North Palm Beach?,,,,,,,not-started,Failing,Palm Beach,2,0
+north-palm-beach,storm-prep,Storm Prep for North Palm Beach Waterfront Owners,What are the storm and debris rules in North Palm Beach?,,,,,,,not-started,Failing,Palm Beach,2,0
+palm-beach,seawall-height-requirement,Palm Beach Seawall Height Requirement,How high does a seawall have to be in Palm Beach?,,,,,,,not-started,Compliance,Palm Beach,2,0
+palm-beach,seawall-permit,Seawall Permits in Palm Beach,Do I need a permit to repair a seawall in Palm Beach?,,,,,,,not-started,Compliance,Palm Beach,2,0
+palm-beach,flood-zone,Palm Beach Flood Zone & Elevation Rules,"What flood zone is Palm Beach in, and what does it require?",,,,,,,not-started,Compliance,Palm Beach,2,0
+palm-beach,dock-permit-size,Dock Permits & Size Limits in Palm Beach,How big a dock can I build in Palm Beach?,,,,,,,not-started,Dock,Palm Beach,2,0
+palm-beach,boat-lift-rules,Boat Lift Rules in Palm Beach,What are the boat lift rules in Palm Beach?,,,,,,,not-started,Dock,Palm Beach,2,0
+palm-beach,deck-requirements,Waterfront Deck Rules in Palm Beach,What are the deck setback and railing rules in Palm Beach?,,,,,,,not-started,Deck,Palm Beach,2,0
+palm-beach,licensed-contractors,Checking a Marine Contractor in Palm Beach,How do I check a marine contractor in Palm Beach?,,,,,,,not-started,Failing,Palm Beach,2,0
+palm-beach,storm-prep,Storm Prep for Palm Beach Waterfront Owners,What are the storm and debris rules in Palm Beach?,,,,,,,not-started,Failing,Palm Beach,2,0
+palm-beach-gardens,seawall-height-requirement,Palm Beach Gardens Seawall Height Requirement,How high does a seawall have to be in Palm Beach Gardens?,,,,,,,not-started,Compliance,Palm Beach,2,0
+palm-beach-gardens,seawall-permit,Seawall Permits in Palm Beach Gardens,Do I need a permit to repair a seawall in Palm Beach Gardens?,,,,,,,not-started,Compliance,Palm Beach,2,0
+palm-beach-gardens,flood-zone,Palm Beach Gardens Flood Zone & Elevation Rules,"What flood zone is Palm Beach Gardens in, and what does it require?",,,,,,,not-started,Compliance,Palm Beach,2,0
+palm-beach-gardens,dock-permit-size,Dock Permits & Size Limits in Palm Beach Gardens,How big a dock can I build in Palm Beach Gardens?,,,,,,,not-started,Dock,Palm Beach,2,0
+palm-beach-gardens,boat-lift-rules,Boat Lift Rules in Palm Beach Gardens,What are the boat lift rules in Palm Beach Gardens?,,,,,,,not-started,Dock,Palm Beach,2,0
+palm-beach-gardens,deck-requirements,Waterfront Deck Rules in Palm Beach Gardens,What are the deck setback and railing rules in Palm Beach Gardens?,,,,,,,not-started,Deck,Palm Beach,2,0
+palm-beach-gardens,licensed-contractors,Checking a Marine Contractor in Palm Beach Gardens,How do I check a marine contractor in Palm Beach Gardens?,,,,,,,not-started,Failing,Palm Beach,2,0
+palm-beach-gardens,storm-prep,Storm Prep for Palm Beach Gardens Waterfront Owners,What are the storm and debris rules in Palm Beach Gardens?,,,,,,,not-started,Failing,Palm Beach,2,0
+boynton-beach,seawall-height-requirement,Boynton Beach Seawall Height Requirement,How high does a seawall have to be in Boynton Beach?,,,,,,,not-started,Compliance,Palm Beach,2,0
+boynton-beach,seawall-permit,Seawall Permits in Boynton Beach,Do I need a permit to repair a seawall in Boynton Beach?,,,,,,,not-started,Compliance,Palm Beach,2,0
+boynton-beach,flood-zone,Boynton Beach Flood Zone & Elevation Rules,"What flood zone is Boynton Beach in, and what does it require?",,,,,,,not-started,Compliance,Palm Beach,2,0
+boynton-beach,dock-permit-size,Dock Permits & Size Limits in Boynton Beach,How big a dock can I build in Boynton Beach?,,,,,,,not-started,Dock,Palm Beach,2,0
+boynton-beach,boat-lift-rules,Boat Lift Rules in Boynton Beach,What are the boat lift rules in Boynton Beach?,,,,,,,not-started,Dock,Palm Beach,2,0
+boynton-beach,deck-requirements,Waterfront Deck Rules in Boynton Beach,What are the deck setback and railing rules in Boynton Beach?,,,,,,,not-started,Deck,Palm Beach,2,0
+boynton-beach,licensed-contractors,Checking a Marine Contractor in Boynton Beach,How do I check a marine contractor in Boynton Beach?,,,,,,,not-started,Failing,Palm Beach,2,0
+boynton-beach,storm-prep,Storm Prep for Boynton Beach Waterfront Owners,What are the storm and debris rules in Boynton Beach?,,,,,,,not-started,Failing,Palm Beach,2,0
+highland-beach,seawall-height-requirement,Highland Beach Seawall Height Requirement,How high does a seawall have to be in Highland Beach?,,,,,,,not-started,Compliance,Palm Beach,2,0
+highland-beach,seawall-permit,Seawall Permits in Highland Beach,Do I need a permit to repair a seawall in Highland Beach?,,,,,,,not-started,Compliance,Palm Beach,2,0
+highland-beach,flood-zone,Highland Beach Flood Zone & Elevation Rules,"What flood zone is Highland Beach in, and what does it require?",,,,,,,not-started,Compliance,Palm Beach,2,0
+highland-beach,dock-permit-size,Dock Permits & Size Limits in Highland Beach,How big a dock can I build in Highland Beach?,,,,,,,not-started,Dock,Palm Beach,2,0
+highland-beach,boat-lift-rules,Boat Lift Rules in Highland Beach,What are the boat lift rules in Highland Beach?,,,,,,,not-started,Dock,Palm Beach,2,0
+highland-beach,deck-requirements,Waterfront Deck Rules in Highland Beach,What are the deck setback and railing rules in Highland Beach?,,,,,,,not-started,Deck,Palm Beach,2,0
+highland-beach,licensed-contractors,Checking a Marine Contractor in Highland Beach,How do I check a marine contractor in Highland Beach?,,,,,,,not-started,Failing,Palm Beach,2,0
+highland-beach,storm-prep,Storm Prep for Highland Beach Waterfront Owners,What are the storm and debris rules in Highland Beach?,,,,,,,not-started,Failing,Palm Beach,2,0
+marathon,seawall-height-requirement,Marathon Seawall Height Requirement,How high does a seawall have to be in Marathon?,,,,,,,not-started,Compliance,Monroe,2,0
+marathon,seawall-permit,Seawall Permits in Marathon,Do I need a permit to repair a seawall in Marathon?,,,,,,,not-started,Compliance,Monroe,2,0
+marathon,flood-zone,Marathon Flood Zone & Elevation Rules,"What flood zone is Marathon in, and what does it require?",,,,,,,not-started,Compliance,Monroe,2,0
+marathon,dock-permit-size,Dock Permits & Size Limits in Marathon,How big a dock can I build in Marathon?,,,,,,,not-started,Dock,Monroe,2,0
+marathon,boat-lift-rules,Boat Lift Rules in Marathon,What are the boat lift rules in Marathon?,,,,,,,not-started,Dock,Monroe,2,0
+marathon,deck-requirements,Waterfront Deck Rules in Marathon,What are the deck setback and railing rules in Marathon?,,,,,,,not-started,Deck,Monroe,2,0
+marathon,licensed-contractors,Checking a Marine Contractor in Marathon,How do I check a marine contractor in Marathon?,,,,,,,not-started,Failing,Monroe,2,0
+marathon,storm-prep,Storm Prep for Marathon Waterfront Owners,What are the storm and debris rules in Marathon?,,,,,,,not-started,Failing,Monroe,2,0
+islamorada,seawall-height-requirement,Islamorada Seawall Height Requirement,How high does a seawall have to be in Islamorada?,,,,,,,not-started,Compliance,Monroe,2,0
+islamorada,seawall-permit,Seawall Permits in Islamorada,Do I need a permit to repair a seawall in Islamorada?,,,,,,,not-started,Compliance,Monroe,2,0
+islamorada,flood-zone,Islamorada Flood Zone & Elevation Rules,"What flood zone is Islamorada in, and what does it require?",,,,,,,not-started,Compliance,Monroe,2,0
+islamorada,dock-permit-size,Dock Permits & Size Limits in Islamorada,How big a dock can I build in Islamorada?,,,,,,,not-started,Dock,Monroe,2,0
+islamorada,boat-lift-rules,Boat Lift Rules in Islamorada,What are the boat lift rules in Islamorada?,,,,,,,not-started,Dock,Monroe,2,0
+islamorada,deck-requirements,Waterfront Deck Rules in Islamorada,What are the deck setback and railing rules in Islamorada?,,,,,,,not-started,Deck,Monroe,2,0
+islamorada,licensed-contractors,Checking a Marine Contractor in Islamorada,How do I check a marine contractor in Islamorada?,,,,,,,not-started,Failing,Monroe,2,0
+islamorada,storm-prep,Storm Prep for Islamorada Waterfront Owners,What are the storm and debris rules in Islamorada?,,,,,,,not-started,Failing,Monroe,2,0
+key-largo,seawall-height-requirement,Key Largo Seawall Height Requirement,How high does a seawall have to be in Key Largo?,,,,,,,not-started,Compliance,Monroe,2,0
+key-largo,seawall-permit,Seawall Permits in Key Largo,Do I need a permit to repair a seawall in Key Largo?,,,,,,,not-started,Compliance,Monroe,2,0
+key-largo,flood-zone,Key Largo Flood Zone & Elevation Rules,"What flood zone is Key Largo in, and what does it require?",,,,,,,not-started,Compliance,Monroe,2,0
+key-largo,dock-permit-size,Dock Permits & Size Limits in Key Largo,How big a dock can I build in Key Largo?,,,,,,,not-started,Dock,Monroe,2,0
+key-largo,boat-lift-rules,Boat Lift Rules in Key Largo,What are the boat lift rules in Key Largo?,,,,,,,not-started,Dock,Monroe,2,0
+key-largo,deck-requirements,Waterfront Deck Rules in Key Largo,What are the deck setback and railing rules in Key Largo?,,,,,,,not-started,Deck,Monroe,2,0
+key-largo,licensed-contractors,Checking a Marine Contractor in Key Largo,How do I check a marine contractor in Key Largo?,,,,,,,not-started,Failing,Monroe,2,0
+key-largo,storm-prep,Storm Prep for Key Largo Waterfront Owners,What are the storm and debris rules in Key Largo?,,,,,,,not-started,Failing,Monroe,2,0
+wilton-manors,seawall-height-requirement,Wilton Manors Seawall Height Requirement,How high does a seawall have to be in Wilton Manors?,,,,,,,not-started,Compliance,Broward,3,0
+wilton-manors,seawall-permit,Seawall Permits in Wilton Manors,Do I need a permit to repair a seawall in Wilton Manors?,,,,,,,not-started,Compliance,Broward,3,0
+wilton-manors,flood-zone,Wilton Manors Flood Zone & Elevation Rules,"What flood zone is Wilton Manors in, and what does it require?",,,,,,,not-started,Compliance,Broward,3,0
+wilton-manors,dock-permit-size,Dock Permits & Size Limits in Wilton Manors,How big a dock can I build in Wilton Manors?,,,,,,,not-started,Dock,Broward,3,0
+wilton-manors,boat-lift-rules,Boat Lift Rules in Wilton Manors,What are the boat lift rules in Wilton Manors?,,,,,,,not-started,Dock,Broward,3,0
+wilton-manors,deck-requirements,Waterfront Deck Rules in Wilton Manors,What are the deck setback and railing rules in Wilton Manors?,,,,,,,not-started,Deck,Broward,3,0
+wilton-manors,licensed-contractors,Checking a Marine Contractor in Wilton Manors,How do I check a marine contractor in Wilton Manors?,,,,,,,not-started,Failing,Broward,3,0
+wilton-manors,storm-prep,Storm Prep for Wilton Manors Waterfront Owners,What are the storm and debris rules in Wilton Manors?,,,,,,,not-started,Failing,Broward,3,0
+hillsboro-beach,seawall-height-requirement,Hillsboro Beach Seawall Height Requirement,How high does a seawall have to be in Hillsboro Beach?,,,,,,,not-started,Compliance,Broward,3,0
+hillsboro-beach,seawall-permit,Seawall Permits in Hillsboro Beach,Do I need a permit to repair a seawall in Hillsboro Beach?,,,,,,,not-started,Compliance,Broward,3,0
+hillsboro-beach,flood-zone,Hillsboro Beach Flood Zone & Elevation Rules,"What flood zone is Hillsboro Beach in, and what does it require?",,,,,,,not-started,Compliance,Broward,3,0
+hillsboro-beach,dock-permit-size,Dock Permits & Size Limits in Hillsboro Beach,How big a dock can I build in Hillsboro Beach?,,,,,,,not-started,Dock,Broward,3,0
+hillsboro-beach,boat-lift-rules,Boat Lift Rules in Hillsboro Beach,What are the boat lift rules in Hillsboro Beach?,,,,,,,not-started,Dock,Broward,3,0
+hillsboro-beach,deck-requirements,Waterfront Deck Rules in Hillsboro Beach,What are the deck setback and railing rules in Hillsboro Beach?,,,,,,,not-started,Deck,Broward,3,0
+hillsboro-beach,licensed-contractors,Checking a Marine Contractor in Hillsboro Beach,How do I check a marine contractor in Hillsboro Beach?,,,,,,,not-started,Failing,Broward,3,0
+hillsboro-beach,storm-prep,Storm Prep for Hillsboro Beach Waterfront Owners,What are the storm and debris rules in Hillsboro Beach?,,,,,,,not-started,Failing,Broward,3,0
+oakland-park,seawall-height-requirement,Oakland Park Seawall Height Requirement,How high does a seawall have to be in Oakland Park?,,,,,,,not-started,Compliance,Broward,3,0
+oakland-park,seawall-permit,Seawall Permits in Oakland Park,Do I need a permit to repair a seawall in Oakland Park?,,,,,,,not-started,Compliance,Broward,3,0
+oakland-park,flood-zone,Oakland Park Flood Zone & Elevation Rules,"What flood zone is Oakland Park in, and what does it require?",,,,,,,not-started,Compliance,Broward,3,0
+oakland-park,dock-permit-size,Dock Permits & Size Limits in Oakland Park,How big a dock can I build in Oakland Park?,,,,,,,not-started,Dock,Broward,3,0
+oakland-park,boat-lift-rules,Boat Lift Rules in Oakland Park,What are the boat lift rules in Oakland Park?,,,,,,,not-started,Dock,Broward,3,0
+oakland-park,deck-requirements,Waterfront Deck Rules in Oakland Park,What are the deck setback and railing rules in Oakland Park?,,,,,,,not-started,Deck,Broward,3,0
+oakland-park,licensed-contractors,Checking a Marine Contractor in Oakland Park,How do I check a marine contractor in Oakland Park?,,,,,,,not-started,Failing,Broward,3,0
+oakland-park,storm-prep,Storm Prep for Oakland Park Waterfront Owners,What are the storm and debris rules in Oakland Park?,,,,,,,not-started,Failing,Broward,3,0
+sea-ranch-lakes,seawall-height-requirement,Sea Ranch Lakes Seawall Height Requirement,How high does a seawall have to be in Sea Ranch Lakes?,,,,,,,not-started,Compliance,Broward,3,0
+sea-ranch-lakes,seawall-permit,Seawall Permits in Sea Ranch Lakes,Do I need a permit to repair a seawall in Sea Ranch Lakes?,,,,,,,not-started,Compliance,Broward,3,0
+sea-ranch-lakes,flood-zone,Sea Ranch Lakes Flood Zone & Elevation Rules,"What flood zone is Sea Ranch Lakes in, and what does it require?",,,,,,,not-started,Compliance,Broward,3,0
+sea-ranch-lakes,dock-permit-size,Dock Permits & Size Limits in Sea Ranch Lakes,How big a dock can I build in Sea Ranch Lakes?,,,,,,,not-started,Dock,Broward,3,0
+sea-ranch-lakes,boat-lift-rules,Boat Lift Rules in Sea Ranch Lakes,What are the boat lift rules in Sea Ranch Lakes?,,,,,,,not-started,Dock,Broward,3,0
+sea-ranch-lakes,deck-requirements,Waterfront Deck Rules in Sea Ranch Lakes,What are the deck setback and railing rules in Sea Ranch Lakes?,,,,,,,not-started,Deck,Broward,3,0
+sea-ranch-lakes,licensed-contractors,Checking a Marine Contractor in Sea Ranch Lakes,How do I check a marine contractor in Sea Ranch Lakes?,,,,,,,not-started,Failing,Broward,3,0
+sea-ranch-lakes,storm-prep,Storm Prep for Sea Ranch Lakes Waterfront Owners,What are the storm and debris rules in Sea Ranch Lakes?,,,,,,,not-started,Failing,Broward,3,0
+north-bay-village,seawall-height-requirement,North Bay Village Seawall Height Requirement,How high does a seawall have to be in North Bay Village?,,,,,,,not-started,Compliance,Miami-Dade,3,0
+north-bay-village,seawall-permit,Seawall Permits in North Bay Village,Do I need a permit to repair a seawall in North Bay Village?,,,,,,,not-started,Compliance,Miami-Dade,3,0
+north-bay-village,flood-zone,North Bay Village Flood Zone & Elevation Rules,"What flood zone is North Bay Village in, and what does it require?",,,,,,,not-started,Compliance,Miami-Dade,3,0
+north-bay-village,dock-permit-size,Dock Permits & Size Limits in North Bay Village,How big a dock can I build in North Bay Village?,,,,,,,not-started,Dock,Miami-Dade,3,0
+north-bay-village,boat-lift-rules,Boat Lift Rules in North Bay Village,What are the boat lift rules in North Bay Village?,,,,,,,not-started,Dock,Miami-Dade,3,0
+north-bay-village,deck-requirements,Waterfront Deck Rules in North Bay Village,What are the deck setback and railing rules in North Bay Village?,,,,,,,not-started,Deck,Miami-Dade,3,0
+north-bay-village,licensed-contractors,Checking a Marine Contractor in North Bay Village,How do I check a marine contractor in North Bay Village?,,,,,,,not-started,Failing,Miami-Dade,3,0
+north-bay-village,storm-prep,Storm Prep for North Bay Village Waterfront Owners,What are the storm and debris rules in North Bay Village?,,,,,,,not-started,Failing,Miami-Dade,3,0
+golden-beach,seawall-height-requirement,Golden Beach Seawall Height Requirement,How high does a seawall have to be in Golden Beach?,,,,,,,not-started,Compliance,Miami-Dade,3,0
+golden-beach,seawall-permit,Seawall Permits in Golden Beach,Do I need a permit to repair a seawall in Golden Beach?,,,,,,,not-started,Compliance,Miami-Dade,3,0
+golden-beach,flood-zone,Golden Beach Flood Zone & Elevation Rules,"What flood zone is Golden Beach in, and what does it require?",,,,,,,not-started,Compliance,Miami-Dade,3,0
+golden-beach,dock-permit-size,Dock Permits & Size Limits in Golden Beach,How big a dock can I build in Golden Beach?,,,,,,,not-started,Dock,Miami-Dade,3,0
+golden-beach,boat-lift-rules,Boat Lift Rules in Golden Beach,What are the boat lift rules in Golden Beach?,,,,,,,not-started,Dock,Miami-Dade,3,0
+golden-beach,deck-requirements,Waterfront Deck Rules in Golden Beach,What are the deck setback and railing rules in Golden Beach?,,,,,,,not-started,Deck,Miami-Dade,3,0
+golden-beach,licensed-contractors,Checking a Marine Contractor in Golden Beach,How do I check a marine contractor in Golden Beach?,,,,,,,not-started,Failing,Miami-Dade,3,0
+golden-beach,storm-prep,Storm Prep for Golden Beach Waterfront Owners,What are the storm and debris rules in Golden Beach?,,,,,,,not-started,Failing,Miami-Dade,3,0
+palmetto-bay,seawall-height-requirement,Palmetto Bay Seawall Height Requirement,How high does a seawall have to be in Palmetto Bay?,,,,,,,not-started,Compliance,Miami-Dade,3,0
+palmetto-bay,seawall-permit,Seawall Permits in Palmetto Bay,Do I need a permit to repair a seawall in Palmetto Bay?,,,,,,,not-started,Compliance,Miami-Dade,3,0
+palmetto-bay,flood-zone,Palmetto Bay Flood Zone & Elevation Rules,"What flood zone is Palmetto Bay in, and what does it require?",,,,,,,not-started,Compliance,Miami-Dade,3,0
+palmetto-bay,dock-permit-size,Dock Permits & Size Limits in Palmetto Bay,How big a dock can I build in Palmetto Bay?,,,,,,,not-started,Dock,Miami-Dade,3,0
+palmetto-bay,boat-lift-rules,Boat Lift Rules in Palmetto Bay,What are the boat lift rules in Palmetto Bay?,,,,,,,not-started,Dock,Miami-Dade,3,0
+palmetto-bay,deck-requirements,Waterfront Deck Rules in Palmetto Bay,What are the deck setback and railing rules in Palmetto Bay?,,,,,,,not-started,Deck,Miami-Dade,3,0
+palmetto-bay,licensed-contractors,Checking a Marine Contractor in Palmetto Bay,How do I check a marine contractor in Palmetto Bay?,,,,,,,not-started,Failing,Miami-Dade,3,0
+palmetto-bay,storm-prep,Storm Prep for Palmetto Bay Waterfront Owners,What are the storm and debris rules in Palmetto Bay?,,,,,,,not-started,Failing,Miami-Dade,3,0
+cutler-bay,seawall-height-requirement,Cutler Bay Seawall Height Requirement,How high does a seawall have to be in Cutler Bay?,,,,,,,not-started,Compliance,Miami-Dade,3,0
+cutler-bay,seawall-permit,Seawall Permits in Cutler Bay,Do I need a permit to repair a seawall in Cutler Bay?,,,,,,,not-started,Compliance,Miami-Dade,3,0
+cutler-bay,flood-zone,Cutler Bay Flood Zone & Elevation Rules,"What flood zone is Cutler Bay in, and what does it require?",,,,,,,not-started,Compliance,Miami-Dade,3,0
+cutler-bay,dock-permit-size,Dock Permits & Size Limits in Cutler Bay,How big a dock can I build in Cutler Bay?,,,,,,,not-started,Dock,Miami-Dade,3,0
+cutler-bay,boat-lift-rules,Boat Lift Rules in Cutler Bay,What are the boat lift rules in Cutler Bay?,,,,,,,not-started,Dock,Miami-Dade,3,0
+cutler-bay,deck-requirements,Waterfront Deck Rules in Cutler Bay,What are the deck setback and railing rules in Cutler Bay?,,,,,,,not-started,Deck,Miami-Dade,3,0
+cutler-bay,licensed-contractors,Checking a Marine Contractor in Cutler Bay,How do I check a marine contractor in Cutler Bay?,,,,,,,not-started,Failing,Miami-Dade,3,0
+cutler-bay,storm-prep,Storm Prep for Cutler Bay Waterfront Owners,What are the storm and debris rules in Cutler Bay?,,,,,,,not-started,Failing,Miami-Dade,3,0
+miami-shores,seawall-height-requirement,Miami Shores Seawall Height Requirement,How high does a seawall have to be in Miami Shores?,,,,,,,not-started,Compliance,Miami-Dade,3,0
+miami-shores,seawall-permit,Seawall Permits in Miami Shores,Do I need a permit to repair a seawall in Miami Shores?,,,,,,,not-started,Compliance,Miami-Dade,3,0
+miami-shores,flood-zone,Miami Shores Flood Zone & Elevation Rules,"What flood zone is Miami Shores in, and what does it require?",,,,,,,not-started,Compliance,Miami-Dade,3,0
+miami-shores,dock-permit-size,Dock Permits & Size Limits in Miami Shores,How big a dock can I build in Miami Shores?,,,,,,,not-started,Dock,Miami-Dade,3,0
+miami-shores,boat-lift-rules,Boat Lift Rules in Miami Shores,What are the boat lift rules in Miami Shores?,,,,,,,not-started,Dock,Miami-Dade,3,0
+miami-shores,deck-requirements,Waterfront Deck Rules in Miami Shores,What are the deck setback and railing rules in Miami Shores?,,,,,,,not-started,Deck,Miami-Dade,3,0
+miami-shores,licensed-contractors,Checking a Marine Contractor in Miami Shores,How do I check a marine contractor in Miami Shores?,,,,,,,not-started,Failing,Miami-Dade,3,0
+miami-shores,storm-prep,Storm Prep for Miami Shores Waterfront Owners,What are the storm and debris rules in Miami Shores?,,,,,,,not-started,Failing,Miami-Dade,3,0
+ocean-ridge,seawall-height-requirement,Ocean Ridge Seawall Height Requirement,How high does a seawall have to be in Ocean Ridge?,,,,,,,not-started,Compliance,Palm Beach,3,0
+ocean-ridge,seawall-permit,Seawall Permits in Ocean Ridge,Do I need a permit to repair a seawall in Ocean Ridge?,,,,,,,not-started,Compliance,Palm Beach,3,0
+ocean-ridge,flood-zone,Ocean Ridge Flood Zone & Elevation Rules,"What flood zone is Ocean Ridge in, and what does it require?",,,,,,,not-started,Compliance,Palm Beach,3,0
+ocean-ridge,dock-permit-size,Dock Permits & Size Limits in Ocean Ridge,How big a dock can I build in Ocean Ridge?,,,,,,,not-started,Dock,Palm Beach,3,0
+ocean-ridge,boat-lift-rules,Boat Lift Rules in Ocean Ridge,What are the boat lift rules in Ocean Ridge?,,,,,,,not-started,Dock,Palm Beach,3,0
+ocean-ridge,deck-requirements,Waterfront Deck Rules in Ocean Ridge,What are the deck setback and railing rules in Ocean Ridge?,,,,,,,not-started,Deck,Palm Beach,3,0
+ocean-ridge,licensed-contractors,Checking a Marine Contractor in Ocean Ridge,How do I check a marine contractor in Ocean Ridge?,,,,,,,not-started,Failing,Palm Beach,3,0
+ocean-ridge,storm-prep,Storm Prep for Ocean Ridge Waterfront Owners,What are the storm and debris rules in Ocean Ridge?,,,,,,,not-started,Failing,Palm Beach,3,0
+gulf-stream,seawall-height-requirement,Gulf Stream Seawall Height Requirement,How high does a seawall have to be in Gulf Stream?,,,,,,,not-started,Compliance,Palm Beach,3,0
+gulf-stream,seawall-permit,Seawall Permits in Gulf Stream,Do I need a permit to repair a seawall in Gulf Stream?,,,,,,,not-started,Compliance,Palm Beach,3,0
+gulf-stream,flood-zone,Gulf Stream Flood Zone & Elevation Rules,"What flood zone is Gulf Stream in, and what does it require?",,,,,,,not-started,Compliance,Palm Beach,3,0
+gulf-stream,dock-permit-size,Dock Permits & Size Limits in Gulf Stream,How big a dock can I build in Gulf Stream?,,,,,,,not-started,Dock,Palm Beach,3,0
+gulf-stream,boat-lift-rules,Boat Lift Rules in Gulf Stream,What are the boat lift rules in Gulf Stream?,,,,,,,not-started,Dock,Palm Beach,3,0
+gulf-stream,deck-requirements,Waterfront Deck Rules in Gulf Stream,What are the deck setback and railing rules in Gulf Stream?,,,,,,,not-started,Deck,Palm Beach,3,0
+gulf-stream,licensed-contractors,Checking a Marine Contractor in Gulf Stream,How do I check a marine contractor in Gulf Stream?,,,,,,,not-started,Failing,Palm Beach,3,0
+gulf-stream,storm-prep,Storm Prep for Gulf Stream Waterfront Owners,What are the storm and debris rules in Gulf Stream?,,,,,,,not-started,Failing,Palm Beach,3,0
+manalapan,seawall-height-requirement,Manalapan Seawall Height Requirement,How high does a seawall have to be in Manalapan?,,,,,,,not-started,Compliance,Palm Beach,3,0
+manalapan,seawall-permit,Seawall Permits in Manalapan,Do I need a permit to repair a seawall in Manalapan?,,,,,,,not-started,Compliance,Palm Beach,3,0
+manalapan,flood-zone,Manalapan Flood Zone & Elevation Rules,"What flood zone is Manalapan in, and what does it require?",,,,,,,not-started,Compliance,Palm Beach,3,0
+manalapan,dock-permit-size,Dock Permits & Size Limits in Manalapan,How big a dock can I build in Manalapan?,,,,,,,not-started,Dock,Palm Beach,3,0
+manalapan,boat-lift-rules,Boat Lift Rules in Manalapan,What are the boat lift rules in Manalapan?,,,,,,,not-started,Dock,Palm Beach,3,0
+manalapan,deck-requirements,Waterfront Deck Rules in Manalapan,What are the deck setback and railing rules in Manalapan?,,,,,,,not-started,Deck,Palm Beach,3,0
+manalapan,licensed-contractors,Checking a Marine Contractor in Manalapan,How do I check a marine contractor in Manalapan?,,,,,,,not-started,Failing,Palm Beach,3,0
+manalapan,storm-prep,Storm Prep for Manalapan Waterfront Owners,What are the storm and debris rules in Manalapan?,,,,,,,not-started,Failing,Palm Beach,3,0
+tequesta,seawall-height-requirement,Tequesta Seawall Height Requirement,How high does a seawall have to be in Tequesta?,,,,,,,not-started,Compliance,Palm Beach,3,0
+tequesta,seawall-permit,Seawall Permits in Tequesta,Do I need a permit to repair a seawall in Tequesta?,,,,,,,not-started,Compliance,Palm Beach,3,0
+tequesta,flood-zone,Tequesta Flood Zone & Elevation Rules,"What flood zone is Tequesta in, and what does it require?",,,,,,,not-started,Compliance,Palm Beach,3,0
+tequesta,dock-permit-size,Dock Permits & Size Limits in Tequesta,How big a dock can I build in Tequesta?,,,,,,,not-started,Dock,Palm Beach,3,0
+tequesta,boat-lift-rules,Boat Lift Rules in Tequesta,What are the boat lift rules in Tequesta?,,,,,,,not-started,Dock,Palm Beach,3,0
+tequesta,deck-requirements,Waterfront Deck Rules in Tequesta,What are the deck setback and railing rules in Tequesta?,,,,,,,not-started,Deck,Palm Beach,3,0
+tequesta,licensed-contractors,Checking a Marine Contractor in Tequesta,How do I check a marine contractor in Tequesta?,,,,,,,not-started,Failing,Palm Beach,3,0
+tequesta,storm-prep,Storm Prep for Tequesta Waterfront Owners,What are the storm and debris rules in Tequesta?,,,,,,,not-started,Failing,Palm Beach,3,0
+juno-beach,seawall-height-requirement,Juno Beach Seawall Height Requirement,How high does a seawall have to be in Juno Beach?,,,,,,,not-started,Compliance,Palm Beach,3,0
+juno-beach,seawall-permit,Seawall Permits in Juno Beach,Do I need a permit to repair a seawall in Juno Beach?,,,,,,,not-started,Compliance,Palm Beach,3,0
+juno-beach,flood-zone,Juno Beach Flood Zone & Elevation Rules,"What flood zone is Juno Beach in, and what does it require?",,,,,,,not-started,Compliance,Palm Beach,3,0
+juno-beach,dock-permit-size,Dock Permits & Size Limits in Juno Beach,How big a dock can I build in Juno Beach?,,,,,,,not-started,Dock,Palm Beach,3,0
+juno-beach,boat-lift-rules,Boat Lift Rules in Juno Beach,What are the boat lift rules in Juno Beach?,,,,,,,not-started,Dock,Palm Beach,3,0
+juno-beach,deck-requirements,Waterfront Deck Rules in Juno Beach,What are the deck setback and railing rules in Juno Beach?,,,,,,,not-started,Deck,Palm Beach,3,0
+juno-beach,licensed-contractors,Checking a Marine Contractor in Juno Beach,How do I check a marine contractor in Juno Beach?,,,,,,,not-started,Failing,Palm Beach,3,0
+juno-beach,storm-prep,Storm Prep for Juno Beach Waterfront Owners,What are the storm and debris rules in Juno Beach?,,,,,,,not-started,Failing,Palm Beach,3,0
+riviera-beach,seawall-height-requirement,Riviera Beach Seawall Height Requirement,How high does a seawall have to be in Riviera Beach?,,,,,,,not-started,Compliance,Palm Beach,3,0
+riviera-beach,seawall-permit,Seawall Permits in Riviera Beach,Do I need a permit to repair a seawall in Riviera Beach?,,,,,,,not-started,Compliance,Palm Beach,3,0
+riviera-beach,flood-zone,Riviera Beach Flood Zone & Elevation Rules,"What flood zone is Riviera Beach in, and what does it require?",,,,,,,not-started,Compliance,Palm Beach,3,0
+riviera-beach,dock-permit-size,Dock Permits & Size Limits in Riviera Beach,How big a dock can I build in Riviera Beach?,,,,,,,not-started,Dock,Palm Beach,3,0
+riviera-beach,boat-lift-rules,Boat Lift Rules in Riviera Beach,What are the boat lift rules in Riviera Beach?,,,,,,,not-started,Dock,Palm Beach,3,0
+riviera-beach,deck-requirements,Waterfront Deck Rules in Riviera Beach,What are the deck setback and railing rules in Riviera Beach?,,,,,,,not-started,Deck,Palm Beach,3,0
+riviera-beach,licensed-contractors,Checking a Marine Contractor in Riviera Beach,How do I check a marine contractor in Riviera Beach?,,,,,,,not-started,Failing,Palm Beach,3,0
+riviera-beach,storm-prep,Storm Prep for Riviera Beach Waterfront Owners,What are the storm and debris rules in Riviera Beach?,,,,,,,not-started,Failing,Palm Beach,3,0
+lantana,seawall-height-requirement,Lantana Seawall Height Requirement,How high does a seawall have to be in Lantana?,,,,,,,not-started,Compliance,Palm Beach,3,0
+lantana,seawall-permit,Seawall Permits in Lantana,Do I need a permit to repair a seawall in Lantana?,,,,,,,not-started,Compliance,Palm Beach,3,0
+lantana,flood-zone,Lantana Flood Zone & Elevation Rules,"What flood zone is Lantana in, and what does it require?",,,,,,,not-started,Compliance,Palm Beach,3,0
+lantana,dock-permit-size,Dock Permits & Size Limits in Lantana,How big a dock can I build in Lantana?,,,,,,,not-started,Dock,Palm Beach,3,0
+lantana,boat-lift-rules,Boat Lift Rules in Lantana,What are the boat lift rules in Lantana?,,,,,,,not-started,Dock,Palm Beach,3,0
+lantana,deck-requirements,Waterfront Deck Rules in Lantana,What are the deck setback and railing rules in Lantana?,,,,,,,not-started,Deck,Palm Beach,3,0
+lantana,licensed-contractors,Checking a Marine Contractor in Lantana,How do I check a marine contractor in Lantana?,,,,,,,not-started,Failing,Palm Beach,3,0
+lantana,storm-prep,Storm Prep for Lantana Waterfront Owners,What are the storm and debris rules in Lantana?,,,,,,,not-started,Failing,Palm Beach,3,0
+south-palm-beach,seawall-height-requirement,South Palm Beach Seawall Height Requirement,How high does a seawall have to be in South Palm Beach?,,,,,,,not-started,Compliance,Palm Beach,3,0
+south-palm-beach,seawall-permit,Seawall Permits in South Palm Beach,Do I need a permit to repair a seawall in South Palm Beach?,,,,,,,not-started,Compliance,Palm Beach,3,0
+south-palm-beach,flood-zone,South Palm Beach Flood Zone & Elevation Rules,"What flood zone is South Palm Beach in, and what does it require?",,,,,,,not-started,Compliance,Palm Beach,3,0
+south-palm-beach,dock-permit-size,Dock Permits & Size Limits in South Palm Beach,How big a dock can I build in South Palm Beach?,,,,,,,not-started,Dock,Palm Beach,3,0
+south-palm-beach,boat-lift-rules,Boat Lift Rules in South Palm Beach,What are the boat lift rules in South Palm Beach?,,,,,,,not-started,Dock,Palm Beach,3,0
+south-palm-beach,deck-requirements,Waterfront Deck Rules in South Palm Beach,What are the deck setback and railing rules in South Palm Beach?,,,,,,,not-started,Deck,Palm Beach,3,0
+south-palm-beach,licensed-contractors,Checking a Marine Contractor in South Palm Beach,How do I check a marine contractor in South Palm Beach?,,,,,,,not-started,Failing,Palm Beach,3,0
+south-palm-beach,storm-prep,Storm Prep for South Palm Beach Waterfront Owners,What are the storm and debris rules in South Palm Beach?,,,,,,,not-started,Failing,Palm Beach,3,0
+lake-worth-beach,seawall-height-requirement,Lake Worth Beach Seawall Height Requirement,How high does a seawall have to be in Lake Worth Beach?,,,,,,,not-started,Compliance,Palm Beach,3,0
+lake-worth-beach,seawall-permit,Seawall Permits in Lake Worth Beach,Do I need a permit to repair a seawall in Lake Worth Beach?,,,,,,,not-started,Compliance,Palm Beach,3,0
+lake-worth-beach,flood-zone,Lake Worth Beach Flood Zone & Elevation Rules,"What flood zone is Lake Worth Beach in, and what does it require?",,,,,,,not-started,Compliance,Palm Beach,3,0
+lake-worth-beach,dock-permit-size,Dock Permits & Size Limits in Lake Worth Beach,How big a dock can I build in Lake Worth Beach?,,,,,,,not-started,Dock,Palm Beach,3,0
+lake-worth-beach,boat-lift-rules,Boat Lift Rules in Lake Worth Beach,What are the boat lift rules in Lake Worth Beach?,,,,,,,not-started,Dock,Palm Beach,3,0
+lake-worth-beach,deck-requirements,Waterfront Deck Rules in Lake Worth Beach,What are the deck setback and railing rules in Lake Worth Beach?,,,,,,,not-started,Deck,Palm Beach,3,0
+lake-worth-beach,licensed-contractors,Checking a Marine Contractor in Lake Worth Beach,How do I check a marine contractor in Lake Worth Beach?,,,,,,,not-started,Failing,Palm Beach,3,0
+lake-worth-beach,storm-prep,Storm Prep for Lake Worth Beach Waterfront Owners,What are the storm and debris rules in Lake Worth Beach?,,,,,,,not-started,Failing,Palm Beach,3,0
+big-pine-key,seawall-height-requirement,Big Pine Key Seawall Height Requirement,How high does a seawall have to be in Big Pine Key?,,,,,,,not-started,Compliance,Monroe,3,0
+big-pine-key,seawall-permit,Seawall Permits in Big Pine Key,Do I need a permit to repair a seawall in Big Pine Key?,,,,,,,not-started,Compliance,Monroe,3,0
+big-pine-key,flood-zone,Big Pine Key Flood Zone & Elevation Rules,"What flood zone is Big Pine Key in, and what does it require?",,,,,,,not-started,Compliance,Monroe,3,0
+big-pine-key,dock-permit-size,Dock Permits & Size Limits in Big Pine Key,How big a dock can I build in Big Pine Key?,,,,,,,not-started,Dock,Monroe,3,0
+big-pine-key,boat-lift-rules,Boat Lift Rules in Big Pine Key,What are the boat lift rules in Big Pine Key?,,,,,,,not-started,Dock,Monroe,3,0
+big-pine-key,deck-requirements,Waterfront Deck Rules in Big Pine Key,What are the deck setback and railing rules in Big Pine Key?,,,,,,,not-started,Deck,Monroe,3,0
+big-pine-key,licensed-contractors,Checking a Marine Contractor in Big Pine Key,How do I check a marine contractor in Big Pine Key?,,,,,,,not-started,Failing,Monroe,3,0
+big-pine-key,storm-prep,Storm Prep for Big Pine Key Waterfront Owners,What are the storm and debris rules in Big Pine Key?,,,,,,,not-started,Failing,Monroe,3,0
+key-colony-beach,seawall-height-requirement,Key Colony Beach Seawall Height Requirement,How high does a seawall have to be in Key Colony Beach?,,,,,,,not-started,Compliance,Monroe,3,0
+key-colony-beach,seawall-permit,Seawall Permits in Key Colony Beach,Do I need a permit to repair a seawall in Key Colony Beach?,,,,,,,not-started,Compliance,Monroe,3,0
+key-colony-beach,flood-zone,Key Colony Beach Flood Zone & Elevation Rules,"What flood zone is Key Colony Beach in, and what does it require?",,,,,,,not-started,Compliance,Monroe,3,0
+key-colony-beach,dock-permit-size,Dock Permits & Size Limits in Key Colony Beach,How big a dock can I build in Key Colony Beach?,,,,,,,not-started,Dock,Monroe,3,0
+key-colony-beach,boat-lift-rules,Boat Lift Rules in Key Colony Beach,What are the boat lift rules in Key Colony Beach?,,,,,,,not-started,Dock,Monroe,3,0
+key-colony-beach,deck-requirements,Waterfront Deck Rules in Key Colony Beach,What are the deck setback and railing rules in Key Colony Beach?,,,,,,,not-started,Deck,Monroe,3,0
+key-colony-beach,licensed-contractors,Checking a Marine Contractor in Key Colony Beach,How do I check a marine contractor in Key Colony Beach?,,,,,,,not-started,Failing,Monroe,3,0
+key-colony-beach,storm-prep,Storm Prep for Key Colony Beach Waterfront Owners,What are the storm and debris rules in Key Colony Beach?,,,,,,,not-started,Failing,Monroe,3,0
+tavernier,seawall-height-requirement,Tavernier Seawall Height Requirement,How high does a seawall have to be in Tavernier?,,,,,,,not-started,Compliance,Monroe,3,0
+tavernier,seawall-permit,Seawall Permits in Tavernier,Do I need a permit to repair a seawall in Tavernier?,,,,,,,not-started,Compliance,Monroe,3,0
+tavernier,flood-zone,Tavernier Flood Zone & Elevation Rules,"What flood zone is Tavernier in, and what does it require?",,,,,,,not-started,Compliance,Monroe,3,0
+tavernier,dock-permit-size,Dock Permits & Size Limits in Tavernier,How big a dock can I build in Tavernier?,,,,,,,not-started,Dock,Monroe,3,0
+tavernier,boat-lift-rules,Boat Lift Rules in Tavernier,What are the boat lift rules in Tavernier?,,,,,,,not-started,Dock,Monroe,3,0
+tavernier,deck-requirements,Waterfront Deck Rules in Tavernier,What are the deck setback and railing rules in Tavernier?,,,,,,,not-started,Deck,Monroe,3,0
+tavernier,licensed-contractors,Checking a Marine Contractor in Tavernier,How do I check a marine contractor in Tavernier?,,,,,,,not-started,Failing,Monroe,3,0
+tavernier,storm-prep,Storm Prep for Tavernier Waterfront Owners,What are the storm and debris rules in Tavernier?,,,,,,,not-started,Failing,Monroe,3,0
+cudjoe-key,seawall-height-requirement,Cudjoe Key Seawall Height Requirement,How high does a seawall have to be in Cudjoe Key?,,,,,,,not-started,Compliance,Monroe,3,0
+cudjoe-key,seawall-permit,Seawall Permits in Cudjoe Key,Do I need a permit to repair a seawall in Cudjoe Key?,,,,,,,not-started,Compliance,Monroe,3,0
+cudjoe-key,flood-zone,Cudjoe Key Flood Zone & Elevation Rules,"What flood zone is Cudjoe Key in, and what does it require?",,,,,,,not-started,Compliance,Monroe,3,0
+cudjoe-key,dock-permit-size,Dock Permits & Size Limits in Cudjoe Key,How big a dock can I build in Cudjoe Key?,,,,,,,not-started,Dock,Monroe,3,0
+cudjoe-key,boat-lift-rules,Boat Lift Rules in Cudjoe Key,What are the boat lift rules in Cudjoe Key?,,,,,,,not-started,Dock,Monroe,3,0
+cudjoe-key,deck-requirements,Waterfront Deck Rules in Cudjoe Key,What are the deck setback and railing rules in Cudjoe Key?,,,,,,,not-started,Deck,Monroe,3,0
+cudjoe-key,licensed-contractors,Checking a Marine Contractor in Cudjoe Key,How do I check a marine contractor in Cudjoe Key?,,,,,,,not-started,Failing,Monroe,3,0
+cudjoe-key,storm-prep,Storm Prep for Cudjoe Key Waterfront Owners,What are the storm and debris rules in Cudjoe Key?,,,,,,,not-started,Failing,Monroe,3,0
+fort-lauderdale,seawall-repair-cost,Seawall Repair Cost in Fort Lauderdale,What does a seawall cost in Fort Lauderdale?,~$140k,"estimated, seawall and dock together","About $140,000 in 2026 for roughly 80 linear feet of new seawall and cap together with a new composite dock of about 660 square feet, including demolition of the old dock and piles. These are estimates, not quotes, and they are rounded. What a seawall costs depends on the condition of what is standing now, water depth, whether a barge can reach the site, the soil, the length of wall, what your city requires and what the permitting agencies ask for once they look. Nobody can price this accurately without a site inspection, a current survey and an engineer's assessment. Use these to get a sense of scale for budgeting, not as a number to hold anyone to.","What was in scope :: about 80 linear feet of new seawall and cap, nine king piles, nine batter piles, eight panels, twelve timber dock piles, and roughly 660 square feet of composite dock and decking. | What came out first :: about 720 square feet of old dock and seventeen timber piles. | Composite decking :: quoted around $12 per square foot in 2026. Your selection moves this. | Priced separately :: a return wall at about $3,500, only if it turned out to be needed. | Why it is shown whole :: this was a single lump sum covering the seawall and the dock. Splitting it into a price per foot would be a guess.","Rounded from marine construction pricing in this market, 2026. Estimates only.",2026-09,verified,Compliance,Broward,1,0
+miami-beach,seawall-repair-cost,Seawall Repair Cost in Miami Beach,What does a seawall cost in Miami Beach?,,,,,,,not-started,Compliance,Miami-Dade,1,0
+boca-raton,seawall-repair-cost,Seawall Repair Cost in Boca Raton,What does a seawall cost in Boca Raton?,$370k – $720k,"estimated range, same wall","One 280-foot seawall in Boca Raton, priced three ways in 2026. Repairing the panels and restoring the cap came to roughly $370,000. Repairing the panels and replacing the cap outright, roughly $470,000. Building a new wall in front of the old one, roughly $720,000. Same wall, same year. These are estimates, not quotes, and they are rounded. What a seawall costs depends on the condition of what is standing now, water depth, whether a barge can reach the site, the soil, the length of wall, what your city requires and what the permitting agencies ask for once they look. Nobody can price this accurately without a site inspection, a current survey and an engineer's assessment. Use these to get a sense of scale for budgeting, not as a number to hold anyone to.","Repair and restore the cap :: roughly $370,000 | Repair and replace the cap :: roughly $470,000 | New wall in front of the existing one :: roughly $720,000 | The spread :: about $350,000 between the lightest and the heaviest approach on the same 280 feet. | Why the heaviest option costs more than the wall :: it also carried access ramps, and putting a new wall in front of an old one needs an exemption from the city, which is a permitting risk rather than a line item. | What this does not tell you :: what your wall costs. These are rounded estimates from work in this market, not a price for any other property.","Rounded from marine construction pricing in this market, 2026. Estimates only.",2026-09,verified,Compliance,Palm Beach,1,0
+pompano-beach,seawall-repair-cost,Seawall Repair Cost in Pompano Beach,What does a seawall cost in Pompano Beach?,,,,,,,not-started,Compliance,Broward,1,0
+hollywood,seawall-repair-cost,Seawall Repair Cost in Hollywood,What does a seawall cost in Hollywood?,,,,,,,not-started,Compliance,Broward,1,0
+key-west,seawall-repair-cost,Seawall Repair Cost in Key West,What does a seawall cost in Key West?,,,,,,,not-started,Compliance,Monroe,1,0
+delray-beach,seawall-repair-cost,Seawall Repair Cost in Delray Beach,What does a seawall cost in Delray Beach?,,,,,,,not-started,Compliance,Palm Beach,1,0
+jupiter,seawall-repair-cost,Seawall Repair Cost in Jupiter,What does a seawall cost in Jupiter?,,,,,,,not-started,Compliance,Palm Beach,1,0
+coral-gables,seawall-repair-cost,Seawall Repair Cost in Coral Gables,What does a seawall cost in Coral Gables?,~$125k,"estimated, boat lift","About $125,000 in 2026 for a single boat lift sized to a specific vessel. Coral Gables also required a refundable bond of $15,000 on top of the contract, which catches people out. These are estimates, not quotes, and they are rounded. What a seawall costs depends on the condition of what is standing now, water depth, whether a barge can reach the site, the soil, the length of wall, what your city requires and what the permitting agencies ask for once they look. Nobody can price this accurately without a site inspection, a current survey and an engineer's assessment. Use these to get a sense of scale for budgeting, not as a number to hold anyone to.","What was in scope :: one lift, with capacity, water depth, bunk spacing and decking colour all specified to the boat. | On top of the contract :: a $15,000 refundable city bond. | Also on the owner :: permit fees paid directly to the agencies, and a benthic survey at around $2,000 if the agencies ask for one. | What moves this number most :: the weight and beam of the boat, and the water depth at the dock.","Rounded from marine construction pricing in this market, 2026. Estimates only.",2026-09,verified,Compliance,Miami-Dade,1,0
+key-biscayne,seawall-repair-cost,Seawall Repair Cost in Key Biscayne,What does a seawall cost in Key Biscayne?,,,,,,,not-started,Compliance,Miami-Dade,1,0
+lighthouse-point,seawall-repair-cost,Seawall Repair Cost in Lighthouse Point,What does a seawall cost in Lighthouse Point?,,,,,,,not-started,Compliance,Broward,2,0
+deerfield-beach,seawall-repair-cost,Seawall Repair Cost in Deerfield Beach,What does a seawall cost in Deerfield Beach?,,,,,,,not-started,Compliance,Broward,2,0
+dania-beach,seawall-repair-cost,Seawall Repair Cost in Dania Beach,What does a seawall cost in Dania Beach?,,,,,,,not-started,Compliance,Broward,2,0
+hallandale-beach,seawall-repair-cost,Seawall Repair Cost in Hallandale Beach,What does a seawall cost in Hallandale Beach?,,,,,,,not-started,Compliance,Broward,2,0
+lauderdale-by-the-sea,seawall-repair-cost,Seawall Repair Cost in Lauderdale-by-the-Sea,What does a seawall cost in Lauderdale-by-the-Sea?,,,,,,,not-started,Compliance,Broward,2,0
+miami,seawall-repair-cost,Seawall Repair Cost in Miami,What does a seawall cost in Miami?,,,,,,,not-started,Compliance,Miami-Dade,2,0
+surfside,seawall-repair-cost,Seawall Repair Cost in Surfside,What does a seawall cost in Surfside?,,,,,,,not-started,Compliance,Miami-Dade,2,0
+aventura,seawall-repair-cost,Seawall Repair Cost in Aventura,What does a seawall cost in Aventura?,,,,,,,not-started,Compliance,Miami-Dade,2,0
+sunny-isles-beach,seawall-repair-cost,Seawall Repair Cost in Sunny Isles Beach,What does a seawall cost in Sunny Isles Beach?,,,,,,,not-started,Compliance,Miami-Dade,2,0
+bay-harbor-islands,seawall-repair-cost,Seawall Repair Cost in Bay Harbor Islands,What does a seawall cost in Bay Harbor Islands?,,,,,,,not-started,Compliance,Miami-Dade,2,0
+bal-harbour,seawall-repair-cost,Seawall Repair Cost in Bal Harbour,What does a seawall cost in Bal Harbour?,,,,,,,not-started,Compliance,Miami-Dade,2,0
+west-palm-beach,seawall-repair-cost,Seawall Repair Cost in West Palm Beach,What does a seawall cost in West Palm Beach?,,,,,,,not-started,Compliance,Palm Beach,2,0
+north-palm-beach,seawall-repair-cost,Seawall Repair Cost in North Palm Beach,What does a seawall cost in North Palm Beach?,,,,,,,not-started,Compliance,Palm Beach,2,0
+palm-beach,seawall-repair-cost,Seawall Repair Cost in Palm Beach,What does a seawall cost in Palm Beach?,,,,,,,not-started,Compliance,Palm Beach,2,0
+palm-beach-gardens,seawall-repair-cost,Seawall Repair Cost in Palm Beach Gardens,What does a seawall cost in Palm Beach Gardens?,,,,,,,not-started,Compliance,Palm Beach,2,0
+boynton-beach,seawall-repair-cost,Seawall Repair Cost in Boynton Beach,What does a seawall cost in Boynton Beach?,,,,,,,not-started,Compliance,Palm Beach,2,0
+highland-beach,seawall-repair-cost,Seawall Repair Cost in Highland Beach,What does a seawall cost in Highland Beach?,,,,,,,not-started,Compliance,Palm Beach,2,0
+marathon,seawall-repair-cost,Seawall Repair Cost in Marathon,What does a seawall cost in Marathon?,,,,,,,not-started,Compliance,Monroe,2,0
+islamorada,seawall-repair-cost,Seawall Repair Cost in Islamorada,What does a seawall cost in Islamorada?,,,,,,,not-started,Compliance,Monroe,2,0
+key-largo,seawall-repair-cost,Seawall Repair Cost in Key Largo,What does a seawall cost in Key Largo?,,,,,,,not-started,Compliance,Monroe,2,0
+wilton-manors,seawall-repair-cost,Seawall Repair Cost in Wilton Manors,What does a seawall cost in Wilton Manors?,,,,,,,not-started,Compliance,Broward,3,0
+hillsboro-beach,seawall-repair-cost,Seawall Repair Cost in Hillsboro Beach,What does a seawall cost in Hillsboro Beach?,,,,,,,not-started,Compliance,Broward,3,0
+oakland-park,seawall-repair-cost,Seawall Repair Cost in Oakland Park,What does a seawall cost in Oakland Park?,,,,,,,not-started,Compliance,Broward,3,0
+sea-ranch-lakes,seawall-repair-cost,Seawall Repair Cost in Sea Ranch Lakes,What does a seawall cost in Sea Ranch Lakes?,,,,,,,not-started,Compliance,Broward,3,0
+north-bay-village,seawall-repair-cost,Seawall Repair Cost in North Bay Village,What does a seawall cost in North Bay Village?,,,,,,,not-started,Compliance,Miami-Dade,3,0
+golden-beach,seawall-repair-cost,Seawall Repair Cost in Golden Beach,What does a seawall cost in Golden Beach?,,,,,,,not-started,Compliance,Miami-Dade,3,0
+palmetto-bay,seawall-repair-cost,Seawall Repair Cost in Palmetto Bay,What does a seawall cost in Palmetto Bay?,,,,,,,not-started,Compliance,Miami-Dade,3,0
+cutler-bay,seawall-repair-cost,Seawall Repair Cost in Cutler Bay,What does a seawall cost in Cutler Bay?,,,,,,,not-started,Compliance,Miami-Dade,3,0
+miami-shores,seawall-repair-cost,Seawall Repair Cost in Miami Shores,What does a seawall cost in Miami Shores?,,,,,,,not-started,Compliance,Miami-Dade,3,0
+ocean-ridge,seawall-repair-cost,Seawall Repair Cost in Ocean Ridge,What does a seawall cost in Ocean Ridge?,,,,,,,not-started,Compliance,Palm Beach,3,0
+gulf-stream,seawall-repair-cost,Seawall Repair Cost in Gulf Stream,What does a seawall cost in Gulf Stream?,,,,,,,not-started,Compliance,Palm Beach,3,0
+manalapan,seawall-repair-cost,Seawall Repair Cost in Manalapan,What does a seawall cost in Manalapan?,,,,,,,not-started,Compliance,Palm Beach,3,0
+tequesta,seawall-repair-cost,Seawall Repair Cost in Tequesta,What does a seawall cost in Tequesta?,,,,,,,not-started,Compliance,Palm Beach,3,0
+juno-beach,seawall-repair-cost,Seawall Repair Cost in Juno Beach,What does a seawall cost in Juno Beach?,,,,,,,not-started,Compliance,Palm Beach,3,0
+riviera-beach,seawall-repair-cost,Seawall Repair Cost in Riviera Beach,What does a seawall cost in Riviera Beach?,,,,,,,not-started,Compliance,Palm Beach,3,0
+lantana,seawall-repair-cost,Seawall Repair Cost in Lantana,What does a seawall cost in Lantana?,,,,,,,not-started,Compliance,Palm Beach,3,0
+south-palm-beach,seawall-repair-cost,Seawall Repair Cost in South Palm Beach,What does a seawall cost in South Palm Beach?,,,,,,,not-started,Compliance,Palm Beach,3,0
+lake-worth-beach,seawall-repair-cost,Seawall Repair Cost in Lake Worth Beach,What does a seawall cost in Lake Worth Beach?,,,,,,,not-started,Compliance,Palm Beach,3,0
+big-pine-key,seawall-repair-cost,Seawall Repair Cost in Big Pine Key,What does a seawall cost in Big Pine Key?,,,,,,,not-started,Compliance,Monroe,3,0
+key-colony-beach,seawall-repair-cost,Seawall Repair Cost in Key Colony Beach,What does a seawall cost in Key Colony Beach?,,,,,,,not-started,Compliance,Monroe,3,0
+tavernier,seawall-repair-cost,Seawall Repair Cost in Tavernier,What does a seawall cost in Tavernier?,,,,,,,not-started,Compliance,Monroe,3,0
+cudjoe-key,seawall-repair-cost,Seawall Repair Cost in Cudjoe Key,What does a seawall cost in Cudjoe Key?,,,,,,,not-started,Compliance,Monroe,3,0

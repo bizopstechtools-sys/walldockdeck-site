@@ -1,0 +1,10 @@
+slug,topic,question,h1Pattern,cluster,published,order
+seawall-height-requirement,Seawall height requirement,How high does a seawall have to be in {city}?,{city} Seawall Height Requirement,Compliance,TRUE,1
+seawall-permit,Seawall permit process,Do I need a permit to repair a seawall in {city}?,Seawall Permits in {city},Compliance,TRUE,2
+flood-zone,Flood zone & elevation,"What flood zone is {city} in, and what does it require?",{city} Flood Zone & Elevation Rules,Compliance,TRUE,3
+dock-permit-size,Dock permit & size limits,How big a dock can I build in {city}?,Dock Permits & Size Limits in {city},Dock,TRUE,4
+boat-lift-rules,Boat lift rules,What are the boat lift rules in {city}?,Boat Lift Rules in {city},Dock,TRUE,5
+deck-requirements,Waterfront deck requirements,What are the deck setback and railing rules in {city}?,Waterfront Deck Rules in {city},Deck,TRUE,6
+licensed-contractors,Checking a marine contractor,How do I check a marine contractor in {city}?,Checking a Marine Contractor in {city},Failing,TRUE,7
+storm-prep,Storm prep & documentation,What are the storm and debris rules in {city}?,Storm Prep for {city} Waterfront Owners,Failing,TRUE,8
+seawall-repair-cost,Seawall repair cost,What does a seawall cost in {city}?,Seawall Repair Cost in {city},Compliance,FALSE,9

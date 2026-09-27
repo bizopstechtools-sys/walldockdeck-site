@@ -1,0 +1,7 @@
+slug,cluster,who,asset,order,jobValueLow,jobValueHigh
+seawall-compliance,Seawall compliance,"Got a notice, or planning ahead",City Seawall Height Sheet,2,25000,200000
+failing-seawall,Seawall failing,"Sees cracks, sinkholes, leaning",Seawall Warning Signs Checklist,1,18000,150000
+docks-and-lifts,Dock or lift build,Wants to add or upgrade,Dock Permit & Size Guide,3,15000,120000
+buying-and-selling,Buying or selling,In an inspection period,Waterfront Buyer's Due Diligence Checklist,4,0,0
+decks,Deck repair,"Soft boards, loose rail",Deck Safety Inspection Checklist,5,5000,40000
+hoa-and-commercial,HOA / commercial,Board or property manager,Board Shoreline Planning Pack,6,100000,1000000

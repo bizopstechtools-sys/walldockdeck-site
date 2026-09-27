@@ -1,0 +1,17 @@
+slot_id,page,position,audience,currentOffer,style
+A1,/agents,Hero,Agent,agent_tools,dark
+A2,/agents,After the questions,Agent,sample_report,tint
+A3,/agents,After the benefits,Agent,prerun,
+A4,/agents,After the tools,Agent,lunch_learn,quiet
+A5,/agents|/luxury,Closing block,Agent,agent_tools,dark
+C1,/check,Before the result,Homeowner,shore_score,dark
+C2,/check,Under the form,Homeowner,county_guide,quiet
+R1,/report,Under the score,Both,book_inspect,dark
+R2,/report,Sidebar,Homeowner,county_guide,
+R3,/report,After the detail,Homeowner,bid_compare,tint
+R4,/report,Foot of page,Homeowner,annual,quiet
+H1,/{city}/{topic},Mid-article,Homeowner,height_sheet,tint
+H2,/{city}/{topic},End of article,Homeowner,warning_list,dark
+H3,/{city}/{topic},Sidebar,Homeowner,storm_alerts,
+K1,/recheck,Hero,Homeowner,shore_score,dark
+K2,/recheck,Below,Homeowner,storm_alerts,quiet

@@ -1,0 +1,16 @@
+offer_id,audience,headline,body,button,fields,fine
+agent_tools,Agent,Get a Shore Score on any waterfront property,"Request access to our exclusive, branded tools at no cost. Send your first seawall condition review this afternoon.",Request access,name|email|brokerage,By invitation. We work with a limited number of agents in each waterfront market.
+sample_report,Agent,See a finished report first,"One real Shore Score, start to finish, before you decide.",Show me one,email,A real report on a real address. No obligation.
+prerun,Agent,We will run your next listing for you,Send one waterfront address. We return the Shore Score under your name.,Send an address,email|address,One address per agent to start.
+lunch_learn,Agent,Bring it to your sales meeting,"Thirty minutes on what holds up waterfront closings, at your office.",Book a session,email|office,"We come to you. Thirty minutes, no slides to sit through."
+ce_waitlist,Agent,"CE credit, when it is approved","Waterfront due diligence, as a continuing education course.",Join the list,email,Not yet approved for credit. We will tell you the day it is.
+shore_score,Homeowner,Get a Shore Score,"See what shape the seawall, dock and deck are in.",Get my Shore Score,first_name|email,"A screening based on public data and your answers, not an engineering inspection."
+county_guide,Homeowner,The guide for your county,"Permits, agencies and the order they go in.",Send the guide,email,One email. Unsubscribe in a click.
+height_sheet,Homeowner,Your city's height sheet,"The height your city requires, the datum, and the code section. One page.",Send the sheet,email,Every figure carries its code section and the date we checked it.
+warning_list,Homeowner,Seawall warning signs,"The twelve things that mean a wall is going, with photos.",Send the checklist,first_name|email,Twelve photographs of what failure actually looks like.
+fifteen_q,Homeowner,Fifteen questions before you buy,"What to ask about the wall, the dock and the deck during inspection.",Send the list,email,"Written for the inspection period, when the clock is running."
+bid_compare,Homeowner,Are your quotes comparable?,"Two seawall quotes rarely cover the same work. Tell us where to reach you and we will send you somewhere to upload them, then tell you what each one leaves out.",Start a comparison,email,We do not sell the work. We have no reason to steer you to the expensive quote.
+book_inspect,Homeowner,Have someone look at it,"A licensed marine contractor, at your property.",Book a visit,phone|window,"A licensed contractor, at your property. No charge for the visit."
+callback,Homeowner,Have someone call you,"Ten minutes, about your wall specifically.",Request a call,phone,Ten minutes. We call when you say.
+annual,Homeowner,Check it again next year,"One email, twelve months from now.",Remind me,consent,One email a year. Nothing else.
+storm_alerts,Homeowner,King tides and storm notices,Only when something is coming to your stretch of water.,Keep me posted,email,Only when something is coming to your stretch of water.

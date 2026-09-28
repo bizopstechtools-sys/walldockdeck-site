@@ -571,6 +571,84 @@ def build_costs():
     PAGES.append((path, TODAY, "0.9"))
 
 
+# ------------------------------------------------------- county / region pages
+def load_regions():
+    p = os.path.join(DATA, "Regions.csv")
+    if not os.path.exists(p):
+        return []
+    with open(p, newline="", encoding="utf8") as f:
+        return [r for r in csv.DictReader(f) if r.get("status") == "verified"]
+
+
+def build_regions():
+    regions = load_regions()
+    for r in regions:
+        rs, ss = r["regionSlug"], r["serviceSlug"]
+        path = f"/{rs}/{ss}/"
+
+        # Every verified city page in this county, grouped by topic. This is what
+        # makes the county page a hub rather than another article.
+        in_county = [x for x in LIVE
+                     if CITY.get(x["citySlug"], {}).get("county") == r["region"]]
+        by_topic = {}
+        for x in in_county:
+            by_topic.setdefault(x["topicSlug"], []).append(x)
+
+        blocks = ""
+        for tslug in [t["slug"] for t in TOPICS]:
+            items = by_topic.get(tslug)
+            if not items:
+                continue
+            t = TOPIC[tslug]
+            links = "".join(
+                f'<a href="/{x["citySlug"]}/{x["topicSlug"]}/">'
+                f'<em>{e(CITY[x["citySlug"]]["city"])}</em>'
+                f'{e(x.get("headline_answer",""))} {e(x.get("unit",""))}</a>'
+                for x in sorted(items, key=lambda i: CITY[i["citySlug"]]["city"]))
+            blocks += f'''<div style="margin-bottom:26px">
+      <div class="shead" style="margin-bottom:12px"><h3 style="font-size:19px">{e(t["topic"])}</h3></div>
+      <div class="strip">{links}</div>
+    </div>'''
+
+        cities_here = sorted({CITY[x["citySlug"]]["city"] for x in in_county})
+        count_line = (f'{len(in_county)} published across {len(cities_here)} cities: '
+                      + ", ".join(cities_here) + ".") if in_county else \
+                     "City pages for this county are still being verified."
+
+        body = head_(f'{r["title"]} | WallDockDeck', r["qualifier"][:158], path,
+                     body_data=f' data-cluster="seawall-compliance"')
+        body += f'''<nav class="crumbs"><div class="wrap">
+  <a href="/">Home</a> <span>/</span> <a href="/resources/">Resources</a> <span>/</span> {e(r["region"])}
+</div></nav>
+
+<div class="answer"><div class="wrap">
+  <span class="eyebrow">{e(r["region"])} County &middot; {e(r["service"])}</span>
+  <h1>{e(r["question"])}</h1>
+  <div class="figure"><b>{e(r["headline_answer"])}</b><span>{e(r["unit"])}</span></div>
+  <p class="qualifier">{e(r["qualifier"])}</p>
+  <p class="src"><b>Source:</b> {e(r["source"])} &middot; <b>Verified</b> {e(r["verified_date"])}</p>
+</div></div>
+
+<section><div class="wrap">
+  <div class="shead"><h2>The detail</h2></div>
+  {detail_rows(r.get("detail_rows"))}
+</div></section>
+
+<section class="tint"><div class="wrap">{slot("H1", "", "seawall-compliance")}</div></section>
+
+<section><div class="wrap">
+  <div class="shead"><h2>Your city, specifically</h2><p>{count_line}</p></div>
+  {blocks if blocks else '<p class="qualifier">Nothing published for this county yet.</p>'}
+</div></section>
+
+<section class="tint"><div class="wrap">{slot("H2", "", "seawall-compliance")}</div></section>
+'''
+        body += FOOT
+        write(path, body)
+        PAGES.append((path, TODAY, "0.9"))
+    return len(regions)
+
+
 # ---------------------------------------------------------------- sitemap etc
 def build_sitemap():
     urls = "".join(
@@ -594,6 +672,7 @@ def main():
     build_agents(False)
     build_agents(True)
     build_costs()
+    n_reg = build_regions()
     build_sitemap()
 
     held = len(CT) - len(LIVE)
@@ -602,6 +681,7 @@ def main():
     print(f"resources hub        1")
     print(f"agent pages          2   /agents/ /luxury/")
     print(f"cost page            1   /resources/what-it-costs/")
+    print(f"county pages      {n_reg:>4}   /{{county}}/{{service}}/")
     print(f"sitemap entries   {len(PAGES)+1:>4}")
     print(f"\nindex.html and /guides untouched.")
 

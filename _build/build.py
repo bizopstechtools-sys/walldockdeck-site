@@ -139,7 +139,7 @@ def slot(slot_id, city="", cluster=""):
     if not s:
         return ""
     o = OFFERS.get(s["currentOffer"])
-    if not o:
+    if not o or o.get("live", "yes") == "no":
         return ""
     style = (" " + s["style"]) if s.get("style") else ""
     fields = [f for f in (o.get("fields") or "").split("|") if f]
@@ -202,6 +202,9 @@ def detail_rows(raw):
 
 
 def build_matrix():
+    # county pages that exist, so a city page can link up to its own county
+    region_for = {r["region"]: f'/{r["regionSlug"]}/{r["serviceSlug"]}/'
+                  for r in load_regions()}
     n = 0
     for r in LIVE:
         cs, ts = r["citySlug"], r["topicSlug"]
@@ -244,11 +247,14 @@ def build_matrix():
         cl = CLUS.get(cluster, {})
         body = head_(title, desc, path,
                     body_data=f' data-city="{e(cs)}" data-cluster="{e(cluster)}"')
+        county_url = region_for.get(city["county"])
+        county_crumb = (f'<a href="{county_url}">{e(city["county"])} County</a> <span>/</span>\n  '
+                        if county_url else "")
         body += f"""<nav class="crumbs"><div class="wrap">
   <a href="/">Home</a> <span>/</span>
   <a href="/resources/">Resources</a> <span>/</span>
   <a href="/resources/{e(cluster)}/">{e(cl.get('cluster','Resources'))}</a> <span>/</span>
-  {e(city['city'])}
+  {county_crumb}{e(city['city'])}
 </div></nav>
 
 <div class="answer"><div class="wrap">
@@ -262,6 +268,8 @@ def build_matrix():
 {('<section><div class="wrap"><div class="shead"><h2>The detail</h2></div>' + detail_rows(r.get('detail_rows')) + '</div></section>') if r.get('detail_rows') else ''}
 
 <section class="tint"><div class="wrap">{slot('H1', cs, cluster)}</div></section>
+
+{(f'<section class="tint"><div class="wrap"><div class="shead"><h2>The county rule behind this</h2><p>What applies across {e(city["county"])} County, and where each city departs from it.</p></div><div class="strip"><a href="{county_url}"><em>{e(city["county"])} County</em>Seawall requirements county-wide</a></div></div></section>') if county_url else ''}
 
 {near_html}
 {others_html}
@@ -289,8 +297,17 @@ def build_clusters():
             f'<span class="meta">{e(r.get("headline_answer",""))} {e(r.get("unit",""))}</span></a>'
             for r in rows if r["citySlug"] in CITY)
 
-        empty = ('<p class="qualifier">Pages for this cluster are being verified city by city. '
-                 'A rule goes up with its code section and the date we checked it, or it does not go up.</p>')
+        guides = "".join(
+            f'<a class="card" href="/guides/{g}.pdf"><span class="k">Regional guide</span>'
+            f'<h3>{n}</h3><p>Permits, agencies and the order they go in, for {n}.</p>'
+            f'<span class="meta">Open the guide &rarr;</span></a>'
+            for g, n in (("broward", "Broward"), ("miami", "Miami-Dade"),
+                         ("palm", "Palm Beach"), ("keys", "Florida Keys")))
+        counties = "".join(
+            f'<a class="card" href="/{r["regionSlug"]}/{r["serviceSlug"]}/">'
+            f'<span class="k">{e(r["region"])} County</span><h3>{e(r["question"])}</h3>'
+            f'<p>{e(r["qualifier"][:140])}</p><span class="meta">Read it &rarr;</span></a>'
+            for r in load_regions())
 
         path = f"/resources/{slug}/"
         title = f'{c["cluster"]} | WallDockDeck Resources'
@@ -304,9 +321,18 @@ def build_clusters():
   <h1>{e(c['cluster'])}</h1>
   <p class="qualifier">{e(c['who'])}. Start with the rule for your own city, then the checklist.</p>
 </div></div>
+{('<section><div class="wrap"><div class="shead"><h2>Answers by city</h2><p>The rule where you are, with the code section and the date we checked it.</p></div><div class="cards">' + cards + '</div></div></section>') if cards else ''}
+
 <section><div class="wrap">
-  <div class="shead"><h2>Answers by city</h2><p>{len(cards and rows or [])} published so far.</p></div>
-  {('<div class="cards">' + cards + '</div>') if cards else empty}
+  <div class="shead"><h2>Start with your county</h2>
+  <p>The rule that applies across the whole county, and where the cities inside it depart from it.</p></div>
+  <div class="cards">{counties}</div>
+</div></section>
+
+<section class="tint"><div class="wrap">
+  <div class="shead"><h2>The guide for your area</h2>
+  <p>Which agencies are involved, what they want, and the order they want it in.</p></div>
+  <div class="cards">{guides}</div>
 </div></section>
 <section class="tint"><div class="wrap">{slot('H2', '', slug)}</div></section>
 """
@@ -649,6 +675,79 @@ def build_regions():
     return len(regions)
 
 
+# ------------------------------------------------------------------ downloads
+def build_downloads():
+    import glob
+    files = sorted(os.path.basename(f) for f in glob.glob(os.path.join(ROOT, "downloads", "*.pdf")))
+    if not files:
+        return 0
+
+    def label(fn):
+        if fn.startswith("seawall-height-sheet-"):
+            slug = fn[len("seawall-height-sheet-"):-4]
+            c = CITY.get(slug, {})
+            row = next((r for r in LIVE if r["citySlug"] == slug
+                        and r["topicSlug"] == "seawall-height-requirement"), {})
+            return ("City height sheet", f'{c.get("city", titlecase_(slug))} seawall height',
+                    f'{row.get("headline_answer","")} {row.get("unit","")}'.strip()
+                    or "The elevation, the datum and the code section.")
+        return {
+            "seawall-warning-signs-checklist.pdf":
+                ("Owner checklist", "Twelve signs a seawall is failing",
+                 "What to look for, where, and what it means when you find it."),
+            "waterfront-buyer-questions-checklist.pdf":
+                ("Buyer checklist", "Fifteen questions before you buy waterfront",
+                 "For the inspection period, while you can still act on the answer."),
+            "waterfront-deck-safety-checklist.pdf":
+                ("Owner checklist", "Ten checks on a waterfront deck",
+                 "The parts that fail first on the water, and how to find them."),
+        }.get(fn, ("Download", fn, ""))
+
+    cards = "".join(
+        f'<a class="card" href="/downloads/{fn}"><span class="k">{k}</span>'
+        f'<h3>{e(t)}</h3><p>{e(d)}</p><span class="meta">Open the PDF &rarr;</span></a>'
+        for fn, (k, t, d) in ((f, label(f)) for f in files))
+
+    guides = "".join(
+        f'<a class="card" href="/guides/{g}.pdf"><span class="k">Regional guide</span>'
+        f'<h3>{n} waterfront guide</h3><p>Which agencies are involved, what each wants, '
+        f'and the order they want it in.</p><span class="meta">Open the PDF &rarr;</span></a>'
+        for g, n in (("broward", "Broward"), ("miami", "Miami-Dade"),
+                     ("palm", "Palm Beach"), ("keys", "Florida Keys")))
+
+    path = "/downloads/"
+    body = head_("Downloads | WallDockDeck",
+                 "Every sheet, checklist and guide we publish, free to open. City height sheets, "
+                 "owner checklists and the four regional waterfront guides.", path)
+    body += f'''<nav class="crumbs"><div class="wrap">
+  <a href="/">Home</a> <span>/</span> <a href="/resources/">Resources</a> <span>/</span> Downloads
+</div></nav>
+<div class="answer"><div class="wrap">
+  <span class="eyebrow">Open, no email needed</span>
+  <h1>Everything we publish, in one place</h1>
+  <p class="qualifier">Nothing here is gated. If it is on this page it opens, and every figure in it
+  carries the code section it came from and the date we checked it.</p>
+</div></div>
+<section><div class="wrap">
+  <div class="shead"><h2>Sheets and checklists</h2></div>
+  <div class="cards">{cards}</div>
+</div></section>
+<section class="tint"><div class="wrap">
+  <div class="shead"><h2>The four regional guides</h2></div>
+  <div class="cards">{guides}</div>
+</div></section>
+<section><div class="wrap">{slot("H1")}</div></section>
+'''
+    body += FOOT
+    write(path, body)
+    PAGES.append((path, TODAY, "0.8"))
+    return len(files) + 4
+
+
+def titlecase_(slug):
+    return " ".join(w.capitalize() for w in str(slug or "").split("-"))
+
+
 # ---------------------------------------------------------------- sitemap etc
 def build_sitemap():
     urls = "".join(
@@ -673,6 +772,7 @@ def main():
     build_agents(True)
     build_costs()
     n_reg = build_regions()
+    n_dl = build_downloads()
     build_sitemap()
 
     held = len(CT) - len(LIVE)
@@ -682,6 +782,7 @@ def main():
     print(f"agent pages          2   /agents/ /luxury/")
     print(f"cost page            1   /resources/what-it-costs/")
     print(f"county pages      {n_reg:>4}   /{{county}}/{{service}}/")
+    print(f"downloads page       1   {n_dl} files listed")
     print(f"sitemap entries   {len(PAGES)+1:>4}")
     print(f"\nindex.html and /guides untouched.")
 

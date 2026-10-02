@@ -1,17 +1,17 @@
-slot_id,page,position,audience,currentOffer,style
-A1,/agents,Hero,Agent,agent_tools,dark
-A2,/agents,After the questions,Agent,agent_tools,tint
-A3,/agents,After the benefits,Agent,agent_tools,
-A4,/agents,After the tools,Agent,agent_tools,quiet
-A5,/agents|/luxury,Closing block,Agent,agent_tools,dark
-C1,/check,Before the result,Homeowner,shore_score,dark
-C2,/check,Under the form,Homeowner,county_guide,quiet
-R1,/report,Under the score,Both,book_inspect,dark
-R2,/report,Sidebar,Homeowner,county_guide,
-R3,/report,After the detail,Homeowner,bid_compare,tint
-R4,/report,Foot of page,Homeowner,county_guide,quiet
-H1,/{city}/{topic},Mid-article,Homeowner,height_sheet,tint
-H2,/{city}/{topic},End of article,Homeowner,warning_list,dark
-H3,/{city}/{topic},Sidebar,Homeowner,county_guide,
-K1,/recheck,Hero,Homeowner,shore_score,dark
-K2,/recheck,Below,Homeowner,county_guide,quiet
+slot_id,page,position,audience,currentOffer,style,render,embed_url,embed_height
+A1,/agents,Hero,Agent,agent_tools,dark,native,,700
+A2,/agents,After the questions,Agent,agent_tools,tint,native,,700
+A3,/agents,After the benefits,Agent,agent_tools,,native,,700
+A4,/agents,After the tools,Agent,agent_tools,quiet,native,,700
+A5,/agents|/luxury,Closing block,Agent,agent_tools,dark,native,,700
+C1,/check,Before the result,Homeowner,shore_score,dark,native,,700
+C2,/check,Under the form,Homeowner,county_guide,quiet,native,,700
+R1,/report,Under the score,Both,book_inspect,dark,native,,700
+R2,/report,Sidebar,Homeowner,county_guide,,native,,700
+R3,/report,After the detail,Homeowner,bid_compare,tint,native,,700
+R4,/report,Foot of page,Homeowner,county_guide,quiet,native,,700
+H1,/{city}/{topic},Mid-article,Homeowner,height_sheet,tint,native,,700
+H2,/{city}/{topic},End of article,Homeowner,warning_list,dark,native,,700
+H3,/{city}/{topic},Sidebar,Homeowner,county_guide,,native,,700
+K1,/recheck,Hero,Homeowner,shore_score,dark,native,,700
+K2,/recheck,Below,Homeowner,county_guide,quiet,native,,700

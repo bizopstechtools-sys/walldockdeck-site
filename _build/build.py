@@ -142,6 +142,23 @@ def slot(slot_id, city="", cluster=""):
     if not o or o.get("live", "yes") == "no":
         return ""
     style = (" " + s["style"]) if s.get("style") else ""
+
+    # An embedded Tomonagi form lives in an iframe, so page JavaScript cannot
+    # reach into it. The six fields therefore travel in the query string — the
+    # only channel an iframe will accept them on. Confirm Tomonagi reads them.
+    if s.get("render") == "embed" and s.get("embed_url"):
+        from urllib.parse import urlencode, quote
+        qs = urlencode({"slot_id": slot_id, "offer_id": o["offer_id"],
+                        "cluster": cluster, "city": city}, quote_via=quote)
+        sep = "&" if "?" in s["embed_url"] else "?"
+        h = s.get("embed_height") or "700"
+        return (f'<div class="slot{style}" data-slot="{e(slot_id)}" data-offer="{e(o["offer_id"])}">'
+                f'<h3>{e(o["headline"])}</h3><p>{e(o["body"])}</p>'
+                f'<iframe src="{e(s["embed_url"])}{sep}{qs}" title="{e(o["headline"])}" '
+                f'loading="lazy" style="width:100%;border:0;height:{e(h)}px;margin-top:14px"></iframe>'
+                + (f'<p class="fine">{e(o.get("fine",""))}</p>' if o.get("fine") else "")
+                + '</div>')
+
     fields = [f for f in (o.get("fields") or "").split("|") if f]
 
     inputs = []

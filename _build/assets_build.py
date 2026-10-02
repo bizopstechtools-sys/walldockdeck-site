@@ -136,7 +136,7 @@ def height_sheets():
                  '</ol>')
         h1 = f'Seawall height in<br>{e(c["city"])}'
         sub = "The elevation your city requires, the datum it is measured in, and the section of code that says so."
-        made.append((f'seawall-height-sheet-{r["citySlug"]}.pdf', shell("City Height Sheet", h1, sub, inner)))
+        made.append((f'height-sheet-{r["citySlug"]}.pdf', shell("City Height Sheet", h1, sub, inner)))
     return made
 
 
@@ -246,7 +246,7 @@ def buyer_checklist():
              '<div class="src"><b>The timing point.</b> Found at the listing appointment, a seawall problem is a '
              'pricing conversation. Found on day nine of a fifteen-day inspection period, it is a file that dies. '
              'Ask these in the first week.</div>')
-    return [("waterfront-buyer-questions-checklist.pdf",
+    return [("waterfront-buyer-checklist.pdf",
              shell("Buyer Checklist", "Fifteen questions<br>before you buy waterfront",
                    "What to ask about the seawall, the dock and the deck while you still have time to act on the "
                    "answer.", inner))]
@@ -297,7 +297,7 @@ def deck_checklist():
              '<div class="src"><b>What to do with what you find.</b> Soft posts, a moving railing or anything wrong '
              'at the ledger are reasons to keep people off the deck until it is looked at properly. This is an '
              'owner screening sheet, not a structural inspection, and it cannot tell you what a repair involves.</div>')
-    return [("waterfront-deck-safety-checklist.pdf",
+    return [("deck-safety-checklist.pdf",
              shell("Owner Checklist", "Ten checks on a<br>waterfront deck",
                    "The parts that fail first on the water, and how to find them without taking anything apart.",
                    inner))]

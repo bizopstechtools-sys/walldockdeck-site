@@ -7,7 +7,7 @@ every page has a clean URL. Nothing in the existing repo is touched: index.html
 
 Run:  python3 _build/build.py
 """
-import csv, html, os, re, shutil, sys
+import csv, html, json, os, re, shutil, sys
 from datetime import date
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -276,7 +276,90 @@ FONTS = ('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
          '&family=IBM+Plex+Mono:wght@400;500&family=Cormorant+Garamond:wght@400;600&display=swap">')
 
 
-def head_(title, desc, path, body_class="", body_data=""):
+# -------------------------------------------------------------- structured data
+# Only the types that still earn anything. FAQ rich results were deprecated in
+# May 2026 and HowTo before that, so neither is emitted here however many SEO
+# checklists still ask for them.
+ORG_ID = SITE + "/#org"
+
+ORG_SCHEMA = {
+    "@type": "Organization",
+    "@id": ORG_ID,
+    "name": "Wall Dock Deck",
+    "alternateName": "WallDockDeck",
+    "url": SITE + "/",
+    "logo": {"@type": "ImageObject", "url": SITE + "/assets/logo.png",
+             "width": 512, "height": 512},
+    "image": SITE + "/assets/logo.png",
+    "email": "hello@walldockdeck.com",
+    "description": ("Verified seawall, dock and waterfront deck requirements for South "
+                    "Florida property owners, published with the code section and the "
+                    "date each rule was checked."),
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "16300 SW 137th Avenue, Unit 128",
+        "addressLocality": "Miami",
+        "addressRegion": "FL",
+        "postalCode": "33177",
+        "addressCountry": "US",
+    },
+    "areaServed": [{"@type": "AdministrativeArea", "name": n} for n in
+                   ("Miami-Dade County, Florida", "Broward County, Florida",
+                    "Palm Beach County, Florida", "Monroe County, Florida")],
+}
+
+
+def crumbs(items):
+    """One definition drives both the visible breadcrumb and its markup, so the
+    two can never disagree. items: [(label, url_or_None)], last one current."""
+    links = [f'<a href="{u}">{e(n)}</a>' if u else e(n) for n, u in items]
+    visible = ('<nav class="crumbs"><div class="wrap">\n  '
+               + ' <span>/</span>\n  '.join(links) + '\n</div></nav>\n')
+    schema = {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            dict({"@type": "ListItem", "position": i + 1, "name": n},
+                 **({"item": SITE + u} if u else {}))
+            for i, (n, u) in enumerate(items)
+        ],
+    }
+    return visible, schema
+
+
+def article_schema(path, title, desc, verified="", source=""):
+    """City and county rule pages are articles with a verification date. The
+    date is the one in the CSV, never today's, or the freshness is a lie."""
+    a = {
+        "@type": "Article",
+        "headline": clip(title, 110),
+        "description": desc,
+        "mainEntityOfPage": SITE + path,
+        "publisher": {"@id": ORG_ID},
+        "author": {"@id": ORG_ID},
+        "isAccessibleForFree": True,
+    }
+    if verified:
+        iso = squash(verified)
+        iso = iso + "-01" if re.fullmatch(r"\d{4}-\d{2}", iso) else iso
+        a["dateModified"] = iso
+        a["datePublished"] = iso
+    if source:
+        a["citation"] = squash(source)
+    return a
+
+
+def jsonld(path, extra=None):
+    graph = [ORG_SCHEMA,
+             {"@type": "WebSite", "@id": SITE + "/#site", "url": SITE + "/",
+              "name": "WallDockDeck", "publisher": {"@id": ORG_ID}}]
+    graph += [g for g in (extra or []) if g]
+    doc = {"@context": "https://schema.org", "@graph": graph}
+    return ('<script type="application/ld+json">'
+            + json.dumps(doc, ensure_ascii=False, separators=(",", ":"))
+            + "</script>")
+
+
+def head_(title, desc, path, body_class="", body_data="", schema=None):
     canon = SITE + path
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -291,8 +374,12 @@ def head_(title, desc, path, body_class="", body_data=""):
 <meta property="og:url" content="{canon}">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="WallDockDeck">
+<meta property="og:image" content="{SITE}/assets/logo.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
 {FONTS}
 <link rel="stylesheet" href="/assets/wdd.css">
+{jsonld(path, schema)}
 </head>
 <body{(' class="'+body_class+'"') if body_class else ''}{body_data}>
 <header class="site"><div class="wrap">
@@ -507,17 +594,20 @@ def build_matrix():
 </div></section>"""
 
         cl = CLUS.get(cluster, {})
-        body = head_(title, desc, path,
-                    body_data=f' data-city="{e(cs)}" data-cluster="{e(cluster)}"')
         county_url = region_for.get(city["county"])
-        county_crumb = (f'<a href="{county_url}">{e(city["county"])} County</a> <span>/</span>\n  '
-                        if county_url else "")
-        body += f"""<nav class="crumbs"><div class="wrap">
-  <a href="/">Home</a> <span>/</span>
-  <a href="/resources/">Resources</a> <span>/</span>
-  <a href="/resources/{e(cluster)}/">{e(cl.get('cluster','Resources'))}</a> <span>/</span>
-  {county_crumb}{e(city['city'])}
-</div></nav>
+        trail = [("Home", "/"), ("Resources", "/resources/"),
+                 (cl.get("cluster", "Resources"), f"/resources/{cluster}/")]
+        if county_url:
+            trail.append((f'{city["county"]} County', county_url))
+        trail.append((city["city"], None))
+        crumb_html, crumb_schema = crumbs(trail)
+
+        body = head_(title, desc, path,
+                     body_data=f' data-city="{e(cs)}" data-cluster="{e(cluster)}"',
+                     schema=[crumb_schema,
+                             article_schema(path, title, desc,
+                                            r.get("verified_date"), r.get("source"))])
+        body += crumb_html + f"""
 
 <div class="answer"><div class="wrap">
   <span class="eyebrow">{e(city['city'])} &middot; {e(city['county'])} County</span>
@@ -578,10 +668,11 @@ def build_clusters():
         else:
             title = fit_title(f'{c["cluster"]}: The {c["asset"]}')
             desc = fit_desc(f'{c["who"]}', f'The {c["asset"]}, plus the rule your own city enforces', CTA_SCORE)
-        body = head_(title, desc, path, body_data=f' data-cluster="{e(slug)}"')
-        body += f"""<nav class="crumbs"><div class="wrap">
-  <a href="/">Home</a> <span>/</span> <a href="/resources/">Resources</a> <span>/</span> {e(c['cluster'])}
-</div></nav>
+        crumb_html, crumb_schema = crumbs(
+            [("Home", "/"), ("Resources", "/resources/"), (c["cluster"], None)])
+        body = head_(title, desc, path, body_data=f' data-cluster="{e(slug)}"',
+                     schema=[crumb_schema])
+        body += crumb_html + f"""
 <div class="answer"><div class="wrap">
   <span class="eyebrow">Resources</span>
   <h1>{e(c['cluster'])}</h1>
@@ -796,10 +887,11 @@ def build_costs():
     excl = "".join(f'<div><b>{e(k)}</b><span>{e(v)}</span></div>' for k, v in EXCLUSIONS)
     terms = "".join(f'<div><b>{e(k)}</b><span>{e(v)}</span></div>' for k, v in TERMS)
 
-    body = head_(title, desc, path, body_data=' data-cluster="seawall-compliance"')
-    body += f'''<nav class="crumbs"><div class="wrap">
-  <a href="/">Home</a> <span>/</span> <a href="/resources/">Resources</a> <span>/</span> What it costs
-</div></nav>
+    crumb_html, crumb_schema = crumbs(
+        [("Home", "/"), ("Resources", "/resources/"), ("What it costs", None)])
+    body = head_(title, desc, path, body_data=' data-cluster="seawall-compliance"',
+                 schema=[crumb_schema])
+    body += crumb_html + f'''
 
 <div class="answer"><div class="wrap">
   <span class="eyebrow">Real quotes &middot; not ranges</span>
@@ -919,14 +1011,18 @@ def build_regions():
                      "City pages for this county are still being verified."
 
         county_ans = answer_line(r.get("headline_answer"), r.get("unit"), 26)
+        r_title = fit_title(REGION_TITLE.get(rs)
+                            or f'{r["region"]} County Seawall Rules: {county_ans}')
+        r_desc = fit_desc(REGION_SEO.get(rs)
+                          or fit_desc(clip(r["qualifier"], 108), CTA_SCORE))
+        crumb_html, crumb_schema = crumbs(
+            [("Home", "/"), ("Resources", "/resources/"), (r["region"], None)])
         body = head_(
-            fit_title(REGION_TITLE.get(rs)
-                      or f'{r["region"]} County Seawall Rules: {county_ans}'),
-            fit_desc(REGION_SEO.get(rs) or fit_desc(clip(r["qualifier"], 108), CTA_SCORE)),
-            path, body_data=' data-cluster="seawall-compliance"')
-        body += f'''<nav class="crumbs"><div class="wrap">
-  <a href="/">Home</a> <span>/</span> <a href="/resources/">Resources</a> <span>/</span> {e(r["region"])}
-</div></nav>
+            r_title, r_desc, path, body_data=' data-cluster="seawall-compliance"',
+            schema=[crumb_schema,
+                    article_schema(path, r_title, r_desc,
+                                   r.get("verified_date"), r.get("source"))])
+        body += crumb_html + f'''
 
 <div class="answer"><div class="wrap">
   <span class="eyebrow">{e(r["region"])} County &middot; {e(r["service"])}</span>
@@ -964,8 +1060,8 @@ def build_downloads():
         return 0
 
     def label(fn):
-        if fn.startswith("seawall-height-sheet-"):
-            slug = fn[len("seawall-height-sheet-"):-4]
+        if fn.startswith("height-sheet-"):
+            slug = fn[len("height-sheet-"):-4]
             c = CITY.get(slug, {})
             row = next((r for r in LIVE if r["citySlug"] == slug
                         and r["topicSlug"] == "seawall-height-requirement"), {})
@@ -976,10 +1072,10 @@ def build_downloads():
             "seawall-warning-signs-checklist.pdf":
                 ("Owner checklist", "Twelve signs a seawall is failing",
                  "What to look for, where, and what it means when you find it."),
-            "waterfront-buyer-questions-checklist.pdf":
+            "waterfront-buyer-checklist.pdf":
                 ("Buyer checklist", "Fifteen questions before you buy waterfront",
                  "For the inspection period, while you can still act on the answer."),
-            "waterfront-deck-safety-checklist.pdf":
+            "deck-safety-checklist.pdf":
                 ("Owner checklist", "Ten checks on a waterfront deck",
                  "The parts that fail first on the water, and how to find them."),
         }.get(fn, ("Download", fn, ""))
@@ -997,13 +1093,13 @@ def build_downloads():
                      ("palm", "Palm Beach"), ("keys", "Florida Keys")))
 
     path = "/downloads/"
+    crumb_html, crumb_schema = crumbs(
+        [("Home", "/"), ("Resources", "/resources/"), ("Downloads", None)])
     body = head_(fit_title("Free Seawall Height Sheets & Owner Checklists (PDF)"),
                  fit_desc("Every sheet, checklist and guide we publish, free to open",
                           "City height sheets, owner checklists, and the four regional guides"),
-                 path)
-    body += f'''<nav class="crumbs"><div class="wrap">
-  <a href="/">Home</a> <span>/</span> <a href="/resources/">Resources</a> <span>/</span> Downloads
-</div></nav>
+                 path, schema=[crumb_schema])
+    body += crumb_html + f'''
 <div class="answer"><div class="wrap">
   <span class="eyebrow">Open, no email needed</span>
   <h1>Everything we publish, in one place</h1>
@@ -1059,14 +1155,13 @@ def build_coverage():
     # Names the counties that actually have published pages. A title promising
     # the Keys would land on a page with no Keys city on it.
     counties = [r["region"] for r in load_regions()]
+    cov_html, cov_schema = crumbs([("Home", "/"), ("Where we work", None)])
     body = head_(fit_title(clip("Seawall Rules by City: " + ", ".join(counties), TITLE_MAX)),
                  fit_desc("Seawalls, docks and waterfront decks, city by city",
                           "Find yours and see the figure, the code section and the date we checked",
                           CTA_SCORE),
-                 path)
-    body += f'''<nav class="crumbs"><div class="wrap">
-  <a href="/">Home</a> <span>/</span> Where we work
-</div></nav>
+                 path, schema=[cov_schema])
+    body += cov_html + f'''
 <div class="answer"><div class="wrap">
   <span class="eyebrow">Florida Keys to Palm Beach</span>
   <h1>Where we work</h1>
@@ -1158,10 +1253,9 @@ LEGAL_PAGES = [
 
 def build_legal():
     for path, kicker, h1, sub, inner in LEGAL_PAGES:
-        body = head_(f"{h1} | WallDockDeck", sub, path)
-        body += f'''<nav class="crumbs"><div class="wrap">
-  <a href="/">Home</a> <span>/</span> {e(h1)}
-</div></nav>
+        crumb_html, crumb_schema = crumbs([("Home", "/"), (h1, None)])
+        body = head_(f"{h1} | WallDockDeck", sub, path, schema=[crumb_schema])
+        body += crumb_html + f'''
 <div class="answer"><div class="wrap">
   <span class="eyebrow">{e(kicker)}</span>
   <h1>{e(h1)}</h1>
@@ -1186,9 +1280,18 @@ def build_sitemap():
            f'{urls}</urlset>\n')
     open(os.path.join(ROOT, "sitemap.xml"), "w", encoding="utf8").write(xml)
 
-    robots = (f"User-agent: *\nAllow: /\nDisallow: /_build/\n\n"
+    robots = (f"User-agent: *\nAllow: /\nDisallow: /_build/\nDisallow: /_preview/\n\n"
               f"Sitemap: {SITE}/sitemap.xml\n")
     open(os.path.join(ROOT, "robots.txt"), "w", encoding="utf8").write(robots)
+
+    # IndexNow: the key has to be served as a text file at the site root, whose
+    # name is the key itself. Bing, Yandex and several AI crawlers read it;
+    # Google has not adopted IndexNow, so this is not a Google play.
+    kp = os.path.join(DATA, "indexnow.key")
+    if os.path.exists(kp):
+        key = open(kp, encoding="utf8").read().strip()
+        if re.fullmatch(r"[0-9a-fA-F]{8,128}", key):
+            open(os.path.join(ROOT, f"{key}.txt"), "w", encoding="utf8").write(key)
 
 
 def main():

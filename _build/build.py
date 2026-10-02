@@ -185,6 +185,19 @@ def slot(slot_id, city="", cluster=""):
     if not inputs:
         inputs.append('<input name="email" type="email" placeholder="Email" autocomplete="email" required>')
 
+    # A form that asks for a phone number must capture consent at the point of
+    # collection, visibly, unticked. Carriers check this on registration and it is
+    # the thing that gets a campaign rejected.
+    consent = ""
+    if "phone" in fields:
+        consent = (
+          '<label class="consent"><input type="checkbox" name="consent" value="yes">'
+          '<span>I agree that WallDockDeck and its contractor partner for my area may contact me by '
+          'phone, text and email about my property at the number above, including by automated means. '
+          'Consent is not a condition of purchase. Message and data rates may apply. Message frequency '
+          'varies. Reply STOP to opt out, HELP for help. See our '
+          '<a href="/privacy/">Privacy Policy</a> and <a href="/sms-terms/">SMS Terms</a>.</span></label>')
+
     fine = f'<p class="fine">{e(o.get("fine",""))}</p>' if o.get("fine") else ""
     return f"""<div class="slot{style}" data-slot="{e(slot_id)}" data-offer="{e(o['offer_id'])}"
      data-city="{e(city)}" data-cluster="{e(cluster)}" data-action="resource_request">
@@ -192,8 +205,10 @@ def slot(slot_id, city="", cluster=""):
   <p>{e(o['body'])}</p>
   <form novalidate>
     {''.join(inputs)}
+    {consent}
     <button type="submit">{e(o.get('button','Send it'))}</button>
   </form>
+  
   <p class="err"></p>
   {fine}
   <p class="done">Done &mdash; it is on the way to your inbox.</p>
@@ -821,39 +836,68 @@ def build_coverage():
 
 PRIVACY_BODY = """<section><div class="wrap">
   <div class="rows">
-    <div><b>Who we are</b><span>WallDockDeck connects South Florida waterfront owners with licensed marine contractors. We do not perform construction ourselves.</span></div>
-    <div><b>What we collect</b><span>Only what you give us on a form: your name, email address, phone number if you provide one, and the property address. We also record which page you were on when you submitted, and which offer you responded to.</span></div>
-    <div><b>What we do not collect</b><span>We do not ask for, and have no use for, financial information, government identifiers or date of birth. If a form ever asks you for any of those, it is not ours.</span></div>
-    <div><b>Why we collect it</b><span>To send you the sheet, checklist or report you asked for, to answer your question about your property, and to arrange an inspection if you request one. The property address is what lets us give you your city&rsquo;s rule rather than a generic answer.</span></div>
-    <div><b>Who we share it with</b><span>A licensed marine contractor serving your area, when you ask us to arrange an inspection or a quote. We tell you who before we pass anything on. We do not sell your information to anyone, and we do not share it with advertisers or data brokers.</span></div>
-    <div><b>Our contractor partners</b><span>Once we pass your details to a contractor, their own privacy policy governs what they do with it. Ask them for it.</span></div>
-    <div><b>Email</b><span>Asking us for a download means we will email you that download, and follow up about it. Every email has an unsubscribe link and it works immediately.</span></div>
-    <div><b>Text and phone</b><span>We only call or text you if you tick the box giving permission, and that box is never ticked for you. See our SMS Terms for the detail.</span></div>
-    <div><b>Cookies</b><span>We keep your details in your own browser so you do not have to type them twice, and we count which pages are read so we know what to write next. We do not run advertising trackers.</span></div>
-    <div><b>How long we keep it</b><span>While you are a live enquiry, and for a reasonable period after in case you come back. Ask us to delete it and we will.</span></div>
-    <div><b>Making us stop</b><span>Reply to any email, or write to us at the address below, and say what you want: stop emailing, stop calling, or delete everything. We will do it and confirm.</span></div>
+    <div><b>Who we are</b><span>WallDockDeck connects waterfront property owners in South Florida with licensed marine contractors. We do not perform construction ourselves. Legal entity: [Legal Business Name]. Address: [Business Address]. Contact: [support email] &middot; [support phone].</span></div>
+    <div><b>What we collect</b><span>Only what you give us on a form: your name, email address, phone number if you provide one, the property address, and anything you type into the notes field. We also record which page you were on and which resource you asked for.</span></div>
+    <div><b>What we never collect</b><span>Financial account details, card numbers, Social Security or other government identifiers, or date of birth. If a form ever asks you for any of those, it is not ours.</span></div>
+    <div><b>Why we collect it</b><span>To send you the sheet, checklist or report you asked for, to answer your question about your property, and to arrange an inspection if you request one. The property address is what lets us give you your own city&rsquo;s rule instead of a generic answer.</span></div>
+  </div>
+</div></section>
+
+<section class="tint"><div class="wrap">
+  <div class="shead"><h2>Mobile information and text messaging</h2>
+  <p>This section governs any phone number you give us and any permission you give us to text you.</p></div>
+  <div class="rows">
+    <div><b>We do not sell or share it</b><span>No mobile information will be sold or shared with third parties or affiliates for marketing or promotional purposes. Text messaging originator opt-in data and consent are not shared with any third party for any purpose other than delivering the service you asked for.</span></div>
+    <div><b>Service providers</b><span>We use service providers to send messages and run our systems, and they may process your information only to provide those services to us. If you ask us to arrange an inspection, we pass your contact details to the licensed contractor who will carry it out, because that is the service you requested. We tell you who before we do it. Your SMS consent itself is never transferred to them, and they must obtain their own permission before texting you.</span></div>
+    <div><b>Opt-in is always yours</b><span>We only text or call you if you tick the consent box on a form, or if you text us first. The box is never ticked for you, and consent is never a condition of receiving anything on this site.</span></div>
+    <div><b>Stopping messages</b><span>Reply STOP to any text and messages end immediately. Reply HELP for assistance. See our <a href="/sms-terms/">SMS Terms</a> for the detail.</span></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="rows">
+    <div><b>Email</b><span>Asking us for a download means we will email you that download and follow up about it. Every email carries an unsubscribe link, and it works immediately.</span></div>
+    <div><b>Cookies and local storage</b><span>We keep your details in your own browser so you do not have to type them twice, and we count which pages are read so we know what to write next. We do not run advertising trackers and we do not sell browsing data.</span></div>
+    <div><b>How long we keep it</b><span>While you are a live enquiry, and for a reasonable period afterwards in case you come back. Ask us to delete it and we will.</span></div>
+    <div><b>Your choices</b><span>Reply to any email, or write to us at the address above, and tell us what you want: stop emailing, stop texting, stop calling, send me a copy of what you hold, or delete everything. We will do it and confirm.</span></div>
     <div><b>Children</b><span>This site is for property owners and real estate professionals. It is not directed at anyone under 18 and we do not knowingly collect their information.</span></div>
-    <div><b>Changes</b><span>If we change this policy we change the date at the top. Material changes get an email to anyone on the list.</span></div>
-    <div><b>Contact</b><span>[Your contact email] &middot; [Your postal address]</span></div>
+    <div><b>Changes</b><span>If we change this policy we change the date at the top of this page. Material changes are emailed to anyone on the list.</span></div>
   </div>
 </div></section>"""
 
 SMS_BODY = """<section><div class="wrap">
   <div class="rows">
-    <div><b>What you are agreeing to</b><span>If you tick the consent box on a form, you agree that WallDockDeck and the contractor partner serving your area may contact you by phone, text and email about the property you told us about, including by automated means.</span></div>
-    <div><b>It is never ticked for you</b><span>The box starts empty. If you do not tick it, we will only email you, and only about what you asked for.</span></div>
-    <div><b>It is not a condition of anything</b><span>Every download, sheet and checklist on this site is available without agreeing to be called or texted. Consent is not a condition of any purchase.</span></div>
-    <div><b>What we would text you about</b><span>Confirming an inspection time, telling you a contractor is on the way, or answering a question you asked. Not marketing blasts.</span></div>
-    <div><b>How often</b><span>Only when something is actually happening with your enquiry. There is no scheduled send.</span></div>
-    <div><b>Stopping it</b><span>Reply STOP to any text and it ends immediately. Reply HELP for assistance. Stopping texts does not stop email &mdash; use the unsubscribe link for that.</span></div>
-    <div><b>Costs</b><span>Message and data rates may apply, depending on your plan. We do not charge you anything.</span></div>
-    <div><b>Carriers</b><span>Mobile carriers are not liable for delayed or undelivered messages.</span></div>
-    <div><b>Who is calling</b><span>The consent text on the form names the contractor partner for your region. If it does not name anyone, do not tick it and tell us &mdash; that is a mistake on our side.</span></div>
-    <div><b>Contact</b><span>[Your contact email] &middot; [Your phone number]</span></div>
+    <div><b>Program name</b><span>WallDockDeck Property Alerts.</span></div>
+    <div><b>What the program does</b><span>We send text messages about the property enquiry you made: confirming an inspection time, telling you a contractor is on the way, answering a question you asked, and occasionally a notice about conditions affecting your stretch of water. We do not send marketing blasts.</span></div>
+    <div><b>How you opt in</b><span>By ticking the consent box on a form on this site, or by texting us first. The box is never ticked for you.</span></div>
+    <div><b>What you agree to</b><span>That WallDockDeck and the licensed contractor serving your area may contact you by phone, text and email about the property you told us about, including by automated means.</span></div>
+    <div><b>Consent is not a condition</b><span>Every sheet, checklist and guide on this site is available without agreeing to be called or texted. Consent is not a condition of any purchase.</span></div>
+    <div><b>Message frequency</b><span>Message frequency varies. We text only when something is actually happening with your enquiry; there is no scheduled send.</span></div>
+    <div><b>Costs</b><span>Message and data rates may apply, depending on your mobile plan. We do not charge you anything.</span></div>
   </div>
 </div></section>
+
 <section class="tint"><div class="wrap">
-  <p class="qualifier" style="max-width:66ch"><b>A note on how we read this.</b> We treat a tick on that box as permission to help you with the thing you asked about, not as permission to sell at you. If we ever get that wrong, reply STOP and we will have earned it.</p>
+  <div class="shead"><h2>Stopping or getting help</h2></div>
+  <div class="rows">
+    <div><b>To stop</b><span>Reply <b>STOP</b> to any message from us. You will get one confirmation that you have been unsubscribed, and we will not text you again unless you opt in afresh. Stopping texts does not stop email &mdash; use the unsubscribe link in any email for that.</span></div>
+    <div><b>To get help</b><span>Reply <b>HELP</b> to any message and we will reply with how to reach us. You can also email [support email] or call [support phone].</span></div>
+    <div><b>Carriers</b><span>Mobile carriers are not liable for delayed or undelivered messages.</span></div>
+    <div><b>Supported carriers</b><span>Major US carriers, including AT&amp;T, Verizon, T-Mobile, Sprint, US Cellular, Boost, MetroPCS and Cricket. Carrier support can change.</span></div>
+    <div><b>Privacy</b><span>Your mobile information is never sold or shared with third parties or affiliates for marketing or promotional purposes. See our <a href="/privacy/">Privacy Policy</a>.</span></div>
+    <div><b>Who is contacting you</b><span>The consent text on every form names the contractor partner for your region. If it does not name anyone, do not tick it, and please tell us &mdash; that is a mistake on our side.</span></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="shead"><h2>The exact consent wording</h2>
+  <p>This is what appears beside the checkbox on our forms, so you can read it before you tick anything.</p></div>
+  <div class="card" style="border-left:3px solid var(--teal)">
+    <p style="font-size:16px;color:var(--ink2)">I agree that WallDockDeck and [Partner Company Name] may contact me by phone, text and email
+    about my property at the number I have given, including by automated means. Consent is not a condition of
+    purchase. Message and data rates may apply. Message frequency varies. Reply STOP to opt out, HELP for help.
+    See our <a href="/privacy/">Privacy Policy</a> and <a href="/sms-terms/">SMS Terms</a>.</p>
+  </div>
 </div></section>"""
 
 LEGAL_PAGES = [

@@ -171,3 +171,11 @@ body.lux .figure b{color:var(--mulberry)}
 .comp h3{font-size:17px;font-weight:700}
 .comp p{font-size:14.5px;color:var(--ink2)}
 .comp .note{margin-top:auto;padding-top:10px;border-top:1px dashed var(--line);font-size:13.5px;color:var(--ink3)}
+
+/* ---------- consent, at the point of collection ---------- */
+.slot .consent{display:flex;gap:10px;align-items:flex-start;margin-top:13px;flex-basis:100%;cursor:pointer}
+.slot .consent input{flex:none;width:18px;height:18px;margin:2px 0 0;accent-color:var(--teal)}
+.slot .consent span{font-size:13.5px;line-height:1.5;color:var(--ink2);max-width:62ch}
+.slot .consent a{color:var(--teal)}
+.slot.dark .consent span{color:#A8C2CE}
+.slot.dark .consent a{color:var(--teal-line)}

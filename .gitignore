@@ -1,3 +1,6 @@
 _wdd-site.tgz
 .DS_Store
 __pycache__/
+
+# Confidential ban list for the build guard. NEVER commit this.
+_build/guard-banned.txt

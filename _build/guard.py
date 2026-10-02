@@ -5,22 +5,37 @@ Runs at the end of every build. If it finds anything here in a generated page,
 the build fails and nothing gets committed. This exists because a previous build
 put client street addresses and exact signed-contract totals on public pages.
 
-Add to BANNED whenever a new source document is read. Never relax it.
+Add to _build/guard-banned.txt whenever a new source document is read.
+Never relax it, and never commit that file.
 """
 import os, re, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Exact contract totals from signed proposals. Published figures must be rounded.
-BANNED_FIGURES = ["468,675", "720,250", "140,099", "124,450", "350,250",
-                  "98,675", "251,575", "694,750", "428,975", "12.40"]
+# The confidential list is NOT stored here. This file is committed to a public
+# repo, and a ban list of secrets is still a list of secrets — an earlier version
+# of this guard leaked exactly the data it exists to block, by carrying it.
+#
+# Entries live in _build/guard-banned.txt, which is gitignored.
+BAN_FILE = os.path.join(ROOT, "_build", "guard-banned.txt")
 
-# Street addresses and anything naming a party to a deal.
-BANNED_STRINGS = [
-    "1501 SE 14th", "930 Lugo", "Orchid Bay", "7400 NE 8th", "7400 NE Orchid",
-    "Hunter Barrett", "Philippe Bibi", "Vona", "Castle Marine", "Atlantic Harbor",
-    "Giordano", "same contractor", "signed contract", "the contractor's proposal",
-]
+
+def banned_terms():
+    """Read the confidential list. Missing is survivable but must be loud —
+    failing silently would leave the build unprotected and looking fine."""
+    if not os.path.exists(BAN_FILE):
+        print("guard            WARN   _build/guard-banned.txt is missing — name and\n"
+              "                        figure matching is OFF. Structural checks still\n"
+              "                        run. Restore it from 'Wall Dock Deck/00 Plan/'.",
+              file=sys.stderr)
+        return []
+    out = []
+    with open(BAN_FILE, encoding="utf8") as f:
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith("#"):
+                out.append(line)
+    return out
 
 # A street address in any page is a bug, whatever the name — with one exception:
 # our own registered address, which belongs on the privacy page. Anything else
@@ -31,6 +46,9 @@ OWN_ADDRESS = [
     "16300 SW 137th Avenue",
     "16300 SW 137 Ave",
 ]
+
+TERMS = banned_terms()
+
 
 def pages():
     for d, dirs, fs in os.walk(ROOT):
@@ -44,7 +62,7 @@ def main():
     for p in pages():
         text = open(p, encoding="utf8").read()
         rel = os.path.relpath(p, ROOT)
-        for bad in BANNED_FIGURES + BANNED_STRINGS:
+        for bad in TERMS:
             if bad.lower() in text.lower():
                 problems.append(f"{rel}: contains {bad!r}")
         for m in ADDRESS_RE.finditer(text):

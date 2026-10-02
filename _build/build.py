@@ -281,6 +281,20 @@ FONTS = ('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
 # May 2026 and HowTo before that, so neither is emitted here however many SEO
 # checklists still ask for them.
 ORG_ID = SITE + "/#org"
+# The byline. Every rule page states who verified it, because a figure without a
+# verifier is just a number on a website.
+AUTHOR_ID = SITE + "/#author"
+AUTHOR_NAME = "JB Marine"
+AUTHOR_SCHEMA = {
+    "@type": "Organization",
+    "@id": AUTHOR_ID,
+    "name": AUTHOR_NAME,
+    "url": SITE + "/how-we-verify/",
+    "parentOrganization": {"@id": ORG_ID},
+    "description": ("Researches and verifies South Florida waterfront building rules for "
+                    "WallDockDeck. Every figure is taken from the primary code and carries "
+                    "its section and the date it was checked."),
+}
 
 ORG_SCHEMA = {
     "@type": "Organization",
@@ -335,7 +349,7 @@ def article_schema(path, title, desc, verified="", source=""):
         "description": desc,
         "mainEntityOfPage": SITE + path,
         "publisher": {"@id": ORG_ID},
-        "author": {"@id": ORG_ID},
+        "author": {"@id": AUTHOR_ID},
         "isAccessibleForFree": True,
     }
     if verified:
@@ -349,7 +363,7 @@ def article_schema(path, title, desc, verified="", source=""):
 
 
 def jsonld(path, extra=None):
-    graph = [ORG_SCHEMA,
+    graph = [ORG_SCHEMA, AUTHOR_SCHEMA,
              {"@type": "WebSite", "@id": SITE + "/#site", "url": SITE + "/",
               "name": "WallDockDeck", "publisher": {"@id": ORG_ID}}]
     graph += [g for g in (extra or []) if g]
@@ -421,6 +435,8 @@ FOOT = f"""<footer class="foot"><div class="wrap">
   </div>
   <div>
     <h4>Company</h4>
+    <a href="/about/">About</a>
+    <a href="/how-we-verify/">How we verify</a>
     <a href="/legal/">Legal</a>
     <a href="/privacy/">Privacy</a>
     <a href="/sms-terms/">SMS terms</a>
@@ -1509,6 +1525,132 @@ def build_sitemap():
             open(os.path.join(ROOT, f"{key}.txt"), "w", encoding="utf8").write(key)
 
 
+# ------------------------------------------------------------ trust pages
+def build_verify():
+    """The method page. This exists because the whole position rests on one
+    claim -- every figure carries its code section and the date it was checked --
+    and until now the site never said so anywhere a reader could find it."""
+    path = "/how-we-verify/"
+    title = fit_title("How We Verify Every Rule on This Site")
+    desc = fit_desc(
+        "Primary code only, the section recorded, the date recorded. Nothing publishes "
+        "without both",
+        "What we do when we cannot confirm a rule")
+    crumb_html, crumb_schema = crumbs([("Home", "/"), ("How we verify", None)])
+    body = head_(title, desc, path, schema=[crumb_schema])
+    body += crumb_html + f'''
+
+<div class="answer"><div class="wrap">
+  <span class="eyebrow">Our method &middot; {e(AUTHOR_NAME)}</span>
+  <h1>How we verify every rule on this site</h1>
+  <p class="qualifier">Every elevation, setback and deadline published here was read out of the
+  primary code, not copied from another website. Each one carries the section it came from and the
+  month we checked it. If we cannot confirm a rule from the code itself, we do not publish it &mdash;
+  and we say so rather than filling the gap with a plausible guess.</p>
+</div></div>
+
+<section><div class="wrap">
+  <div class="shead"><h2>The standard</h2>
+  <p>Four rules, applied to every figure on the site without exception.</p></div>
+  <div class="rows">
+    <div><b>Primary sources only</b><span>County and municipal code, state statute, administrative code, and official guidance published by the authority itself. Not contractor blogs, not directories, not other summaries. Where a city publishes its own guidance, we read it alongside the ordinance.</span></div>
+    <div><b>The section is recorded</b><span>Every figure is stored with the exact code section it came from, and that citation is printed on the page. If you want to check us, you have what you need to do it in about two minutes.</span></div>
+    <div><b>The date is recorded</b><span>Every rule carries the month we last checked it. That date is the one in our records, never today&rsquo;s. A page that silently restamps itself is lying about its freshness.</span></div>
+    <div><b>No source, no page</b><span>This one is enforced mechanically, not by good intentions. Our build only publishes a rule marked verified with both a citation and a date. An unfinished entry produces no page at all, which is why some cities are missing rather than thin.</span></div>
+  </div>
+</div></section>
+
+<section class="tint"><div class="wrap">
+  <div class="shead"><h2>What we do when it is not clear</h2>
+  <p>Regulations in South Florida are genuinely inconsistent between neighbouring towns. These are the cases that come up most, and how we handle each.</p></div>
+  <div class="rows">
+    <div><b>When the county and the city disagree</b><span>We publish both and say which one governs. In Broward the county sets a standard every city had to adopt, and several cities went stricter &mdash; so the number that applies to you is your city&rsquo;s, not the county&rsquo;s. We say that on the page rather than averaging it away.</span></div>
+    <div><b>When the rule is not in the code</b><span>It happens more than you would expect. Some towns set their seawall elevation in an engineering standards manual rather than an ordinance, where searching the code finds nothing. We cite where it actually lives.</span></div>
+    <div><b>When the datum differs</b><span>A height means nothing without the datum it is measured from. Where a town states its rule in mean low water and its neighbour states theirs in NAVD88, we print both as given and do not convert between them. The offset is local, and converting by rule of thumb produces a wall at the wrong height.</span></div>
+    <div><b>When we cannot confirm it</b><span>We publish nothing. Monroe County is the current example: we have not been able to establish from public sources whether the county sets a minimum seawall height, so the Keys pages carry no elevation figure. An empty space is honest. A guess that reads like a fact is not.</span></div>
+    <div><b>When a rule changes</b><span>Rules move, sometimes quickly. Miami-Dade rewrote its seawall permitting in July 2025 for the first time in decades. When we find a change, the figure and its date are updated together.</span></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="shead"><h2>What this is not</h2></div>
+  <div class="rows">
+    <div><b>Not legal or engineering advice</b><span>This is published information with its sources attached. It is not a legal opinion and it is not an engineering determination.</span></div>
+    <div><b>Not a substitute for your building department</b><span>Confirm the current requirement with your city before you design or sign anything. We print the date we checked precisely so you can see how old our reading is.</span></div>
+    <div><b>Not a price</b><span>We do not publish cost estimates. No honest figure exists before someone surveys your wall, and we will not republish anyone else&rsquo;s bid.</span></div>
+  </div>
+</div></section>
+
+<section class="tint"><div class="wrap">
+  <div class="shead"><h2>Found something wrong?</h2>
+  <p>We would rather hear it than not. If a figure here does not match what your building department
+  told you, send us the section and we will re-check it against the code and correct the page. A
+  corrected page is worth more than one that was never challenged.</p></div>
+  {slot("R3", "", "seawall-compliance")}
+</div></section>
+'''
+    body += FOOT
+    write(path, body)
+    PAGES.append((path, TODAY, "0.6"))
+
+
+def build_about():
+    """Who we are and how we are paid. The legal set has always been straight about
+    the referral model; the public pages never explained it."""
+    path = "/about/"
+    title = fit_title("About WallDockDeck: Who We Are, How We Are Paid", brand=False)
+    desc = fit_desc(
+        "What we do, how the referral model works and how we are paid",
+        "Seawalls, docks and waterfront decks from the Keys to Palm Beach")
+    crumb_html, crumb_schema = crumbs([("Home", "/"), ("About", None)])
+    body = head_(title, desc, path, schema=[crumb_schema])
+    body += crumb_html + f'''
+
+<div class="answer"><div class="wrap">
+  <span class="eyebrow">About</span>
+  <h1>Who we are, and how we are paid</h1>
+  <p class="qualifier">WallDockDeck publishes the waterfront building rules for South Florida and
+  connects owners with licensed marine contractors. We do not perform the work ourselves, and we are
+  paid by the contractors we refer to &mdash; not by you. Both of those facts change how you should
+  read everything else here, so they go at the top rather than in the small print.</p>
+</div></div>
+
+<section><div class="wrap">
+  <div class="shead"><h2>What we do</h2></div>
+  <div class="rows">
+    <div><b>We publish the rules</b><span>The seawall, dock and waterfront deck requirements for the cities we cover, each with its code section and the date we checked it. Most of this exists only as legal text in a municipal PDF. We publish the number.</span></div>
+    <div><b>We score your shoreline</b><span>The Shore Score is a screening based on public data and the answers you give us. It tells you what your answers point to and what to ask next. It is not an engineering inspection and we never call it one.</span></div>
+    <div><b>We connect you to a licensed contractor</b><span>If you ask to be connected, we pass your details to a licensed marine contractor covering your area. They are an independent business, not our employee or our agent, and they may contact you directly.</span></div>
+    <div><b>We do not do the work</b><span>We refer. We do not build, repair, inspect or engineer anything, and we never quote a price for work.</span></div>
+  </div>
+</div></section>
+
+<section class="tint"><div class="wrap">
+  <div class="shead"><h2>How we are paid, plainly</h2>
+  <p>Worth knowing before you decide how much weight to give our advice.</p></div>
+  <div class="rows">
+    <div><b>Contractors pay us, you do not</b><span>Our contractor partners pay us for referrals. Everything on this site is free to you, including the guides and the Shore Score.</span></div>
+    <div><b>What that means for our incentives</b><span>We have an interest in you contacting a contractor. We have no interest in which option you choose or how much you spend &mdash; we are not paid on the size of the job, which is why we publish what drives a price rather than a price.</span></div>
+    <div><b>Why we publish rules rather than quotes</b><span>A number without a survey is a guess, and a quote from someone who has not seen your wall is worth nothing. The rules are checkable. That is what we can honestly give you.</span></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="shead"><h2>Who writes this</h2></div>
+  <div class="rows">
+    <div><b>{e(AUTHOR_NAME)}</b><span>Researches and verifies the rules published here. Every figure is read out of the primary code, recorded with its section and the month it was checked, and nothing publishes without both. The method is set out in full on our <a href="/how-we-verify/">verification page</a>.</span></div>
+    <div><b>Where we cover</b><span>Monroe, Miami-Dade, Broward and Palm Beach counties &mdash; the Florida Keys to Palm Beach. We publish a city only once we have verified its rules, which is why the list grows rather than starting complete.</span></div>
+    <div><b>What we will not do</b><span>Publish a figure we cannot source, republish another party&rsquo;s bid, or present an estimate as a quote.</span></div>
+  </div>
+</div></section>
+
+<section class="tint"><div class="wrap">{slot("R3", "", "seawall-compliance")}</div></section>
+'''
+    body += FOOT
+    write(path, body)
+    PAGES.append((path, TODAY, "0.6"))
+
+
 def main():
     n_matrix = build_matrix()
     n_clus = build_clusters()
@@ -1520,6 +1662,8 @@ def main():
     n_dl = build_downloads()
     build_book()
     build_coverage()
+    build_verify()
+    build_about()
     n_legal = build_legal()
     build_sitemap()
 
@@ -1529,6 +1673,7 @@ def main():
     print(f"resources hub        1")
     print(f"agent pages          2   /agents/ /luxury/")
     print(f"cost page            1   /resources/what-it-costs/")
+    print(f"trust pages          2   /about/ /how-we-verify/")
     print(f"county pages      {n_reg:>4}   /{{county}}/{{service}}/")
     print(f"downloads page       1   {n_dl} files listed")
     print(f"legal pages       {n_legal+1:>4}   /legal/ + {n_legal} documents")

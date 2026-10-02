@@ -8,6 +8,7 @@ put client street addresses and exact signed-contract totals on public pages.
 Add to _build/guard-banned.txt whenever a new source document is read.
 Never relax it, and never commit that file.
 """
+import difflib
 import os, re, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -48,6 +49,69 @@ OWN_ADDRESS = [
 ]
 
 TERMS = banned_terms()
+
+
+# ---------------------------------------------------------------- doorway gate
+# Fourteen city pages whose only difference is the name in the heading are
+# doorway pages, which Google's spam policies name directly. On a site with no
+# link authority a duplicate cluster drags down the pages that are good, so this
+# is checked at the data level -- where the uniqueness has to live -- rather than
+# on the rendered HTML, which is mostly shared chrome either way.
+SIM_LIMIT = 0.86          # above this, two city rows are the same page
+MIN_OWN_WORDS = 12        # words a row must have that its topic-mates do not
+
+
+def _norm(row, city_name, county_name):
+    """The comparable body of a row, with the names that make it look unique
+    taken out. If two rows still read the same after that, they are the same."""
+    t = " ".join([row.get("qualifier", ""), row.get("detail_rows", ""),
+                  row.get("headline_answer", ""), row.get("unit", "")]).lower()
+    for n in (city_name or "", county_name or ""):
+        for form in (n.lower(), n.lower().replace(" ", "-")):
+            if form:
+                t = t.replace(form, " ")
+    t = re.sub(r"[^a-z0-9 ]", " ", t)
+    return re.sub(r"\s+", " ", t).strip()
+
+
+def doorway_problems():
+    data = os.path.join(ROOT, "_build", "data")
+    ct, cities = os.path.join(data, "CityTopics.csv"), os.path.join(data, "Cities.csv")
+    if not (os.path.exists(ct) and os.path.exists(cities)):
+        return []
+    import csv
+    name = {c["slug"]: c.get("city", c["slug"]) for c in csv.DictReader(open(cities, encoding="utf8"))}
+    rows = [r for r in csv.DictReader(open(ct, encoding="utf8")) if r.get("status") == "verified"]
+
+    by_topic = {}
+    for r in rows:
+        by_topic.setdefault(r["topicSlug"], []).append(r)
+
+    out = []
+    for topic, group in sorted(by_topic.items()):
+        norm = {r["citySlug"]: _norm(r, name.get(r["citySlug"], ""), r.get("county", ""))
+                for r in group}
+        # near-duplicate pairs
+        for i, a in enumerate(group):
+            for b in group[i + 1:]:
+                ka, kb = a["citySlug"], b["citySlug"]
+                ratio = difflib.SequenceMatcher(None, norm[ka], norm[kb]).ratio()
+                if ratio >= SIM_LIMIT:
+                    out.append(f"{topic}: {ka} and {kb} are {ratio:.0%} identical once the city "
+                               f"name is removed - one of them needs a fact of its own")
+        # a row with nothing its topic-mates lack
+        if len(group) > 1:
+            for r in group:
+                k = r["citySlug"]
+                others = set()
+                for o in group:
+                    if o["citySlug"] != k:
+                        others |= set(norm[o["citySlug"]].split())
+                own = set(norm[k].split()) - others
+                if len(own) < MIN_OWN_WORDS:
+                    out.append(f"{topic}: {k} has only {len(own)} words no other city page has "
+                               f"(minimum {MIN_OWN_WORDS}) - it reads as a template fill")
+    return out
 
 
 def pages():
@@ -107,11 +171,13 @@ def main():
                 continue          # our own address, on our own page
             problems.append(f"{rel}: looks like a street address — {m.group(0)!r}")
 
+    problems += doorway_problems()
+
     if problems:
-        print("\nBUILD BLOCKED — confidential deal information in generated pages:\n")
+        print("\nBUILD BLOCKED\n")
         for x in sorted(set(problems)):
             print("  " + x)
-        print(f"\n{len(set(problems))} problem(s). Nothing ships until these are gone.\n")
+        print(f"\n{len(set(problems))} problem(s) - confidential data and/or duplicate city pages. Nothing ships until these are gone.\n")
         sys.exit(1)
 
     print(f"guard              ok   {sum(1 for _ in pages())} pages clean")

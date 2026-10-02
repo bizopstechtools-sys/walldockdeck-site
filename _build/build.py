@@ -836,7 +836,7 @@ def build_coverage():
 
 PRIVACY_BODY = """<section><div class="wrap">
   <div class="rows">
-    <div><b>Who we are</b><span>WallDockDeck connects waterfront property owners in South Florida with licensed marine contractors. We do not perform construction ourselves. Legal entity: [Legal Business Name]. Address: [Business Address]. Contact: [support email] &middot; [support phone].</span></div>
+    <div><b>Who we are</b><span>WallDockDeck connects waterfront property owners in South Florida with licensed marine contractors. We do not perform construction ourselves. Legal entity: [Legal Business Name]. Address: [Business Address]. Contact: hello@walldockdeck.com.</span></div>
     <div><b>What we collect</b><span>Only what you give us on a form: your name, email address, phone number if you provide one, the property address, and anything you type into the notes field. We also record which page you were on and which resource you asked for.</span></div>
     <div><b>What we never collect</b><span>Financial account details, card numbers, Social Security or other government identifiers, or date of birth. If a form ever asks you for any of those, it is not ours.</span></div>
     <div><b>Why we collect it</b><span>To send you the sheet, checklist or report you asked for, to answer your question about your property, and to arrange an inspection if you request one. The property address is what lets us give you your own city&rsquo;s rule instead of a generic answer.</span></div>
@@ -867,6 +867,7 @@ PRIVACY_BODY = """<section><div class="wrap">
 
 SMS_BODY = """<section><div class="wrap">
   <div class="rows">
+    <div><b>Not yet in service</b><span>We do not currently send text messages. These terms are published so you can read them before we do, and they take effect only once we publish a number on this site. Until then, everything reaches you by email and you can stop it with the unsubscribe link in any message.</span></div>
     <div><b>Program name</b><span>WallDockDeck Property Alerts.</span></div>
     <div><b>What the program does</b><span>We send text messages about the property enquiry you made: confirming an inspection time, telling you a contractor is on the way, answering a question you asked, and occasionally a notice about conditions affecting your stretch of water. We do not send marketing blasts.</span></div>
     <div><b>How you opt in</b><span>By ticking the consent box on a form on this site, or by texting us first. The box is never ticked for you.</span></div>
@@ -881,7 +882,7 @@ SMS_BODY = """<section><div class="wrap">
   <div class="shead"><h2>Stopping or getting help</h2></div>
   <div class="rows">
     <div><b>To stop</b><span>Reply <b>STOP</b> to any message from us. You will get one confirmation that you have been unsubscribed, and we will not text you again unless you opt in afresh. Stopping texts does not stop email &mdash; use the unsubscribe link in any email for that.</span></div>
-    <div><b>To get help</b><span>Reply <b>HELP</b> to any message and we will reply with how to reach us. You can also email [support email] or call [support phone].</span></div>
+    <div><b>To get help</b><span>Reply <b>HELP</b> to any message and we will reply with how to reach us. You can also email hello@walldockdeck.com.</span></div>
     <div><b>Carriers</b><span>Mobile carriers are not liable for delayed or undelivered messages.</span></div>
     <div><b>Supported carriers</b><span>Major US carriers, including AT&amp;T, Verizon, T-Mobile, Sprint, US Cellular, Boost, MetroPCS and Cricket. Carrier support can change.</span></div>
     <div><b>Privacy</b><span>Your mobile information is never sold or shared with third parties or affiliates for marketing or promotional purposes. See our <a href="/privacy/">Privacy Policy</a>.</span></div>

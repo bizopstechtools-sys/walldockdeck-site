@@ -88,8 +88,8 @@ def head_(title, desc, path, body_class="", body_data=""):
   <a class="brand" href="/">{MARK}<b>Wall<i>Dock</i>Deck</b></a>
   <nav>
     <a href="/resources/">Resources</a>
-    <a href="/tools/">Tools</a>
-    <a href="/directory/">Directory</a>
+    <a href="/downloads/">Downloads</a>
+    <a href="/resources/what-it-costs/">What it costs</a>
     <a href="/agents/">For Agents</a>
     <a class="cta" href="/#/start">Get a Shore Score</a>
   </nav>
@@ -106,16 +106,17 @@ FOOT = f"""<footer class="foot"><div class="wrap">
     <a href="/resources/buying-and-selling/">Buying or selling</a>
   </div>
   <div>
-    <h4>Tools</h4>
-    <a href="/tools/">All tools</a>
-    <a href="/#/start">Shore Score</a>
+    <h4>Answers</h4>
+    <a href="/#/start">Get a Shore Score</a>
     <a href="/resources/what-it-costs/">What it costs</a>
-    <a href="/glossary/">Glossary</a>
+    <a href="/downloads/">All downloads</a>
+    <a href="/broward/seawalls/">Broward seawall rules</a>
   </div>
   <div>
     <h4>Coverage</h4>
     <a href="/coverage/">Where we work</a>
-    <a href="/directory/">Surveyors &amp; marinas</a>
+    <a href="/miami-dade/seawalls/">Miami-Dade</a>
+    <a href="/palm-beach/seawalls/">Palm Beach</a>
     <a href="/agents/">For agents</a>
   </div>
   <div>
@@ -772,6 +773,116 @@ def titlecase_(slug):
     return " ".join(w.capitalize() for w in str(slug or "").split("-"))
 
 
+# ------------------------------------------------------------- coverage, legal
+def build_coverage():
+    regs = load_regions()
+    byc = {}
+    for r in LIVE:
+        c = CITY.get(r["citySlug"])
+        if c:
+            byc.setdefault(c["county"], set()).add(c["city"])
+    blocks = ""
+    for r in regs:
+        cities = sorted(byc.get(r["region"], []))
+        # link each city to a topic it actually has, not an assumed one
+        chips = ""
+        for c in cities:
+            row = next((x for x in LIVE if CITY.get(x["citySlug"], {}).get("city") == c), None)
+            if not row:
+                continue
+            chips += (f'<a href="/{row["citySlug"]}/{row["topicSlug"]}/">'
+                      f'<em>{e(TOPIC[row["topicSlug"]]["topic"])}</em>{e(c)}</a>')
+        blocks += f'''<div style="margin-bottom:28px">
+      <div class="shead" style="margin-bottom:10px"><h3 style="font-size:20px">{e(r["region"])} County</h3>
+      <p>{e(r["qualifier"][:200])}</p></div>
+      <div class="strip"><a href="/{r["regionSlug"]}/{r["serviceSlug"]}/"><em>County rule</em>Seawall requirements across {e(r["region"])}</a>{chips}</div>
+    </div>'''
+
+    path = "/coverage/"
+    body = head_("Where We Work | WallDockDeck",
+                 "Seawalls, docks and waterfront decks from the Florida Keys to Palm Beach. "
+                 "The counties and cities whose rules we have verified and published.", path)
+    body += f'''<nav class="crumbs"><div class="wrap">
+  <a href="/">Home</a> <span>/</span> Where we work
+</div></nav>
+<div class="answer"><div class="wrap">
+  <span class="eyebrow">Florida Keys to Palm Beach</span>
+  <h1>Where we work</h1>
+  <p class="qualifier">Four counties along the South Florida coast. We publish a city&rsquo;s rule once we
+  have the code section and the date we checked it &mdash; so this list grows, and everything on it is sourced.</p>
+</div></div>
+<section><div class="wrap">{blocks}</div></section>
+<section class="tint"><div class="wrap">{slot("H2")}</div></section>
+'''
+    body += FOOT
+    write(path, body)
+    PAGES.append((path, TODAY, "0.6"))
+
+
+PRIVACY_BODY = """<section><div class="wrap">
+  <div class="rows">
+    <div><b>Who we are</b><span>WallDockDeck connects South Florida waterfront owners with licensed marine contractors. We do not perform construction ourselves.</span></div>
+    <div><b>What we collect</b><span>Only what you give us on a form: your name, email address, phone number if you provide one, and the property address. We also record which page you were on when you submitted, and which offer you responded to.</span></div>
+    <div><b>What we do not collect</b><span>We do not ask for, and have no use for, financial information, government identifiers or date of birth. If a form ever asks you for any of those, it is not ours.</span></div>
+    <div><b>Why we collect it</b><span>To send you the sheet, checklist or report you asked for, to answer your question about your property, and to arrange an inspection if you request one. The property address is what lets us give you your city&rsquo;s rule rather than a generic answer.</span></div>
+    <div><b>Who we share it with</b><span>A licensed marine contractor serving your area, when you ask us to arrange an inspection or a quote. We tell you who before we pass anything on. We do not sell your information to anyone, and we do not share it with advertisers or data brokers.</span></div>
+    <div><b>Our contractor partners</b><span>Once we pass your details to a contractor, their own privacy policy governs what they do with it. Ask them for it.</span></div>
+    <div><b>Email</b><span>Asking us for a download means we will email you that download, and follow up about it. Every email has an unsubscribe link and it works immediately.</span></div>
+    <div><b>Text and phone</b><span>We only call or text you if you tick the box giving permission, and that box is never ticked for you. See our SMS Terms for the detail.</span></div>
+    <div><b>Cookies</b><span>We keep your details in your own browser so you do not have to type them twice, and we count which pages are read so we know what to write next. We do not run advertising trackers.</span></div>
+    <div><b>How long we keep it</b><span>While you are a live enquiry, and for a reasonable period after in case you come back. Ask us to delete it and we will.</span></div>
+    <div><b>Making us stop</b><span>Reply to any email, or write to us at the address below, and say what you want: stop emailing, stop calling, or delete everything. We will do it and confirm.</span></div>
+    <div><b>Children</b><span>This site is for property owners and real estate professionals. It is not directed at anyone under 18 and we do not knowingly collect their information.</span></div>
+    <div><b>Changes</b><span>If we change this policy we change the date at the top. Material changes get an email to anyone on the list.</span></div>
+    <div><b>Contact</b><span>[Your contact email] &middot; [Your postal address]</span></div>
+  </div>
+</div></section>"""
+
+SMS_BODY = """<section><div class="wrap">
+  <div class="rows">
+    <div><b>What you are agreeing to</b><span>If you tick the consent box on a form, you agree that WallDockDeck and the contractor partner serving your area may contact you by phone, text and email about the property you told us about, including by automated means.</span></div>
+    <div><b>It is never ticked for you</b><span>The box starts empty. If you do not tick it, we will only email you, and only about what you asked for.</span></div>
+    <div><b>It is not a condition of anything</b><span>Every download, sheet and checklist on this site is available without agreeing to be called or texted. Consent is not a condition of any purchase.</span></div>
+    <div><b>What we would text you about</b><span>Confirming an inspection time, telling you a contractor is on the way, or answering a question you asked. Not marketing blasts.</span></div>
+    <div><b>How often</b><span>Only when something is actually happening with your enquiry. There is no scheduled send.</span></div>
+    <div><b>Stopping it</b><span>Reply STOP to any text and it ends immediately. Reply HELP for assistance. Stopping texts does not stop email &mdash; use the unsubscribe link for that.</span></div>
+    <div><b>Costs</b><span>Message and data rates may apply, depending on your plan. We do not charge you anything.</span></div>
+    <div><b>Carriers</b><span>Mobile carriers are not liable for delayed or undelivered messages.</span></div>
+    <div><b>Who is calling</b><span>The consent text on the form names the contractor partner for your region. If it does not name anyone, do not tick it and tell us &mdash; that is a mistake on our side.</span></div>
+    <div><b>Contact</b><span>[Your contact email] &middot; [Your phone number]</span></div>
+  </div>
+</div></section>
+<section class="tint"><div class="wrap">
+  <p class="qualifier" style="max-width:66ch"><b>A note on how we read this.</b> We treat a tick on that box as permission to help you with the thing you asked about, not as permission to sell at you. If we ever get that wrong, reply STOP and we will have earned it.</p>
+</div></section>"""
+
+LEGAL_PAGES = [
+ ("/privacy/", "Privacy", "Privacy Policy",
+  "What we collect, why, who we share it with, and how to make us stop.", PRIVACY_BODY),
+ ("/sms-terms/", "SMS Terms", "SMS Terms",
+  "What you are agreeing to if you tick the box to let us text you.", SMS_BODY),
+]
+
+
+def build_legal():
+    for path, kicker, h1, sub, inner in LEGAL_PAGES:
+        body = head_(f"{h1} | WallDockDeck", sub, path)
+        body += f'''<nav class="crumbs"><div class="wrap">
+  <a href="/">Home</a> <span>/</span> {e(h1)}
+</div></nav>
+<div class="answer"><div class="wrap">
+  <span class="eyebrow">{e(kicker)}</span>
+  <h1>{e(h1)}</h1>
+  <p class="qualifier">{e(sub)}</p>
+  <p class="src">Last updated {TODAY}.</p>
+</div></div>
+{inner}
+'''
+        body += FOOT
+        write(path, body)
+        PAGES.append((path, TODAY, "0.3"))
+
+
 # ---------------------------------------------------------------- sitemap etc
 def build_sitemap():
     urls = "".join(
@@ -797,6 +908,8 @@ def main():
     build_costs()
     n_reg = build_regions()
     n_dl = build_downloads()
+    build_coverage()
+    build_legal()
     build_sitemap()
 
     held = len(CT) - len(LIVE)

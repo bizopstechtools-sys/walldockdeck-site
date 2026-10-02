@@ -428,6 +428,7 @@ FOOT = f"""<footer class="foot"><div class="wrap">
   </div>
   <div>
     <h4>Coverage</h4>
+    <a href="/seawall-height-by-county/">Height rules by county</a>
     <a href="/coverage/">Where we work</a>
     <a href="/miami-dade/seawalls/">Miami-Dade</a>
     <a href="/palm-beach/seawalls/">Palm Beach</a>
@@ -1525,6 +1526,149 @@ def build_sitemap():
             open(os.path.join(ROOT, f"{key}.txt"), "w", encoding="utf8").write(key)
 
 
+# ------------------------------------------------- does your county set one?
+COUNTY_ANSWER = [
+    ("Broward", "broward", "Yes", "5.0 ft NAVD88 by 2050",
+     "Broward County Code Sec. 39-404, Art. XXV &mdash; Resiliency Standards for Tidal Flood "
+     "Protection, plus Land Use Plan Policy 2.21.7",
+     "The only county of the four with a single standard behind every city. Every municipality had "
+     "to adopt it locally by 13 February 2022. Until 2035 a city <em>may</em> allow 4 ft NAVD88, but "
+     "only if the barrier is built to be raised to 5 ft by 2050 &mdash; and that allowance is the "
+     "city's to grant, not yours to claim."),
+    ("Miami-Dade", "miami-dade", "No", "Your city sets it",
+     "Miami-Dade County Code Ch. 24 governs environmental permitting, not elevation",
+     "The county controls where a wall may go and what it may disturb, not how high it stands. "
+     "Elevation is entirely municipal, and the cities disagree sharply. What the county does control "
+     "is how far waterward you may rebuild &mdash; and that single measurement decides whether your "
+     "permit takes weeks or months."),
+    ("Palm Beach", "palm-beach", "No", "Your town sets it",
+     "Palm Beach County ULDC Article 18 &mdash; Flood Damage Prevention sets no minimum elevation",
+     "We checked Article 18 directly. It regulates seawalls only as development in Coastal High "
+     "Hazard Areas, requiring authorisation and proof the wall will not divert floodwater onto "
+     "someone else. It never says how tall. Each town sets its own figure independently, and two "
+     "neighbouring towns can differ."),
+    ("Monroe", "", "Not confirmed", "We will not guess",
+     "Not established from public sources",
+     "We have not been able to confirm from the published code whether Monroe County sets a minimum "
+     "seawall height. Our working expectation is that it does not, because the Keys regulate the "
+     "shoreline through other instruments. We are not publishing that expectation as a fact. Until "
+     "we can cite it, the Keys pages carry no elevation figure."),
+]
+
+
+def build_county_compare():
+    """The page that only exists once. Four adjacent counties answer the same
+    question four different ways, and nobody has written that down."""
+    path = "/seawall-height-by-county/"
+    title = fit_title("Does Your County Set a Minimum Seawall Height?")
+    desc = fit_desc(
+        "Only one of the four South Florida counties sets a standard. Broward does. "
+        "Miami-Dade and Palm Beach leave it to your city",
+        "What each county requires, with the code section")
+
+    rows = ""
+    for name, slug, ans, fig, where, note in COUNTY_ANSWER:
+        link = f'<a href="/{slug}/seawalls/">{e(name)}</a>' if slug else e(name)
+        cls = "yes" if ans == "Yes" else ("tbc" if ans.startswith("Not") else "no")
+        rows += (f'<tr><td class="k">{link}</td>'
+                 f'<td><b class="ans {cls}">{e(ans)}</b></td>'
+                 f'<td>{e(fig)}</td></tr>')
+
+    detail = ""
+    for name, slug, ans, fig, where, note in COUNTY_ANSWER:
+        head = f'<a href="/{slug}/seawalls/">{e(name)} County</a>' if slug else e(name) + " County"
+        detail += (f'<div><b>{head} &mdash; {e(ans)}</b>'
+                   f'<span>{note}<br><br><b>Where it is written:</b> {where}</span></div>')
+
+    # Every city we have actually verified, grouped by county, built from the data
+    by_county = {}
+    for r in LIVE:
+        if r["topicSlug"] != "seawall-height-requirement":
+            continue
+        c = CITY.get(r["citySlug"], {})
+        by_county.setdefault(r.get("county") or c.get("county", ""), []).append(r)
+    cities = ""
+    for cty in ("Broward", "Miami-Dade", "Palm Beach", "Monroe"):
+        got = sorted(by_county.get(cty, []), key=lambda r: r["citySlug"])
+        if not got:
+            cities += (f'<div><b>{e(cty)}</b><span>No cities verified yet. We publish a city only '
+                       f'once we have read its rule out of the code.</span></div>')
+            continue
+        bits = " &middot; ".join(
+            f'<a href="/{r["citySlug"]}/{r["topicSlug"]}/">{e(CITY.get(r["citySlug"],{}).get("city", r["citySlug"]))}</a>'
+            f' {e(squash(r["headline_answer"]))} {e(squash(r["unit"]))}' for r in got)
+        cities += f'<div><b>{e(cty)}</b><span>{bits}</span></div>'
+
+    crumb_html, crumb_schema = crumbs(
+        [("Home", "/"), ("Seawall height by county", None)])
+    art = article_schema(path, title, desc, "2026-10",
+                         "Broward County Code Sec. 39-404 Art. XXV; Palm Beach County ULDC Art. 18; "
+                         "Miami-Dade County Code Ch. 24")
+    body = head_(title, desc, path, body_data=' data-cluster="seawall-compliance"',
+                 schema=[crumb_schema, art])
+    body += crumb_html + f'''
+
+<div class="answer"><div class="wrap">
+  <span class="eyebrow">Four counties &middot; four different answers</span>
+  <h1>Does your county set a minimum seawall height?</h1>
+  <p class="qualifier"><b>Only one of the four does.</b> Broward sets a standard every city had to
+  adopt. Miami-Dade and Palm Beach set none at all and leave the number to your city. Monroe we have
+  not been able to confirm. The practical consequence is that a seawall built legally in one city
+  can sit nearly two feet below what is required twenty miles up the coast.</p>
+</div></div>
+
+<section><div class="wrap">
+  <div class="shead"><h2>The answer, by county</h2></div>
+  <table class="rt">
+    <tr><th>County</th><th>Sets a standard?</th><th>The figure that governs</th></tr>
+    {rows}
+  </table>
+  <p class="caveat" style="max-width:68ch"><b>Why this catches people out.</b> Most owners assume
+  the county sets the rule, because that is how flood and building standards usually work here. For
+  three of these four counties that assumption is wrong, and asking the county will get you an
+  answer that does not apply to your property.</p>
+</div></section>
+
+<section class="tint"><div class="wrap">
+  <div class="shead"><h2>What each county actually does</h2></div>
+  <div class="rows">{detail}</div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="shead"><h2>The spread is real</h2>
+  <p>These are verified figures from cities we have read the code for. They are not estimates.</p></div>
+  <div class="rows">
+    <div><b>The low end</b><span>Hollywood, in Broward, requires 4 ft NAVD88 before 2035. It took the county's interim allowance and wrote it into its own guidance.</span></div>
+    <div><b>The high end</b><span>The City of Miami requires 6 ft NAVD88 east of US-1, and Miami River frontage must be capable of reaching 8 ft over time. Miami-Dade sets no county floor, so the city chose its own &mdash; and chose the highest in the region.</span></div>
+    <div><b>Two feet apart, two counties apart</b><span>A wall built to code in Hollywood would be two feet short of the requirement in the City of Miami. Both are legal. Both are South Florida. Neither county rule explains the gap, because one of the two counties has no rule.</span></div>
+    <div><b>And one city caps the top</b><span>Pompano Beach sets a maximum as well as a minimum &mdash; 5 ft NAVD88 to 5 ft 10 in. It is the only city we have found that says a wall can be too high as well as too low.</span></div>
+  </div>
+</div></section>
+
+<section class="tint"><div class="wrap">
+  <div class="shead"><h2>Every city we have verified</h2>
+  <p>Each figure below was read out of that city's own code or published guidance, and carries its
+  section and the month we checked it on its page.</p></div>
+  <div class="rows">{cities}</div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="shead"><h2>What to ask, and who to ask</h2></div>
+  <ol>
+    <li><b>Ask your city, not your county</b><span>Unless you are in Broward, the county almost certainly does not set your number. Even in Broward, several cities went stricter than the county floor.</span></li>
+    <li><b>Ask for the section, in writing</b><span>&ldquo;What is the minimum cap elevation, in which datum, and where is it written?&rdquo; The last part matters &mdash; some towns keep the figure in an engineering standards manual rather than the ordinance, where searching the code finds nothing.</span></li>
+    <li><b>Confirm the datum</b><span>NAVD88 and mean low water are different reference points. Surfside states its rule in MLW while Miami Beach next door states theirs in NAVD88. Comparing the two numbers directly will mislead you, and the offset is local.</span></li>
+    <li><b>Ask whether you must build for later</b><span>Several jurisdictions let you build lower now only if the wall is engineered to be raised. Building to the minimum today does not always close the question.</span></li>
+  </ol>
+</div></section>
+
+<section class="tint"><div class="wrap">{slot("R1", "", "seawall-compliance")}</div></section>
+'''
+    body += FOOT
+    write(path, body)
+    PAGES.append((path, TODAY, "0.9"))
+
+
 # ------------------------------------------------------------ trust pages
 def build_verify():
     """The method page. This exists because the whole position rests on one
@@ -1662,6 +1806,7 @@ def main():
     n_dl = build_downloads()
     build_book()
     build_coverage()
+    build_county_compare()
     build_verify()
     build_about()
     n_legal = build_legal()
@@ -1674,6 +1819,7 @@ def main():
     print(f"agent pages          2   /agents/ /luxury/")
     print(f"cost page            1   /resources/what-it-costs/")
     print(f"trust pages          2   /about/ /how-we-verify/")
+    print(f"county comparison    1   /seawall-height-by-county/")
     print(f"county pages      {n_reg:>4}   /{{county}}/{{service}}/")
     print(f"downloads page       1   {n_dl} files listed")
     print(f"legal pages       {n_legal+1:>4}   /legal/ + {n_legal} documents")

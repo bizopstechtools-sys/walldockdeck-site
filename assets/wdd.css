@@ -103,9 +103,16 @@ a.card:hover{border-color:var(--teal);box-shadow:0 1px 0 var(--teal-soft)}
 .slot p{margin-top:8px;color:var(--ink2);max-width:56ch;font-size:16px}
 .slot.dark p{color:#A8C2CE}
 .slot form{display:flex;flex-wrap:wrap;gap:9px;margin-top:17px;align-items:flex-start}
-.slot input{font-family:var(--body);font-size:16px;padding:11px 13px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink);min-width:0;flex:1 1 190px}
-.slot input::placeholder{color:var(--ink3)}
-.slot input:focus{outline:2px solid var(--teal);outline-offset:0;border-color:var(--teal)}
+.slot input,.slot select,.slot textarea{font-family:var(--body);font-size:16px;padding:11px 13px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink);min-width:0;flex:1 1 190px}
+.slot select{appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236F8492' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 13px center;padding-right:34px}
+.slot textarea{flex-basis:100%;resize:vertical;line-height:1.5;min-height:76px}
+.slot input::placeholder,.slot textarea::placeholder{color:var(--ink3)}
+.slot input:focus,.slot select:focus,.slot textarea:focus{outline:2px solid var(--teal);outline-offset:0;border-color:var(--teal)}
+/* the consent box must stay visibly unticked and legible on the dark slot */
+.slot.dark .sharing{color:#8FAEBD}
+.slot.dark .sharing a{color:var(--teal-line)}
 .slot button{font-family:var(--disp);font-stretch:88%;font-weight:700;font-size:16px;padding:11px 21px;border:0;border-radius:6px;background:var(--orange);color:#fff;cursor:pointer;flex:none}
 .slot button:hover{background:var(--orange-hover)}
 .slot button[disabled]{opacity:.55;cursor:default}
@@ -222,5 +229,5 @@ body.lux .figure b{color:var(--mulberry)}
 }
 
 /* point-of-collection sharing notice, beside the consent box */
-.slot .sharing{font-size:13px;line-height:1.5;color:var(--ink3);margin:8px 0 0}
+.slot .sharing{flex-basis:100%;font-size:13px;line-height:1.5;color:var(--ink3);margin:4px 0 2px;max-width:62ch}
 .slot .sharing a{color:var(--teal)}

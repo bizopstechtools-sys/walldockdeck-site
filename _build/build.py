@@ -389,6 +389,7 @@ def head_(title, desc, path, body_class="", body_data="", schema=None):
     <a href="/downloads/">Downloads</a>
     <a href="/resources/what-it-costs/">What it costs</a>
     <a href="/agents/">For Agents</a>
+    <a href="/book/">Book an inspection</a>
     <a class="cta" href="/#/start">Get a Shore Score</a>
   </nav>
 </div></header>
@@ -406,6 +407,7 @@ FOOT = f"""<footer class="foot"><div class="wrap">
   <div>
     <h4>Answers</h4>
     <a href="/#/start">Get a Shore Score</a>
+    <a href="/book/">Book an inspection</a>
     <a href="/resources/what-it-costs/">What it costs</a>
     <a href="/downloads/">All downloads</a>
     <a href="/broward/seawalls/">Broward seawall rules</a>
@@ -458,6 +460,17 @@ SHARING_NOTE = (
 )
 
 
+# What kind of lead this is, so the CRM can route it without parsing the offer.
+# A booking arriving tagged "resource_request" lands in the wrong sequence and
+# nobody calls the person back.
+ACTION_FOR = {
+    "book_inspect": "book_inspection",
+    "shore_score":  "score_request",
+    "agent_tools":  "agent_request",
+    "bid_compare":  "quote_review",
+}
+
+
 def county_slug(name):
     """'Palm Beach' -> 'palm-beach'. The CRM routes on the slug; the display name
     is carried alongside it so a human reading a lead card sees something legible."""
@@ -467,7 +480,14 @@ def county_slug(name):
 def consent_block():
     """The consent checkbox plus the sharing disclosure. data-consent carries the
     exact wording shown, so the lead record stores what the person actually read
-    rather than a yes/no flag. That is the thing that settles a TCPA dispute."""
+    rather than a yes/no flag. That is the thing that settles a TCPA dispute.
+
+    The checkbox is deliberately NOT required. The earlier build spec said it was,
+    which contradicts the wording printed inside it and published on /sms-terms/ —
+    "Consent is not a condition of purchase." A form that will not submit without
+    consent makes that sentence false, and a reviewer comparing the two is exactly
+    how a campaign gets rejected. Unticked, the request still goes through and we
+    reply by email instead."""
     link = (CONSENT_TEXT
             .replace("Privacy Policy", '<a href="/privacy/">Privacy Policy</a>')
             .replace("SMS Terms", '<a href="/sms-terms/">SMS Terms</a>'))
@@ -532,11 +552,27 @@ def slot(slot_id, city="", cluster="", county=""):
     if "phone" in fields:
         inputs.append('<input name="phone" type="tel" placeholder="Phone" autocomplete="tel" required>')
     if "address" in fields:
-        inputs.append('<input name="property_address" type="text" placeholder="Property address" autocomplete="street-address">')
+        # On a form that asks for a phone number we are arranging a site visit,
+        # and a visit without an address is useless. Elsewhere it stays optional.
+        req = " required" if "phone" in fields else ""
+        inputs.append('<input name="property_address" type="text" placeholder="Property address" '
+                      f'autocomplete="street-address"{req}>')
     if "brokerage" in fields:
         inputs.append('<input name="brokerage" type="text" placeholder="Brokerage">')
     if "office" in fields:
         inputs.append('<input name="office" type="text" placeholder="Office or team">')
+    if "window" in fields:
+        inputs.append(
+            '<select name="preferred_window" aria-label="Preferred window">'
+            '<option value="">Preferred window (optional)</option>'
+            '<option value="morning">Morning, 8am&ndash;12pm</option>'
+            '<option value="afternoon">Afternoon, 12pm&ndash;4pm</option>'
+            '<option value="first_available">First available</option>'
+            '</select>')
+    if "notes" in fields:
+        inputs.append(
+            '<textarea name="notes" rows="3" '
+            'placeholder="Anything we should know? A crack, a sinkhole, a deadline."></textarea>')
     if not inputs:
         inputs.append('<input name="email" type="email" placeholder="Email" autocomplete="email" required>')
 
@@ -548,7 +584,7 @@ def slot(slot_id, city="", cluster="", county=""):
     fine = f'<p class="fine">{e(o.get("fine",""))}</p>' if o.get("fine") else ""
     return f"""<div class="slot{style}" data-slot="{e(slot_id)}" data-offer="{e(o['offer_id'])}"
      data-city="{e(city)}" data-county="{e(county)}" data-county-slug="{e(county_slug(county))}"
-     data-cluster="{e(cluster)}" data-action="resource_request">
+     data-cluster="{e(cluster)}" data-action="{e(ACTION_FOR.get(o['offer_id'], 'resource_request'))}">
   <h3>{e(o['headline'])}</h3>
   <p>{e(o['body'])}</p>
   <form novalidate>
@@ -1180,6 +1216,81 @@ def titlecase_(slug):
 
 
 # ------------------------------------------------------------- coverage, legal
+def build_book():
+    """The booking page. This is the only form on the site that collects a phone
+    number, which makes it the only page where the consent checkbox renders — and
+    therefore the page a carrier reviewer needs to see for A2P registration."""
+    path = "/book/"
+    crumb_html, crumb_schema = crumbs([("Home", "/"), ("Book an inspection", None)])
+    body = head_(
+        fit_title("Book a Seawall Inspection: South Florida"),
+        fit_desc("A licensed marine contractor covering your area comes to the property",
+                 "No charge for the visit and no obligation after it",
+                 "Four counties, Keys to Palm Beach"),
+        path, body_data=' data-cluster="seawall-compliance"', schema=[crumb_schema])
+    body += crumb_html + f'''
+<div class="answer"><div class="wrap">
+  <span class="eyebrow">Book an inspection</span>
+  <h1>Have someone look at it</h1>
+  <p class="qualifier">A licensed marine contractor covering your area comes to the property,
+  looks at the wall, the cap, the dock and the ground behind it, and tells you what they see.
+  No charge for the visit, and no obligation after it.</p>
+</div></div>
+
+<section><div class="wrap">
+  <div class="shead"><h2>What happens</h2>
+  <p>Four steps, and you can stop at any of them.</p></div>
+  <div class="cards">
+    <div class="card"><span class="k">Step one</span><h3>You tell us the address</h3>
+      <p>We check which contractor covers it and what your city requires there.</p></div>
+    <div class="card"><span class="k">Step two</span><h3>They call you</h3>
+      <p>Usually within one business day, to agree a time. That is a target, not a promise.</p></div>
+    <div class="card"><span class="k">Step three</span><h3>They walk the wall</h3>
+      <p>At the property, at low tide where they can, because low tide is when a wall
+      tells the truth.</p></div>
+    <div class="card"><span class="k">Step four</span><h3>You decide</h3>
+      <p>You get what they found. Whether you do anything about it is up to you.</p></div>
+  </div>
+</div></section>
+
+<section class="tint"><div class="wrap">{slot("R1", "", "seawall-compliance")}</div></section>
+
+<section><div class="wrap">
+  <div class="shead"><h2>Worth being straight about</h2></div>
+  <div class="cards">
+    <div class="card"><span class="k">Who comes</span><h3>Not us</h3>
+      <p>We publish the rules and make the introduction. The inspection is done by an
+      independent licensed contractor. They are not our employee or our agent, and we do
+      not supervise their work. <a href="/legal/terms/">The terms</a> say exactly that.</p></div>
+    <div class="card"><span class="k">Who pays</span><h3>Not you</h3>
+      <p>The visit is free to you. Contractors pay us for the introduction. You should know
+      that when you weigh what we tell you.</p></div>
+    <div class="card"><span class="k">Your details</span><h3>Go to one contractor</h3>
+      <p>The one covering your area &mdash; not sold to a panel to bid on. You can
+      <a href="/legal/your-privacy-choices/">opt out</a> at any time.</p></div>
+    <div class="card"><span class="k">If it is urgent</span><h3>Do not wait for us</h3>
+      <p>A wall that has moved, a sinkhole, or water where it should not be is not a form.
+      Call a licensed marine contractor, and call your building department if anything
+      looks unsafe.</p></div>
+  </div>
+</div></section>
+
+<section class="tint"><div class="wrap">
+  <div class="shead"><h2>Before they arrive</h2>
+  <p>None of this is required. It just makes the visit worth more.</p></div>
+  <div class="strip">
+    <a href="/downloads/seawall-warning-signs-checklist.pdf"><em>Checklist</em>Walk the wall first &mdash; twelve signs</a>
+    <a href="/resources/what-it-costs/"><em>Costs</em>What this work runs in this market</a>
+    <a href="/coverage/"><em>Coverage</em>Your city&rsquo;s rule, with the code section</a>
+  </div>
+</div></section>
+'''
+    body += FOOT
+    write(path, body)
+    PAGES.append((path, TODAY, "0.9"))
+    return 1
+
+
 def build_coverage():
     regs = load_regions()
     byc = {}
@@ -1386,6 +1497,7 @@ def main():
     build_costs()
     n_reg = build_regions()
     n_dl = build_downloads()
+    build_book()
     build_coverage()
     n_legal = build_legal()
     build_sitemap()

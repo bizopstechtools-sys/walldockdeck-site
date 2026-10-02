@@ -6,7 +6,7 @@ A4,/agents,After the tools,Agent,agent_tools,quiet,native,,700
 A5,/agents|/luxury,Closing block,Agent,agent_tools,dark,native,,700
 C1,/check,Before the result,Homeowner,shore_score,dark,native,,700
 C2,/check,Under the form,Homeowner,county_guide,quiet,native,,700
-R1,/report,Under the score,Both,book_inspect,dark,native,,700
+R1,/book,Under the score,Both,book_inspect,dark,native,,700
 R2,/report,Sidebar,Homeowner,county_guide,,native,,700
 R3,/report,After the detail,Homeowner,bid_compare,tint,native,,700
 R4,/report,Foot of page,Homeowner,county_guide,quiet,native,,700

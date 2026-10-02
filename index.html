@@ -250,6 +250,8 @@ section.band{padding-block:64px}
 .gate .qcard{max-width:520px;width:100%;box-shadow:0 18px 40px rgba(11,37,54,.18)}
 .consent{display:grid;grid-template-columns:22px 1fr;gap:10px;font-size:13px;color:var(--ink-2);margin:6px 0 14px}
 .consent input{width:18px;height:18px;margin-top:2px;accent-color:var(--teal)}
+.sharenote{font-size:12.5px;line-height:1.5;color:var(--ink-3,#6F8492);margin:-8px 0 14px;max-width:62ch}
+.sharenote a{color:var(--teal)}
 .slots{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:12px 0}
 .slot{border:1px solid var(--line);border-radius:8px;padding:10px;background:var(--surface);cursor:pointer;text-align:center;font-size:14px;color:var(--ink)}
 .slot b{display:block;font-size:15px}
@@ -1094,7 +1096,13 @@ footer.site a:hover{color:#fff}
       '<button type="button" class="opt" data-mode="pick" aria-pressed="'+(mode==="pick")+'"><b>Pick a time now</b><span>Choose a window that works</span></button>'+
       '<button type="button" class="opt" data-mode="call" aria-pressed="'+(mode==="call")+'"><b>Call me to schedule</b><span>We\'ll call within one business day</span></button></div>';
   }
-  function consentText(r){ return '(Optional) Yes, call and text me. I agree that WallDockDeck and its licensed inspection partner for '+(r?r.name:'my region')+', may call and text me at the number above about my Shore Score, inspection and related services, including messages sent with automated technology. Consent is not a condition of any purchase or service. Message frequency varies. Msg & data rates may apply. Reply STOP to opt out, HELP for help. See our Privacy Policy and SMS Terms.'; }
+  /* One company, named. Carriers reject consent covering a second business the
+     recipient was never named. Must stay character-identical to the wording on
+     /sms-terms/ and in the A2P campaign registration. r is unused but kept so
+     existing call sites do not change. */
+  function consentText(r){ return 'I agree that Wall Dock Deck may contact me by phone, text and email about my property at the number above, including by automated means. Consent is not a condition of purchase. Message and data rates may apply. Message frequency varies. Reply STOP to opt out, HELP for help. See our Privacy Policy and SMS Terms.'; }
+  /* Point-of-collection notice. A disclosure, not a second tick. */
+  function shareNote(){ return 'If you ask to be connected, we share your details with a licensed contractor for your area, who is an independent business and may contact you directly.'; }
 
   function planBox(r){
     if(state.structs.indexOf("dock")>-1 || state.dockQ==="skip") return "";
@@ -1129,6 +1137,7 @@ footer.site a:hover{color:#fff}
       '<div class="row2"><div class="field"><label for="cName">Full name</label><input id="cName" autocomplete="name" value="'+esc(who.name||"")+'"></div><div class="field"><label for="cPhone">Mobile phone</label><input id="cPhone" autocomplete="tel" inputmode="tel" value="'+esc(who.phone||"")+'"></div></div>'+
       '<div class="field"><label for="cEmail">Email</label><input id="cEmail" autocomplete="email" inputmode="email" value="'+esc(who.email||"")+'"></div>'+
       '<label class="consent"><input type="checkbox" id="cConsent"><span>'+consentText(r)+'</span></label>'+
+      '<p class="sharenote">'+shareNote()+' <a href="/legal/your-privacy-choices/">You can opt out.</a></p>'+
       '<button class="btn btn-cta" style="width:100%" id="unlock">Show my full report</button><p class="fine" id="gateErr" style="color:var(--act);margin:8px 0 0"></p></div></div>';
 
     var book = state.booked ?
@@ -1189,6 +1198,7 @@ footer.site a:hover{color:#fff}
       '<div class="row2"><div class="field"><label for="dName">Full name</label><input id="dName" autocomplete="name" value="'+esc(who.name||"")+'"></div><div class="field"><label for="dPhone">Mobile phone</label><input id="dPhone" autocomplete="tel" inputmode="tel" value="'+esc(who.phone||"")+'"></div></div>'+
       '<div class="field"><label for="dEmail">Email</label><input id="dEmail" autocomplete="email" inputmode="email" value="'+esc(who.email||"")+'"></div>'+
       '<label class="consent"><input type="checkbox" id="dConsent"><span id="dConsentText">'+consentText(r)+'</span></label>'+
+      '<p class="sharenote">'+shareNote()+' <a href="/legal/your-privacy-choices/">You can opt out.</a></p>'+
       '<div class="field"><span class="flabel">Photos, plans, permits or drawings (optional)</span><label class="btn btn-ghost btn-sm" style="cursor:pointer;margin-top:6px">Add files<input type="file" multiple data-upload-book hidden></label><div class="fine" data-upmsg style="margin-top:6px"></div></div><button class="btn btn-cta" style="width:100%" id="dBook">'+(bk.mode==="pick"?"Request my inspection":"Request a call")+'</button><p class="fine" id="dErr" style="color:var(--act);margin:8px 0 0"></p>'+
       '<p class="skip">Want to know your score first? <a href="#/start">Take the 2-minute Health Check</a></p></div>';
     el.querySelectorAll("[data-bseg]").forEach(function(x){x.onclick=function(){bk.segment=x.dataset.bseg; renderBook();}});
@@ -1235,6 +1245,7 @@ footer.site a:hover{color:#fff}
       '<div class="row2"><div class="field"><label for="gName">First name</label><input id="gName" autocomplete="given-name" value="'+esc(who.name||"")+'"></div><div class="field"><label for="gEmail">Email</label><input id="gEmail" value="'+esc(g.email)+'" autocomplete="email" inputmode="email"></div></div>'+
       '<div class="field"><label for="gPhone">Mobile phone (optional)</label><input id="gPhone" autocomplete="tel" inputmode="tel"></div>'+
       '<label class="consent"><input type="checkbox" id="gConsent"><span id="gConsentText">'+consentText(r)+'</span></label>'+
+      '<p class="sharenote">'+shareNote()+' <a href="/legal/your-privacy-choices/">You can opt out.</a></p>'+
       '<button class="btn btn-cta" style="width:100%" id="gSend">Send my free guide</button><p class="fine" id="gErr" style="color:var(--act);margin:8px 0 0"></p>'+
       '<p class="skip">Want your score too? <a href="#/start">Take the 2-minute Health Check</a> and the guide comes with it.</p></div>';
     function syncEd(){ var rr=state.region?REGIONS[state.region]:null; $("#gEd").textContent=rr?rr.name+" edition":"Your area edition"; $("#gConsentText").textContent=consentText(rr); }

@@ -22,8 +22,15 @@ BANNED_STRINGS = [
     "Giordano", "same contractor", "signed contract", "the contractor's proposal",
 ]
 
-# A street address in any page is a bug, whatever the name.
+# A street address in any page is a bug, whatever the name — with one exception:
+# our own registered address, which belongs on the privacy page. Anything else
+# matching this shape is a customer's property and must not ship.
 ADDRESS_RE = re.compile(r"\b\d{2,5}\s+(?:N|S|E|W|NE|NW|SE|SW)\.?\s+\w+", re.I)
+
+OWN_ADDRESS = [
+    "16300 SW 137th Avenue",
+    "16300 SW 137 Ave",
+]
 
 def pages():
     for d, dirs, fs in os.walk(ROOT):
@@ -41,6 +48,9 @@ def main():
             if bad.lower() in text.lower():
                 problems.append(f"{rel}: contains {bad!r}")
         for m in ADDRESS_RE.finditer(text):
+            around = text[max(0, m.start() - 10): m.end() + 40]
+            if any(own.lower() in around.lower() for own in OWN_ADDRESS):
+                continue          # our own address, on our own page
             problems.append(f"{rel}: looks like a street address — {m.group(0)!r}")
 
     if problems:

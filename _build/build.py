@@ -53,6 +53,217 @@ def title_case(slug):
     out = " ".join(w.capitalize() for w in str(slug or "").split("-"))
     return out.replace("By The Sea", "by-the-Sea").replace("Lauderdale By-the-Sea", "Lauderdale-by-the-Sea")
 
+
+# ---------------------------------------------------------------- search result
+# How a page looks in Google. Two rules behind everything below:
+#
+#  1. Lead with the answer, not the brand. On a rule query the figure IS the
+#     hook — someone who sees "5.0 ft NAVD88" clicks to find out whether it
+#     applies to them, which exception they fall under, and where it is written.
+#     A title that answers outperforms one that teases, because it also looks
+#     like the only result that actually knows.
+#  2. No superlative we cannot source. "#1 guide" is the kind of claim Google
+#     rewrites out of the result, and it contradicts our own rule that a number
+#     without a source does not ship. "Every city, verified" says the same thing
+#     and is true.
+#
+# Budgets: ~60 characters of title before Google truncates, ~155 of description.
+BRAND = "WallDockDeck"
+TITLE_MAX = 60
+DESC_MAX = 155
+
+# Rotating closers. Each is a reason to click the competition cannot copy.
+CTA_SCORE = "How is your seawall holding up? Get a score."
+CTA_SHEET = "Free one-page sheet with the code section."
+CTA_LIST = "Free checklist."
+
+
+def squash(s):
+    return re.sub(r"\s+", " ", str(s or "")).strip()
+
+
+def _tidy(s):
+    """Drop a dangling separator or joining word left behind by a cut."""
+    stop = {"a", "an", "the", "and", "or", "no", "of", "in", "on", "to", "for",
+            "is", "with", "then", "but", "by", "at", "from", "its", "it"}
+    s = s.strip()
+    while True:
+        s2 = s.rstrip(" ,;:.—–-&/")
+        parts = s2.split()
+        if parts and parts[-1].lower() in stop:
+            s = " ".join(parts[:-1])
+            continue
+        return s2
+
+
+def clip(s, n):
+    """Cut to n characters on a clause boundary first, a word boundary second.
+    The original separators are kept, so a clipped sentence still reads as one
+    sentence rather than a run of comma splices."""
+    s = squash(s)
+    if len(s) <= n:
+        return _tidy(s)
+    # keep the separators so the join is the author's punctuation, not ours
+    parts = re.split(r"(\s+—\s+|\s+-\s+|,\s+|;\s+|\.\s+)", s)
+    out = ""
+    for i in range(0, len(parts), 2):
+        nxt = out + (parts[i - 1] if i else "") + parts[i]
+        if len(_tidy(nxt)) > n:
+            break
+        out = nxt
+    return _tidy(out) if out else _tidy(s[:n].rsplit(" ", 1)[0])
+
+
+def fit_title(core, brand=True):
+    """Append the brand only when it fits. Google appends the site name itself
+    when we do not, so those characters are better spent on the answer."""
+    core = squash(core)
+    if brand and len(core) + 3 + len(BRAND) <= TITLE_MAX:
+        return f"{core} | {BRAND}"
+    return core
+
+
+def fit_desc(*parts):
+    """Build a description from whole sentences, so it never ends mid-thought."""
+    out = ""
+    for p in parts:
+        p = squash(p)
+        if not p:
+            continue
+        if not p.endswith((".", "?", "!")):
+            p += "."
+        nxt = p if not out else f"{out} {p}"
+        if len(nxt) > DESC_MAX:
+            break
+        out = nxt
+    return out
+
+
+def answer_line(ans, unit, n=34):
+    """The figure as it should read in a title: '5.0 ft NAVD88', 'Town by town'."""
+    ans, unit = squash(ans), squash(unit)
+    if not ans:
+        return clip(unit, n)
+    if not unit:
+        return clip(ans, n)
+    # a bare figure needs its unit beside it; a sentence needs a separator
+    joined = f"{ans} {unit}" if re.match(r"^[~$<>\d]", ans) else f"{ans} — {unit}"
+    return clip(joined, n)
+
+
+def year_of(s):
+    m = re.match(r"(\d{4})", squash(s))
+    return m.group(1) if m else str(date.today().year)
+
+
+# Per-topic search framing. Keyed on topic slug; anything unlisted falls back to
+# the question itself, which is already the phrase people type.
+TOPIC_SEO = {
+    "seawall-height-requirement": dict(
+        title="Seawall Height in {city}: {ans}",
+        desc=lambda c, r, ans: fit_desc(
+            f"{c} requires {ans} for a new or substantially repaired seawall",
+            "The code section, what triggers it, and the exceptions",
+            CTA_SHEET),
+    ),
+    "seawall-permit": dict(
+        title="Do I Need a Permit to Fix a Seawall in {city}?",
+        desc=lambda c, r, ans: fit_desc(
+            f"Yes — and {c} checks things in a set order",
+            "What the plans must show, who signs off first, and the step that catches owners out",
+            CTA_SHEET),
+    ),
+    "seawall-repair-cost": dict(
+        title="Seawall Cost in {city}: {raw} ({year} Estimate)",
+        desc=lambda c, r, ans: fit_desc(
+            f"{squash(r.get('headline_answer'))} in {c}, {year_of(r.get('verified_date'))}, with what was actually in scope",
+            "Estimates, not quotes — a seawall cannot be priced without a survey"),
+    ),
+    "flood-zone": dict(
+        title="{city} Flood Zone: What It Means for Your Seawall",
+        desc=lambda c, r, ans: fit_desc(
+            f"The flood zone and base elevation {c} builds to, and what it changes about your wall",
+            CTA_SHEET),
+    ),
+    "dock-permit-size": dict(
+        title="How Big a Dock Can You Build in {city}?",
+        desc=lambda c, r, ans: fit_desc(
+            f"{c} dock size limits, setbacks, and the permits in the order they go in",
+            CTA_SHEET),
+    ),
+    "boat-lift-rules": dict(
+        title="Boat Lift Rules in {city}: {ans}",
+        desc=lambda c, r, ans: fit_desc(
+            f"What {c} allows on a boat lift, what needs a permit, and what the agencies check",
+            CTA_SHEET),
+    ),
+    "deck-requirements": dict(
+        title="Waterfront Deck Rules in {city}: Setbacks & Railings",
+        desc=lambda c, r, ans: fit_desc(
+            f"The setback, railing and surface rules {c} enforces on a waterfront deck",
+            CTA_LIST),
+    ),
+    "licensed-contractors": dict(
+        title="How to Check a Marine Contractor in {city}",
+        desc=lambda c, r, ans: fit_desc(
+            "The licence, the insurance and the two records to pull before you sign anything",
+            f"Specific to {c}", CTA_LIST),
+    ),
+    "storm-prep": dict(
+        title="Storm Prep for {city} Waterfront Owners",
+        desc=lambda c, r, ans: fit_desc(
+            f"What {c} requires before and after a storm, what to photograph, and the debris rules",
+            CTA_LIST),
+    ),
+}
+
+# Cluster hubs. These are the pages where the hook has to carry the click,
+# because there is no single figure to lead with.
+CLUSTER_SEO = {
+    "failing-seawall": dict(
+        title="Is Your Seawall Failing? 12 Signs to Check",
+        desc="Sinkholes, leaning panels, rust bleed and water draining the wrong way. "
+             "The twelve signs that mean call someone, and the ones that can wait."),
+    "seawall-compliance": dict(
+        title="Seawall Rules by City: Heights, Permits, Deadlines",
+        desc="Every South Florida city sets its own seawall height, and most owners are "
+             "quoting the wrong one. The figure, the code section, the date we checked."),
+    "docks-and-lifts": dict(
+        title="Dock & Boat Lift Permits in South Florida",
+        desc="How big a dock you can build, what a lift needs, and the order the agencies "
+             "sign off in. City by city, with the code section for each."),
+    "buying-and-selling": dict(
+        title="Buying Waterfront? Ask These Before You Close",
+        desc="A seawall is the one thing a standard home inspection does not look at. "
+             "The questions to ask inside the inspection period, and who answers them."),
+    "decks": dict(
+        title="Waterfront Deck Safety: A 10-Point Owner Check",
+        desc="Soft boards, loose rails, and the connections that fail first on salt water. "
+             "What to check yourself, and what your city requires when you rebuild."),
+    "hoa-and-commercial": dict(
+        title="HOA Shoreline Planning: What Boards Must Budget",
+        desc="Shared seawalls, reserve studies, and the deadlines that arrive whether the "
+             "board planned for them or not. What to put in front of your members."),
+}
+
+# County pages. Each county's hook is how it differs from the other three, which
+# is the thing a searcher cannot get anywhere else.
+REGION_TITLE = {
+    # The data figure reads as a repetition next to the words "Seawall Rules"
+    # on these two, so they get written rather than generated.
+    "miami-dade": "Miami-Dade Seawall Rules: Your City Sets the Height",
+    "palm-beach": "Palm Beach Seawall Rules: Every Town Sets Its Own",
+}
+
+REGION_SEO = {
+    "broward": "Broward is the one county with a single standard behind every city — and "
+               "several cities went above it. The figure, the code, and who differs.",
+    "miami-dade": "The county sets no seawall height at all. Your city does, and the cities "
+                  "differ sharply. Which figure applies to your address, and where it is written.",
+    "palm-beach": "No county standard exists — every town sets its own elevation, in its own "
+                  "document. The towns we have verified, with the figure and the code section.",
+}
+
 MARK = ('<svg viewBox="0 0 34 34" width="28" height="28" aria-hidden="true"><rect width="34" height="34" rx="7" fill="#123549"/>'
         '<rect x="7" y="8" width="5" height="18" rx="1" fill="#7FC6CF"/>'
         '<rect x="14.5" y="14" width="12.5" height="3.5" rx="1" fill="#fff"/>'
@@ -254,8 +465,19 @@ def build_matrix():
         cluster = CLUSTER_OF_NAME.get(r.get("cluster", ""), "seawall-compliance")
         path = f"/{cs}/{ts}/"
         q = r.get("question") or topic["question"].replace("{city}", city["city"])
-        title = f'{q} | WallDockDeck'
-        desc = (r.get("qualifier") or "").strip() or q
+
+        # How it reads in Google. Answer first, city named, brand only if it fits.
+        seo = TOPIC_SEO.get(ts)
+        ans = answer_line(r.get("headline_answer"), r.get("unit"))
+        if seo:
+            title = fit_title(seo["title"].format(
+                city=city["city"], ans=ans,
+                raw=squash(r.get("headline_answer")),
+                year=year_of(r.get("verified_date"))))
+            desc = seo["desc"](city["city"], r, ans)
+        else:
+            title = fit_title(f"{q} {ans}".strip() if ans else q)
+            desc = fit_desc(clip(r.get("qualifier") or q, 110), CTA_SCORE)
 
         # Rule 2 — same question, nearby. Only links to pages that exist.
         near = [s for s in (city.get("nearby") or "").split("|")
@@ -350,8 +572,12 @@ def build_clusters():
             for r in load_regions())
 
         path = f"/resources/{slug}/"
-        title = f'{c["cluster"]} | WallDockDeck Resources'
-        desc = f'{c["who"]}. {c["asset"]} plus the local rule for your city.'
+        s = CLUSTER_SEO.get(slug)
+        if s:
+            title, desc = fit_title(s["title"]), fit_desc(s["desc"])
+        else:
+            title = fit_title(f'{c["cluster"]}: The {c["asset"]}')
+            desc = fit_desc(f'{c["who"]}', f'The {c["asset"]}, plus the rule your own city enforces', CTA_SCORE)
         body = head_(title, desc, path, body_data=f' data-cluster="{e(slug)}"')
         body += f"""<nav class="crumbs"><div class="wrap">
   <a href="/">Home</a> <span>/</span> <a href="/resources/">Resources</a> <span>/</span> {e(c['cluster'])}
@@ -392,8 +618,10 @@ def build_resources_hub():
         for c in sorted(CLUSTERS, key=lambda x: int(x["order"])))
 
     path = "/resources/"
-    body = head_("Waterfront Resources | WallDockDeck",
-                "Seawall, dock and deck answers for every waterfront city from the Keys to Palm Beach — the local rule, the code section, and the date we checked it.",
+    body = head_(fit_title("South Florida Seawall, Dock & Deck Rules by City"),
+                fit_desc("Seawall, dock and deck rules from the Keys to Palm Beach",
+                         "Each one with the figure, the code section, and the date we checked it",
+                         CTA_SCORE),
                 path)
     body += f"""<div class="answer"><div class="wrap">
   <span class="eyebrow">Resources</span>
@@ -437,10 +665,17 @@ def build_agents(luxury=False):
     path = "/luxury/" if luxury else "/agents/"
     slots_shown = ["A1", "A2", "A5"] if luxury else ["A1", "A2", "A3", "A4", "A5"]
     kicker = "Luxury Real Estate" if luxury else "Waterfront Agent Tools"
-    title = ("Luxury Waterfront Tools for Agents | WallDockDeck" if luxury
-             else "Waterfront Tools for Agents | WallDockDeck")
-    desc = ("See what shape the seawall is in, what the city requires, and what a repair would cost — "
-            "on any waterfront property, listing side or buy side.")
+    title = fit_title("Luxury Waterfront: Check the Seawall Before You List" if luxury
+                       else "Waterfront Listings: Check the Seawall Before You List")
+    desc = fit_desc(
+        "On an eight-figure waterfront listing the seawall is the one asset no home inspector "
+        "opens, and the one a buyer's engineer will"
+        if luxury else
+        "The seawall is what kills a waterfront deal in the inspection period, and no home "
+        "inspector looks at it",
+        "Know the condition, the city rule and the repair range before you list"
+        if luxury else
+        "See the condition, the city rule and the repair range on any address")
 
     ben = "".join(
         f'<div class="card"><span class="k">{n}</span><h3>{t}</h3><p>{p}</p></div>'
@@ -533,9 +768,11 @@ TERMS = [
 
 def build_costs():
     path = "/resources/what-it-costs/"
-    title = "What a Seawall Actually Costs | WallDockDeck"
-    desc = ("Estimated seawall, dock and lift costs from real South Florida work in 2026, rounded, "
-            "with what was actually built. One 280-foot wall priced three ways. Not a quote.")
+    title = fit_title("What a Seawall Really Costs: One Wall, Three Prices")
+    desc = fit_desc(
+        "One 280-foot Boca Raton seawall, priced three ways in 2026 — a $350,000 spread "
+        "on the same wall",
+        "What was in scope each time, and what nobody includes")
     top = max(o[3] for o in OPTIONS)
 
     bars = ""
@@ -681,8 +918,12 @@ def build_regions():
                       + ", ".join(cities_here) + ".") if in_county else \
                      "City pages for this county are still being verified."
 
-        body = head_(f'{r["title"]} | WallDockDeck', r["qualifier"][:158], path,
-                     body_data=f' data-cluster="seawall-compliance"')
+        county_ans = answer_line(r.get("headline_answer"), r.get("unit"), 26)
+        body = head_(
+            fit_title(REGION_TITLE.get(rs)
+                      or f'{r["region"]} County Seawall Rules: {county_ans}'),
+            fit_desc(REGION_SEO.get(rs) or fit_desc(clip(r["qualifier"], 108), CTA_SCORE)),
+            path, body_data=' data-cluster="seawall-compliance"')
         body += f'''<nav class="crumbs"><div class="wrap">
   <a href="/">Home</a> <span>/</span> <a href="/resources/">Resources</a> <span>/</span> {e(r["region"])}
 </div></nav>
@@ -756,9 +997,10 @@ def build_downloads():
                      ("palm", "Palm Beach"), ("keys", "Florida Keys")))
 
     path = "/downloads/"
-    body = head_("Downloads | WallDockDeck",
-                 "Every sheet, checklist and guide we publish, free to open. City height sheets, "
-                 "owner checklists and the four regional waterfront guides.", path)
+    body = head_(fit_title("Free Seawall Height Sheets & Owner Checklists (PDF)"),
+                 fit_desc("Every sheet, checklist and guide we publish, free to open",
+                          "City height sheets, owner checklists, and the four regional guides"),
+                 path)
     body += f'''<nav class="crumbs"><div class="wrap">
   <a href="/">Home</a> <span>/</span> <a href="/resources/">Resources</a> <span>/</span> Downloads
 </div></nav>
@@ -814,9 +1056,14 @@ def build_coverage():
     </div>'''
 
     path = "/coverage/"
-    body = head_("Where We Work | WallDockDeck",
-                 "Seawalls, docks and waterfront decks from the Florida Keys to Palm Beach. "
-                 "The counties and cities whose rules we have verified and published.", path)
+    # Names the counties that actually have published pages. A title promising
+    # the Keys would land on a page with no Keys city on it.
+    counties = [r["region"] for r in load_regions()]
+    body = head_(fit_title(clip("Seawall Rules by City: " + ", ".join(counties), TITLE_MAX)),
+                 fit_desc("Seawalls, docks and waterfront decks, city by city",
+                          "Find yours and see the figure, the code section and the date we checked",
+                          CTA_SCORE),
+                 path)
     body += f'''<nav class="crumbs"><div class="wrap">
   <a href="/">Home</a> <span>/</span> Where we work
 </div></nav>
@@ -836,7 +1083,7 @@ def build_coverage():
 
 PRIVACY_BODY = """<section><div class="wrap">
   <div class="rows">
-    <div><b>Who we are</b><span>WallDockDeck connects waterfront property owners in South Florida with licensed marine contractors. We do not perform construction ourselves. Legal entity: [Legal Business Name]. Address: [Business Address]. Contact: hello@walldockdeck.com.</span></div>
+    <div><b>Who we are</b><span>WallDockDeck connects waterfront property owners in South Florida with licensed marine contractors. We do not perform construction ourselves. Wall Dock Deck, 16300 SW 137th Avenue, Unit 128, Miami, FL 33177. Contact: hello@walldockdeck.com.</span></div>
     <div><b>What we collect</b><span>Only what you give us on a form: your name, email address, phone number if you provide one, the property address, and anything you type into the notes field. We also record which page you were on and which resource you asked for.</span></div>
     <div><b>What we never collect</b><span>Financial account details, card numbers, Social Security or other government identifiers, or date of birth. If a form ever asks you for any of those, it is not ours.</span></div>
     <div><b>Why we collect it</b><span>To send you the sheet, checklist or report you asked for, to answer your question about your property, and to arrange an inspection if you request one. The property address is what lets us give you your own city&rsquo;s rule instead of a generic answer.</span></div>

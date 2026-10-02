@@ -57,10 +57,46 @@ def pages():
             if f.endswith(".html") and d != ROOT:      # skip the untouched prototype
                 yield os.path.join(d, f)
 
+def extra_docs():
+    """The guides were excluded from this scan until October 2026, which meant the four
+    documents we actually email were the only ones never checked. Their text source is
+    checked here, and the built PDFs too when pdftotext is available."""
+    src = os.path.join(ROOT, "_build", "guides-src")
+    if os.path.isdir(src):
+        for f in sorted(os.listdir(src)):
+            if f.endswith(".md"):
+                yield os.path.join(src, f)
+    import shutil, subprocess, tempfile
+    if not shutil.which("pdftotext"):
+        return
+    for sub in ("guides", "downloads"):
+        d = os.path.join(ROOT, sub)
+        if not os.path.isdir(d):
+            continue
+        for f in sorted(os.listdir(d)):
+            if not f.endswith(".pdf"):
+                continue
+            t = tempfile.NamedTemporaryFile(suffix=".txt", delete=False)
+            t.close()
+            subprocess.run(["pdftotext", os.path.join(d, f), t.name],
+                           capture_output=True)
+            yield t.name + "\x00" + os.path.join(d, f)
+
+
+def read_doc(p):
+    if "\x00" in p:
+        tmp, real = p.split("\x00")
+        try:
+            return open(tmp, encoding="utf8", errors="replace").read(), real
+        finally:
+            os.unlink(tmp)
+    return open(p, encoding="utf8", errors="replace").read(), p
+
+
 def main():
     problems = []
-    for p in pages():
-        text = open(p, encoding="utf8").read()
+    for p in list(pages()) + list(extra_docs()):
+        text, p = read_doc(p)
         rel = os.path.relpath(p, ROOT)
         for bad in TERMS:
             if bad.lower() in text.lower():

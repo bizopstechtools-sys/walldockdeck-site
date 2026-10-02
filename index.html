@@ -795,7 +795,11 @@ footer.site a:hover{color:#fff}
     var id = "wdd:"+fnv(normAddr(addr)||"noaddr")+":"+fnv(owner||String(Date.now()));
     who.extId=id; who.addrKey=normAddr(addr); who.ownerKey=owner; return id;
   }
-  function utm(){ var o={}; try{ var q=new URLSearchParams(location.search); ["utm_source","utm_medium","utm_campaign","utm_term","utm_content","gclid","fbclid"].forEach(function(k){ var v=q.get(k)||sessionStorage.getItem("wdd_"+k); if(v){ o[k]=v; sessionStorage.setItem("wdd_"+k,v); } }); }catch(e){} return o; }
+  /* Reads tags from the query AND from the fragment, because a campaign link
+     like /#/book?utm_source=... puts them where location.search cannot see them.
+     Values persist for the session so browsing does not drop attribution. */
+  function utmParams(){ var o=new URLSearchParams(location.search); var h=location.hash||""; var i=h.indexOf("?"); if(i>-1){ new URLSearchParams(h.slice(i+1)).forEach(function(v,k){ if(!o.has(k)) o.append(k,v); }); } return o; }
+  function utm(){ var o={}; try{ var q=utmParams(); ["utm_source","utm_medium","utm_campaign","utm_term","utm_content","gclid","fbclid"].forEach(function(k){ var v=q.get(k)||sessionStorage.getItem("wdd_"+k); if(v){ o[k]=v; sessionStorage.setItem("wdd_"+k,v); } }); }catch(e){} return o; }
   utm();
   var SITE_KEYS = {cracks:1};
   function scoreFields(){

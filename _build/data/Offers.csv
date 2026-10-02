@@ -14,3 +14,4 @@ book_inspect,Homeowner,Have someone look at it,"A licensed marine contractor cov
 callback,Homeowner,Have someone call you,"Ten minutes, about your wall specifically.",Request a call,phone,Ten minutes. We call when you say.,no
 annual,Homeowner,Check it again next year,"One email, twelve months from now.",Remind me,consent,One email a year. Nothing else.,no
 storm_alerts,Homeowner,King tides and storm notices,Only when something is coming to your stretch of water.,Keep me posted,email,Only when something is coming to your stretch of water.,no
+deck_check,Homeowner,Ten checks on a waterfront deck,"The parts that fail first on salt water, where to look, and what it means when you find one. Twenty minutes with a torch and a screwdriver.",Send the checklist,email,"A screening aid for owners, not a structural inspection.",yes

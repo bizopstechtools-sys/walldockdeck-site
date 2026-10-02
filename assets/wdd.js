@@ -41,10 +41,36 @@
   }
 
   /* ---------- utm passthrough ---------- */
+  /* Campaign links routinely put their tags after the fragment --
+     walldockdeck.com/#/book?utm_source=... -- where location.search is EMPTY and
+     the whole tag is silently lost. Read both halves. Then remember what we saw,
+     so someone who lands from an email, reads two pages and converts later still
+     carries the attribution that brought them. */
+  function params() {
+    var out = new URLSearchParams(location.search);
+    var h = location.hash || '';
+    var i = h.indexOf('?');
+    if (i > -1) {
+      new URLSearchParams(h.slice(i + 1)).forEach(function (v, k) {
+        if (!out.has(k)) out.append(k, v);
+      });
+    }
+    return out;
+  }
+
+  var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term',
+                  'utm_content', 'gclid', 'fbclid'];
+
   function utm() {
-    var out = {}, q = new URLSearchParams(location.search);
-    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid']
-      .forEach(function (k) { if (q.get(k)) out[k] = q.get(k); });
+    var out = {}, q = params();
+    UTM_KEYS.forEach(function (k) {
+      var v = q.get(k);
+      try {
+        if (v) sessionStorage.setItem('wdd_' + k, v);
+        else v = sessionStorage.getItem('wdd_' + k);
+      } catch (e) {}
+      if (v) out[k] = v;
+    });
     var a = q.get('agent') || q.get('a');
     if (a) out.agent_id = a;
     return out;

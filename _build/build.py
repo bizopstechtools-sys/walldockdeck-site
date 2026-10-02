@@ -471,6 +471,20 @@ ACTION_FOR = {
 }
 
 
+# Which asset each resource hub offers. Without this every hub showed the same
+# warning-signs checklist, so a campaign email about buying waterfront landed on
+# a page offering a seawall checklist. Where a cluster has no asset of its own
+# yet, it falls back to the county guide, which is always relevant.
+CLUSTER_OFFER = {
+    "seawall-compliance": "height_sheet",
+    "failing-seawall":    "warning_list",
+    "buying-and-selling": "fifteen_q",
+    "decks":              "deck_check",
+    "docks-and-lifts":    "county_guide",
+    "hoa-and-commercial": "county_guide",
+}
+
+
 def county_slug(name):
     """'Palm Beach' -> 'palm-beach'. The CRM routes on the slug; the display name
     is carried alongside it so a human reading a lead card sees something legible."""
@@ -499,13 +513,16 @@ def consent_block():
         f'<a href="/legal/your-privacy-choices/">You can opt out.</a></p>')
 
 
-def slot(slot_id, city="", cluster="", county=""):
+def slot(slot_id, city="", cluster="", county="", offer=""):
     """Render one capture slot. The offer comes from Slots -> Offers, so the
     copy and the placement are separate variables you can move one at a time."""
     s = SLOTS.get(slot_id)
     if not s:
         return ""
-    o = OFFERS.get(s["currentOffer"])
+    # A caller may override which offer this slot shows. Cluster hubs do, so a
+    # visitor who arrived from a "buying waterfront" email is offered the buyer
+    # checklist rather than whatever the slot shows by default.
+    o = OFFERS.get(offer or s["currentOffer"])
     if not o or o.get("live", "yes") == "no":
         return ""
     style = (" " + s["style"]) if s.get("style") else ""
@@ -777,7 +794,7 @@ def build_clusters():
   <p>Which agencies are involved, what they want, and the order they want it in.</p></div>
   <div class="cards">{guides}</div>
 </div></section>
-<section class="tint"><div class="wrap">{slot('H2', '', slug)}</div></section>
+<section class="tint"><div class="wrap">{slot('H2', '', slug, offer=CLUSTER_OFFER.get(slug, ''))}</div></section>
 """
         body += FOOT
         write(path, body)

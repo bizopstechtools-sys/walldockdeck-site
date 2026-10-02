@@ -64,6 +64,10 @@ table{width:100%;border-collapse:collapse;margin-bottom:6mm}
 td{padding:6pt 8pt;border-bottom:1px solid #EAF0F2;vertical-align:top;font-size:9.8pt}
 td.k{font-family:"IBM Plex Mono",monospace;font-size:7.8pt;letter-spacing:.07em;text-transform:uppercase;
      color:#6F8492;width:42mm}
+table.rt th{text-align:left;padding:5pt 8pt;border-bottom:1px solid #D8E1E6;
+     font-family:"IBM Plex Mono",monospace;font-size:7.4pt;letter-spacing:.13em;
+     text-transform:uppercase;color:#6F8492;font-weight:500}
+table.rt td.mono{font-family:"IBM Plex Mono",monospace;font-size:8.6pt;color:#6F8492}
 .src{background:#F4F7F8;border-left:2.5pt solid #0F7482;padding:5mm 6mm;font-size:9.2pt;color:#41586A;margin-bottom:6mm}
 .src b{color:#0B2536}
 ol{margin:0 0 6mm;padding-left:0;list-style:none;counter-reset:n}
@@ -303,8 +307,102 @@ def deck_checklist():
                    inner))]
 
 
+# ---------------------------------------------------------------- agent sheet
+# Backs the agent_tools offer, which has been live on 8 placements with nothing
+# behind it. Every figure here comes from the verified CityTopics rows, so this
+# sheet cannot claim a number the website has not sourced and dated.
+
+AGENT_QUESTIONS = [
+    ("How high is the cap, and in which datum?",
+     "A figure in MLW is not the same number as a figure in NAVD88. Contractor drawings "
+     "in this market are sometimes written to MLW while the city states its rule in NAVD88. "
+     "Ask which datum before anyone compares the two."),
+    ("When was the wall last inspected, and by whom?",
+     "A standard home inspection does not look at a seawall. If the seller has an engineer's "
+     "report, get it now rather than discovering it in the buyer's hands."),
+    ("Has any work been permitted, and was it closed out?",
+     "An open permit on a marine structure is a title and closing problem, not a punch-list item."),
+    ("Is the wall shared with a neighbour?",
+     "Shared walls, shared caps and tie-back easements change who pays and who can act. "
+     "Find out before a buyer's attorney does."),
+    ("Does any of it sit on a neighbour's line or in a waterway setback?",
+     "The zoning location survey answers this. Ask whether one exists."),
+    ("Is there a sinkhole, a depression, or bare soil along the cap?",
+     "Soil leaving the property is the single most expensive thing to find late."),
+    ("What is the city's current minimum, and does this wall meet it?",
+     "The rule changes at the city line, not the county line. Our city pages carry the "
+     "figure, the code section, and the date we checked it."),
+]
+
+AGENT_KILLERS = [
+    ("Substantial repair pulls in the whole shoreline",
+     "In several cities, once work exceeds a threshold \u2014 commonly more than 50% of the "
+     "length, the cap included, or any work changing elevation along more than 50% \u2014 the "
+     "minimum elevation applies to the continuous wall along the entire property, not just "
+     "the stretch being fixed. A quote for 40 feet can become a quote for 200."),
+    ("The wall is compliant today and not compliant on rebuild",
+     "Existing walls are generally allowed to stay. The moment they are substantially "
+     "repaired or replaced, today's minimum applies. A wall that is fine now can carry a "
+     "much larger number the day it needs work."),
+    ("Build low now, build again later",
+     "Where a city allows an interim elevation before a future deadline, the wall normally "
+     "has to be engineered so it can be raised later. That is two mobilisations, not one. "
+     "Ask what it costs to build to the final elevation now."),
+]
+
+
+def agent_sheet():
+    rows = ""
+    live = sorted(
+        [r for r in CT if r["topicSlug"] == "seawall-height-requirement"],
+        key=lambda r: (CITIES.get(r["citySlug"], {}).get("county", ""),
+                       CITIES.get(r["citySlug"], {}).get("city", "")))
+    for r in live:
+        c = CITIES.get(r["citySlug"], {})
+        rows += (f'<tr><td><b>{e(c.get("city", r["citySlug"]))}</b></td>'
+                 f'<td>{e(c.get("county",""))}</td>'
+                 f'<td><b>{e(r.get("headline_answer",""))}</b> {e(r.get("unit",""))}</td>'
+                 f'<td class="mono">{e(r.get("verified_date",""))}</td></tr>')
+
+    qs = "".join(f'<li><b>{e(q)}</b><span>{e(w)}</span></li>' for q, w in AGENT_QUESTIONS)
+    ks = "".join(f'<li><b>{e(t)}</b><span>{e(d)}</span></li>' for t, d in AGENT_KILLERS)
+
+    inner = (
+        '<span class="eyebrow">Before you list &middot; waterfront</span>'
+        '<h2>One disclosure rule worth knowing first</h2>'
+        '<p class="lead">In <b>Delray Beach</b>, any contract to sell property in a tidally '
+        'influenced area signed after 1 February 2022 must carry a tidal-flood-barrier '
+        'disclosure, in bold capitals of at least 14 point. It is written into the land '
+        'development regulations, and it is the kind of requirement that surfaces at the '
+        'closing table rather than at the listing appointment. Other cities in this market '
+        'do not all have an equivalent \u2014 check the one you are in.</p>'
+        '<div class="src"><b>Source.</b> City of Delray Beach Land Development Regulations '
+        'Sec. 7.1.7; Ordinance 23-21, adopted 11 January 2022. Verified 2026-09.</div>'
+        '<h2 style="margin-top:7mm">Seven questions before you list</h2>'
+        f'<ol>{qs}</ol>'
+        '<h2 style="margin-top:7mm">Three things that kill a waterfront deal late</h2>'
+        f'<ol>{ks}</ol>'
+        '<h2 style="margin-top:7mm">Verified minimum cap elevations</h2>'
+        '<p class="lead">Published with the code section and the date checked. The rule '
+        'changes at the city line. Confirm with the building department before anyone '
+        'relies on it in a contract.</p>'
+        '<table class="rt"><thead><tr><th>City</th><th>County</th><th>Minimum</th>'
+        '<th>Verified</th></tr></thead><tbody>' + rows + '</tbody></table>'
+        '<div class="src"><b>How to use this.</b> None of this is an inspection, an '
+        'engineering opinion, or a valuation. It is the set of questions that stops a '
+        'waterfront deal falling apart in the inspection period, and the figures your '
+        'buyer\u2019s engineer will be working from. Full city pages, the code sections '
+        'and the dates are at walldockdeck.com.</div>')
+
+    return [("waterfront-listing-sheet.pdf",
+             shell("For Agents", "The waterfront listing sheet",
+                   "What to check before you list, what your buyer\u2019s engineer will ask, "
+                   "and the verified city minimums.", inner))]
+
+
 def main():
-    jobs = height_sheets() + warning_checklist() + buyer_checklist() + deck_checklist()
+    jobs = (height_sheets() + warning_checklist() + buyer_checklist()
+            + deck_checklist() + agent_sheet())
     with sync_playwright() as p:
         b = p.chromium.launch()
         pg = b.new_page()

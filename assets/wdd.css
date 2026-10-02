@@ -220,3 +220,7 @@ body.lux .figure b{color:var(--mulberry)}
   .legalbody tr{display:block;padding:12px 0;border-bottom:1px solid var(--line2)}
   .legalbody td:first-child{font-weight:700}
 }
+
+/* point-of-collection sharing notice, beside the consent box */
+.slot .sharing{font-size:13px;line-height:1.5;color:var(--ink3);margin:8px 0 0}
+.slot .sharing a{color:var(--teal)}

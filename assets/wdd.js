@@ -69,9 +69,11 @@
       slot_id:   el.dataset.slot || '',
       offer_id:  el.dataset.offer || '',
       page_path: location.pathname,
-      cluster:   el.dataset.cluster || d.cluster || '',
-      city:      el.dataset.city || d.city || '',
-      agent_id:  agentId()
+      cluster:     el.dataset.cluster || d.cluster || '',
+      city:        el.dataset.city || d.city || '',
+      county:      el.dataset.county || d.county || '',
+      county_slug: el.dataset.countySlug || d.countySlug || '',
+      agent_id:    agentId()
     };
   }
 
@@ -150,10 +152,17 @@
         if (e) e.focus();
         return;
       }
+      /* Record the exact sentence the person read, not a yes/no flag. The
+         wording lives on the label, so this stays correct if the label changes. */
       if (fields.consent === 'yes') {
+        var lab = el.querySelector('.consent[data-consent]');
         fields.consent_given = 'yes';
         fields.consent_timestamp = new Date().toISOString();
-        fields.consent_text = el.dataset.consent || '';
+        fields.consent_text = (lab && lab.dataset.consent) ||
+          (lab && lab.textContent.trim()) || '';
+        fields.consent_page = location.pathname;
+      } else if (fields.consent === 'no') {
+        fields.consent_given = 'no';
       }
       delete fields.consent;
 

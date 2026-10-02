@@ -433,7 +433,53 @@ FOOT = f"""<footer class="foot"><div class="wrap">
 """
 
 
-def slot(slot_id, city="", cluster=""):
+# The consent wording lives here once. The visible label, the data-consent
+# attribute that gets recorded with the lead, the SMS Terms page and the carrier
+# registration all read from this one string, so they cannot drift apart. If you
+# change it here, change it in the A2P registration too — a form that differs
+# from what was filed is the most common reason a campaign is pulled.
+#
+# It names ONE company. Carriers routinely reject consent language that covers a
+# second business, because the recipient cannot meaningfully consent to messages
+# from a party who is not named. The contractor handoff is disclosed separately,
+# below, which is also what CPRA wants at the point of collection.
+CONSENT_TEXT = (
+    "I agree that Wall Dock Deck may contact me by phone, text and email about my "
+    "property at the number above, including by automated means. Consent is not a "
+    "condition of purchase. Message and data rates may apply. Message frequency "
+    "varies. Reply STOP to opt out, HELP for help. See our Privacy Policy and SMS Terms."
+)
+
+# Shown next to the consent box wherever we collect contact details. Not a tick —
+# a disclosure, which is what the point-of-collection notice requirement asks for.
+SHARING_NOTE = (
+    "If you ask to be connected, we share your details with a licensed contractor "
+    "for your area, who is an independent business and may contact you directly."
+)
+
+
+def county_slug(name):
+    """'Palm Beach' -> 'palm-beach'. The CRM routes on the slug; the display name
+    is carried alongside it so a human reading a lead card sees something legible."""
+    return re.sub(r"[^a-z0-9]+", "-", squash(name).lower()).strip("-")
+
+
+def consent_block():
+    """The consent checkbox plus the sharing disclosure. data-consent carries the
+    exact wording shown, so the lead record stores what the person actually read
+    rather than a yes/no flag. That is the thing that settles a TCPA dispute."""
+    link = (CONSENT_TEXT
+            .replace("Privacy Policy", '<a href="/privacy/">Privacy Policy</a>')
+            .replace("SMS Terms", '<a href="/sms-terms/">SMS Terms</a>'))
+    return (
+        f'<label class="consent" data-consent="{e(CONSENT_TEXT)}">'
+        f'<input type="checkbox" name="consent" value="yes">'
+        f'<span>{link}</span></label>'
+        f'<p class="sharing">{e(SHARING_NOTE)} '
+        f'<a href="/legal/your-privacy-choices/">You can opt out.</a></p>')
+
+
+def slot(slot_id, city="", cluster="", county=""):
     """Render one capture slot. The offer comes from Slots -> Offers, so the
     copy and the placement are separate variables you can move one at a time."""
     s = SLOTS.get(slot_id)
@@ -443,6 +489,13 @@ def slot(slot_id, city="", cluster=""):
     if not o or o.get("live", "yes") == "no":
         return ""
     style = (" " + s["style"]) if s.get("style") else ""
+
+    # County is derived from the city rather than passed in, so the two can never
+    # disagree. On a county page there is no city, so it is passed explicitly.
+    # Without this the CRM cannot pick a county guide, and cannot fall back when
+    # a city has no height sheet — which is most of them.
+    if not county and city:
+        county = CITY.get(city, {}).get("county", "")
 
     # An embedded Tomonagi form lives in an iframe, so page JavaScript cannot
     # reach into it. The six fields therefore travel in the query string — the
@@ -455,9 +508,11 @@ def slot(slot_id, city="", cluster=""):
         # placement is producing submits. The named parameters below are sent
         # alongside it and are ignored until hidden fields ship; nothing breaks
         # when they start being read.
-        src = ".".join(x for x in (slot_id, o["offer_id"], city) if x)
+        src = ".".join(x for x in (slot_id, o["offer_id"], city or county_slug(county)) if x)
         qs = urlencode({"src": src, "slot_id": slot_id, "offer_id": o["offer_id"],
-                        "cluster": cluster, "city": city}, quote_via=quote)
+                        "cluster": cluster, "city": city,
+                        "county": county, "county_slug": county_slug(county)},
+                       quote_via=quote)
         sep = "&" if "?" in s["embed_url"] else "?"
         h = s.get("embed_height") or "700"
         return (f'<div class="slot{style}" data-slot="{e(slot_id)}" data-offer="{e(o["offer_id"])}">'
@@ -488,19 +543,12 @@ def slot(slot_id, city="", cluster=""):
     # A form that asks for a phone number must capture consent at the point of
     # collection, visibly, unticked. Carriers check this on registration and it is
     # the thing that gets a campaign rejected.
-    consent = ""
-    if "phone" in fields:
-        consent = (
-          '<label class="consent"><input type="checkbox" name="consent" value="yes">'
-          '<span>I agree that WallDockDeck and its contractor partner for my area may contact me by '
-          'phone, text and email about my property at the number above, including by automated means. '
-          'Consent is not a condition of purchase. Message and data rates may apply. Message frequency '
-          'varies. Reply STOP to opt out, HELP for help. See our '
-          '<a href="/privacy/">Privacy Policy</a> and <a href="/sms-terms/">SMS Terms</a>.</span></label>')
+    consent = consent_block() if "phone" in fields else ""
 
     fine = f'<p class="fine">{e(o.get("fine",""))}</p>' if o.get("fine") else ""
     return f"""<div class="slot{style}" data-slot="{e(slot_id)}" data-offer="{e(o['offer_id'])}"
-     data-city="{e(city)}" data-cluster="{e(cluster)}" data-action="resource_request">
+     data-city="{e(city)}" data-county="{e(county)}" data-county-slug="{e(county_slug(county))}"
+     data-cluster="{e(cluster)}" data-action="resource_request">
   <h3>{e(o['headline'])}</h3>
   <p>{e(o['body'])}</p>
   <form novalidate>
@@ -1039,14 +1087,14 @@ def build_regions():
   {detail_rows(r.get("detail_rows"))}
 </div></section>
 
-<section class="tint"><div class="wrap">{slot("H1", "", "seawall-compliance")}</div></section>
+<section class="tint"><div class="wrap">{slot("H1", "", "seawall-compliance", r["region"])}</div></section>
 
 <section><div class="wrap">
   <div class="shead"><h2>Your city, specifically</h2><p>{count_line}</p></div>
   {blocks if blocks else '<p class="qualifier">Nothing published for this county yet.</p>'}
 </div></section>
 
-<section class="tint"><div class="wrap">{slot("H2", "", "seawall-compliance")}</div></section>
+<section class="tint"><div class="wrap">{slot("H2", "", "seawall-compliance", r["region"])}</div></section>
 '''
         body += FOOT
         write(path, body)
@@ -1080,6 +1128,9 @@ def build_downloads():
             "deck-safety-checklist.pdf":
                 ("Owner checklist", "Ten checks on a waterfront deck",
                  "The parts that fail first on the water, and how to find them."),
+            "waterfront-listing-sheet.pdf":
+                ("For agents", "The waterfront listing sheet",
+                 "What to check before you list, and the verified city minimums."),
         }.get(fn, ("Download", fn, ""))
 
     cards = "".join(

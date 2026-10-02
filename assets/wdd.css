@@ -179,3 +179,44 @@ body.lux .figure b{color:var(--mulberry)}
 .slot .consent a{color:var(--teal)}
 .slot.dark .consent span{color:#A8C2CE}
 .slot.dark .consent a{color:var(--teal-line)}
+
+/* ---------------------------------------------------------------- legal docs
+   Rendered from markdown, so these are bare tags rather than classed elements.
+   Measure is capped well below .wrap for readability — legal text is read in
+   long passages and a 1080px line is unreadable. */
+.legalbody{max-width:72ch;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r);padding:34px 38px;overflow-wrap:anywhere}
+.legalbody>*:first-child{margin-top:0}
+.legalbody>*:last-child{margin-bottom:0}
+.legalbody h2{font-family:var(--disp);font-stretch:88%;font-size:23px;line-height:1.25;
+  font-weight:700;margin:38px 0 12px;padding-top:22px;border-top:1px solid var(--line2)}
+.legalbody h2:first-of-type{border-top:0;padding-top:0;margin-top:0}
+.legalbody h3{font-family:var(--disp);font-stretch:88%;font-size:18px;font-weight:700;
+  margin:26px 0 8px}
+.legalbody p{margin:0 0 15px}
+.legalbody ul,.legalbody ol{margin:0 0 15px;padding-left:22px}
+.legalbody li{margin-bottom:7px}
+.legalbody li>p{margin-bottom:7px}
+.legalbody strong{font-weight:700;color:var(--ink)}
+.legalbody blockquote{margin:18px 0;padding:14px 18px;background:var(--teal-soft);
+  border-left:3px solid var(--teal-line);border-radius:0 var(--r) var(--r) 0}
+.legalbody blockquote p{margin:0}
+.legalbody table{width:100%;border-collapse:collapse;margin:0 0 18px;font-size:15.5px}
+.legalbody th,.legalbody td{text-align:left;vertical-align:top;padding:9px 12px;
+  border-bottom:1px solid var(--line2)}
+.legalbody th{font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--ink3);font-weight:500;
+  border-bottom:1px solid var(--line)}
+.legalbody tr:last-child td{border-bottom:0}
+.legalbody hr{border:0;border-top:1px solid var(--line);margin:28px 0}
+.legalbody code{font-family:var(--mono);font-size:.9em;background:var(--ground);
+  padding:1px 5px;border-radius:4px}
+@media(max-width:620px){
+  .legalbody{padding:22px 20px}
+  .legalbody table,.legalbody thead,.legalbody tbody,.legalbody tr,
+  .legalbody th,.legalbody td{display:block;width:auto}
+  .legalbody thead{display:none}
+  .legalbody td{border-bottom:0;padding:2px 0}
+  .legalbody tr{display:block;padding:12px 0;border-bottom:1px solid var(--line2)}
+  .legalbody td:first-child{font-weight:700}
+}

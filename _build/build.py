@@ -419,8 +419,10 @@ FOOT = f"""<footer class="foot"><div class="wrap">
   </div>
   <div>
     <h4>Company</h4>
+    <a href="/legal/">Legal</a>
     <a href="/privacy/">Privacy</a>
     <a href="/sms-terms/">SMS terms</a>
+    <a href="/legal/your-privacy-choices/">Do Not Sell or Share My Info</a>
   </div>
   <p class="legal"><strong style="color:#B9CCD6">WallDockDeck</strong> &middot; Seawalls, docks &amp; waterfront decks &middot; Florida Keys to Palm Beach<br>
   Shore Scores are screenings based on public data and owner answers, not engineering inspections. Inspections and construction are performed by licensed contractors.
@@ -1176,97 +1178,127 @@ def build_coverage():
     PAGES.append((path, TODAY, "0.6"))
 
 
-PRIVACY_BODY = """<section><div class="wrap">
-  <div class="rows">
-    <div><b>Who we are</b><span>WallDockDeck connects waterfront property owners in South Florida with licensed marine contractors. We do not perform construction ourselves. Wall Dock Deck, 16300 SW 137th Avenue, Unit 128, Miami, FL 33177. Contact: hello@walldockdeck.com.</span></div>
-    <div><b>What we collect</b><span>Only what you give us on a form: your name, email address, phone number if you provide one, the property address, and anything you type into the notes field. We also record which page you were on and which resource you asked for.</span></div>
-    <div><b>What we never collect</b><span>Financial account details, card numbers, Social Security or other government identifiers, or date of birth. If a form ever asks you for any of those, it is not ours.</span></div>
-    <div><b>Why we collect it</b><span>To send you the sheet, checklist or report you asked for, to answer your question about your property, and to arrange an inspection if you request one. The property address is what lets us give you your own city&rsquo;s rule instead of a generic answer.</span></div>
-  </div>
-</div></section>
+# ------------------------------------------------------------------------ legal
+# Every legal document lives as a markdown file in _build/legal/. Each one opens
+# with a small header block, then --- , then the body. Keeping them as files
+# rather than Python strings means they can be read, diffed and edited by a
+# lawyer without touching the generator.
+#
+# /privacy/ and /sms-terms/ keep their own top-level URLs because those exact
+# URLs are filed with the mobile carriers and printed on the consent checkbox.
+# Moving them would break the A2P registration. Everything else lives under
+# /legal/.
+LEGAL_DIR = os.path.join(ROOT, "_build", "legal")
 
-<section class="tint"><div class="wrap">
-  <div class="shead"><h2>Mobile information and text messaging</h2>
-  <p>This section governs any phone number you give us and any permission you give us to text you.</p></div>
-  <div class="rows">
-    <div><b>We do not sell or share it</b><span>No mobile information will be sold or shared with third parties or affiliates for marketing or promotional purposes. Text messaging originator opt-in data and consent are not shared with any third party for any purpose other than delivering the service you asked for.</span></div>
-    <div><b>Service providers</b><span>We use service providers to send messages and run our systems, and they may process your information only to provide those services to us. If you ask us to arrange an inspection, we pass your contact details to the licensed contractor who will carry it out, because that is the service you requested. We tell you who before we do it. Your SMS consent itself is never transferred to them, and they must obtain their own permission before texting you.</span></div>
-    <div><b>Opt-in is always yours</b><span>We only text or call you if you tick the consent box on a form, or if you text us first. The box is never ticked for you, and consent is never a condition of receiving anything on this site.</span></div>
-    <div><b>Stopping messages</b><span>Reply STOP to any text and messages end immediately. Reply HELP for assistance. See our <a href="/sms-terms/">SMS Terms</a> for the detail.</span></div>
-  </div>
-</div></section>
-
-<section><div class="wrap">
-  <div class="rows">
-    <div><b>Email</b><span>Asking us for a download means we will email you that download and follow up about it. Every email carries an unsubscribe link, and it works immediately.</span></div>
-    <div><b>Cookies and local storage</b><span>We keep your details in your own browser so you do not have to type them twice, and we count which pages are read so we know what to write next. We do not run advertising trackers and we do not sell browsing data.</span></div>
-    <div><b>How long we keep it</b><span>While you are a live enquiry, and for a reasonable period afterwards in case you come back. Ask us to delete it and we will.</span></div>
-    <div><b>Your choices</b><span>Reply to any email, or write to us at the address above, and tell us what you want: stop emailing, stop texting, stop calling, send me a copy of what you hold, or delete everything. We will do it and confirm.</span></div>
-    <div><b>Children</b><span>This site is for property owners and real estate professionals. It is not directed at anyone under 18 and we do not knowingly collect their information.</span></div>
-    <div><b>Changes</b><span>If we change this policy we change the date at the top of this page. Material changes are emailed to anyone on the list.</span></div>
-  </div>
-</div></section>"""
-
-SMS_BODY = """<section><div class="wrap">
-  <div class="rows">
-    <div><b>Not yet in service</b><span>We do not currently send text messages. These terms are published so you can read them before we do, and they take effect only once we publish a number on this site. Until then, everything reaches you by email and you can stop it with the unsubscribe link in any message.</span></div>
-    <div><b>Program name</b><span>WallDockDeck Property Alerts.</span></div>
-    <div><b>What the program does</b><span>We send text messages about the property enquiry you made: confirming an inspection time, telling you a contractor is on the way, answering a question you asked, and occasionally a notice about conditions affecting your stretch of water. We do not send marketing blasts.</span></div>
-    <div><b>How you opt in</b><span>By ticking the consent box on a form on this site, or by texting us first. The box is never ticked for you.</span></div>
-    <div><b>What you agree to</b><span>That WallDockDeck and the licensed contractor serving your area may contact you by phone, text and email about the property you told us about, including by automated means.</span></div>
-    <div><b>Consent is not a condition</b><span>Every sheet, checklist and guide on this site is available without agreeing to be called or texted. Consent is not a condition of any purchase.</span></div>
-    <div><b>Message frequency</b><span>Message frequency varies. We text only when something is actually happening with your enquiry; there is no scheduled send.</span></div>
-    <div><b>Costs</b><span>Message and data rates may apply, depending on your mobile plan. We do not charge you anything.</span></div>
-  </div>
-</div></section>
-
-<section class="tint"><div class="wrap">
-  <div class="shead"><h2>Stopping or getting help</h2></div>
-  <div class="rows">
-    <div><b>To stop</b><span>Reply <b>STOP</b> to any message from us. You will get one confirmation that you have been unsubscribed, and we will not text you again unless you opt in afresh. Stopping texts does not stop email &mdash; use the unsubscribe link in any email for that.</span></div>
-    <div><b>To get help</b><span>Reply <b>HELP</b> to any message and we will reply with how to reach us. You can also email hello@walldockdeck.com.</span></div>
-    <div><b>Carriers</b><span>Mobile carriers are not liable for delayed or undelivered messages.</span></div>
-    <div><b>Supported carriers</b><span>Major US carriers, including AT&amp;T, Verizon, T-Mobile, Sprint, US Cellular, Boost, MetroPCS and Cricket. Carrier support can change.</span></div>
-    <div><b>Privacy</b><span>Your mobile information is never sold or shared with third parties or affiliates for marketing or promotional purposes. See our <a href="/privacy/">Privacy Policy</a>.</span></div>
-    <div><b>Who is contacting you</b><span>The consent text on every form names the contractor partner for your region. If it does not name anyone, do not tick it, and please tell us &mdash; that is a mistake on our side.</span></div>
-  </div>
-</div></section>
-
-<section><div class="wrap">
-  <div class="shead"><h2>The exact consent wording</h2>
-  <p>This is what appears beside the checkbox on our forms, so you can read it before you tick anything.</p></div>
-  <div class="card" style="border-left:3px solid var(--teal)">
-    <p style="font-size:16px;color:var(--ink2)">I agree that WallDockDeck and [Partner Company Name] may contact me by phone, text and email
-    about my property at the number I have given, including by automated means. Consent is not a condition of
-    purchase. Message and data rates may apply. Message frequency varies. Reply STOP to opt out, HELP for help.
-    See our <a href="/privacy/">Privacy Policy</a> and <a href="/sms-terms/">SMS Terms</a>.</p>
-  </div>
-</div></section>"""
-
-LEGAL_PAGES = [
- ("/privacy/", "Privacy", "Privacy Policy",
-  "What we collect, why, who we share it with, and how to make us stop.", PRIVACY_BODY),
- ("/sms-terms/", "SMS Terms", "SMS Terms",
-  "What you are agreeing to if you tick the box to let us text you.", SMS_BODY),
+LEGAL_GROUPS = [
+    "Core agreements",
+    "Messaging",
+    "Data, privacy and security",
+    "Using the site",
+    "Working with us",
 ]
 
 
+def read_legal_files():
+    """Parse _build/legal/*.md into dicts. Header keys are key: value lines."""
+    docs = []
+    if not os.path.isdir(LEGAL_DIR):
+        return docs
+    for fn in sorted(os.listdir(LEGAL_DIR)):
+        if not fn.endswith(".md"):
+            continue
+        raw = open(os.path.join(LEGAL_DIR, fn), encoding="utf8").read()
+        if "\n---\n" not in raw:
+            sys.exit(f"legal/{fn}: missing the --- separating header from body")
+        head, body = raw.split("\n---\n", 1)
+        d = {"file": fn, "body": body.strip()}
+        for line in head.strip().splitlines():
+            if ":" in line:
+                k, v = line.split(":", 1)
+                d[k.strip()] = v.strip()
+        for req in ("title", "path", "summary", "group", "updated"):
+            if not d.get(req):
+                sys.exit(f"legal/{fn}: header is missing {req}")
+        if d["group"] not in LEGAL_GROUPS:
+            sys.exit(f"legal/{fn}: group {d['group']!r} is not one of {LEGAL_GROUPS}")
+        d["order"] = int(d.get("order", "99"))
+        docs.append(d)
+    return docs
+
+
+def md_to_html(text):
+    """Render the document body. Falls back to escaped <pre> rather than
+    publishing raw markdown if the library is unavailable."""
+    try:
+        import markdown
+    except ImportError:
+        return "<pre>" + e(text) + "</pre>"
+    return markdown.markdown(
+        text, extensions=["tables", "sane_lists", "attr_list"], output_format="html5")
+
+
 def build_legal():
-    for path, kicker, h1, sub, inner in LEGAL_PAGES:
-        crumb_html, crumb_schema = crumbs([("Home", "/"), (h1, None)])
-        body = head_(f"{h1} | WallDockDeck", sub, path, schema=[crumb_schema])
+    docs = read_legal_files()
+    if not docs:
+        return 0
+
+    for d in docs:
+        path, h1 = d["path"], d["title"]
+        inner = f'<section><div class="wrap"><div class="legalbody">{md_to_html(d["body"])}</div></div></section>'
+        crumb_items = ([("Home", "/"), ("Legal", "/legal/"), (h1, None)]
+                       if path.startswith("/legal/") else [("Home", "/"), (h1, None)])
+        crumb_html, crumb_schema = crumbs(crumb_items)
+        body = head_(fit_title(h1), fit_desc(d["summary"]),
+                     path, schema=[crumb_schema])
         body += crumb_html + f'''
 <div class="answer"><div class="wrap">
-  <span class="eyebrow">{e(kicker)}</span>
+  <span class="eyebrow">{e(d.get("kicker", "Legal"))}</span>
   <h1>{e(h1)}</h1>
-  <p class="qualifier">{e(sub)}</p>
-  <p class="src">Last updated {TODAY}.</p>
+  <p class="qualifier">{e(d["summary"])}</p>
+  <p class="src"><b>Last updated</b> {e(d["updated"])} &middot; <b>Version</b> {e(d["updated"])}</p>
 </div></div>
 {inner}
+<section class="tint"><div class="wrap"><div class="shead">
+  <h2>Every agreement and policy</h2>
+  <p>All of them, in plain language.</p></div>
+  <div class="strip"><a href="/legal/"><em>Index</em>All legal documents</a></div>
+</div></section>
 '''
         body += FOOT
         write(path, body)
-        PAGES.append((path, TODAY, "0.3"))
+        PAGES.append((path, d["updated"], "0.3"))
+
+    # the index
+    blocks = ""
+    for g in LEGAL_GROUPS:
+        rows = sorted([d for d in docs if d["group"] == g], key=lambda x: x["order"])
+        if not rows:
+            continue
+        cards = "".join(
+            f'<a class="card" href="{d["path"]}"><span class="k">Updated {e(d["updated"])}</span>'
+            f'<h3>{e(d["title"])}</h3><p>{e(d["summary"])}</p>'
+            f'<span class="meta">Read it &rarr;</span></a>' for d in rows)
+        blocks += (f'<section><div class="wrap"><div class="shead"><h2>{e(g)}</h2></div>'
+                   f'<div class="cards">{cards}</div></div></section>')
+
+    crumb_html, crumb_schema = crumbs([("Home", "/"), ("Legal", None)])
+    body = head_(fit_title("Legal: Terms, Privacy and Policies"),
+                 fit_desc("Every agreement and policy that governs Wall Dock Deck, "
+                          "in plain language"),
+                 "/legal/", schema=[crumb_schema])
+    body += crumb_html + f'''
+<div class="answer"><div class="wrap">
+  <span class="eyebrow">Legal</span>
+  <h1>Every agreement and policy, in plain language</h1>
+  <p class="qualifier">We publish all of it. If something here is unclear, that is a fault
+  worth telling us about &mdash; email <a href="mailto:hello@walldockdeck.com">hello@walldockdeck.com</a>.</p>
+</div></div>
+{blocks}
+'''
+    body += FOOT
+    write("/legal/", body)
+    PAGES.append(("/legal/", TODAY, "0.3"))
+    return len(docs)
 
 
 # ---------------------------------------------------------------- sitemap etc
@@ -1304,7 +1336,7 @@ def main():
     n_reg = build_regions()
     n_dl = build_downloads()
     build_coverage()
-    build_legal()
+    n_legal = build_legal()
     build_sitemap()
 
     held = len(CT) - len(LIVE)
@@ -1315,6 +1347,7 @@ def main():
     print(f"cost page            1   /resources/what-it-costs/")
     print(f"county pages      {n_reg:>4}   /{{county}}/{{service}}/")
     print(f"downloads page       1   {n_dl} files listed")
+    print(f"legal pages       {n_legal+1:>4}   /legal/ + {n_legal} documents")
     print(f"sitemap entries   {len(PAGES)+1:>4}")
     print(f"\nindex.html and /guides untouched.")
 

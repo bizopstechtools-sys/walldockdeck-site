@@ -148,7 +148,14 @@ def slot(slot_id, city="", cluster=""):
     # only channel an iframe will accept them on. Confirm Tomonagi reads them.
     if s.get("render") == "embed" and s.get("embed_url"):
         from urllib.parse import urlencode, quote
-        qs = urlencode({"slot_id": slot_id, "offer_id": o["offer_id"],
+        # Tomonagi reads one parameter today, ?src=, and keeps it in the form's
+        # own analytics rather than on the lead. So the discriminator is packed
+        # into that single tag — slot.offer.city — which at least tells you which
+        # placement is producing submits. The named parameters below are sent
+        # alongside it and are ignored until hidden fields ship; nothing breaks
+        # when they start being read.
+        src = ".".join(x for x in (slot_id, o["offer_id"], city) if x)
+        qs = urlencode({"src": src, "slot_id": slot_id, "offer_id": o["offer_id"],
                         "cluster": cluster, "city": city}, quote_via=quote)
         sep = "&" if "?" in s["embed_url"] else "?"
         h = s.get("embed_height") or "700"

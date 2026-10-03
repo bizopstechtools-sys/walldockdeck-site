@@ -19,8 +19,8 @@ F L O R I D A K E Y S · W AT E R F R O N T O W N E R ' S G U I D E
 START HERE
 
 What this guide is for
-Waterfront work is the most expensive, most heavily permitted and least transparent work you
-will ever buy for your home. This guide gives you the part nobody hands you: who has to
+Waterfront work is among the most expensive and most heavily permitted work you can buy for
+your home, and among the least transparent. This guide gives you the part nobody hands you: who has to
 approve the job, which paperwork protects your money, how to check a company in about ten
 minutes, and what to ask before you sign.
 This edition covers Monroe County and the Keys, where a federal marine sanctuary, state siting rules written
@@ -34,8 +34,8 @@ WHY IT DECIDES EVERYTHING
 
 Permits
 
-Up to five agencies can touch one seawall or dock. Missing one can stop work, void
-insurance, or surface years later when you sell.
+Several layers of government can touch one seawall or dock (Chapter 1 lists them).
+Missing one can stop work, void insurance, or surface years later when you sell.
 
 The contractor
 
@@ -53,13 +53,13 @@ Local rules set a minimum seawall height in a specific measuring system. Build t
 wrong number and the wall may not pass, or may not comply later.
 
 How to use this guide
-Read pages 3–4 before you call anyone. Take the 15 questions on pages 5–6 to every estimate. Use
-the ten-minute check on page 7 before you sign. Keep the closing checklist on the last page next to your
+Read Chapters 1 and 2 before you call anyone. Take the 15 questions to every estimate. Use
+the ten-minute check in Chapter 4 before you sign. Keep the closing checklist on the last page next to your
 final payment.
 
 One honest caveat
 Rules change, and they change city by city. Every figure in this guide is sourced, and the sources are listed
-so you can check them yourself. Before you sign a contract, confirm the current requirement with your
+so you can check them yourself. Figures were checked against the primary sources in October 2026. Before you sign a contract, confirm the current requirement with your
 building department. This guide is information, not legal or engineering advice.
 
 Not sure where your shoreline stands?
@@ -101,8 +101,9 @@ a lease.
 5. Federal: Army
 Corps
 
-Usually handled through Florida's State Programmatic General Permit, alongside the state
-permit.
+A Department of the Army permit (nationwide, general or individual) for work in navigable
+waters (33 CFR 322.3). For some minor work the Corps lets FDEP review it through a State
+Programmatic General Permit; ask whether one applies to your job.
 
 The exemptions homeowners can actually use
 Florida law exempts several common residential projects from the state ERP. "Exempt" does not mean "no
@@ -114,12 +115,13 @@ THE LIMIT
 Private single-family dock
 
 1,000 sq ft over-water (500 sq ft in Outstanding Florida Waters).
-Roofs and canopies count. One dock per 65 ft of shoreline.
+Boat shelters, lifts and roofs count toward it. One exempt dock per 65 ft of shoreline.
 
 Seawall restoration
 
 Rebuilt in the same place, or no more than 18 inches waterward
-of where it was.
+of where it was, where the wall was damaged within the last year by a
+discrete event such as a storm, or the work needs only minimal backfilling.
 
 New seawall between two existing ones
 
@@ -128,23 +130,23 @@ feet.
 
 Floating boat lift or platform
 
-Within a permitted slip, or up to 500 sq ft combined (200 sq ft in
-Outstanding Florida Waters).
+Wholly within a previously permitted slip, or up to 500 sq ft combined
+(200 sq ft in Outstanding Florida Waters) beside a qualifying dock or bulkhead.
 
-Source: Florida Statutes 403.813(1); FDEP Form 62-330.050(1) requests written verification of an exemption.
+Source: Florida Statutes 403.813(1)(b), (e), (o) and (s); Florida Administrative Code 62-330.051(5) and (12); FDEP Form 62-330.050(1), adopted in Rule 62-330.050(2), requests written verification of an exemption.
 
 Ask for the exemption in writing
 A verbal "that's exempt" is worth nothing at closing. FDEP has a form for verifying one. Ask your
 contractor to request it, and keep the response in your permit file.
 
 Submerged lands: the layer most owners have never heard of
-A letter of consent covers one minimum-size private dock per parcel, and stabilization no more than 3
-feet waterward.
-Structures must sit at least 25 feet inside your riparian lines (10 feet for marginal docks), unless your lot
-has under 65 feet of frontage.
-A dock may extend no more than 25% of the width of the waterway.
-More than 10 sq ft of state bottom per linear foot of shoreline means a lease, with fees.
-Source: Florida Administrative Code 18-21.004 and 18-21.005.
+A letter of consent can cover one minimum-size private residential dock per parcel, and a seawall no more
+than 3 feet waterward of the mean or ordinary high water line.
+Structures must sit at least 25 feet inside your riparian lines (10 feet for marginal docks). Exceptions include
+a single-family dock on a lot with under 65 feet of frontage and a written concurrence from the neighbour.
+A letter of consent covers up to 10 sq ft of state bottom per linear foot of shoreline; beyond that you need a
+lease, with fees.
+Source: Florida Administrative Code 18-21.004(3)(d) and 18-21.005(1)(c)-(d).
 
 F L O R I D A K E Y S · W AT E R F R O N T O W N E R ' S G U I D E
 
@@ -152,7 +154,7 @@ CHAPTER 2
 
 Seven costly mistakes
 1. Fixing the cap and ignoring what's behind the wall
-Most seawalls fail from the land side. Water and soil move through joints and cracks, the anchors (tie-backs
+Many seawall failures start on the land side. Water and soil move through joints and cracks, the anchors (tie-backs
 and deadmen) corrode, and voids open behind the wall. A new cap on a wall with failing anchors buys time,
 not a fix. Ask what the plan is for the anchors, the drainage and the soil behind the wall — not just the part
 you can see.
@@ -178,7 +180,7 @@ depth, access and what your neighbors have. Ask why this material for this site,
 would cost over the life of the wall.
 
 6. Hiring without checking license, insurance and permit history
-All three take about ten minutes to verify, and all three are public. Page 7 shows exactly where to look.
+All three take about ten minutes to verify, and all three are public. Chapter 4 shows exactly where to look.
 
 7. Waiting until after a storm
 After a named storm, every crew in the county is booked, emergency work gets priced accordingly, and your
@@ -207,7 +209,7 @@ They should be able to name every layer that applies: city, county environmental
 lands, federal.
 
 Is my project exempt at the state level, and will you get that in writing?
-See the exemption limits on page 3.
+See the exemption limits in Chapter 1.
 
 What elevation are you building to, and in which datum?
 "Four feet" means two different walls in NAVD88 versus the old NGVD29. Get the number and the datum
@@ -222,7 +224,7 @@ Pile driving and barge work are often subcontracted. Every sub needs its own ins
 comp.
 
 Can I see your certificate of insurance and your workers' comp status?
-Ask for the certificate, then verify it yourself. Page 7 shows how.
+Ask for the certificate, then verify it yourself. Chapter 4 shows how.
 
 F L O R I D A K E Y S · W AT E R F R O N T O W N E R ' S G U I D E
 
@@ -280,14 +282,15 @@ Verify a license: myfloridalicense.com/portalsearches/VerifyLicensee
 File a complaint / check unlicensed activity: myfloridalicense.com
 
 Which license covers this work?
-Since 2024 Florida has statewide marine specialty categories — Marine Specialty Contractor, plus
-narrower seawall, bulkhead, dock and pile-driving categories. Certified general, building and residential
-contractors can also hold the scope. If a company offers only a county card, call that county's building
+Since May 2024, state rule 61G4-15.100 lists the Marine Specialty Contractor plus narrower marine
+seawall, bulkhead, dock and pile-driving specialty categories. A certified general contractor's scope also
+covers this work. If a company offers only a county card, call that county's building
 department and ask whether it is still recognized.
 
 2. Workers' compensation — 3 minutes
-In construction, coverage is required from the first employee. Officers and LLC members can be exempt, but
-an exemption covers only that named person — not the four-person crew that shows up. If an uninsured
+In construction, coverage is required from the first employee (s. 440.02(20)(b)2). Up to three officers or LLC
+members owning at least 10% can be exempt, but an exemption covers only that named person (s. 440.05) —
+not the four-person crew that shows up. If an uninsured
 worker is hurt on your property, that can become your problem, and your homeowners policy usually will not
 cover it.
 Coverage and exemption search: dwcdataportal.fldfs.com/POCData.aspx
@@ -297,14 +300,15 @@ Ask for a certificate of general liability naming you as certificate holder, cov
 certificates for every subcontractor. Then call the agency listed on the certificate and confirm the policy is in
 force. Certificates are the easiest document in this trade to fake.
 Confirm the agency is licensed: licenseesearch.fldfs.com
-State licensing minimums are low — $300,000 liability for general/building/residential, $100,000 for specialty trades. Treat them
+State licensing minimums are low — $300,000 liability and $50,000 property damage for general and building
+contractors, $100,000 and $25,000 for residential and most specialty contractors (Rule 61G4-15.003). Treat them
 as a floor, not a target.
 
 4. Permit history — 2 minutes
 Look up the company's recent permits in your local portal, and look up your own address while you're there.
 Open or expired permits on your property are worth finding now rather than at closing.
-Monroe County (incl. Key Largo): mcesearch.monroecounty-fl.gov/search/permits · Key West: etrakit.cityofkeywest-fl.gov ·
-Marathon: marathonfl.viewpointcloud.com · Islamorada: cvportal.us/CityViewPortal
+Key West: etrakit.cityofkeywest-fl.gov/etrakit · Islamorada: cvportal.us/CityViewPortal · Unincorporated Monroe
+(including Key Largo) and Marathon: the online permit search on each building department's website
 
 F L O R I D A K E Y S · W AT E R F R O N T O W N E R ' S G U I D E
 
@@ -327,34 +331,36 @@ Direct contracts over
 $2,500 on 1–4 unit
 residential property
 
-Required by law, in capitals and bold type, signed by
-you. Its absence tells you how this company runs.
+Required by s. 713.015 in 12-point capitalised bold
+type, signed and dated by you. Its absence tells you
+how this company runs.
 
 Recovery Fund disclosure
 
-Contracts over $2,500
+Residential contracts over $2,500
 
-Points to the state fund that can pay you if a licensed
+Required by s. 489.1425. Points to the state fund that can pay you if a licensed
 contractor takes your money and abandons the job.
 
 Notice of Commencement
 
-Direct contracts over
-$5,000
+Direct contracts over $2,500
 
 You (the owner) record it with the county and post it
-at the site. Payments made after it expires can be
-treated as improper — meaning you may have to pay
-again.
+at the site (s. 713.13). Over $5,000, the building
+department needs a copy before the first inspection
+(s. 713.135; HVAC repair under $15,000 excepted).
+Payments made after it expires are improper —
+meaning you may have to pay again.
 
 Notice to Owner
 
 From subs and
 suppliers
 
-They must serve it within 45 days of starting. Every
-notice you receive is someone who can lien your
-home. Keep the list.
+They must serve it no later than 45 days after
+starting (s. 713.06). Every notice you receive is
+someone who can lien your home. Keep the list.
 
 Releases of lien
 
@@ -368,28 +374,31 @@ Final contractor's affidavit
 
 Before final payment
 
-States that everyone under the contract has been
-paid, or names who has not.
+States that every lienor who served a notice has
+been paid, or names who has not and how much
+(s. 713.06(3)(d)).
 
 The Recovery Fund, and the number that surprises people
 If a licensed contractor causes you a financial loss and you win a judgment you cannot collect, Florida's
 Homeowners' Construction Recovery Fund may pay part of it. For contracts signed on or after July 1, 2024,
-the caps are $100,000 per claim against a general, building or residential contractor, and $30,000 per
-claim against a specialty contractor. Many marine contractors hold a specialty license, which means the
-lower cap applies. It is worth asking which category your contractor holds before you hand over a large
+the caps are $100,000 per claim against a Division I contractor (general, building or residential) and
+$30,000 per claim against a Division II contractor, which includes the marine specialties (s. 489.143(3)).
+The fund pays nothing if the contractor was unlicensed when you signed (s. 489.141). A contractor licensed only
+in a marine specialty falls under the lower cap. It is worth asking which category your contractor holds before you hand over a large
 deposit.
 
 If they came to you
-Florida gives buyers the right to cancel a "home solicitation sale" until midnight of the third business day
-after signing, and the contract must carry a "BUYER'S RIGHT TO CANCEL" notice. The catch: if you called
-them and asked for the estimate, the sale may not qualify. The right matters most after a storm, when crews
+Florida gives buyers the right to cancel a "home solicitation sale" over $25 until midnight of the third
+business day after signing (Sundays and federal holidays do not count), and the contract must carry a
+"BUYER'S RIGHT TO CANCEL" notice (ss. 501.021, 501.025, 501.031). The catch: a sale that results from your
+own request for specific goods or services is excluded. The right matters most after a storm, when crews
 knock on doors.
 
 Closing the permit is part of the job
 A final inspection is not the same as a closed permit. Open permits show up in title searches and can stall a
 sale years later. Florida law lets a property owner close a permit even if the original contractor is gone, by
 hiring another licensed contractor to finish and obtain the inspections, and lets local agencies close expired
-permits where the work was substantially completed. Do not rely on that as a plan — confirm the permit
+permits where the work was substantially completed (s. 553.79(16)). Do not rely on that as a plan — confirm the permit
 shows closed in your local portal before the final payment.
 
 F L O R I D A K E Y S · W AT E R F R O N T O W N E R ' S G U I D E
@@ -401,34 +410,40 @@ These rules delay more South Florida projects than anything except permitting it
 of them can generate fines against you, the property owner, for something a crew did.
 
 Mangroves: the six-foot line
-Never cut a mangrove below 6 feet in height, and never remove or defoliate one.
+Trimming under the state exemptions may not take a mangrove below 6 feet, and removing, defoliating
+or destroying one needs a permit.
 An owner may trim a riparian fringe only where the mangroves are 10 feet or less before trimming.
 Above 10 feet, a professional mangrove trimmer is required; the ceiling is 24 feet pre-trim, and for
-mangroves 16 feet or taller, no more than 25% of the foliage per year.
+mangroves 16 feet or taller, no more than 25% of the foliage per year. These exemptions are written for
+shorelines of 150 feet or less.
 Second and later violations run up to $100 per mangrove trimmed and $250 per mangrove altered,
-and restoration obligations can run five years with 2-to-1 replanting.
+and restoration can require replanting to replace the lost canopy within five years.
+Source: Florida Statutes 403.9326 and 403.9332.
 The "we'll open up your view" offer
 A crew that offers to clear the mangroves for a better view is proposing penalties and a multi-year
 restoration obligation that attach to your property, not theirs. Get the trimming plan in writing and
 confirm the trimmer's credentials.
 
 Manatees
-Standard manatee conditions are attached to essentially every in-water authorization in Florida. Crews must
+Standard manatee conditions are attached to in-water authorizations in Florida, including exempt work
+(FWC Standard Manatee Conditions for In-Water Work, 2011; Rule 62-330.050(9)). Crews must
 idle in the work area, use turbidity barriers manatees cannot get tangled in, post the required signs, and shut
 down all in-water operations if a manatee comes within 50 feet. Expect occasional lost hours; a
 contractor who has never had to stop for a manatee has probably not worked here long.
 
 Seagrass and the bottom
-State rules favor riprap, native vegetation and living shorelines over new vertical seawalls wherever feasible,
+State rules favor native vegetation and riprap over new vertical seawalls wherever feasible (Rule
+18-21.004(2)(f)),
 and dock designs are routinely modified — narrower, higher, or moved — to avoid shading seagrass. If a
 survey finds seagrass or hardbottom at your site, expect the design to change. That is normal, and it is better
 found before the contract than after.
 
 Elevation, and the datum trap
 Elevations are measured from an agreed zero. NGVD29 is the old zero; NAVD88 is the modern one that
-current codes, flood maps and seawall ordinances use. The ground does not move — only the number
-describing it does. In South Florida the same point reads roughly 0.6 to 1.8 feet lower in NAVD88 than in
-NGVD29, and the offset varies by location, so it is never safe to convert with a rule of thumb.
+current flood maps and most seawall ordinances use, though some older city codes still state heights in
+NGVD29 or mean sea level. The ground does not move — only the number describing it does. Across the South
+Florida Water Management District the same point reads roughly 0.6 to 1.6 feet lower in NAVD88 than in
+NGVD29 (SFWMD), and the offset varies by location, so it is never safe to convert with a rule of thumb.
 Put both in the contract
 "Top of cap at 5.0 ft NAVD88, verified by survey" is enforceable. "Four feet high" is not. Ask for the
 surveyor's elevation certificate at the end.
@@ -438,17 +453,17 @@ F L O R I D A K E Y S · W AT E R F R O N T O W N E R ' S G U I D E
 CHAPTER 7 · YOUR LOCAL RULES
 
 The Florida Keys
-Nowhere else in Florida has this many layers. Keys projects are not harder to build — they are
-harder to approve, and the approval is where the schedule lives.
+The Keys add layers the mainland does not have: a national marine sanctuary, state dock siting rules for
+Monroe County, and the Area of Critical State Concern. The approval is where the schedule lives.
 
-State dock siting rules written only for the Keys
+State dock siting limits for the Keys
 RULE
 
 THE LIMIT
 
 Water depth at the mooring area
 
-Minimum −4 ft at mean low water, deeper for deeper-draft boats
+Minimum −4 ft at mean low water; more for boats drawing over 3 ft, to leave 1 ft of clearance
 
 Private residential dock (no lease)
 
@@ -461,49 +476,54 @@ No more than 20%
 
 Benthic communities
 
-No approval where seagrass or similar communities are present at
-the mooring area, turning basin or pilings — except minimumaccess docks
+Multi-slip lease applications: no approval where benthic communities are
+at the mooring area, turning basin or pilings, except main access docks
 
 Dredging for access
 
-Not permitted
+No docking facility that needs dredging or filling for access
 
 Dock length
 
 No dock longer than 500 ft absent a specific finding
 
-Florida Administrative Code 18-21.0041, Florida Keys marina and dock siting policies.
+Florida Administrative Code 18-21.0041(2), Florida Keys marina and dock siting policies, which apply to docks on
+state-owned bottom in Monroe County. Monroe County is also excluded from the state's no-application consent for a
+single exempt dock (18-21.005(1)(b)).
 
 The sanctuary layer
 The Florida Keys National Marine Sanctuary reviews construction that could affect corals — which includes
-seawall repairs and dock installation. The usual order is: state authorization first, then the federal Army
-Corps permit, then submit the complete package to the sanctuary so it can determine whether a separate
-sanctuary authorization is needed.
+seawall repairs and dock installation. Its guidance asks for one complete submission: project plans, the state
+approval, a benthic survey if applicable, and the federal approval (such as an Army Corps permit) if applicable,
+so it can determine whether a separate sanctuary authorization is needed.
 A trap worth knowing
-Even the pre-construction resource survey can be regulated. Placing transect lines to quantify corals or
-seagrass is itself a restricted activity unless performed by a qualified biologist holding a sanctuary
-permit. Ask who is doing your survey and under what authorization.
+Even the pre-construction resource survey can be regulated. If the survey involves activities the sanctuary
+prohibits, such as placing transect lines to quantify resources, the sanctuary says it must be done by a
+qualified biologist holding a sanctuary permit. Ask who is doing your survey and under what authorization.
 
 F L O R I D A K E Y S · W AT E R F R O N T O W N E R ' S G U I D E
 
 CHAPTER 7 · CONTINUED
 
 Area of Critical State Concern
-The entire Keys chain is a designated Area of Critical State Concern. Local land development rules and
-comprehensive plan changes only take effect after state approval, and the guiding principles expressly
-include protecting mangroves, coral, seagrass and wetlands. Practically, this means Keys reviewers apply
-shoreline and marine protections more strictly than anywhere on the mainland, and timelines run longer.
+The Florida Keys are a designated Area of Critical State Concern. Local land development rules and
+comprehensive plan changes only take effect after approval by the state land planning agency, and the
+guiding principles expressly include protecting mangroves, coral reef formations, seagrass beds and wetlands
+(s. 380.0552(7), (9)).
 
 County rules
-Monroe County's land development code sets the shoreline setback and local dock standards, and the
-section has been amended in recent years. Ask the county building department for the current text of the
-shoreline setback section before you design, and confirm whether your project sits in unincorporated Monroe
-or inside Key West, Marathon or Islamorada, which run their own permitting.
+Monroe County sets no seawall height. Its land development code instead limits where a wall may go: a new
+vertical seawall or bulkhead is allowed only to stabilise a severely eroding shoreline on a manmade canal,
+channel or basin, and only where vegetation or riprap will not work; none is allowed on open water. A lawfully
+existing wall may be repaired or replaced (LDC Sec. 118-12(k), amended as recently as 2022). Of the Keys
+cities, only Key Colony Beach sets a height: 5.5 ft above mean sea level, matched to adjoining walls (Code
+Sec. 5-51). Confirm whether your project sits in unincorporated Monroe or inside Key West, Marathon,
+Islamorada, Key Colony Beach or Layton, which run their own permitting.
 
 Materials and exposure
 Open-water exposure, higher salinity and limestone bottom change what lasts here. Galvanized hardware
-that survives a decade on a mainland canal can fail much faster on an exposed Keys dock; stainless grades,
-pile wraps and heavier sections are common upgrades. Ask every bidder what hardware grade they are
+can fail faster on an exposed dock than on a sheltered canal; stainless grades, pile wraps and heavier
+sections are common upgrades. Ask every bidder what hardware grade they are
 quoting, and what they would use on their own dock.
 Three Keys questions to add to your fifteen
 "Has the sanctuary been contacted, and who performed the resource survey?"
@@ -544,15 +564,15 @@ Corroded hangers, screws and connectors
 Footings that have settled, especially near the seawall
 After a named storm in Florida Keys
 Photograph everything the same week, before repairs. In the Keys, also check that pilings have not
-been pushed or lifted, and that riprap has not migrated. Expect longer lead times for crews after a storm
-than anywhere on the mainland.
+been pushed or lifted, and that riprap has not migrated. Book crews early; after a named storm, lead
+times stretch.
 
 Glossary
 Cap: the concrete beam across the top of a seawall. Tie-back / deadman: the anchor system that holds the wall against
 soil pressure. Weep hole: a drain that relieves water pressure behind the wall. Riprap: rock placed at the base of a wall to
 absorb wave energy. MHW: mean high water. NAVD88: the modern elevation datum. ERP: the state Environmental
-Resource Permit. Letter of consent / lease: permission to use state-owned bottom. SPGP: the state-run federal permit
-path. King tide: the highest seasonal tides, usually in fall.
+Resource Permit. Letter of consent / lease: permission to use state-owned bottom. SPGP: a Corps general permit under
+which FDEP reviews certain minor work for the Corps. King tide: the highest seasonal tides, usually in fall.
 
 F L O R I D A K E Y S · W AT E R F R O N T O W N E R ' S G U I D E
 
@@ -577,13 +597,14 @@ cost range for Florida Keys, and the rules that apply at your address. If someth
 book a free on-site inspection to take a closer look.
 
 Sources
-Florida Statutes 380.0552, 403.813, 403.9326, 489.105, 489.141, 489.143, 501.025, 553.79, 713.13, 713.015, 713.135 · Florida
-Administrative Code 18-21.0041, 18-21.004, 18-21.005, 61G4-15.100, 62-330.051 · Monroe County Land Development Code
-Chapter 118 · Florida Keys National Marine Sanctuary nearshore construction guidance (15 CFR Part 922 Subpart P) ·
-FloridaCommerce Area of Critical State Concern program · FDEP and USACE Jacksonville District permitting pages · FWC
-standard manatee conditions · SFWMD vertical datum guidance.
+Florida Statutes 380.0552, 403.813, 403.9326, 403.9332, 440.02, 440.05, 489.105, 489.141, 489.1425, 489.143, 501.021, 501.025,
+501.031, 553.79, 713.015, 713.02, 713.06, 713.13, 713.135 · Florida Administrative Code 18-21.0041, 18-21.004, 18-21.005,
+61G4-15.003, 61G4-15.100, 62-330.050, 62-330.051 · 33 CFR 322.3 · Monroe County Land Development Code Sec. 118-12 · Key Colony
+Beach Code Sec. 5-51 · Florida Keys National Marine Sanctuary nearshore construction guidance (15 CFR Part 922 Subpart P) ·
+FloridaCommerce Area of Critical State Concern program · FWC Standard Manatee Conditions for In-Water Work · SFWMD vertical
+datum fact sheet.
 
 WallDockDeck is a waterfront resource for South Florida and the Keys. On-site inspections and construction work are
 performed by licensed partner contractors. This guide is general information, not legal, engineering or permitting advice, and
 rules change — confirm current requirements with your local building department before signing a contract. Edition:
-September 2026.
+October 2026.

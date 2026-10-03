@@ -157,7 +157,7 @@ WARNING_SIGNS = [
      "for soil to leave."),
     ("Water or sand coming through the joints",
      "Sand fanning out below a joint at low tide, or water seeping through on a falling tide, is soil loss in "
-     "progress. This is the clearest single sign a wall is actively failing."),
+     "progress. It is one of the clearest signs a wall is actively failing."),
     ("A wall that leans, bows or has gone out of line",
      "Sight along the top of the cap from one end. A straight wall reads straight. Bowing outward at the middle of a "
      "run usually points to tieback or anchor trouble behind it."),
@@ -222,16 +222,17 @@ BUYER_QUESTIONS = [
     ("Who owns the wall at each end?",
      "Shared walls and walls crossing a property line turn into disputes. Establish it before closing, not after."),
     ("Is there a dock, and does its permit match what is actually there?",
-     "Docks get extended and rebuilt without paperwork more often than anything else on the water."),
+     "Docks are often extended or rebuilt without paperwork."),
     ("How deep is the water at the dock at mean low tide?",
      "A boat that does not float at low tide is a dock that does not work."),
     ("What size vessel does the dock and lift actually take?",
      "Check the lift's rated capacity against the boat the buyer intends to keep there, not the one in the "
      "photographs."),
     ("Is the property in a tidally influenced area, and is there a disclosure obligation?",
-     "Some cities now require a specific written disclosure in the contract. Delray Beach is one."),
+     "Some local codes require a specific written disclosure in the sale contract. Broward County does, "
+     "countywide (Sec. 39-408), and so does Delray Beach (LDR 7.1.7(D)(7))."),
     ("What does the flood map say, and what is the base flood elevation?",
-     "It drives the seawall maximum in some cities and the insurance in all of them."),
+     "It sets the seawall maximum in some cities, and it affects flood insurance requirements and price."),
     ("Will the insurer write it, and on what terms?",
      "Ask early. A seawall problem can turn into an insurance problem, which turns into a financing problem."),
     ("What would it cost to put right?",
@@ -243,8 +244,8 @@ def buyer_checklist():
     items = "".join(f'<li><b>{e(q)}</b><span>{e(w)}</span></li>' for q, w in BUYER_QUESTIONS)
     inner = ('<span class="eyebrow">Inspection period &middot; the clock is running</span>'
              '<h2>Ask these before the inspection period closes</h2>'
-             '<p class="lead">A waterfront purchase has one structure on it that a standard home inspection does not '
-             'cover properly, and it is the most expensive one. These are the questions that surface a problem while '
+             '<p class="lead">A waterfront purchase has one structure on it that a Florida home inspector is not '
+             'required to inspect (Rule 61-30.810), and it is often the most expensive one. These are the questions that surface a problem while '
              'you can still do something about it.</p>'
              f'<ol>{items}</ol>'
              '<div class="src"><b>The timing point.</b> Found at the listing appointment, a seawall problem is a '
@@ -271,7 +272,7 @@ DECK_ITEMS = [
      "Rust streaks, lifted screw heads and black staining around a fastener mean the metal is failing. Salt air eats "
      "anything that is not stainless or properly rated."),
     ("Check where the deck meets the house",
-     "The ledger connection is the most common point of total collapse. Look for separation, rot in the band joist, "
+     "A failed ledger connection can bring the whole deck down. Look for separation, rot in the band joist, "
      "or bolts that have corroded."),
     ("Look under it, at the joist hangers",
      "Hangers rust out from the back. If you can see light between a joist and its hanger, or the hanger is scaled "
@@ -318,7 +319,8 @@ AGENT_QUESTIONS = [
      "in this market are sometimes written to MLW while the city states its rule in NAVD88. "
      "Ask which datum before anyone compares the two."),
     ("When was the wall last inspected, and by whom?",
-     "A standard home inspection does not look at a seawall. If the seller has an engineer's "
+     "Florida's home inspection standards do not require the inspector to inspect a seawall or dock "
+     "(Rule 61-30.810). If the seller has an engineer's "
      "report, get it now rather than discovering it in the buyer's hands."),
     ("Has any work been permitted, and was it closed out?",
      "An open permit on a marine structure is a title and closing problem, not a punch-list item."),
@@ -371,13 +373,16 @@ def agent_sheet():
         '<span class="eyebrow">Before you list &middot; waterfront</span>'
         '<h2>One disclosure rule worth knowing first</h2>'
         '<p class="lead">In <b>Delray Beach</b>, any contract to sell property in a tidally '
-        'influenced area signed after 1 February 2022 must carry a tidal-flood-barrier '
+        'influenced area executed after 1 February 2022 must carry a tidal-flood-barrier '
         'disclosure, in bold capitals of at least 14 point. It is written into the land '
         'development regulations, and it is the kind of requirement that surfaces at the '
-        'closing table rather than at the listing appointment. Other cities in this market '
-        'do not all have an equivalent \u2014 check the one you are in.</p>'
+        'closing table rather than at the listing appointment. Broward County imposes the '
+        'same kind of disclosure countywide on contracts executed after 31 December 2020. '
+        'Other cities in this market do not all have an equivalent \u2014 check the one you '
+        'are in.</p>'
         '<div class="src"><b>Source.</b> City of Delray Beach Land Development Regulations '
-        'Sec. 7.1.7; Ordinance 23-21, adopted 11 January 2022. Verified 2026-09.</div>'
+        'Sec. 7.1.7(D)(7); Ordinance 23-21, adopted 11 January 2022. Broward County Code '
+        'Sec. 39-408 (Ord. No. 2020-11). Verified 2026-10.</div>'
         '<h2 style="margin-top:7mm">Seven questions before you list</h2>'
         f'<ol>{qs}</ol>'
         '<h2 style="margin-top:7mm">Three things that kill a waterfront deal late</h2>'

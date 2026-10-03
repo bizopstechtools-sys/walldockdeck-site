@@ -165,12 +165,12 @@ def render(name):
   </div>
   <div class="mid">
     {f'<span class="inc">{e(inc)}</span>' if inc else ''}
-    <p class="note">Waterfront work is the most expensive, most heavily permitted and least
-    transparent work you will ever buy for your home. This guide gives you the part nobody
+    <p class="note">Waterfront work is among the most expensive and most heavily permitted
+    work you can buy for your home, and among the least transparent. This guide gives you the part nobody
     hands you: who has to approve the job, which paperwork protects your money, how to check
     a company in about ten minutes, and what to ask before you sign.</p>
-    <p class="note"><b>Every local rule in this guide carries its code section and the date we
-    verified it.</b> Rules change. Confirm with your building department before you rely on one.</p>
+    <p class="note"><b>Every local rule in this guide carries its code section, and the figures were
+    checked against the primary sources in October 2026.</b> Rules change. Confirm with your building department before you rely on one.</p>
   </div>
 </div>'''
 

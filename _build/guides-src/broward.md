@@ -21,12 +21,12 @@ B R O W A R D · W AT E R F R O N T O W N E R ' S G U I D E
 START HERE
 
 What this guide is for
-Waterfront work is the most expensive, most heavily permitted and least transparent work you
-will ever buy for your home. This guide gives you the part nobody hands you: who has to
+Waterfront work is among the most expensive and most heavily permitted work you can buy for
+your home, and among the least transparent. This guide gives you the part nobody hands you: who has to
 approve the job, which paperwork protects your money, how to check a company in about ten
 minutes, and what to ask before you sign.
-This edition covers Broward County, where a countywide elevation standard and a maintenance obligation
-now apply to every tidal flood barrier — including your seawall.
+This edition covers Broward County, where the county code sets a minimum elevation for new and substantially
+repaired tidal flood barriers, and a maintenance duty for every one — including your seawall.
 
 The four things that decide how your project goes
 WHAT
@@ -35,8 +35,8 @@ WHY IT DECIDES EVERYTHING
 
 Permits
 
-Up to five agencies can touch one seawall or dock. Missing one can stop work, void
-insurance, or surface years later when you sell.
+Several layers of government can touch one seawall or dock (Chapter 1 lists them).
+Missing one can stop work, void insurance, or surface years later when you sell.
 
 The contractor
 
@@ -54,13 +54,13 @@ Local rules set a minimum seawall height in a specific measuring system. Build t
 wrong number and the wall may not pass, or may not comply later.
 
 How to use this guide
-Read pages 3–4 before you call anyone. Take the 15 questions on pages 5–6 to every estimate. Use
-the ten-minute check on page 7 before you sign. Keep the closing checklist on the last page next to your
+Read Chapters 1 and 2 before you call anyone. Take the 15 questions to every estimate. Use
+the ten-minute check in Chapter 4 before you sign. Keep the closing checklist on the last page next to your
 final payment.
 
 One honest caveat
 Rules change, and they change city by city. Every figure in this guide is sourced, and the sources are listed
-so you can check them yourself. Before you sign a contract, confirm the current requirement with your
+so you can check them yourself. Figures were checked against the primary sources in October 2026. Before you sign a contract, confirm the current requirement with your
 building department. This guide is information, not legal or engineering advice.
 
 Not sure where your shoreline stands?
@@ -102,8 +102,9 @@ a lease.
 5. Federal: Army
 Corps
 
-Usually handled through Florida's State Programmatic General Permit, alongside the state
-permit.
+A Department of the Army permit (nationwide, general or individual) for work in navigable
+waters (33 CFR 322.3). For some minor work the Corps lets FDEP review it through a State
+Programmatic General Permit; ask whether one applies to your job.
 
 The exemptions homeowners can actually use
 Florida law exempts several common residential projects from the state ERP. "Exempt" does not mean "no
@@ -115,12 +116,13 @@ THE LIMIT
 Private single-family dock
 
 1,000 sq ft over-water (500 sq ft in Outstanding Florida Waters).
-Roofs and canopies count. One dock per 65 ft of shoreline.
+Boat shelters, lifts and roofs count toward it. One exempt dock per 65 ft of shoreline.
 
 Seawall restoration
 
 Rebuilt in the same place, or no more than 18 inches waterward
-of where it was.
+of where it was, where the wall was damaged within the last year by a
+discrete event such as a storm, or the work needs only minimal backfilling.
 
 New seawall between two existing ones
 
@@ -129,23 +131,23 @@ feet.
 
 Floating boat lift or platform
 
-Within a permitted slip, or up to 500 sq ft combined (200 sq ft in
-Outstanding Florida Waters).
+Wholly within a previously permitted slip, or up to 500 sq ft combined
+(200 sq ft in Outstanding Florida Waters) beside a qualifying dock or bulkhead.
 
-Source: Florida Statutes 403.813(1); FDEP Form 62-330.050(1) requests written verification of an exemption.
+Source: Florida Statutes 403.813(1)(b), (e), (o) and (s); Florida Administrative Code 62-330.051(5) and (12); FDEP Form 62-330.050(1), adopted in Rule 62-330.050(2), requests written verification of an exemption.
 
 Ask for the exemption in writing
 A verbal "that's exempt" is worth nothing at closing. FDEP has a form for verifying one. Ask your
 contractor to request it, and keep the response in your permit file.
 
 Submerged lands: the layer most owners have never heard of
-A letter of consent covers one minimum-size private dock per parcel, and stabilization no more than 3
-feet waterward.
-Structures must sit at least 25 feet inside your riparian lines (10 feet for marginal docks), unless your lot
-has under 65 feet of frontage.
-A dock may extend no more than 25% of the width of the waterway.
-More than 10 sq ft of state bottom per linear foot of shoreline means a lease, with fees.
-Source: Florida Administrative Code 18-21.004 and 18-21.005.
+A letter of consent can cover one minimum-size private residential dock per parcel, and a seawall no more
+than 3 feet waterward of the mean or ordinary high water line.
+Structures must sit at least 25 feet inside your riparian lines (10 feet for marginal docks). Exceptions include
+a single-family dock on a lot with under 65 feet of frontage and a written concurrence from the neighbour.
+A letter of consent covers up to 10 sq ft of state bottom per linear foot of shoreline; beyond that you need a
+lease, with fees.
+Source: Florida Administrative Code 18-21.004(3)(d) and 18-21.005(1)(c)-(d).
 
 B R O W A R D · W AT E R F R O N T O W N E R ' S G U I D E
 
@@ -153,7 +155,7 @@ CHAPTER 2
 
 Seven costly mistakes
 1. Fixing the cap and ignoring what's behind the wall
-Most seawalls fail from the land side. Water and soil move through joints and cracks, the anchors (tie-backs
+Many seawall failures start on the land side. Water and soil move through joints and cracks, the anchors (tie-backs
 and deadmen) corrode, and voids open behind the wall. A new cap on a wall with failing anchors buys time,
 not a fix. Ask what the plan is for the anchors, the drainage and the soil behind the wall — not just the part
 you can see.
@@ -179,7 +181,7 @@ depth, access and what your neighbors have. Ask why this material for this site,
 would cost over the life of the wall.
 
 6. Hiring without checking license, insurance and permit history
-All three take about ten minutes to verify, and all three are public. Page 7 shows exactly where to look.
+All three take about ten minutes to verify, and all three are public. Chapter 4 shows exactly where to look.
 
 7. Waiting until after a storm
 After a named storm, every crew in the county is booked, emergency work gets priced accordingly, and your
@@ -208,7 +210,7 @@ They should be able to name every layer that applies: city, county environmental
 lands, federal.
 
 Is my project exempt at the state level, and will you get that in writing?
-See the exemption limits on page 3.
+See the exemption limits in Chapter 1.
 
 What elevation are you building to, and in which datum?
 "Four feet" means two different walls in NAVD88 versus the old NGVD29. Get the number and the datum
@@ -223,7 +225,7 @@ Pile driving and barge work are often subcontracted. Every sub needs its own ins
 comp.
 
 Can I see your certificate of insurance and your workers' comp status?
-Ask for the certificate, then verify it yourself. Page 7 shows how.
+Ask for the certificate, then verify it yourself. Chapter 4 shows how.
 
 B R O W A R D · W AT E R F R O N T O W N E R ' S G U I D E
 
@@ -281,14 +283,15 @@ Verify a license: myfloridalicense.com/portalsearches/VerifyLicensee
 File a complaint / check unlicensed activity: myfloridalicense.com
 
 Which license covers this work?
-Since 2024 Florida has statewide marine specialty categories — Marine Specialty Contractor, plus
-narrower seawall, bulkhead, dock and pile-driving categories. Certified general, building and residential
-contractors can also hold the scope. If a company offers only a county card, call that county's building
+Since May 2024, state rule 61G4-15.100 lists the Marine Specialty Contractor plus narrower marine
+seawall, bulkhead, dock and pile-driving specialty categories. A certified general contractor's scope also
+covers this work. If a company offers only a county card, call that county's building
 department and ask whether it is still recognized.
 
 2. Workers' compensation — 3 minutes
-In construction, coverage is required from the first employee. Officers and LLC members can be exempt, but
-an exemption covers only that named person — not the four-person crew that shows up. If an uninsured
+In construction, coverage is required from the first employee (s. 440.02(20)(b)2). Up to three officers or LLC
+members owning at least 10% can be exempt, but an exemption covers only that named person (s. 440.05) —
+not the four-person crew that shows up. If an uninsured
 worker is hurt on your property, that can become your problem, and your homeowners policy usually will not
 cover it.
 Coverage and exemption search: dwcdataportal.fldfs.com/POCData.aspx
@@ -298,14 +301,15 @@ Ask for a certificate of general liability naming you as certificate holder, cov
 certificates for every subcontractor. Then call the agency listed on the certificate and confirm the policy is in
 force. Certificates are the easiest document in this trade to fake.
 Confirm the agency is licensed: licenseesearch.fldfs.com
-State licensing minimums are low — $300,000 liability for general/building/residential, $100,000 for specialty trades. Treat them
+State licensing minimums are low — $300,000 liability and $50,000 property damage for general and building
+contractors, $100,000 and $25,000 for residential and most specialty contractors (Rule 61G4-15.003). Treat them
 as a floor, not a target.
 
 4. Permit history — 2 minutes
 Look up the company's recent permits in your local portal, and look up your own address while you're there.
 Open or expired permits on your property are worth finding now rather than at closing.
-Broward County permits: broward.org/ePermits · Building records by address: dpepp.broward.org · Environmental licenses:
-dpep.broward.org · Fort Lauderdale: fortlauderdale.gov/lauderbuild
+Broward County permits and licenses, including environmental: broward.org/ePermits · Fort Lauderdale:
+fortlauderdale.gov/lauderbuild · Other cities: your city building department's permit portal
 
 B R O W A R D · W AT E R F R O N T O W N E R ' S G U I D E
 
@@ -328,34 +332,36 @@ Direct contracts over
 $2,500 on 1–4 unit
 residential property
 
-Required by law, in capitals and bold type, signed by
-you. Its absence tells you how this company runs.
+Required by s. 713.015 in 12-point capitalised bold
+type, signed and dated by you. Its absence tells you
+how this company runs.
 
 Recovery Fund disclosure
 
-Contracts over $2,500
+Residential contracts over $2,500
 
-Points to the state fund that can pay you if a licensed
+Required by s. 489.1425. Points to the state fund that can pay you if a licensed
 contractor takes your money and abandons the job.
 
 Notice of Commencement
 
-Direct contracts over
-$5,000
+Direct contracts over $2,500
 
 You (the owner) record it with the county and post it
-at the site. Payments made after it expires can be
-treated as improper — meaning you may have to pay
-again.
+at the site (s. 713.13). Over $5,000, the building
+department needs a copy before the first inspection
+(s. 713.135; HVAC repair under $15,000 excepted).
+Payments made after it expires are improper —
+meaning you may have to pay again.
 
 Notice to Owner
 
 From subs and
 suppliers
 
-They must serve it within 45 days of starting. Every
-notice you receive is someone who can lien your
-home. Keep the list.
+They must serve it no later than 45 days after
+starting (s. 713.06). Every notice you receive is
+someone who can lien your home. Keep the list.
 
 Releases of lien
 
@@ -369,28 +375,31 @@ Final contractor's affidavit
 
 Before final payment
 
-States that everyone under the contract has been
-paid, or names who has not.
+States that every lienor who served a notice has
+been paid, or names who has not and how much
+(s. 713.06(3)(d)).
 
 The Recovery Fund, and the number that surprises people
 If a licensed contractor causes you a financial loss and you win a judgment you cannot collect, Florida's
 Homeowners' Construction Recovery Fund may pay part of it. For contracts signed on or after July 1, 2024,
-the caps are $100,000 per claim against a general, building or residential contractor, and $30,000 per
-claim against a specialty contractor. Many marine contractors hold a specialty license, which means the
-lower cap applies. It is worth asking which category your contractor holds before you hand over a large
+the caps are $100,000 per claim against a Division I contractor (general, building or residential) and
+$30,000 per claim against a Division II contractor, which includes the marine specialties (s. 489.143(3)).
+The fund pays nothing if the contractor was unlicensed when you signed (s. 489.141). A contractor licensed only
+in a marine specialty falls under the lower cap. It is worth asking which category your contractor holds before you hand over a large
 deposit.
 
 If they came to you
-Florida gives buyers the right to cancel a "home solicitation sale" until midnight of the third business day
-after signing, and the contract must carry a "BUYER'S RIGHT TO CANCEL" notice. The catch: if you called
-them and asked for the estimate, the sale may not qualify. The right matters most after a storm, when crews
+Florida gives buyers the right to cancel a "home solicitation sale" over $25 until midnight of the third
+business day after signing (Sundays and federal holidays do not count), and the contract must carry a
+"BUYER'S RIGHT TO CANCEL" notice (ss. 501.021, 501.025, 501.031). The catch: a sale that results from your
+own request for specific goods or services is excluded. The right matters most after a storm, when crews
 knock on doors.
 
 Closing the permit is part of the job
 A final inspection is not the same as a closed permit. Open permits show up in title searches and can stall a
 sale years later. Florida law lets a property owner close a permit even if the original contractor is gone, by
 hiring another licensed contractor to finish and obtain the inspections, and lets local agencies close expired
-permits where the work was substantially completed. Do not rely on that as a plan — confirm the permit
+permits where the work was substantially completed (s. 553.79(16)). Do not rely on that as a plan — confirm the permit
 shows closed in your local portal before the final payment.
 
 B R O W A R D · W AT E R F R O N T O W N E R ' S G U I D E
@@ -402,34 +411,40 @@ These rules delay more South Florida projects than anything except permitting it
 of them can generate fines against you, the property owner, for something a crew did.
 
 Mangroves: the six-foot line
-Never cut a mangrove below 6 feet in height, and never remove or defoliate one.
+Trimming under the state exemptions may not take a mangrove below 6 feet, and removing, defoliating
+or destroying one needs a permit.
 An owner may trim a riparian fringe only where the mangroves are 10 feet or less before trimming.
 Above 10 feet, a professional mangrove trimmer is required; the ceiling is 24 feet pre-trim, and for
-mangroves 16 feet or taller, no more than 25% of the foliage per year.
+mangroves 16 feet or taller, no more than 25% of the foliage per year. These exemptions are written for
+shorelines of 150 feet or less.
 Second and later violations run up to $100 per mangrove trimmed and $250 per mangrove altered,
-and restoration obligations can run five years with 2-to-1 replanting.
+and restoration can require replanting to replace the lost canopy within five years.
+Source: Florida Statutes 403.9326 and 403.9332.
 The "we'll open up your view" offer
 A crew that offers to clear the mangroves for a better view is proposing penalties and a multi-year
 restoration obligation that attach to your property, not theirs. Get the trimming plan in writing and
 confirm the trimmer's credentials.
 
 Manatees
-Standard manatee conditions are attached to essentially every in-water authorization in Florida. Crews must
+Standard manatee conditions are attached to in-water authorizations in Florida, including exempt work
+(FWC Standard Manatee Conditions for In-Water Work, 2011; Rule 62-330.050(9)). Crews must
 idle in the work area, use turbidity barriers manatees cannot get tangled in, post the required signs, and shut
 down all in-water operations if a manatee comes within 50 feet. Expect occasional lost hours; a
 contractor who has never had to stop for a manatee has probably not worked here long.
 
 Seagrass and the bottom
-State rules favor riprap, native vegetation and living shorelines over new vertical seawalls wherever feasible,
+State rules favor native vegetation and riprap over new vertical seawalls wherever feasible (Rule
+18-21.004(2)(f)),
 and dock designs are routinely modified — narrower, higher, or moved — to avoid shading seagrass. If a
 survey finds seagrass or hardbottom at your site, expect the design to change. That is normal, and it is better
 found before the contract than after.
 
 Elevation, and the datum trap
 Elevations are measured from an agreed zero. NGVD29 is the old zero; NAVD88 is the modern one that
-current codes, flood maps and seawall ordinances use. The ground does not move — only the number
-describing it does. In South Florida the same point reads roughly 0.6 to 1.8 feet lower in NAVD88 than in
-NGVD29, and the offset varies by location, so it is never safe to convert with a rule of thumb.
+current flood maps and most seawall ordinances use, though some older city codes still state heights in
+NGVD29 or mean sea level. The ground does not move — only the number describing it does. Across the South
+Florida Water Management District the same point reads roughly 0.6 to 1.6 feet lower in NAVD88 than in
+NGVD29 (SFWMD), and the offset varies by location, so it is never safe to convert with a rule of thumb.
 Put both in the contract
 "Top of cap at 5.0 ft NAVD88, verified by survey" is enforceable. "Four feet high" is not. Ask for the
 surveyor's elevation certificate at the end.
@@ -439,8 +454,9 @@ B R O W A R D · W AT E R F R O N T O W N E R ' S G U I D E
 CHAPTER 7 · YOUR LOCAL RULES
 
 Broward County
-Broward is the strictest county in South Florida on seawall elevation, and the only one that also
-puts a maintenance duty on the owner with a deadline attached.
+Broward is the only one of the four counties in this series whose own code sets a minimum seawall
+elevation (Sec. 39-407); Miami-Dade, Palm Beach and Monroe leave the height to cities. It also puts a
+maintenance duty, with deadlines, on every owner of a tidal flood barrier.
 
 The elevation standard
 REQUIREMENT
@@ -454,9 +470,9 @@ Minimum 5.0 ft NAVD88
 
 Interim standard
 
-Applications before January 1, 2035 may build to 4.0 ft NAVD88, if
-designed and built to accommodate 5.0 ft NAVD88 by January 1,
-2050
+Applications before January 1, 2035 may be permitted at 4.0 ft NAVD88,
+if designed and constructed to accommodate 5.0 ft NAVD88 by January 1,
+2050. The code says may: an allowance, not an entitlement
 
 What triggers it
 
@@ -471,14 +487,15 @@ Tidally influenced shorelines. Not oceanfront beaches or areas
 seaward of the Coastal Construction Control Line
 
 Broward County Code Chapter 39, Article XXV (Resiliency Standards for Tidal Flood Protection), Sec. 39-407(a), adopted by Ord. No. 2020-11, 31 March 2020.
-The county's guidance says municipalities were required to adopt implementing ordinances by 13 February 2022.
+The county's guidance says local governments were required to adopt implementing ordinances by 13 February 2022.
 
 The maintenance duty — this is the part owners miss
 You must keep a tidal flood barrier in good repair. A barrier is presumed to be in disrepair if it lets tidal water flow
 unimpeded through or over it onto adjacent property or the public right-of-way (Sec. 39-407(b)). Tidal water
-crossing onto a neighbor's property or a public right-of-way is a citable offense. After a citation, the clock is 60
-days to show progress and 365 days to complete repairs.
-There is also a disclosure obligation in sale contracts for property in tidally influenced areas (Sec. 39-408). A failing wall is no longer a
+crossing onto a neighbor's property or a public right-of-way is a public nuisance and a citable offense. After a
+citation, the clock is 60 days to show progress and 365 days to complete repairs (Sec. 39-407(b)-(c)).
+Sale contracts for property in tidally influenced areas executed after 31 December 2020 must carry the county's
+disclosure in capitalised bold type of at least 14 point (Sec. 39-408). A failing wall is no longer a
 private problem you can leave for the next owner.
 
 B R O W A R D · W AT E R F R O N T O W N E R ' S G U I D E
@@ -486,32 +503,39 @@ B R O W A R D · W AT E R F R O N T O W N E R ' S G U I D E
 CHAPTER 7 · CONTINUED
 
 County environmental license — in addition to your city permit
-Broward County requires an Environmental Resource License for work in, under or over surface waters, on
-top of your city building permit. Several common residential projects qualify for the faster General License:
-Dock repair or replacement not exceeding 500 sq ft of over-water area
-Private noncommercial docks 500 sq ft or less
-Seawall repair within 1 foot of the original location
-Natural limerock riprap installed at a bulkhead
-One-time dredging of 20 cubic yards or less, where isolated and away from seagrass
-Broward County Code Chapter 27, Article XI. Tidal canal applications must show mean high water, mean low water and
-bottom elevations.
+Broward County requires an Environmental Resource License for construction, dredging, filling and similar work
+in regulated aquatic resources, which include canals and tidal waters, on top of your city building permit
+(Sec. 27-333(a)(1)). Several common residential projects qualify for a General License, issued within 10 days of
+a complete application:
 
-City rules worth knowing
+Dock repair or replacement totalling no more than 500 sq ft of over-water area
+New docks or other over-water structures of 500 sq ft or less, with no dredging or filling beyond the pilings
+Seawall repair or restoration no more than 1 foot waterward of its authorized location
+Boat lifts, davits and mooring pilings
+Up to 20 cubic yards of natural limerock riprap at the face of an existing bulkhead
+One-time dredging of 20 cubic yards or less from a residential canal or isolated lake with no seagrass
+
+Source: Broward County Code Chapter 27, Article XI, Secs. 27-333 and 27-336.
+
+What your city adds
 CITY
 
 WHAT'S DIFFERENT
 
 Fort Lauderdale
 
-Matches the county: 5 ft NAVD88, or 4 ft before 2035 if designed for 5 ft by 2050.
-The older city standard was 3.9 ft NAVD88 — many existing walls were built to it.
-Fixed docks may sit no more than 12 inches above the barrier.
+5 ft NAVD88, or 4 ft for applications before 2035 if designed for 5 ft by 2050, with a
+maximum of the base flood elevation or 6 ft NAVD88, whichever is lower (ULDR
+47-19.13.D(1), D(12)). Before March 2023 the city minimum was 3.9 ft NAVD88 where the
+base flood elevation was 4.0 ft, and many existing walls were built to it. A dock on a new or rebuilt barrier may
+sit up to 12 inches above the maximum barrier elevation (ULDR 47-19.3(f)).
 
 Pompano Beach
 
-Minimum 5 ft NAVD88 and a maximum of 5 ft 10 in. Seawall caps may not extend
-more than 36 inches seaward of the existing wet face, and natural lime rock riprap,
-or other approved habitat enhancement, is required at the waterward face (§ 151.05).
+Minimum 5 ft NAVD88 and a maximum of 5 ft 10 in, with no pre-2035 4 ft route in
+its text. Seawall caps may not extend more than 36 inches seaward of the existing
+wet face, and natural lime rock riprap, or other approved habitat enhancement, is
+required at the waterward face (§ 151.05(A), (H), (M)).
 
 Hollywood
 
@@ -521,9 +545,11 @@ and one-year repair clocks, and return walls where a barrier cannot meet the nei
 
 Other cities
 
-Lighthouse Point, Dania Beach, Hallandale Beach and Deerfield Beach were all
-required to adopt conforming rules. Confirm the exact figure with the city before you
-design.
+Dania Beach (Sec. 12-87), Hallandale Beach (Sec. 8-90), Lauderdale-By-The-Sea
+(Sec. 9-63) and Oakland Park (Sec. 14-1) adopted the county figures. Deerfield Beach
+adopted them with a cap of 7 ft NAVD88 or the required finished grade (LDC
+98-87(d)(4)b). For Lighthouse Point and other cities, confirm the figure with the city
+before you design.
 
 Two Broward-specific questions to add to your fifteen
 "Are we building to 4 ft now with a design that accepts 5 ft later, or straight to 5 ft?" The answer
@@ -572,8 +598,8 @@ Glossary
 Cap: the concrete beam across the top of a seawall. Tie-back / deadman: the anchor system that holds the wall against
 soil pressure. Weep hole: a drain that relieves water pressure behind the wall. Riprap: rock placed at the base of a wall to
 absorb wave energy. MHW: mean high water. NAVD88: the modern elevation datum. ERP: the state Environmental
-Resource Permit. Letter of consent / lease: permission to use state-owned bottom. SPGP: the state-run federal permit
-path. King tide: the highest seasonal tides, usually in fall.
+Resource Permit. Letter of consent / lease: permission to use state-owned bottom. SPGP: a Corps general permit under
+which FDEP reviews certain minor work for the Corps. King tide: the highest seasonal tides, usually in fall.
 
 B R O W A R D · W AT E R F R O N T O W N E R ' S G U I D E
 
@@ -598,12 +624,14 @@ cost range for Broward, and the rules that apply at your address. If something l
 free on-site inspection to take a closer look.
 
 Sources
-Florida Statutes 403.813, 489.105, 489.141, 489.143, 501.025, 553.79, 713.13, 713.015, 713.135 · Florida Administrative Code 1821.004, 18-21.005, 61G4-15.100, 62-330.051 · Broward County Code Chapter 39 Article XXV and Chapter 27 Article XI · Broward
-County "Build It High, Keep It Dry" · City of Fort Lauderdale ULDR 47-19 · Pompano Beach Code 151.05 · City of Hollywood
-Ordinance O-2022-01 · FDEP and USACE Jacksonville District permitting pages · FWC standard manatee conditions · SFWMD
-vertical datum guidance.
+Florida Statutes 403.813, 403.9326, 403.9332, 440.02, 440.05, 489.105, 489.141, 489.1425, 489.143, 501.021, 501.025, 501.031,
+553.79, 713.015, 713.02, 713.06, 713.13, 713.135 · Florida Administrative Code 18-21.004, 18-21.005, 61G4-15.003, 61G4-15.100,
+62-330.050, 62-330.051 · 33 CFR 322.3 · Broward County Code Chapter 39 Article XXV and Chapter 27 Article XI · Broward
+County regional resilience standard for seawalls · City of Fort Lauderdale ULDR 47-19.3 and 47-19.13 · Pompano Beach Code 151.05 ·
+City of Hollywood Code 150.30 (Ordinance O-2022-01) · Dania Beach Code 12-87 · Hallandale Beach Code 8-90 · Deerfield Beach LDC
+98-87 · FWC Standard Manatee Conditions for In-Water Work · SFWMD vertical datum fact sheet.
 
 WallDockDeck is a waterfront resource for South Florida and the Keys. On-site inspections and construction work are
 performed by licensed partner contractors. This guide is general information, not legal, engineering or permitting advice, and
 rules change — confirm current requirements with your local building department before signing a contract. Edition:
-September 2026.
+October 2026.

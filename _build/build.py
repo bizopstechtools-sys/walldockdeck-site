@@ -474,7 +474,7 @@ CONSENT_TEXT = (
 # Shown next to the consent box wherever we collect contact details. Not a tick —
 # a disclosure, which is what the point-of-collection notice requirement asks for.
 SHARING_NOTE = (
-    "If you ask to be connected, we share your details with a licensed contractor "
+    "If you book a free inspection, we share your details with a licensed contractor "
     "for your area, who is an independent business and may contact you directly."
 )
 
@@ -1098,7 +1098,7 @@ def build_costs():
     <div><b>No price per foot exists</b><span>Length, condition, access, depth and soil all move it independently. Anyone who hands you a rate without seeing your wall is guessing, and the guess is usually low.</span></div>
     <div><b>We do not publish other people's bids</b><span>Figures from real proposals belong to the owner who commissioned them and the contractor who priced them. We will not republish either.</span></div>
     <div><b>Only a site visit settles it</b><span>Condition, water depth, barge access, soil, length and what the agencies ask for all move the number. No honest price exists before a survey and an engineer have looked at it.</span></div>
-    <div><b>What we will do</b><span>Score your shoreline, tell you which of the three approaches your answers point to, and connect you with a licensed marine contractor covering your area who can price it properly.</span></div>
+    <div><b>What we will do</b><span>Score your shoreline, tell you which of the three approaches your answers point to, and book you for a free inspection with a licensed marine contractor covering your area, who can price it properly.</span></div>
   </div>
 </div></section>
 '''
@@ -1790,7 +1790,7 @@ def build_about():
   <div class="rows">
     <div><b>We publish the rules</b><span>The seawall, dock and waterfront deck requirements for the cities we cover, each with its code section and the date we checked it. Most of this exists only as legal text in a municipal PDF. We publish the number.</span></div>
     <div><b>We score your shoreline</b><span>The Shore Score is a screening based on public data and the answers you give us. It tells you what your answers point to and what to ask next. It is not an engineering inspection and we never call it one.</span></div>
-    <div><b>We connect you to a licensed contractor</b><span>If you ask to be connected, we pass your details to a licensed marine contractor covering your area. They are an independent business, not our employee or our agent, and they may contact you directly.</span></div>
+    <div><b>We book you for a free inspection</b><span>If something looks wrong and you ask for one, we pass your details to a licensed marine contractor covering your area, who comes out at no charge to you. They are an independent business, not our employee or our agent, and they may contact you directly.</span></div>
     <div><b>We do not do the work</b><span>We refer. We do not build, repair, inspect or engineer anything, and we never quote a price for work.</span></div>
   </div>
 </div></section>

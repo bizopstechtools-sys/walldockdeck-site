@@ -481,16 +481,17 @@ first offense and $500 per day after.
 
 City of Miami
 
-New seawalls, bulkheads and living shorelines east of US-1 are set at 6 ft NAVD88,
-with Miami River frontage handled separately and required to be capable of reaching
-8 ft NAVD88 over time. Repairs exceeding 50% of length or cost must bring the full
-property frontage to standard. Confirm the current figure with the city before
-designing — this ordinance has been amended.
+Seawalls, bulkheads and living shorelines on tidally influenced and waterfront
+properties citywide must reach at least 6 ft NAVD88. On the Miami River and its
+tributaries the minimum is 4 ft NAVD88, built so the wall can be raised at least 2 ft
+(City Code Sec. 29-89(a)(4)). Repairs of 50% or more of length or cost must bring
+the full property frontage to standard (Sec. 29-89(a)(5)).
 
 Surfside
 
-Town code requires 5 feet above mean low water. Note the datum: that is MLW, not NAVD88, and the offset is local - get it from your survey rather than converting. A town
-study has recommended raising it; confirm before you design.
+Seawall tops must be at or above the FEMA base flood elevation, no higher than the
+town's design flood elevation (about 8.5 ft NAVD), and built to take 2 more feet
+(Town Code Sec. 90-63.4, Ord. 23-1734, March 2023).
 
 Other cities
 

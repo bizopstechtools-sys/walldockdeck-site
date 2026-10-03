@@ -483,9 +483,10 @@ five feet above mean low water and five feet NAVD88 are different elevations. So
 like NAVD88, tied to a national network of survey marks. Others are tidal, defined by the tide itself.
 NOAA defines mean low water as the average of all the low water heights observed over the National
 Tidal Datum Epoch, a specific 19-year period. South Florida codes use several. Most cities we have
-verified state their rule in NAVD88, <a href="/surfside/seawall-height-requirement/">Surfside</a>
-states mean low water, and <a href="/key-colony-beach/seawall-height-requirement/">Key Colony Beach</a>
-states mean sea level. We publish each as written and do not convert between them.</p>""",
+verified state their rule in NAVD88, <a href="/coral-gables/seawall-height-requirement/">Coral Gables</a>
+states NGVD29, <a href="/key-colony-beach/seawall-height-requirement/">Key Colony Beach</a>
+states mean sea level, and <a href="/surfside/seawall-height-requirement/">Surfside</a> ties its
+minimum to the FEMA base flood elevation. We publish each as written and do not convert between them.</p>""",
          sources=[S_COOPS],
          related=[("How we verify", "/how-we-verify/"),
                   ("Seawall height by county", "/seawall-height-by-county/")],
@@ -580,7 +581,7 @@ s. 403.813(1)(e), Florida Statutes. Your city's permit still applies.</p>""",
          body="""<p>Loose rock placed at the base of a seawall on the water side. It breaks up wave energy,
 protects the toe of the wall from being scoured out, and gives marine life somewhere to settle. Some
 cities require it. <a href="/pompano-beach/seawall-height-requirement/">Pompano Beach</a> requires natural
-limestone riprap at the waterward face, and <a href="/deerfield-beach/seawall-height-requirement/">Deerfield
+lime rock riprap, or other approved habitat enhancement, at the waterward face, and <a href="/deerfield-beach/seawall-height-requirement/">Deerfield
 Beach</a> requires natural limerock riprap or approved habitat enhancement there, with rules on how it is
 placed. Moving or replacing riprap during a seawall job is often the owner's cost rather than the
 contractor's, so check whether each quote includes it.</p>""",
@@ -596,10 +597,10 @@ contractor's, so check whether each quote includes it.</p>""",
 feature that keeps tidal water off the land behind it. The wider word matters because the elevation
 standard attaches to the barrier, not only to a wall. <a href="/pompano-beach/seawall-height-requirement/">Pompano
 Beach</a>, for example, does not require a seawall where another measure is an equally effective tidal
-flood barrier. Broward's standard is set in Broward County Code Sec. 39-404, Art. XXV, and the county's
+flood barrier. Broward's standard is set in Broward County Code Sec. 39-407, Art. XXV, and the county's
 cities adopted it in their own codes, some with stricter terms. The <a href="/broward/seawalls/">Broward
 page</a> sets out the county figure and which cities depart from it.</p>""",
-         sources=[("Broward County Code Sec. 39-404, Art. XXV", ""),
+         sources=[("Broward County Code Sec. 39-407, Art. XXV", ""),
                   ("City of Pompano Beach Code of Ordinances § 151.05", "")],
          related=[("Broward seawall rules", "/broward/seawalls/"),
                   ("Fort Lauderdale height rule", "/fort-lauderdale/seawall-height-requirement/"),
@@ -743,8 +744,8 @@ for state consent to use <a href="/glossary/sovereign-submerged-lands/">sovereig
 materials such as plants, sand or rock, offered as an alternative to hard methods like riprap or
 bulkheads. In practice it might be a planted slope with a rock sill offshore, rather than a vertical wall.
 Some cities fold living shorelines into the same elevation rule as seawalls: the
-<a href="/miami/seawall-height-requirement/">City of Miami</a> standard east of US-1 covers new seawalls,
-bulkheads and living shorelines alike. Whether one suits your lot depends on wave exposure, water depth,
+<a href="/miami/seawall-height-requirement/">City of Miami</a> standard, 6 ft NAVD88 citywide and 4 ft
+on the Miami River, covers seawalls, bulkheads and living shorelines alike. Whether one suits your lot depends on wave exposure, water depth,
 and what your city and the agencies will permit.</p>""",
          sources=[S_LIVING],
          related=[("Miami height rule", "/miami/seawall-height-requirement/"),

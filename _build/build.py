@@ -400,7 +400,7 @@ def head_(title, desc, path, body_class="", body_data="", schema=None):
   <a class="brand" href="/">{MARK}<b>Wall<i>Dock</i>Deck</b></a>
   <nav>
     <a href="/resources/">Resources</a>
-    <a href="/downloads/">Downloads</a>
+    <a href="/free/">Exclusive tools</a>
     <a href="/resources/what-it-costs/">What it costs</a>
     <a href="/agents/">For Agents</a>
     <a href="/book/">Book an inspection</a>
@@ -424,7 +424,9 @@ FOOT = f"""<footer class="foot"><div class="wrap">
     <a href="/book/">Book an inspection</a>
     <a href="/resources/what-it-costs/">What it costs</a>
     <a href="/downloads/">All downloads</a>
-    <a href="/broward/seawalls/">Broward seawall rules</a>
+    <a href="/free/">Exclusive tools &amp; resources</a>
+    <a href="/tools/seawall-height-lookup/">Seawall height lookup</a>
+    <a href="/glossary/">Glossary</a>
   </div>
   <div>
     <h4>Coverage</h4>
@@ -844,7 +846,19 @@ def build_resources_hub():
   <div class="shead"><h2>Start with what applies to you</h2></div>
   <div class="cards">{cards}</div>
 </div></section>
-<section class="tint"><div class="wrap">{slot('H2')}</div></section>
+<section class="tint"><div class="wrap">
+  <div class="shead"><h2>Exclusive tools and resources</h2>
+  <p>Ungated: read, print and use them without giving us an email.</p></div>
+  <div class="strip">
+    <a href="/tools/seawall-height-lookup/"><em>Tool</em>Seawall height lookup</a>
+    <a href="/free/templates/seawall-code-violation-response/"><em>Letter</em>Respond to a code notice</a>
+    <a href="/free/templates/contractor-quote-comparison/"><em>Worksheet</em>Compare contractor quotes</a>
+    <a href="/free/templates/public-records-request-permit-history/"><em>Letter</em>Request permit history</a>
+    <a href="/glossary/"><em>Reference</em>Waterfront glossary</a>
+    <a href="/free/"><em>Everything</em>All exclusive tools and resources</a>
+  </div>
+</div></section>
+<section><div class="wrap">{slot('H2')}</div></section>
 """
     body += FOOT
     write(path, body)
@@ -1241,7 +1255,12 @@ def build_downloads():
   <div class="shead"><h2>The four regional guides</h2></div>
   <div class="cards">{guides}</div>
 </div></section>
-<section><div class="wrap">{slot("H1")}</div></section>
+<section><div class="wrap">
+  <div class="shead"><h2>Templates you can print</h2>
+  <p>Letters and worksheets, readable in full on the page. <a href="/free/">All exclusive tools and resources</a>.</p></div>
+  <div class="strip">{"".join(f'<a href="/free/templates/{t["slug"]}/"><em>{e(t["kind"])}</em>{e(t["title"])}</a>' for t in TEMPLATES)}</div>
+</div></section>
+<section class="tint"><div class="wrap">{slot("H1")}</div></section>
 '''
     body += FOOT
     write(path, body)
@@ -1797,6 +1816,412 @@ def build_about():
     PAGES.append((path, TODAY, "0.6"))
 
 
+# ------------------------------------------------- free resources & templates
+# Everything in this area is ungated. A template is read and printed in full on
+# the page; the capture slot beside it offers the matching PDF, so the template
+# can earn an email without being held hostage for one.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from free_content import TEMPLATES, GLOSSARY, DISCLAIMER, WRITTEN   # noqa: E402
+
+TPL = {t["slug"]: t for t in TEMPLATES}
+GLOSS = {g["slug"]: g for g in GLOSSARY}
+GLOSS_SET_ID = SITE + "/glossary/#set"
+
+PRINT_BTN = ('<button type="button" class="printbtn noprint" onclick="window.print()">'
+             'Print this template</button>')
+
+
+def fills(html_):
+    """A run of underscores is a fill-in line. Wrapped so it prints as one."""
+    return re.sub(r"_{4,}", lambda m: f'<span class="fill">{m.group(0)}</span>', html_)
+
+
+def source_line(sources, checked):
+    if not sources:
+        return ""
+    parts = []
+    for label, url in sources:
+        parts.append(f'<a href="{e(url)}" rel="noopener">{e(label)}</a>' if url else e(label))
+    return (f'<p class="src"><b>Source:</b> {" &middot; ".join(parts)}'
+            f' &middot; <b>Checked</b> {e(checked)}</p>')
+
+
+def worksheet_html(t):
+    cols = 3
+    head = "".join(f"<th>Quote {c}</th>" for c in "ABC"[:cols])
+    blocks = ""
+    for group, rows in t["worksheet"]:
+        blocks += f'<tr class="grp"><th colspan="{cols+1}">{e(group)}</th></tr>'
+        for r in rows:
+            cells = "".join('<td><span class="fill">______________</span></td>' for _ in range(cols))
+            blocks += f"<tr><th scope=\"row\">{e(r)}</th>{cells}</tr>"
+    return (f'<table class="ws"><thead><tr><th>Line</th>{head}</tr></thead>'
+            f'<tbody>{blocks}</tbody></table>')
+
+
+def build_templates():
+    for t in TEMPLATES:
+        path = f'/free/templates/{t["slug"]}/'
+        title = fit_title(t["seo_title"])
+        desc = fit_desc(t["desc"]) or clip(t["desc"], DESC_MAX)
+        crumb_html, crumb_schema = crumbs(
+            [("Home", "/"), ("Exclusive tools & resources", "/free/"), ("Templates", "/free/#templates"),
+             (t["title"], None)])
+        art = article_schema(path, t["title"], desc, WRITTEN)
+
+        body_inner = worksheet_html(t) if t.get("worksheet") else fills(t["body"])
+        before = "".join(f'<div><b>{e(k)}</b><span>{v}</span></div>' for k, v in t["before"])
+        others = "".join(
+            f'<a href="/free/templates/{o["slug"]}/"><em>{e(o["kind"])}</em>{e(o["title"])}</a>'
+            for o in TEMPLATES if o["slug"] != t["slug"])
+
+        page = head_(title, desc, path, body_class="tplpage",
+                     body_data=f' data-cluster="{e(t["cluster"])}"',
+                     schema=[crumb_schema, art])
+        page += crumb_html + f'''
+<div class="answer noprint"><div class="wrap">
+  <span class="eyebrow">Exclusive template &middot; {e(t["kind"])} &middot; no email needed</span>
+  <h1>{e(t["title"])}</h1>
+  <p class="qualifier">{e(t["intro"])}</p>
+  <p class="disclaimer">{e(DISCLAIMER)}</p>
+</div></div>
+
+<section class="noprint"><div class="wrap">
+  <div class="shead"><h2>Before you use it</h2></div>
+  <div class="rows">{before}</div>
+  {source_line(t.get("sources"), WRITTEN)}
+</div></section>
+
+<section class="tplwrap"><div class="wrap">
+  <div class="shead noprint"><h2>The template</h2>
+  <p>Fill in the lines by hand or copy the text into your own document. {PRINT_BTN}</p></div>
+  <article class="tpl{' tpl-wide' if t.get('worksheet') else ''}">
+    <h2 class="tpl-title">{e(t["title"])}</h2>
+    {body_inner}
+    <p class="tpl-disclaimer">{e(DISCLAIMER)}</p>
+    <p class="tpl-foot">From walldockdeck.com/free/templates/{e(t["slug"])}/</p>
+  </article>
+</div></section>
+
+<section class="tint noprint"><div class="wrap">{slot("H1", "", t["cluster"], offer=t["offer"])}</div></section>
+
+<section class="noprint"><div class="wrap">
+  <div class="shead"><h2>More exclusive templates</h2></div>
+  <div class="strip">{others}<a href="/glossary/"><em>Reference</em>Waterfront glossary</a></div>
+</div></section>
+'''
+        page += FOOT
+        write(path, page)
+        PAGES.append((path, TODAY, "0.6"))
+    return len(TEMPLATES)
+
+
+def build_glossary():
+    terms = sorted(GLOSSARY, key=lambda g: g["term"].lower())
+    # index
+    path = "/glossary/"
+    title = fit_title("Seawall & Waterfront Glossary: Plain English")
+    desc = fit_desc("NAVD88, tie-backs, BFE, Notice of Commencement and the other terms on a "
+                    "seawall permit, quote or notice",
+                    "Each with its primary source")
+    crumb_html, crumb_schema = crumbs([("Home", "/"), ("Exclusive tools & resources", "/free/"), ("Glossary", None)])
+    term_set = {
+        "@type": "DefinedTermSet", "@id": GLOSS_SET_ID, "name": "Waterfront glossary",
+        "url": SITE + path,
+        "hasDefinedTerm": [{"@type": "DefinedTerm", "name": g["term"],
+                            "url": f'{SITE}/glossary/{g["slug"]}/'} for g in terms],
+    }
+    cards = "".join(
+        f'<a class="card" href="/glossary/{g["slug"]}/"><span class="k">Term</span>'
+        f'<h3>{e(g["term"])}</h3><p>{e(g["short"])}</p><span class="meta">Read it &rarr;</span></a>'
+        for g in terms)
+    page = head_(title, desc, path, schema=[crumb_schema, term_set,
+                                            article_schema(path, "Waterfront glossary", desc, WRITTEN)])
+    page += crumb_html + f'''
+<div class="answer"><div class="wrap">
+  <span class="eyebrow">Glossary &middot; {len(terms)} terms</span>
+  <h1>The words on a seawall permit, quote or notice</h1>
+  <p class="qualifier">Plain-English definitions of the terms that turn up when you are dealing with a
+  seawall, a dock or a code notice. Where a definition states a figure or what the law requires, it
+  names the primary source and the date we checked it.</p>
+</div></div>
+<section><div class="wrap">
+  <div class="cards">{cards}</div>
+</div></section>
+<section class="tint"><div class="wrap">{slot("H1", "", "seawall-compliance", offer="county_guide")}</div></section>
+'''
+    page += FOOT
+    write(path, page)
+    PAGES.append((path, TODAY, "0.6"))
+
+    for g in terms:
+        path = f'/glossary/{g["slug"]}/'
+        title = fit_title(f'What Is {g["term"]}? Seawall Glossary')
+        plain = re.sub(r"<[^>]+>", "", g["body"])
+        desc = fit_desc(clip(plain, 150))
+        crumb_html, crumb_schema = crumbs(
+            [("Home", "/"), ("Exclusive tools & resources", "/free/"), ("Glossary", "/glossary/"), (g["term"], None)])
+        dt = {"@type": "DefinedTerm", "name": g["term"], "description": squash(plain),
+              "url": SITE + path, "inDefinedTermSet": {"@id": GLOSS_SET_ID}}
+        related = "".join(f'<a href="{u}"><em>Related</em>{e(n)}</a>' for n, u in g["related"])
+        see = "".join(f'<a href="/glossary/{s}/"><em>Term</em>{e(GLOSS[s]["term"])}</a>'
+                      for s in g.get("see", []) if s in GLOSS)
+        page = head_(title, desc, path, schema=[crumb_schema, dt])
+        page += crumb_html + f'''
+<div class="answer"><div class="wrap">
+  <span class="eyebrow">Glossary</span>
+  <h1>{e(g["term"])}</h1>
+  <div class="defn">{g["body"]}</div>
+  {source_line(g["sources"], WRITTEN[:7])}
+</div></div>
+<section><div class="wrap">
+  <div class="shead"><h2>Where this comes up</h2></div>
+  <div class="strip">{related}{see}<a href="/glossary/"><em>Glossary</em>All terms</a></div>
+</div></section>
+<section class="tint"><div class="wrap">{slot("H1", "", "seawall-compliance", offer="county_guide")}</div></section>
+'''
+        page += FOOT
+        write(path, page)
+        PAGES.append((path, TODAY, "0.5"))
+    return len(terms)
+
+
+def build_height_tool():
+    """Ungated lookup. The data is the verified rows only, embedded at build
+    time, so the tool can never show a figure the city page does not."""
+    region_for = {r["region"]: f'/{r["regionSlug"]}/{r["serviceSlug"]}/' for r in load_regions()}
+    rows = {r["citySlug"]: r for r in LIVE if r["topicSlug"] == "seawall-height-requirement"}
+    cities = []
+    for c in sorted(CITIES, key=lambda x: x["city"]):
+        item = {"s": c["slug"], "n": c["city"], "c": c["county"],
+                "cu": region_for.get(c["county"], "/seawall-height-by-county/")}
+        r = rows.get(c["slug"])
+        if r and r.get("source") and r.get("verified_date"):
+            item.update({"a": squash(r["headline_answer"]), "u": squash(r["unit"]),
+                         "q": squash(r["qualifier"]), "src": squash(r["source"]),
+                         "d": squash(r["verified_date"]),
+                         "url": f'/{c["slug"]}/seawall-height-requirement/'})
+        cities.append(item)
+    data = json.dumps(cities, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+    n_ver = sum(1 for c in cities if "a" in c)
+
+    # The full list is also rendered as plain links, so the answer is reachable
+    # with scripts off and every city page is linked from here.
+    by_county = {}
+    for c in cities:
+        by_county.setdefault(c["c"], []).append(c)
+    lists = ""
+    for county in sorted(by_county):
+        links = "".join(
+            (f'<a href="{c["url"]}"><em>{e(c["a"])} {e(c["u"])}</em>{e(c["n"])}</a>' if "a" in c else
+             f'<a href="{c["cu"]}"><em>Not verified yet</em>{e(c["n"])}</a>')
+            for c in by_county[county])
+        lists += (f'<div style="margin-bottom:24px"><div class="shead" style="margin-bottom:10px">'
+                  f'<h3 style="font-size:19px">{e(county)} County</h3></div>'
+                  f'<div class="strip">{links}</div></div>')
+
+    path = "/tools/seawall-height-lookup/"
+    title = fit_title("Seawall Height Lookup: Your City's Rule, Sourced")
+    desc = fit_desc("Pick your South Florida city and see the seawall height it requires, with the code "
+                    "section and the date we verified it",
+                    "If we have not verified your city, we say so")
+    crumb_html, crumb_schema = crumbs(
+        [("Home", "/"), ("Exclusive tools & resources", "/free/"), ("Seawall height lookup", None)])
+    app = {"@type": "WebApplication", "name": "Seawall height lookup", "url": SITE + path,
+           "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any",
+           "isAccessibleForFree": True, "publisher": {"@id": ORG_ID}}
+    page = head_(title, desc, path, body_data=' data-cluster="seawall-compliance"',
+                 schema=[crumb_schema, app])
+    page += crumb_html + f'''
+<div class="answer"><div class="wrap">
+  <span class="eyebrow">Free tool &middot; no email needed</span>
+  <h1>How high does your seawall have to be?</h1>
+  <p class="qualifier">Pick your city. If we have verified its rule you get the figure, the datum, the
+  code section and the date we checked it. If we have not, we tell you that instead of guessing.
+  {n_ver} of {len(cities)} cities verified so far.</p>
+
+  <div class="finder" id="finder" hidden>
+    <label for="cityq">Your city</label>
+    <input id="cityq" type="search" autocomplete="off" spellcheck="false"
+           placeholder="Start typing, for example Hollywood" aria-controls="citylist">
+    <div class="citylist" id="citylist" role="listbox" aria-label="Cities"></div>
+  </div>
+  <div class="result" id="result" aria-live="polite" hidden></div>
+</div></div>
+
+<section class="tint"><div class="wrap">{slot("H1", "", "seawall-compliance", offer="county_guide")}</div></section>
+
+<section><div class="wrap">
+  <div class="shead"><h2>Every city we cover</h2>
+  <p>The same answers as plain links. A city we have not verified links to its county page,
+  which says what applies county-wide.</p></div>
+  {lists}
+</div></section>
+
+<section class="tint"><div class="wrap">
+  <div class="shead"><h2>Reading the answer</h2></div>
+  <div class="rows">
+    <div><b>The datum matters</b><span>A height is only meaningful with the datum it is measured from. Most cities state NAVD88; some do not. See <a href="/glossary/navd88/">NAVD88</a> and <a href="/glossary/datum/">datum</a>.</span></div>
+    <div><b>Confirm before you design</b><span>Rules change. Confirm the current requirement with your building department; the date beside each answer is when we last read the code.</span></div>
+    <div><b>Got a notice?</b><span>Our <a href="/free/templates/seawall-code-violation-response/">response letter</a> asks the city for the section and the deadlines in writing.</span></div>
+  </div>
+</div></section>
+
+<script type="application/json" id="wdd-heights">{data}</script>
+<script>
+(function () {{
+  var data = JSON.parse(document.getElementById('wdd-heights').textContent);
+  var finder = document.getElementById('finder'), q = document.getElementById('cityq'),
+      list = document.getElementById('citylist'), out = document.getElementById('result');
+  finder.hidden = false;
+  function el(tag, cls, text) {{
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }}
+  function link(href, text) {{ var a = el('a', 'go', text); a.href = href; return a; }}
+  function slugOf(c) {{ return c.c.toLowerCase().replace(/[^a-z0-9]+/g, '-'); }}
+  function tagSlot(c) {{
+    var s = document.querySelector('.slot');
+    if (!s) return;
+    s.setAttribute('data-city', c.s);
+    s.setAttribute('data-county', c.c);
+    s.setAttribute('data-county-slug', slugOf(c));
+  }}
+  function show(c) {{
+    out.innerHTML = '';
+    out.appendChild(el('span', 'eyebrow', c.n + ' \\u00b7 ' + c.c + ' County'));
+    if (c.a) {{
+      var f = el('div', 'figure');
+      f.appendChild(el('b', '', c.a));
+      f.appendChild(el('span', '', c.u));
+      out.appendChild(f);
+      out.appendChild(el('p', 'qualifier', c.q));
+      var src = el('p', 'src');
+      src.appendChild(el('b', '', 'Source: '));
+      src.appendChild(document.createTextNode(c.src + ' \\u00b7 '));
+      src.appendChild(el('b', '', 'Verified '));
+      src.appendChild(document.createTextNode(c.d));
+      out.appendChild(src);
+      out.appendChild(link(c.url, 'Read the full ' + c.n + ' rule \\u2192'));
+    }} else {{
+      out.appendChild(el('h2', 'notyet', "We haven't verified " + c.n + ' yet'));
+      out.appendChild(link(c.cu, 'Read the ' + c.c + ' County page \\u2192'));
+    }}
+    out.hidden = false;
+    tagSlot(c);
+    try {{ history.replaceState(null, '', '#' + c.s); }} catch (e) {{}}
+  }}
+  function render() {{
+    var t = q.value.trim().toLowerCase();
+    list.innerHTML = '';
+    data.filter(function (c) {{
+      return !t || c.n.toLowerCase().indexOf(t) > -1 || c.c.toLowerCase().indexOf(t) > -1;
+    }}).forEach(function (c) {{
+      var b = el('button', c.a ? 'v' : '', c.n);
+      b.type = 'button';
+      b.setAttribute('role', 'option');
+      b.appendChild(el('em', '', c.a ? 'Verified' : c.c));
+      b.addEventListener('click', function () {{ q.value = c.n; show(c); render(); }});
+      list.appendChild(b);
+    }});
+    if (!list.firstChild) list.appendChild(el('p', 'none', 'No city by that name in our list. Try your county, or the nearest city.'));
+  }}
+  q.addEventListener('input', render);
+  q.addEventListener('keydown', function (ev) {{
+    if (ev.key === 'Enter') {{ var b = list.querySelector('button'); if (b) {{ ev.preventDefault(); b.click(); }} }}
+  }});
+  render();
+  var pre = (location.hash || '').slice(1);
+  data.forEach(function (c) {{ if (c.s === pre) {{ q.value = c.n; show(c); render(); }} }});
+}})();
+</script>
+'''
+    page += FOOT
+    write(path, page)
+    PAGES.append((path, TODAY, "0.8"))
+    return len(cities), n_ver
+
+
+def build_free_hub():
+    path = "/free/"
+    title = fit_title("Exclusive Waterfront Tools and Resources")
+    desc = fit_desc("Printable letters, a quote worksheet, checklists, a seawall height lookup and a "
+                    "plain-English glossary",
+                    "No email needed to read or print any of it")
+    crumb_html, crumb_schema = crumbs([("Home", "/"), ("Exclusive tools & resources", None)])
+
+    tools = (
+        '<a class="card" href="/tools/seawall-height-lookup/"><span class="k">Tool</span>'
+        '<h3>Seawall height lookup</h3><p>Pick your city and see the height it requires, with the code '
+        'section and the date we checked it.</p><span class="meta">Open the tool &rarr;</span></a>'
+        '<a class="card" href="/#/start"><span class="k">Tool</span>'
+        '<h3>Shore Score</h3><p>A screening of your seawall, dock and deck from public data and your '
+        'answers. Not an engineering inspection.</p><span class="meta">Get a score &rarr;</span></a>'
+        '<a class="card" href="/seawall-height-by-county/"><span class="k">Reference</span>'
+        '<h3>Height rules by county</h3><p>Which counties set a seawall height, and which leave it to '
+        'each city.</p><span class="meta">Compare &rarr;</span></a>')
+    tpls = "".join(
+        f'<a class="card" href="/free/templates/{t["slug"]}/"><span class="k">{e(t["kind"])}</span>'
+        f'<h3>{e(t["title"])}</h3><p>{e(clip(t["intro"], 140))}.</p>'
+        f'<span class="meta">Read and print &rarr;</span></a>'
+        for t in TEMPLATES)
+    pdfs = [("seawall-warning-signs-checklist.pdf", "Owner checklist", "Twelve signs a seawall is failing"),
+            ("waterfront-buyer-checklist.pdf", "Buyer checklist", "Fifteen questions before you buy waterfront"),
+            ("deck-safety-checklist.pdf", "Owner checklist", "Ten checks on a waterfront deck"),
+            ("waterfront-listing-sheet.pdf", "For agents", "The waterfront listing sheet")]
+    checks = "".join(
+        f'<a class="card" href="/downloads/{fn}"><span class="k">{k} &middot; PDF</span><h3>{e(h)}</h3>'
+        f'<span class="meta">Open the PDF &rarr;</span></a>'
+        for fn, k, h in pdfs if os.path.exists(os.path.join(ROOT, "downloads", fn)))
+    checks += ('<a class="card" href="/downloads/"><span class="k">All downloads</span>'
+               '<h3>City height sheets and regional guides</h3><p>Every sheet, checklist and guide we '
+               'publish, in one place.</p><span class="meta">See them all &rarr;</span></a>')
+    terms = "".join(f'<a href="/glossary/{g["slug"]}/"><em>Term</em>{e(g["term"])}</a>'
+                    for g in sorted(GLOSSARY, key=lambda g: g["term"].lower()))
+
+    page = head_(title, desc, path, schema=[crumb_schema,
+                                            article_schema(path, "Exclusive waterfront tools and resources",
+                                                           desc, WRITTEN)])
+    page += crumb_html + f'''
+<div class="answer"><div class="wrap">
+  <span class="eyebrow">Free &middot; nothing gated</span>
+  <h1>Exclusive waterfront tools and resources</h1>
+  <p class="qualifier">Letters you can send, a worksheet for comparing quotes, checklists, a seawall
+  height lookup and a glossary. Every template is readable and printable in full on its page, with no
+  email needed. Where something states a figure or a legal rule, it names the source.</p>
+</div></div>
+
+<section><div class="wrap">
+  <div class="shead"><h2>Tools</h2></div>
+  <div class="cards">{tools}</div>
+</div></section>
+
+<section class="tint" id="templates"><div class="wrap">
+  <div class="shead"><h2>Templates</h2>
+  <p>Plain-English letters and worksheets with lines to fill in. Each is a template, not legal advice.</p></div>
+  <div class="cards">{tpls}</div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="shead"><h2>Checklists and guides</h2></div>
+  <div class="cards">{checks}</div>
+</div></section>
+
+<section class="tint"><div class="wrap">
+  <div class="shead"><h2>Glossary</h2>
+  <p>The words on a seawall permit, quote or notice, in plain English. <a href="/glossary/">See the full glossary</a>.</p></div>
+  <div class="strip">{terms}</div>
+</div></section>
+
+<section><div class="wrap">{slot("H1", "", "seawall-compliance", offer="county_guide")}</div></section>
+'''
+    page += FOOT
+    write(path, page)
+    PAGES.append((path, TODAY, "0.8"))
+
+
 def main():
     n_matrix = build_matrix()
     n_clus = build_clusters()
@@ -1811,6 +2236,10 @@ def main():
     build_county_compare()
     build_verify()
     build_about()
+    n_tpl = build_templates()
+    n_gloss = build_glossary()
+    n_cities, n_ver = build_height_tool()
+    build_free_hub()
     n_legal = build_legal()
     build_sitemap()
 
@@ -1824,6 +2253,10 @@ def main():
     print(f"county comparison    1   /seawall-height-by-county/")
     print(f"county pages      {n_reg:>4}   /{{county}}/{{service}}/")
     print(f"downloads page       1   {n_dl} files listed")
+    print(f"free hub             1   /free/")
+    print(f"templates         {n_tpl:>4}   /free/templates/{{slug}}/")
+    print(f"glossary          {n_gloss+1:>4}   /glossary/ + {n_gloss} terms")
+    print(f"height lookup        1   /tools/seawall-height-lookup/ ({n_ver} of {n_cities} cities verified)")
     print(f"legal pages       {n_legal+1:>4}   /legal/ + {n_legal} documents")
     print(f"sitemap entries   {len(PAGES)+1:>4}")
     print(f"\nindex.html and /guides untouched.")

@@ -10,7 +10,18 @@
 (function () {
   'use strict';
 
-  var TMG = 'https://tomonagi.com/api/public/intake/wall-dock-deck';
+  var TMG_BASE = 'https://tomonagi.com/api/public/intake/';
+  var TMG_GENERAL = 'wall-dock-deck';
+  /* Each offer posts to its own Tomonagi form, so the matching delivery email fires
+     (height sheet, checklist, county guide...). Anything else goes to the general form.
+     If an offer form ever refuses a post (4xx), the lead is re-sent to the general form
+     so nobody is lost. */
+  var FORM_FOR_OFFER = {
+    height_sheet: 'wdd-height-sheet', warning_list: 'wdd-warning-signs',
+    county_guide: 'wdd-county-guide', bid_compare: 'wdd-quote-check',
+    book_inspect: 'wdd-book-inspection', agent_tools: 'wdd-agent-access',
+    fifteen_q: 'wdd-buyer-checklist', deck_check: 'wdd-deck-checklist'
+  };
   var WHO_KEY = 'wdd_who';
   var WHO_TTL = 1000 * 60 * 60 * 24 * 60;   // 60 days
 
@@ -104,7 +115,9 @@
   }
 
   /* ---------- post ---------- */
-  function postLead(p) {
+  function postLead(p, slug) {
+    slug = slug || TMG_GENERAL;
+    var TMG = TMG_BASE + slug;
     var body = JSON.stringify(p);
     var keep = body.length < 60000;   // browsers reject keepalive bodies over 64KB
     function post(retry) {
@@ -116,7 +129,11 @@
         headers: { 'content-type': 'application/json' },
         body: body, keepalive: keep, mode: 'cors'
       })
-        .then(function (res) { if (res.status >= 500 && retry) return again(); return res; })
+        .then(function (res) {
+          if (res.status >= 500 && retry) return again();
+          if (res.status >= 400 && res.status < 500 && slug !== TMG_GENERAL) return postLead(p, TMG_GENERAL);
+          return res;
+        })
         .catch(function () { if (retry) return again(); });
     }
     return post(true);
@@ -142,8 +159,9 @@
     who.extId = p.external_id;
     saveWho(who);
 
+    if (!p.first_name && p.full_name) p.first_name = String(p.full_name).split(/\s+/)[0];
     Object.keys(p).forEach(function (k) { if (p[k] === '' || p[k] == null) delete p[k]; });
-    return postLead(p);
+    return postLead(p, FORM_FOR_OFFER[m.offer_id]);
   }
 
   /* ---------- wire every slot on the page ---------- */

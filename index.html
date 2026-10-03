@@ -778,6 +778,7 @@ footer.site a:hover{color:#fff}
   // lead_source_action says which step the person reached; the latest wins.
   var TMG = {
     url: "https://tomonagi.com/api/public/intake/wall-dock-deck",
+    base: "https://tomonagi.com/api/public/intake/",
     guidePdf: function(region){ return "/guides/"+region+".pdf"; }
   };
   function fnv(str){ var h=0x811c9dc5; for(var i=0;i<str.length;i++){ h^=str.charCodeAt(i); h=Math.imul(h,0x01000193)>>>0; } return h.toString(36); }
@@ -887,21 +888,28 @@ footer.site a:hover{color:#fff}
     }, utm(), f.extra||{});
     p.external_id = extIdFor(p.property_address, p.email, p.phone);
     if(f.files && f.files.length) p.__attachments = f.files;
+    // The guide and booking steps post to their own Tomonagi forms so the delivery email fires;
+    // everything else (score, follow-up signals) stays on the general form.
+    var slug = null;
+    if(p.first_name==null && p.full_name) p.first_name = String(p.full_name).split(/\s+/)[0];
+    if(action==="guide_download"){ slug="wdd-county-guide"; p.county_slug = ({miami:"miami-dade",broward:"broward",palm:"palm-beach",keys:"monroe"})[state.region]||""; }
+    else if(action==="inspection_request"){ slug="wdd-book-inspection"; }
     who.name=p.full_name||who.name; who.email=p.email||who.email; who.phone=p.phone||who.phone; who.addr=p.property_address||who.addr; if(f.consent) who.consent=true; saveWho(who);
     Object.keys(p).forEach(function(k){ if(p[k]===""||p[k]==null) delete p[k]; });
-    return postLead(p);
+    return postLead(p, slug);
   }
-  function postLead(p){
+  function postLead(p, slug){
+    var url = slug ? TMG.base+slug : TMG.url;
     var body = JSON.stringify(p);
     // keepalive lets a post survive the visitor navigating away — but browsers
     // REJECT keepalive bodies over 64 KB, which silently dropped every upload.
     var keep = body.length < 60000;
     function post(retry){
       var again = function(){ return new Promise(function(ok){setTimeout(ok,1500)}).then(function(){return post(false)}); };
-      return fetch(TMG.url,{method:"POST",headers:{"content-type":"application/json"},body:body,keepalive:keep,mode:"cors"})
+      return fetch(url,{method:"POST",headers:{"content-type":"application/json"},body:body,keepalive:keep,mode:"cors"})
         // Retry only what a retry can fix: a network failure or a server error.
-        // A 4xx (rate limit, too large, bad request) would just burn a slot.
-        .then(function(res){ if(res.status>=500 && retry) return again(); return res; })
+        // A 4xx from an offer form falls back to the general form so the lead is never lost.
+        .then(function(res){ if(res.status>=500 && retry) return again(); if(res.status>=400 && res.status<500 && slug) return postLead(p); return res; })
         .catch(function(){ if(retry) return again(); });
     }
     return post(true);

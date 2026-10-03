@@ -963,8 +963,10 @@ APPROACHES = [
      "The same panel repair, but the cap is demolished and rebuilt in full. Chosen when the cap "
      "has spalled, the steel is exposed, or the elevation has to change."),
     ("Heaviest", "Build a new wall in front of the old one",
-     "New panels and new batter piles throughout. In most cities this needs an exemption, so it "
-     "carries a permitting risk on top of the construction cost."),
+     "New panels and new batter piles throughout. How far in front of the old wall the new face sits "
+     "decides the permit route: Florida's environmental permit exemption covers restoring a seawall "
+     "within 18 inches waterward of its previous location (s. 403.813(1)(e), F.S.), and some cities "
+     "set their own line, so it carries a permitting risk on top of the construction cost."),
 ]
 
 DRIVERS = [
@@ -1063,7 +1065,8 @@ def build_costs():
   <div class="rows">{appr}</div>
   <p class="caveat" style="max-width:66ch"><b>This is where catching a problem early pays for
   itself.</b> Found in time, you are choosing between the first two. Left long enough, the third is
-  the only one left &mdash; and it is the one that needs a city exemption.</p>
+  the only one left &mdash; and it is the one whose permit route depends on how far waterward the
+  new wall goes.</p>
 </div></section>
 
 <section class="tint"><div class="wrap">
@@ -1547,13 +1550,13 @@ def build_sitemap():
 
 # ------------------------------------------------- does your county set one?
 COUNTY_ANSWER = [
-    ("Broward", "broward", "Yes", "5.0 ft NAVD88 by 2050",
-     "Broward County Code Sec. 39-404, Art. XXV &mdash; Resiliency Standards for Tidal Flood "
-     "Protection, plus Land Use Plan Policy 2.21.7",
-     "The only county of the four with a single standard behind every city. Every municipality had "
-     "to adopt it locally by 13 February 2022. Until 2035 a city <em>may</em> allow 4 ft NAVD88, but "
-     "only if the barrier is built to be raised to 5 ft by 2050 &mdash; and that allowance is the "
-     "city's to grant, not yours to claim."),
+    ("Broward", "broward", "Yes", "5.0 ft NAVD88 minimum",
+     "Broward County Code Ch. 39, Art. XXV, Sec. 39-407(a) &mdash; Resiliency Standards for Tidal "
+     "Flood Protection (Ord. No. 2020-11), plus Land Use Plan Policy 2.21.7",
+     "The only county of the four with a single standard behind every city. The county's guidance "
+     "says every municipality had to adopt it locally by 13 February 2022. The minimum is 5 ft NAVD88; "
+     "an application filed before 1 January 2035 <em>may</em> be permitted at 4 ft NAVD88, but only if "
+     "the barrier is built to reach 5 ft by 1 January 2050 &mdash; an allowance, not an entitlement."),
     ("Miami-Dade", "miami-dade", "No", "Your city sets it",
      "Miami-Dade County Code Ch. 24 governs environmental permitting, not elevation",
      "The county controls where a wall may go and what it may disturb, not how high it stands. "
@@ -1566,14 +1569,16 @@ COUNTY_ANSWER = [
      "Hazard Areas, requiring authorisation and proof the wall will not divert floodwater onto "
      "someone else. It never says how tall. Each town sets its own figure independently, and two "
      "neighbouring towns can differ."),
-    ("Monroe", "monroe", "No", "Only Key Colony Beach sets one",
+    ("Monroe", "monroe", "No", "Of the Keys cities we have read, only Key Colony Beach sets one",
      "Monroe County Land Development Code Sec. 118-12(k) sets no elevation and no datum",
      "Confirmed by reading every seawall and bulkhead reference in the county&rsquo;s code, not "
      "inferred from silence. Monroe regulates something the other three counties largely do not - "
      "<em>whether you may build a vertical wall at all.</em> New seawalls are permitted only to "
      "stabilise a severely eroding shoreline, only on manmade canals, and only where vegetation or "
-     "riprap will not do the job. On open water they are prohibited outright. One municipality, "
-     "Key Colony Beach, does set a figure: 5.5 ft above mean sea level."),
+     "riprap will not do the job. On open water they are prohibited outright. Key West (Sec. 110-182), "
+     "Marathon (LDR Sec. 106.36(H)) and Islamorada (Village Code Sec. 30-1545) set no figure either. "
+     "Key Colony Beach does: 5.5 ft above mean sea level (Code Sec. 5-51). We have not yet read "
+     "Layton's code."),
 ]
 
 
@@ -1623,7 +1628,7 @@ def build_county_compare():
     crumb_html, crumb_schema = crumbs(
         [("Home", "/"), ("Seawall height by county", None)])
     art = article_schema(path, title, desc, "2026-10",
-                         "Broward County Code Sec. 39-404 Art. XXV; Palm Beach County ULDC Art. 18; "
+                         "Broward County Code Sec. 39-407, Art. XXV; Palm Beach County ULDC Art. 18; "
                          "Miami-Dade County Code Ch. 24")
     body = head_(title, desc, path, body_data=' data-cluster="seawall-compliance"',
                  schema=[crumb_schema, art])
@@ -1633,9 +1638,9 @@ def build_county_compare():
   <span class="eyebrow">Four counties &middot; four different answers</span>
   <h1>Does your county set a minimum seawall height?</h1>
   <p class="qualifier"><b>Only one of the four does.</b> Broward sets a standard every city had to
-  adopt. Miami-Dade and Palm Beach set none at all and leave the number to your city. Monroe we have
-  not been able to confirm. The practical consequence is that a seawall built legally in one city
-  can sit nearly two feet below what is required twenty miles up the coast.</p>
+  adopt. Miami-Dade, Palm Beach and Monroe set none at county level and leave the number to your
+  city. The practical consequence is that a seawall built legally in one city can sit two feet below
+  what another city requires.</p>
 </div></div>
 
 <section><div class="wrap">
@@ -1659,10 +1664,10 @@ def build_county_compare():
   <div class="shead"><h2>The spread is real</h2>
   <p>These are verified figures from cities we have read the code for. They are not estimates.</p></div>
   <div class="rows">
-    <div><b>The low end</b><span>Hollywood, in Broward, requires 4 ft NAVD88 before 2035. It took the county's interim allowance and wrote it into its own guidance.</span></div>
-    <div><b>The high end</b><span>The City of Miami requires 6 ft NAVD88 east of US-1, and Miami River frontage must be capable of reaching 8 ft over time. Miami-Dade sets no county floor, so the city chose its own &mdash; and chose the highest in the region.</span></div>
-    <div><b>Two feet apart, two counties apart</b><span>A wall built to code in Hollywood would be two feet short of the requirement in the City of Miami. Both are legal. Both are South Florida. Neither county rule explains the gap, because one of the two counties has no rule.</span></div>
-    <div><b>And one city caps the top</b><span>Pompano Beach sets a maximum as well as a minimum &mdash; 5 ft NAVD88 to 5 ft 10 in. It is the only city we have found that says a wall can be too high as well as too low.</span></div>
+    <div><b>The low end</b><span>Boca Raton (Engineering Design Standards Manual 7.7), North Palm Beach (Sec. 5-72) and Tequesta (Sec. 76-33) start at 4 ft NAVD88. In Broward the minimum is 5 ft, but an application filed before 2035 may be permitted at 4 ft if the wall is built to reach 5 ft by 2050 (Broward County Code Sec. 39-407(a)).</span></div>
+    <div><b>The high end</b><span>The City of Miami requires 6 ft NAVD88 on tidally influenced and waterfront properties citywide. The Miami River and its tributaries are the exception: 4 ft NAVD88, built so the wall can be raised at least 2 ft (City Code Sec. 29-89(a)(4)). Miami-Dade sets no county floor, so the city chose its own.</span></div>
+    <div><b>Two feet apart, two counties apart</b><span>A wall built to 4.0 ft NAVD88 can meet the minimum in Boca Raton and be two feet short of the City of Miami's citywide minimum. Neither county rule explains the gap, because neither county sets one.</span></div>
+    <div><b>Several cities cap the top</b><span>A wall can be too high as well as too low. Pompano Beach caps it at 5 ft 10 in NAVD88 (&sect; 151.05(A)); Fort Lauderdale at the base flood elevation or 6.0 ft NAVD88, whichever is lower (ULDR 47-19.13.D(12)); Deerfield Beach at 7 ft NAVD88 or the required finished grade, whichever is higher; Hillsboro Beach at the base flood elevation (Sec. 12-268(D)); Boca Raton at 6.0 ft NAVD88; Surfside at the town's design flood elevation (Sec. 90-63.4(a)); and Delray Beach, North Palm Beach and Tequesta by flood zone.</span></div>
   </div>
 </div></section>
 
@@ -1678,7 +1683,7 @@ def build_county_compare():
   <ol>
     <li><b>Ask your city, not your county</b><span>Unless you are in Broward, the county almost certainly does not set your number. Even in Broward, several cities went stricter than the county floor.</span></li>
     <li><b>Ask for the section, in writing</b><span>&ldquo;What is the minimum cap elevation, in which datum, and where is it written?&rdquo; The last part matters &mdash; some towns keep the figure in an engineering standards manual rather than the ordinance, where searching the code finds nothing.</span></li>
-    <li><b>Confirm the datum</b><span>NAVD88 and mean low water are different reference points. Surfside states its rule in MLW while Miami Beach next door states theirs in NAVD88. Comparing the two numbers directly will mislead you, and the offset is local.</span></li>
+    <li><b>Confirm the datum</b><span>NAVD88, NGVD29 and mean sea level are different reference points. Coral Gables states its rule in NGVD29 and Key Colony Beach in mean sea level, while most cities state theirs in NAVD88. Comparing the numbers directly will mislead you, and the offset is local.</span></li>
     <li><b>Ask whether you must build for later</b><span>Several jurisdictions let you build lower now only if the wall is engineered to be raised. Building to the minimum today does not always close the question.</span></li>
   </ol>
 </div></section>
@@ -1730,9 +1735,9 @@ def build_verify():
   <p>Regulations in South Florida are genuinely inconsistent between neighbouring towns. These are the cases that come up most, and how we handle each.</p></div>
   <div class="rows">
     <div><b>When the county and the city disagree</b><span>We publish both and say which one governs. In Broward the county sets a standard every city had to adopt, and several cities went stricter &mdash; so the number that applies to you is your city&rsquo;s, not the county&rsquo;s. We say that on the page rather than averaging it away.</span></div>
-    <div><b>When the rule is not in the code</b><span>It happens more than you would expect. Some towns set their seawall elevation in an engineering standards manual rather than an ordinance, where searching the code finds nothing. We cite where it actually lives.</span></div>
-    <div><b>When the datum differs</b><span>A height means nothing without the datum it is measured from. Where a town states its rule in mean low water and its neighbour states theirs in NAVD88, we print both as given and do not convert between them. The offset is local, and converting by rule of thumb produces a wall at the wrong height.</span></div>
-    <div><b>When we cannot confirm it</b><span>We publish nothing. Monroe County is the current example: we have not been able to establish from public sources whether the county sets a minimum seawall height, so the Keys pages carry no elevation figure. An empty space is honest. A guess that reads like a fact is not.</span></div>
+    <div><b>When the rule is not in the code</b><span>It happens more than you would expect. Some towns publish their seawall elevation in an engineering standards manual rather than the ordinance, and the code can carry an older figure of its own. Boca Raton is the example: 4.0 to 6.0 ft NAVD88 in its design manual, plus 5.00 feet with no datum in Code Sec. 22-31(5). We cite both and say so.</span></div>
+    <div><b>When the datum differs</b><span>A height means nothing without the datum it is measured from. Where a town states its rule in mean sea level or NGVD29 and its neighbour states theirs in NAVD88, we print both as given and do not convert between them. The offset is local, and converting by rule of thumb produces a wall at the wrong height.</span></div>
+    <div><b>When we cannot confirm it</b><span>We publish nothing. A city we have not read stays marked unverified, and a row we cannot source stays unpublished. An empty space is honest. A guess that reads like a fact is not.</span></div>
     <div><b>When a rule changes</b><span>Rules move, sometimes quickly. Miami-Dade rewrote its seawall permitting in July 2025 for the first time in decades. When we find a change, the figure and its date are updated together.</span></div>
   </div>
 </div></section>

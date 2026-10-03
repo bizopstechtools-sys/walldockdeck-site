@@ -460,24 +460,25 @@ designed and built to accommodate 5.0 ft NAVD88 by January 1,
 
 What triggers it
 
-New barriers; substantial repair or rehabilitation; work affecting more
-than 50% of the shoreline length, or costing more than 50% of
-replacement value; attaching fixed structures such as mooring piles
+New barriers; substantial repair or rehabilitation (work along more
+than 50% of the shoreline length, or an attached structure costing more
+than 50% of a barrier along the shoreline); attaching fixed structures
+such as mooring structures
 
 Where it applies
 
 Tidally influenced shorelines. Not oceanfront beaches or areas
 seaward of the Coastal Construction Control Line
 
-Broward County Code Section 39-404, Article XXV (Resiliency Standards for Tidal Flood Protection), adopted 2020.
-Municipalities were required to adopt matching rules by 13 February 2022.
+Broward County Code Chapter 39, Article XXV (Resiliency Standards for Tidal Flood Protection), Sec. 39-407(a), adopted by Ord. No. 2020-11, 31 March 2020.
+The county's guidance says municipalities were required to adopt implementing ordinances by 13 February 2022.
 
 The maintenance duty — this is the part owners miss
-You must keep a tidal flood barrier in good repair. A barrier is presumed to be in disrepair if it allows upland
-erosion, lets material pass through it, or lets tidal water flow unimpeded through or over it. Tidal water
+You must keep a tidal flood barrier in good repair. A barrier is presumed to be in disrepair if it lets tidal water flow
+unimpeded through or over it onto adjacent property or the public right-of-way (Sec. 39-407(b)). Tidal water
 crossing onto a neighbor's property or a public right-of-way is a citable offense. After a citation, the clock is 60
 days to show progress and 365 days to complete repairs.
-There is also a disclosure obligation on sale in designated tidal flooding areas. A failing wall is no longer a
+There is also a disclosure obligation in sale contracts for property in tidally influenced areas (Sec. 39-408). A failing wall is no longer a
 private problem you can leave for the next owner.
 
 B R O W A R D · W AT E R F R O N T O W N E R ' S G U I D E
@@ -509,14 +510,14 @@ Fixed docks may sit no more than 12 inches above the barrier.
 Pompano Beach
 
 Minimum 5 ft NAVD88 and a maximum of 5 ft 10 in. Seawall caps may not extend
-more than 36 inches seaward of the existing wet face, and natural limestone riprap
-is required at the waterward face.
+more than 36 inches seaward of the existing wet face, and natural lime rock riprap,
+or other approved habitat enhancement, is required at the waterward face (§ 151.05).
 
 Hollywood
 
-Adopted the county standard in 2022 — 4 ft NAVD88 before 2035, 5 ft by 2050, with
-the same 60-day and one-year repair clocks. Barriers must adjoin the neighbors' so
-there is no gap.
+Code Sec. 150.30 (Ord. O-2022-01): minimum 5 ft NAVD88; applications before
+1 January 2035 may be permitted at 4 ft if built to reach 5 ft by 2050. Same 60-day
+and one-year repair clocks, and return walls where a barrier cannot meet the neighbor's.
 
 Other cities
 

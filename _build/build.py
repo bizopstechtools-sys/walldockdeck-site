@@ -1547,12 +1547,14 @@ COUNTY_ANSWER = [
      "Hazard Areas, requiring authorisation and proof the wall will not divert floodwater onto "
      "someone else. It never says how tall. Each town sets its own figure independently, and two "
      "neighbouring towns can differ."),
-    ("Monroe", "", "Not confirmed", "We will not guess",
-     "Not established from public sources",
-     "We have not been able to confirm from the published code whether Monroe County sets a minimum "
-     "seawall height. Our working expectation is that it does not, because the Keys regulate the "
-     "shoreline through other instruments. We are not publishing that expectation as a fact. Until "
-     "we can cite it, the Keys pages carry no elevation figure."),
+    ("Monroe", "monroe", "No", "Only Key Colony Beach sets one",
+     "Monroe County Land Development Code Sec. 118-12(k) sets no elevation and no datum",
+     "Confirmed by reading every seawall and bulkhead reference in the county&rsquo;s code, not "
+     "inferred from silence. Monroe regulates something the other three counties largely do not - "
+     "<em>whether you may build a vertical wall at all.</em> New seawalls are permitted only to "
+     "stabilise a severely eroding shoreline, only on manmade canals, and only where vegetation or "
+     "riprap will not do the job. On open water they are prohibited outright. One municipality, "
+     "Key Colony Beach, does set a figure: 5.5 ft above mean sea level."),
 ]
 
 

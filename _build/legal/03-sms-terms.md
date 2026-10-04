@@ -28,13 +28,13 @@ We do not buy lists. We do not scrape numbers. We do not take numbers from prope
 
 This is what appears next to the checkbox, word for word. It is also what we file with the mobile carriers, and we do not change one without changing the other:
 
-> I agree that Wall Dock Deck may contact me by phone, text and email about my property at the number above, including by automated means. Consent is not a condition of purchase. Message and data rates may apply. Message frequency varies. Reply STOP to opt out, HELP for help. See our Privacy Policy and SMS Terms.
+> I agree that Wall Dock Deck can contact me by call, text or email about my property using the information above. Not required to buy anything. Msg & data rates may apply; frequency varies. Reply STOP to stop, HELP for help. Privacy Policy · SMS Terms
 
 **It names one company: us.** Your consent to be texted is consent for *our* messages, and nothing else. We do not ask you to consent on behalf of a business you have not met.
 
 Directly beneath it, on the same form, you also see this — which is a disclosure, not a tick box:
 
-> If you book a free inspection, we share your details with a licensed contractor for your area, who is an independent business and may contact you directly.
+> If you ask to be connected, we share your details with a licensed contractor for your area, who is an independent business and may contact you directly.
 
 So the two things stay separate: **being texted by us**, and **being introduced to a contractor**. You can have either without the other, and you can stop either one. See [Your Privacy Choices](/legal/your-privacy-choices/).
 

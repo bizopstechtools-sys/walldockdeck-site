@@ -465,16 +465,13 @@ FOOT = f"""<footer class="foot"><div class="wrap">
 # from a party who is not named. The contractor handoff is disclosed separately,
 # below, which is also what CPRA wants at the point of collection.
 CONSENT_TEXT = (
-    "I agree that Wall Dock Deck may contact me by phone, text and email about my "
-    "property at the number above, including by automated means. Consent is not a "
-    "condition of purchase. Message and data rates may apply. Message frequency "
-    "varies. Reply STOP to opt out, HELP for help. See our Privacy Policy and SMS Terms."
+    "I agree that Wall Dock Deck can contact me by call, text or email about my property using the information above. Not required to buy anything. Msg & data rates may apply; frequency varies. Reply STOP to stop, HELP for help. Privacy Policy · SMS Terms"
 )
 
 # Shown next to the consent box wherever we collect contact details. Not a tick —
 # a disclosure, which is what the point-of-collection notice requirement asks for.
 SHARING_NOTE = (
-    "If you book a free inspection, we share your details with a licensed contractor "
+    "If you ask to be connected, we share your details with a licensed contractor "
     "for your area, who is an independent business and may contact you directly."
 )
 
@@ -521,7 +518,7 @@ def consent_block():
     consent makes that sentence false, and a reviewer comparing the two is exactly
     how a campaign gets rejected. Unticked, the request still goes through and we
     reply by email instead."""
-    link = (CONSENT_TEXT
+    link = (e(CONSENT_TEXT)
             .replace("Privacy Policy", '<a href="/privacy/">Privacy Policy</a>')
             .replace("SMS Terms", '<a href="/sms-terms/">SMS Terms</a>'))
     return (

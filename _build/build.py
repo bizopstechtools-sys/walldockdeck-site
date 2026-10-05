@@ -875,7 +875,7 @@ AGENT_BENEFITS = [
 ]
 AGENT_TOOLS = [
     ("Tool 01", "Shore Score",
-     "Give it the address and a few observations (age, cracks, soil loss) and it returns a score for the seawall, dock and deck, with what the city requires. About two minutes. Your team can run it, or you can send your link to a client or their estate manager."),
+     "Enter the address, tick what you can see (age, cracks, soil loss and so on) and get a score for the seawall, dock and deck, with what the city requires. About two minutes. Use it yourself or send your link to a client."),
     ("Tool 02", "Local Rule Sheet",
      "The height your city requires, the datum, and the code section, with the date we checked it. One page per city."),
     ("Tool 03", "Checklists and the listing sheet",

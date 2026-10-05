@@ -1095,7 +1095,7 @@ def build_costs():
     <div><b>No price per foot exists</b><span>Length, condition, access, depth and soil all move it independently. Anyone who hands you a rate without seeing your wall is guessing, and the guess is usually low.</span></div>
     <div><b>We do not publish other people's bids</b><span>Figures from real proposals belong to the owner who commissioned them and the contractor who priced them. We will not republish either.</span></div>
     <div><b>Only a site visit settles it</b><span>Condition, water depth, barge access, soil, length and what the agencies ask for all move the number. No honest price exists before a survey and an engineer have looked at it.</span></div>
-    <div><b>What we will do</b><span>Score your shoreline, tell you which of the three approaches your answers point to, and book you for a free inspection with a licensed marine contractor covering your area, who can price it properly.</span></div>
+    <div><b>What we will do</b><span>Score your shoreline, tell you which of the three approaches your answers point to, and book you an inspection with a licensed marine contractor covering your area. It is a resource that does not cost anything, and the contractor can price the work properly.</span></div>
   </div>
 </div></section>
 '''
@@ -1320,7 +1320,7 @@ def build_book():
       independent licensed contractor. They are not our employee or our agent, and we do
       not supervise their work. <a href="/legal/terms/">The terms</a> say exactly that.</p></div>
     <div class="card"><span class="k">Who pays</span><h3>Not you</h3>
-      <p>The visit is free to you. Contractors pay us for the introduction. You should know
+      <p>The visit does not cost you anything. Contractors pay us for the introduction. You should know
       that when you weigh what we tell you.</p></div>
     <div class="card"><span class="k">Your details</span><h3>Go to one contractor</h3>
       <p>The one covering your area &mdash; not sold to a panel to bid on. You can
@@ -1787,7 +1787,7 @@ def build_about():
   <div class="rows">
     <div><b>We publish the rules</b><span>The seawall, dock and waterfront deck requirements for the cities we cover, each with its code section and the date we checked it. Most of this exists only as legal text in a municipal PDF. We publish the number.</span></div>
     <div><b>We score your shoreline</b><span>The Shore Score is a screening based on public data and the answers you give us. It tells you what your answers point to and what to ask next. It is not an engineering inspection and we never call it one.</span></div>
-    <div><b>We book you for a free inspection</b><span>If something looks wrong and you ask for one, we pass your details to a licensed marine contractor covering your area, who comes out at no charge to you. They are an independent business, not our employee or our agent, and they may contact you directly.</span></div>
+    <div><b>We book you an inspection</b><span>If something looks wrong and you ask for one, we pass your details to a licensed marine contractor covering your area, whose visit does not cost you anything. They are an independent business, not our employee or our agent, and they may contact you directly.</span></div>
     <div><b>We do not do the work</b><span>We refer. We do not build, repair, inspect or engineer anything, and we never quote a price for work.</span></div>
   </div>
 </div></section>
@@ -1796,7 +1796,7 @@ def build_about():
   <div class="shead"><h2>How we are paid, plainly</h2>
   <p>Worth knowing before you decide how much weight to give our advice.</p></div>
   <div class="rows">
-    <div><b>Contractors pay us, you do not</b><span>Our contractor partners pay us for referrals. Everything on this site is free to you, including the guides and the Shore Score.</span></div>
+    <div><b>Contractors pay us, you do not</b><span>Our contractor partners pay us for referrals. Nothing on this site costs you anything, including the guides and the Shore Score.</span></div>
     <div><b>What that means for our incentives</b><span>We have an interest in you contacting a contractor. We have no interest in which option you choose or how much you spend &mdash; we are not paid on the size of the job, which is why we publish what drives a price rather than a price.</span></div>
     <div><b>Why we publish rules rather than quotes</b><span>A number without a survey is a guess, and a quote from someone who has not seen your wall is worth nothing. The rules are checkable. That is what we can honestly give you.</span></div>
   </div>

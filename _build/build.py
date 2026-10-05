@@ -870,16 +870,16 @@ AGENT_BENEFITS = [
      "Listing side it defends the price. Buy side it wins a credit. Either way it beats &ldquo;the wall looks old&rdquo;."),
     ("Three", "You have the answer",
      "Nobody else in the room can say what the city requires, or what size boat the dock will take."),
-    ("Four", "You stay relevant all year",
-     "King tides in October, storm prep in June &mdash; under your name, ready to forward to your sphere."),
+    ("Four", "You have a reason to call, all year",
+     "A seawall check is about the client, not about you. Send it before the listing, during the inspection period, and a year after closing."),
 ]
 AGENT_TOOLS = [
-    ("Tool 01", "Seawall Condition Check",
-     "A Shore Score for the seawall, dock and deck at any address &mdash; before listing, or during the inspection period."),
+    ("Tool 01", "Shore Score",
+     "Give it the address and a few observations (age, cracks, soil loss) and it returns a score for the seawall, dock and deck, with what the city requires. About two minutes. Your team can run it, or you can send your link to a client or their estate manager."),
     ("Tool 02", "Local Rule Sheet",
-     "The height your city requires, the datum, and the code section. One page."),
-    ("Tool 03", "Will It Fit?",
-     "Whether your buyer&rsquo;s boat can reach that dock and tie up there."),
+     "The height your city requires, the datum, and the code section, with the date we checked it. One page per city."),
+    ("Tool 03", "Checklists and the listing sheet",
+     "Twelve signs a seawall is failing for the seller, fifteen questions for the buyer during the inspection period, and a listing sheet for the appointment."),
 ]
 
 
@@ -911,8 +911,8 @@ def build_agents(luxury=False):
                 body_data=' data-cluster="agent"')
     body += f"""<div class="answer"><div class="wrap">
   <span class="eyebrow">{kicker}</span>
-  <h1>Waterfront closings are slipping on the seawall.</h1>
-  <p class="qualifier">Your deals don&rsquo;t have to. See what shape the seawall is in, what your city requires,
+  <h1>You won the deal. Don&rsquo;t let a slab of seawall take it back.</h1>
+  <p class="qualifier">See what shape the seawall is in, what your city requires,
   and what a repair would cost &mdash; on any waterfront property, listing side or buy side.</p>
 </div></div>
 
@@ -927,8 +927,7 @@ def build_agents(luxury=False):
 
 <section class="tint"><div class="wrap">
   <div class="shead"><h2>Seawall answers, before anyone asks</h2>
-  <p>Send your link. Your client answers a few questions and gets their Shore Score.
-  The report carries your name and photo, and a copy comes to you. It is clearly our report, provided by you.</p></div>
+  <p>Send your link. Your client answers a few questions and gets their Shore Score. The link is tagged to you, so we know it came from your client. It is our report, provided by you.</p></div>
   <div class="cards">{tools}</div>
 </div></section>
 

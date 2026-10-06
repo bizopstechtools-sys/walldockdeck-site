@@ -628,7 +628,7 @@ def slot(slot_id, city="", cluster="", county="", offer=""):
   
   <p class="err"></p>
   {fine}
-  <p class="done">Done &mdash; it is on the way to your inbox.</p>
+  <p class="done">Done &mdash; it is on the way to your inbox. Not there in a minute? Check your Promotions or Spam folder, and move it to your inbox so the next ones arrive.</p>
 </div>"""
 
 

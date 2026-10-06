@@ -47,8 +47,12 @@
   }
   /* Property alone is wrong: a new owner is a new lead, and consent never
      transfers with the property. */
+  // Fable 10/5: one person = one id, whatever they type later. The id used to include the address, so a visitor who
+  // asked for a sheet (no address) and later booked (address required) became two leads in the CRM, and the booking
+  // never stopped their emails. A new owner has a new email, so email alone is enough. The 'noaddr' segment is kept
+  // so ids for people who never gave an address are unchanged.
   function extIdFor(addr, email, phone) {
-    return 'wdd:' + h(addr || 'noaddr') + ':' + h(email || phone || '');
+    return 'wdd:' + h('noaddr') + ':' + h(email || phone || '');
   }
 
   /* ---------- utm passthrough ---------- */

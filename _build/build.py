@@ -284,7 +284,7 @@ ORG_ID = SITE + "/#org"
 # The byline. Every rule page states who verified it, because a figure without a
 # verifier is just a number on a website.
 AUTHOR_ID = SITE + "/#author"
-AUTHOR_NAME = "JB Marine"
+AUTHOR_NAME = "Wall Dock Deck"
 AUTHOR_SCHEMA = {
     "@type": "Organization",
     "@id": AUTHOR_ID,
@@ -1803,43 +1803,45 @@ def build_verify():
 
 
 def build_about():
-    """Who we are and how we are paid. The legal set has always been straight about
-    the referral model; the public pages never explained it."""
+    """Who we are and what we do: getting the right waterfront information to the
+    right people. (JB 2026-10-07: rewritten around that; payment and referral
+    wording lives in the legal pages, not here.)"""
     path = "/about/"
-    title = fit_title("About WallDockDeck: Who We Are, How We Are Paid", brand=False)
+    title = fit_title("About Wall Dock Deck: A Resource for the South Florida Waterfront Community", brand=False)
     desc = fit_desc(
-        "What we do, how the referral model works and how we are paid",
-        "Seawalls, docks and waterfront decks from the Keys to Palm Beach")
+        "Verified seawall, dock and deck rules from the Keys to Palm Beach, a free Shore Score, "
+        "and an inspection when something looks wrong")
     crumb_html, crumb_schema = crumbs([("Home", "/"), ("About", None)])
     body = head_(title, desc, path, schema=[crumb_schema])
     body += crumb_html + f'''
 
 <div class="answer"><div class="wrap">
   <span class="eyebrow">About</span>
-  <h1>Who we are, and how we are paid</h1>
-  <p class="qualifier">WallDockDeck publishes the waterfront building rules for South Florida and
-  connects owners with licensed marine contractors. We do not perform the work ourselves, and we are
-  paid by the contractors we refer to &mdash; not by you. Both of those facts change how you should
-  read everything else here, so they go at the top rather than in the small print.</p>
+  <h1>Who we are</h1>
+  <p class="qualifier">Wall Dock Deck is a resource for the South Florida waterfront community, from the
+  Keys to Palm Beach. Our job is to get the right information to the right people. The rules that decide
+  what you can build, repair or buy on the water are buried in city and county code, so we find them, check
+  them against the source and put them in plain words, alongside free tools for owners, buyers, agents and
+  boards. And if something looks wrong, we can get an inspection for you.</p>
 </div></div>
 
 <section><div class="wrap">
   <div class="shead"><h2>What we do</h2></div>
   <div class="rows">
     <div><b>We publish the rules</b><span>The seawall, dock and waterfront deck requirements for the cities we cover, each with its code section and the date we checked it. Most of this exists only as legal text in a municipal PDF. We publish the number.</span></div>
-    <div><b>We score your shoreline</b><span>The Shore Score is a screening based on public data and the answers you give us. It tells you what your answers point to and what to ask next. It is not an engineering inspection and we never call it one.</span></div>
-    <div><b>We book you an inspection</b><span>If something looks wrong and you ask for one, we pass your details to a licensed marine contractor covering your area, whose visit does not cost you anything. They are an independent business, not our employee or our agent, and they may contact you directly.</span></div>
-    <div><b>We do not do the work</b><span>We refer. We do not build, repair, inspect or engineer anything, and we never quote a price for work.</span></div>
+    <div><b>We score your shoreline</b><span>The <a href="/#/start">Shore Score</a> is a free screening based on public data and the answers you give us. It tells you what your answers point to and what to ask next. It is not an engineering inspection and we never call it one.</span></div>
+    <div><b>We get you an inspection</b><span>If something looks wrong, <a href="/book/">book an inspection</a>. We set up a free site visit with a licensed marine contractor who covers your area.</span></div>
+    <div><b>We help you read the quotes</b><span>Two seawall quotes rarely cover the same work. Send us yours and we will tell you what each one leaves out.</span></div>
   </div>
 </div></section>
 
 <section class="tint"><div class="wrap">
-  <div class="shead"><h2>How we are paid, plainly</h2>
-  <p>Worth knowing before you decide how much weight to give our advice.</p></div>
+  <div class="shead"><h2>Who we help</h2>
+  <p>The right information looks different depending on where you sit.</p></div>
   <div class="rows">
-    <div><b>Contractors pay us, you do not</b><span>Our contractor partners pay us for referrals. Nothing on this site costs you anything, including the guides and the Shore Score.</span></div>
-    <div><b>What that means for our incentives</b><span>We have an interest in you contacting a contractor. We have no interest in which option you choose or how much you spend &mdash; we are not paid on the size of the job, which is why we publish what drives a price rather than a price.</span></div>
-    <div><b>Why we publish rules rather than quotes</b><span>A number without a survey is a guess, and a quote from someone who has not seen your wall is worth nothing. The rules are checkable. That is what we can honestly give you.</span></div>
+    <div><b>Waterfront owners</b><span>What your city requires, what shape your wall is in and what to ask next. <a href="/#/start">Get a Shore Score</a>.</span></div>
+    <div><b>Buyers and real estate agents</b><span>The seawall questions to ask before closing, and free client tools for agents. <a href="/agents/">Tools for agents</a>.</span></div>
+    <div><b>HOAs, boards and marinas</b><span>Every wall, slip and deck on the property in one pass, with inspections planned around residents and slip holders. <a href="/#/associations">For associations</a>.</span></div>
   </div>
 </div></section>
 
@@ -1848,8 +1850,8 @@ def build_about():
   <div class="rows">
     <div><b>{e(AUTHOR_NAME)}</b><span>Researches and verifies the rules published here. Every figure is read out of the primary code, recorded with its section and the month it was checked, and nothing publishes without both. The method is set out in full on our <a href="/how-we-verify/">verification page</a>.</span></div>
     <div><b>Where we cover</b><span>Monroe, Miami-Dade, Broward and Palm Beach counties &mdash; the Florida Keys to Palm Beach. We publish a city only once we have verified its rules, which is why the list grows rather than starting complete.</span></div>
-    <div><b>What we will not do</b><span>Publish a figure we cannot source, republish another party&rsquo;s bid, or present an estimate as a quote.</span></div>
   </div>
+  <p class="src">Shore Scores are screenings based on public data and owner answers, not engineering inspections or certifications.</p>
 </div></section>
 
 <section class="tint"><div class="wrap">{slot("R3", "", "seawall-compliance")}</div></section>

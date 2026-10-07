@@ -26,15 +26,33 @@
   var WHO_TTL = 1000 * 60 * 60 * 24 * 60;   // 60 days
 
   /* ---------- who this visitor is, remembered across pages ---------- */
+  /* JB 2026-10-07: only the anonymous lead id is kept on the browser, never a name,
+     email, phone or address, so no form is ever pre-filled with someone's details
+     (an agent showing the site to a client). The id still merges every step into one
+     lead and lets a guide open land on it (Tomonagi merges an id-only follow-up on the
+     form's external_id dedupe key). Details saved by older versions are wiped here. */
+  function cleanWho(w) {
+    var o = {};
+    if (w && w.extId) o.extId = String(w.extId);
+    // the home page's scrambled owner key; a raw email or phone from an older version is dropped
+    if (w && w.ownerKey && !/[@\d]/.test(String(w.ownerKey))) o.ownerKey = String(w.ownerKey);
+    return o;
+  }
   function loadWho() {
     try {
-      var w = JSON.parse(localStorage.getItem(WHO_KEY) || '{}');
-      if (w.at && Date.now() - w.at > WHO_TTL) return {};
-      return w || {};
+      var w = JSON.parse(localStorage.getItem(WHO_KEY) || '{}') || {};
+      var t = w.at || w.ts;
+      if (t && Date.now() - t > WHO_TTL) return {};
+      var o = cleanWho(w);
+      if (Object.keys(w).some(function (k) { return k !== 'at' && k !== 'ts' && (!(k in o) || o[k] !== w[k]); })) {
+        o.at = t || Date.now(); o.ts = o.at;
+        localStorage.setItem(WHO_KEY, JSON.stringify(o));
+      }
+      return o;
     } catch (e) { return {}; }
   }
   function saveWho(w) {
-    try { w.at = Date.now(); localStorage.setItem(WHO_KEY, JSON.stringify(w)); } catch (e) {}
+    try { var o = cleanWho(w); o.at = Date.now(); o.ts = o.at; localStorage.setItem(WHO_KEY, JSON.stringify(o)); } catch (e) {}
   }
   var who = loadWho();
 
@@ -154,12 +172,8 @@
       page: location.pathname
     }, fields, m, utm());
 
-    p.external_id = extIdFor(p.property_address || who.addr, p.email, p.phone);
+    p.external_id = extIdFor(p.property_address, p.email, p.phone);
 
-    who.name = p.full_name || who.name;
-    who.email = p.email || who.email;
-    who.phone = p.phone || who.phone;
-    who.addr  = p.property_address || who.addr;
     who.extId = p.external_id;
     saveWho(who);
 
@@ -176,11 +190,7 @@
     if (!form) return;
     var btn = form.querySelector('button');
 
-    /* Prefill what we already know. Nobody should type their email twice. */
-    var e = form.querySelector('[name=email]');
-    if (e && !e.value && who.email) e.value = who.email;
-    var n = form.querySelector('[name=full_name]');
-    if (n && !n.value && who.name) n.value = who.name;
+    /* No pre-fill: whoever is at the keyboard types their own details (JB 2026-10-07). */
 
     form.addEventListener('submit', function (ev) {
       ev.preventDefault();
@@ -232,10 +242,9 @@
     /* Guide and download opens are a real signal and cost nothing to capture. */
     document.querySelectorAll('a[href$=".pdf"]').forEach(function (a) {
       a.addEventListener('click', function () {
-        if (!who.email && !who.phone) return;
+        if (!who.extId) return;
         postLead({
-          full_name: who.name || '', email: who.email || '', phone: who.phone || '',
-          external_id: who.extId || extIdFor(who.addr, who.email, who.phone),
+          external_id: who.extId,
           guide_opened_at: new Date().toISOString(),
           guide_opened_edition: (a.getAttribute('href').split('/').pop() || '').replace('.pdf', ''),
           page_path: location.pathname

@@ -754,6 +754,48 @@ def build_matrix():
     return n
 
 
+def build_retired():
+    """Rows marked `retired`: the answer now lives on the county page. The old
+    address stays reachable (old links, bookmarks) but is a short noindex page that
+    points there - its canonical is the county page, it is not in the sitemap, and
+    it keeps the page's request form, so an old link still brings in leads. Nothing is deleted. (2026-10-07: the four unincorporated
+    Keys height rows, covered once on /monroe/seawalls/.)"""
+    region_for = {r["region"]: f'/{r["regionSlug"]}/{r["serviceSlug"]}/'
+                  for r in load_regions()}
+    done = []
+    for r in CT:
+        if r.get("status") != "retired":
+            continue
+        cs, ts = r["citySlug"], r["topicSlug"]
+        city, topic = CITY.get(cs), TOPIC.get(ts)
+        county_url = region_for.get((city or {}).get("county", ""))
+        if not city or not topic or not county_url:
+            continue
+        path = f"/{cs}/{ts}/"
+        q = r.get("question") or topic["question"].replace("{city}", city["city"])
+        title = fit_title(f"{q} See the {city['county']} County page")
+        desc = f"The answer for {city['city']} is on our {city['county']} County page, with the code section and the date we verified it."
+        body = head_(title, desc, county_url, body_data=f' data-retired="{e(cs)}"')
+        body = body.replace('<meta name="viewport" content="width=device-width,initial-scale=1">',
+                            '<meta name="viewport" content="width=device-width,initial-scale=1">\n<meta name="robots" content="noindex, follow">', 1)
+        body += f"""
+<div class="answer"><div class="wrap">
+  <span class="eyebrow">{e(city['city'])} &middot; {e(city['county'])} County</span>
+  <h1>{e(q)}</h1>
+  <p class="qualifier">The same county rule applies to {e(city['city'])} and the rest of unincorporated {e(city['county'])} County, so we keep the answer in one place.</p>
+  <p><a class="btn" href="{county_url}">See the {e(city['county'])} County rule</a></p>
+</div></div>
+
+<section class="tint"><div class="wrap">{slot('H1', cs, CLUSTER_OF_NAME.get(r.get("cluster", ""), "seawall-compliance"))}</div></section>
+
+<section><div class="wrap">{slot('H2', cs, CLUSTER_OF_NAME.get(r.get("cluster", ""), "seawall-compliance"))}</div></section>
+"""
+        body += FOOT
+        write(path, body)
+        done.append(path)
+    return done
+
+
 # --------------------------------------------------------------- cluster hubs
 def build_clusters():
     for c in sorted(CLUSTERS, key=lambda x: int(x["order"])):
@@ -2225,6 +2267,7 @@ def build_free_hub():
 
 def main():
     n_matrix = build_matrix()
+    retired = build_retired()
     n_clus = build_clusters()
     build_resources_hub()
     build_agents(False)
@@ -2246,6 +2289,7 @@ def main():
 
     held = len(CT) - len(LIVE)
     print(f"matrix pages      {n_matrix:>4}   (of {len(CT)} rows; {held} not yet verified)")
+    print(f"retired (noindex) {len(retired):>4}   {' '.join(retired)}")
     print(f"cluster hubs      {n_clus:>4}")
     print(f"resources hub        1")
     print(f"agent pages          2   /agents/ /luxury/")

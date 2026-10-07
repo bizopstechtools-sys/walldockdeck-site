@@ -784,19 +784,25 @@ footer.site a:hover{color:#fff}
   function fnv(str){ var h=0x811c9dc5; for(var i=0;i<str.length;i++){ h^=str.charCodeAt(i); h=Math.imul(h,0x01000193)>>>0; } return h.toString(36); }
   function normAddr(a){ return String(a||"").toLowerCase().replace(/[^a-z0-9]/g,""); }
   // Remembered for 30 days on this browser, then forgotten (shared computers).
+  // JB 2026-10-07: only the anonymous lead id is kept (and a scrambled owner key), never a name, email, phone or
+  // address, so no form is ever pre-filled with someone's details (an agent showing the site to a client). The id
+  // still merges every step into one lead and lets a guide open or added photos land on it (Tomonagi merges an
+  // id-only follow-up on the form's external_id dedupe key). Older saved details are wiped on the next visit.
   var WHO_TTL = 30*24*3600*1000;
-  function loadWho(){ try{ var w=JSON.parse(localStorage.getItem("wdd_who")||"{}"); if(!w.ts || Date.now()-w.ts>WHO_TTL){ localStorage.removeItem("wdd_who"); return {}; } return w; }catch(e){ return {}; } }
-  function saveWho(w){ try{ w.ts=Date.now(); localStorage.setItem("wdd_who", JSON.stringify(w)); }catch(e){} }
-  var who = loadWho();   // {name,email,phone,consent,extId,addr}
+  function cleanWho(w){ var o={}; if(w && w.extId) o.extId=String(w.extId); if(w && w.ownerKey) o.ownerKey=/[@\d]/.test(w.ownerKey)?fnv(String(w.ownerKey)):String(w.ownerKey); return o; }
+  function saveWho(w){ try{ var o=cleanWho(w); o.ts=Date.now(); o.at=o.ts; localStorage.setItem("wdd_who", JSON.stringify(o)); }catch(e){} }
+  function loadWho(){ try{ var w=JSON.parse(localStorage.getItem("wdd_who")||"{}"); var t=w.ts||w.at; if(!t || Date.now()-t>WHO_TTL){ localStorage.removeItem("wdd_who"); return {}; }
+    var o=cleanWho(w); if(Object.keys(w).some(function(k){ return k!=="ts" && k!=="at" && !(k in o); }) || w.ownerKey!==o.ownerKey){ o.ts=t; o.at=t; try{ localStorage.setItem("wdd_who", JSON.stringify(o)); }catch(_){} } return o; }catch(e){ return {}; } }
+  var who = loadWho();   // {extId, ownerKey} only
   // property + owner, never the property alone (a new owner is a new lead)
   function extIdFor(addr, email, phone){
     var owner = String(email||"").trim().toLowerCase() || String(phone||"").replace(/\D/g,"");
     // Same person on this browser keeps ONE lead even if they type the address
     // differently between steps ("St" vs "Street"). A different email/phone is
     // a different person → a new lead.
-    if(who.extId && owner && who.ownerKey===owner) return who.extId;
+    if(who.extId && owner && who.ownerKey===fnv(owner)) return who.extId;
     var id = "wdd:"+fnv(normAddr(addr)||"noaddr")+":"+fnv(owner||String(Date.now()));
-    who.extId=id; who.addrKey=normAddr(addr); who.ownerKey=owner; return id;
+    who.extId=id; who.ownerKey=owner?fnv(owner):""; return id;
   }
   /* Reads tags from the query AND from the fragment, because a campaign link
      like /#/book?utm_source=... puts them where location.search cannot see them.
@@ -850,7 +856,7 @@ footer.site a:hover{color:#fff}
   // GUIDE OPENED: any click on a /guides/*.pdf link is recorded on the lead
   // (only once we know who they are). Latest open + a running count.
   document.addEventListener("click", function(e){
-    var a = e.target.closest && e.target.closest('a[href^="/guides/"]'); if(!a || !(who.email||who.phone)) return;
+    var a = e.target.closest && e.target.closest('a[href^="/guides/"]'); if(!a || !who.extId) return;
     var n = (parseInt(localStorage.getItem("wdd_guide_opens")||"0",10)||0)+1; try{ localStorage.setItem("wdd_guide_opens", String(n)); }catch(_){}
     sendLead(null,{extra:{guide_opened_at:new Date().toISOString(), guide_opened_edition:(a.getAttribute("href").split("/").pop()||"").replace(".pdf",""), guide_open_count:String(n)}});
   }, true);
@@ -862,11 +868,11 @@ footer.site a:hover{color:#fff}
       // A follow-up signal (guide opened, files added) is NOT a form: send only
       // who this is + the new facts. Re-sending page defaults here overwrote a
       // real lead's answers (Commercial → Residential, consent yes → no).
-      p = Object.assign({ full_name: who.name||"", email: who.email||"", phone: who.phone||"" }, f.extra||{});
-      p.external_id = who.extId || extIdFor(who.addr||"", who.email, who.phone);
+      p = Object.assign({}, f.extra||{});
+      p.external_id = who.extId || "";
       if(f.files && f.files.length) p.__attachments = f.files;
       Object.keys(p).forEach(function(k){ if(p[k]===""||p[k]==null) delete p[k]; });
-      if(!p.email && !p.phone) return Promise.resolve(); // nobody known yet — nothing to attach it to
+      if(!p.external_id) return Promise.resolve(); // nobody known yet — nothing to attach it to
       return postLead(p);
     }
     p = Object.assign({
@@ -894,7 +900,7 @@ footer.site a:hover{color:#fff}
     if(p.first_name==null && p.full_name) p.first_name = String(p.full_name).split(/\s+/)[0];
     if(action==="guide_download"){ slug="wdd-county-guide"; p.county_slug = ({miami:"miami-dade",broward:"broward",palm:"palm-beach",keys:"monroe"})[state.region]||""; }
     else if(action==="inspection_request"){ slug="wdd-book-inspection"; }
-    who.name=p.full_name||who.name; who.email=p.email||who.email; who.phone=p.phone||who.phone; who.addr=p.property_address||who.addr; if(f.consent) who.consent=true; saveWho(who);
+    saveWho(who); // extIdFor() above set who.extId / ownerKey; nothing personal is kept
     Object.keys(p).forEach(function(k){ if(p[k]===""||p[k]==null) delete p[k]; });
     return postLead(p, slug);
   }
@@ -1149,8 +1155,8 @@ footer.site a:hover{color:#fff}
 
     var gate =
       '<div class="gate"><div class="qcard"><h3>Unlock your full report + free guide</h3><p class="muted" style="margin:4px 0 14px">See each structure\'s score, what drove it, the local rules and a budget range. We\'ll email you the report and <i>The South Florida Waterfront Owner\'s Guide</i>.</p>'+
-      '<div class="row2"><div class="field"><label for="cName">Full name</label><input id="cName" autocomplete="name" value="'+esc(who.name||"")+'"></div><div class="field"><label for="cPhone">Mobile phone</label><input id="cPhone" autocomplete="tel" inputmode="tel" value="'+esc(who.phone||"")+'"></div></div>'+
-      '<div class="field"><label for="cEmail">Email</label><input id="cEmail" autocomplete="email" inputmode="email" value="'+esc(who.email||"")+'"></div>'+
+      '<div class="row2"><div class="field"><label for="cName">Full name</label><input id="cName" autocomplete="name" value=""></div><div class="field"><label for="cPhone">Mobile phone</label><input id="cPhone" autocomplete="tel" inputmode="tel" value=""></div></div>'+
+      '<div class="field"><label for="cEmail">Email</label><input id="cEmail" autocomplete="email" inputmode="email" value=""></div>'+
       '<label class="consent"><input type="checkbox" id="cConsent"><span>'+consentHtml(r)+'</span></label>'+
       '<p class="sharenote">'+shareNote()+' <a href="/legal/your-privacy-choices/">You can opt out.</a></p>'+
       '<button class="btn btn-cta" style="width:100%" id="unlock">Show my full report</button><p class="fine" id="gateErr" style="color:var(--act);margin:8px 0 0"></p></div></div>';
@@ -1210,8 +1216,8 @@ footer.site a:hover{color:#fff}
       (bk.structs.indexOf("dock")<0?'<label class="inline-check"><input type="checkbox" id="bDockInfo" '+(bk.dockInfo?'checked':'')+'><span><b>Thinking about adding a dock or boat lift?</b> Send me free info on permits, costs and lift sizing.</span></label>':'')+
       '<div class="flabel" style="margin-top:6px">How would you like to schedule?</div>'+modeHtml(bk.mode)+
       (bk.mode==="pick"?'<div class="slots">'+slotsHtml(bk.slot)+'</div>':'<div class="field" style="margin-top:12px"><label for="bBest2">Best time to call</label><select id="bBest2"><option>Morning</option><option>Afternoon</option><option>Evening (before 8 PM)</option></select></div>')+
-      '<div class="row2"><div class="field"><label for="dName">Full name</label><input id="dName" autocomplete="name" value="'+esc(who.name||"")+'"></div><div class="field"><label for="dPhone">Mobile phone</label><input id="dPhone" autocomplete="tel" inputmode="tel" value="'+esc(who.phone||"")+'"></div></div>'+
-      '<div class="field"><label for="dEmail">Email</label><input id="dEmail" autocomplete="email" inputmode="email" value="'+esc(who.email||"")+'"></div>'+
+      '<div class="row2"><div class="field"><label for="dName">Full name</label><input id="dName" autocomplete="name" value=""></div><div class="field"><label for="dPhone">Mobile phone</label><input id="dPhone" autocomplete="tel" inputmode="tel" value=""></div></div>'+
+      '<div class="field"><label for="dEmail">Email</label><input id="dEmail" autocomplete="email" inputmode="email" value=""></div>'+
       '<label class="consent"><input type="checkbox" id="dConsent"><span id="dConsentText">'+consentHtml(r)+'</span></label>'+
       '<p class="sharenote">'+shareNote()+' <a href="/legal/your-privacy-choices/">You can opt out.</a></p>'+
       '<div class="field"><span class="flabel">Photos, plans, permits or drawings (optional)</span><label class="btn btn-ghost btn-sm" style="cursor:pointer;margin-top:6px">Add files<input type="file" multiple data-upload-book hidden></label><div class="fine" data-upmsg style="margin-top:6px"></div></div><button class="btn btn-cta" style="width:100%" id="dBook">'+(bk.mode==="pick"?"Request my inspection":"Request a call")+'</button><p class="fine" id="dErr" style="color:var(--act);margin:8px 0 0"></p>'+
@@ -1257,7 +1263,7 @@ footer.site a:hover{color:#fff}
         '<button type="button" class="opt" data-gseg="res" aria-pressed="'+(g.segment==="res")+'"><b>Residential</b><span>Homeowner</span></button>'+
         '<button type="button" class="opt" data-gseg="com" aria-pressed="'+(g.segment==="com")+'"><b>Commercial</b><span>HOA, condo, marina, business</span></button></div>'+
       '<div class="field"><span class="flabel">Include chapters for</span><div class="chips">'+["seawall","dock","deck"].map(function(k){return '<button type="button" class="chip" data-gs="'+k+'" aria-pressed="'+(g.structs.indexOf(k)>-1)+'">'+NAMES[k]+'</button>'}).join("")+'</div></div>'+
-      '<div class="row2"><div class="field"><label for="gName">First name</label><input id="gName" autocomplete="given-name" value="'+esc(who.name||"")+'"></div><div class="field"><label for="gEmail">Email</label><input id="gEmail" value="'+esc(g.email)+'" autocomplete="email" inputmode="email"></div></div>'+
+      '<div class="row2"><div class="field"><label for="gName">First name</label><input id="gName" autocomplete="given-name" value=""></div><div class="field"><label for="gEmail">Email</label><input id="gEmail" value="'+esc(g.email)+'" autocomplete="email" inputmode="email"></div></div>'+
       '<div class="field"><label for="gPhone">Mobile phone (optional)</label><input id="gPhone" autocomplete="tel" inputmode="tel"></div>'+
       '<label class="consent"><input type="checkbox" id="gConsent"><span id="gConsentText">'+consentHtml(r)+'</span></label>'+
       '<p class="sharenote">'+shareNote()+' <a href="/legal/your-privacy-choices/">You can opt out.</a></p>'+

@@ -417,6 +417,7 @@ FOOT = f"""<footer class="foot"><div class="wrap">
     <a href="/resources/failing-seawall/">A failing seawall</a>
     <a href="/resources/docks-and-lifts/">Docks &amp; lifts</a>
     <a href="/resources/buying-and-selling/">Buying or selling</a>
+    <a href="/articles/">Articles</a>
   </div>
   <div>
     <h4>Answers</h4>
@@ -1143,6 +1144,170 @@ def build_costs():
     body += FOOT
     write(path, body)
     PAGES.append((path, TODAY, "0.9"))
+
+
+# ------------------------------------------------------------------ articles
+ARTICLE_TIEBACK = "/articles/seawall-tie-back-repair-cost/"
+ARTICLE_DATE = "2026-11-13"
+
+TIEBACK_SIGNS = [
+    ("The wall leans toward the water", "Tie-backs are what hold the wall upright against the soil behind it. A wall that has started to tilt outward is the clearest warning that something is no longer holding."),
+    ("The cap has rotated, cracked or opened at the joints", "The cap is where the anchor rods connect. When the cap twists, splits or shows gaps along its length, the load path through the anchors may have changed."),
+    ("The ground behind the wall is sinking", "Dips, sinkholes or pavers that keep settling near the wall can mean soil is moving. That can happen when the wall shifts or when soil is escaping through gaps."),
+    ("Soil or sand is coming through the wall", "Loose soil showing at joints, cracks or the base of the wall means the wall is no longer holding the fill back as designed."),
+]
+
+TIEBACK_DRIVERS = [
+    ("How many anchors have failed, and at what spacing", "One bad anchor and a whole run of them are different jobs. Anchors are spaced along the wall, so the count and the spacing set the scope more than anything else."),
+    ("Whether the wall itself can be saved", "If the panels are still structurally sound, anchors can often be addressed on their own. If the panels have moved or cracked, the job moves toward a heavier repair or a new wall. A survey settles which one you are in. Our <a href=\"/resources/what-it-costs/\">cost guide</a> lays out those three approaches."),
+    ("What sits on top of the anchor path", "A tie-back runs back from the wall under your yard. Replacing one can mean opening up lawn, pavers, irrigation, trees or part of a pool deck. Putting that back is often listed as work by others, which means it can land on you."),
+    ("How the crew can get to the work", "Land access versus barge access, the width of the side yard and the equipment that fits all change the labor involved."),
+    ("What the replacement is made of and how it is protected", "Anchors corrode out of sight, mostly because of the salt environment. The material, the coating and the way the rod is protected where it meets the cap are worth asking about."),
+    ("Engineering and permits", "Structural work on a seawall normally goes through your local building department, and the rules differ by city. Design, survey and permit costs are usually separate from the contractor's price. Start with the <a href=\"/resources/seawall-compliance/\">rules for your city</a>."),
+    ("What turns up once the digging starts", "Some anchors cannot be inspected until the ground is opened. A good quote states in advance what each additional anchor will cost if more are needed."),
+]
+
+TIEBACK_QUESTIONS = [
+    ("How many anchors are being replaced or added, and at what spacing?", "A quote that says only &ldquo;repair tie-backs&rdquo; is not a scope."),
+    ("What are they made of, and how are they protected?", "Material and coating are where a cheaper bid often differs."),
+    ("What is the price for each extra anchor found after work starts?", "Ask for the unit price in writing before you sign."),
+    ("Who restores the yard, and to what standard?", "Pavers, irrigation, sod and trees are frequently excluded."),
+    ("Is an engineer's design included, and who pays for permits and surveys?", "These are often owner costs on top of the contract price."),
+    ("What does the warranty cover on the anchors specifically?", "Read the length and what it excludes."),
+]
+
+TIEBACK_FAQ = [
+    ("Can tie-backs be repaired without replacing the whole seawall?",
+     "Sometimes. It depends on whether the panels are still structurally sound, which a survey and an engineer establish. If the wall has already moved or cracked, anchors alone may not be enough."),
+    ("How long do seawall tie-backs last?",
+     "There is no fixed lifespan. It depends on the material, how it is protected, and how much salt and moisture it sees. Because they are buried, you usually find out about a problem from the wall, not the anchor."),
+    ("Do I need a permit to repair tie-backs?",
+     "Usually yes for structural work, but the requirement and the process differ by city and county. Check with your building department before work starts. We list the rule for each city we have verified."),
+    ("Who should look at it first?",
+     "A licensed marine contractor, and where the wall is moving, a structural or geotechnical engineer. Get the findings in writing before you compare prices."),
+]
+
+
+def build_articles():
+    path = ARTICLE_TIEBACK
+    title = fit_title("Seawall Tie-Back Repair Cost: What Sets the Price")
+    desc = fit_desc(
+        "What decides the cost of repairing seawall tie-back anchors in South Florida, "
+        "the warning signs, and the questions to put in every quote",
+        "Why an honest figure needs an inspection")
+
+    signs = "".join(f'<div><b>{e(k)}</b><span>{e(v)}</span></div>' for k, v in TIEBACK_SIGNS)
+    drv = "".join(f'<div><b>{e(k)}</b><span>{v}</span></div>' for k, v in TIEBACK_DRIVERS)
+    qs = "".join(f'<div><b>{e(k)}</b><span>{v}</span></div>' for k, v in TIEBACK_QUESTIONS)
+    faq = "".join(f'<div><b>{e(q)}</b><span>{e(a)}</span></div>' for q, a in TIEBACK_FAQ)
+
+    faq_schema = {
+        "@type": "FAQPage",
+        "mainEntity": [{"@type": "Question", "name": q,
+                        "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in TIEBACK_FAQ],
+    }
+    crumb_html, crumb_schema = crumbs(
+        [("Home", "/"), ("Articles", "/articles/"), ("Tie-back repair cost", None)])
+    art = article_schema(path, title, desc, ARTICLE_DATE)
+    body = head_(title, desc, path, body_data=' data-cluster="failing-seawall"',
+                 schema=[crumb_schema, art, faq_schema])
+    body += crumb_html + f'''
+
+<div class="answer"><div class="wrap">
+  <span class="eyebrow">Article &middot; Seawall repair &middot; Updated November 2026</span>
+  <h1>What does a seawall tie-back repair cost?</h1>
+  <p class="qualifier"><b>The honest answer is that it depends on your wall, and no one can give a
+  real number without looking at it.</b> We do not publish a price per anchor because we do not have
+  a verified one, and a guess is worse than no number. What we can show you is what actually decides
+  the price, the signs that tie-backs have failed, and the questions that make two quotes comparable.</p>
+  <p class="artmeta">WallDockDeck &middot; South Florida seawalls, docks &amp; decks &middot; 5 min read</p>
+  <p class="artcta"><a class="artbtn" href="#free-guide">Get the free 12-sign checklist</a>
+  <a class="artlink" href="/resources/what-it-costs/">See the full cost guide &rarr;</a></p>
+</div></div>
+
+<section><div class="wrap">
+  <div class="shead"><h2>What a tie-back does</h2>
+  <p>A <a href="/glossary/tie-back-anchor/">tie-back</a> is a rod or cable that runs from the back
+  of the seawall into the ground behind it. It holds the wall against the push of soil and water on
+  the land side. At the far end it is fastened to something that resists being pulled, such as a
+  <a href="/glossary/deadman-anchor/">deadman</a>. Because it is buried, a failing one is invisible
+  until the wall starts to show it.</p></div>
+</div></section>
+
+<section class="tint"><div class="wrap">
+  <div class="shead"><h2>Signs the tie-backs may have failed</h2>
+  <p>None of these proves an anchor has failed, and they can have other causes. Together they are a
+  reason to have it looked at.</p></div>
+  <div class="rows">{signs}</div>
+  <p class="caveat" style="max-width:66ch"><b>Do not wait on a leaning wall.</b> Our
+  <a href="/resources/failing-seawall/">12-sign checklist</a> covers the rest of what to look for.</p>
+</div></section>
+
+<section id="free-guide"><div class="wrap">{slot("H2", "", "failing-seawall", offer="warning_list")}</div></section>
+
+<section><div class="wrap">
+  <div class="shead"><h2>What sets the price</h2>
+  <p>These are the things that move a tie-back repair quote. You can find out most of them before
+  anyone gives you a number.</p></div>
+  <div class="rows">{drv}</div>
+</div></section>
+
+<section class="tint"><div class="wrap">
+  <div class="shead"><h2>Six questions to put in every quote</h2>
+  <p>Two bids for the same job can look alike and still not be. These are where they differ. Our
+  <a href="/free/templates/contractor-quote-comparison/">quote comparison worksheet</a> puts them side
+  by side.</p></div>
+  <div class="rows">{qs}</div>
+</div></section>
+
+<section class="tint"><div class="wrap">
+  <div class="shead"><h2>Common questions</h2></div>
+  <div class="rows">{faq}</div>
+  <p class="caveat" style="max-width:68ch">This article is general information, not an engineering
+  opinion. Inspections and construction are performed by licensed contractors, and local rules vary.
+  Confirm with your building department before you rely on any of it.</p>
+</div></section>
+
+<section><div class="wrap">{slot("H1", "", "failing-seawall", offer="county_guide")}</div></section>
+
+<section class="tint"><div class="wrap">
+  <div class="shead"><h2>Related</h2></div>
+  <div class="rows">
+    <div><b><a href="/resources/what-it-costs/">What a seawall actually costs</a></b><span>The three ways the same wall can be addressed, and what no quote includes.</span></div>
+    <div><b><a href="/resources/failing-seawall/">Is your seawall failing? 12 signs to check</a></b><span>What to look for and where.</span></div>
+    <div><b><a href="/glossary/tie-back-anchor/">Glossary: tie-back anchor</a></b><span>The plain-English definition.</span></div>
+  </div>
+</div></section>
+'''
+    body += FOOT
+    write(path, body)
+    PAGES.append((path, ARTICLE_DATE, "0.8"))
+
+    # Section index
+    ipath = "/articles/"
+    ititle = fit_title("Seawall & Dock Articles for South Florida Owners")
+    idesc = fit_desc("Plain-English articles on seawall repair, cost and rules in South Florida",
+                     "Sourced, dated and with no invented prices")
+    icrumb_html, icrumb_schema = crumbs([("Home", "/"), ("Articles", None)])
+    ibody = head_(ititle, idesc, ipath, schema=[icrumb_schema])
+    ibody += icrumb_html + f'''
+
+<div class="answer"><div class="wrap">
+  <span class="eyebrow">Articles</span>
+  <h1>Seawall and dock articles for South Florida owners</h1>
+  <p class="qualifier">Short, plain-English answers to the questions owners ask before they hire
+  anyone. Each one says what we know, where it comes from and what we do not know.</p>
+</div></div>
+
+<section><div class="wrap">
+  <div class="rows">
+    <div><b><a href="{ARTICLE_TIEBACK}">What does a seawall tie-back repair cost?</a></b><span>What decides the price, the warning signs of failed anchors, and six questions to put in every quote. November 2026.</span></div>
+  </div>
+</div></section>
+'''
+    ibody += FOOT
+    write(ipath, ibody)
+    PAGES.append((ipath, ARTICLE_DATE, "0.7"))
 
 
 # ------------------------------------------------------- county / region pages
@@ -2272,6 +2437,7 @@ def main():
     build_agents(False)
     build_agents(True)
     build_costs()
+    build_articles()
     n_reg = build_regions()
     n_dl = build_downloads()
     build_book()
@@ -2293,6 +2459,7 @@ def main():
     print(f"resources hub        1")
     print(f"agent pages          2   /agents/ /luxury/")
     print(f"cost page            1   /resources/what-it-costs/")
+    print(f"articles            2   /articles/ + tie-back article")
     print(f"trust pages          2   /about/ /how-we-verify/")
     print(f"county comparison    1   /seawall-height-by-county/")
     print(f"county pages      {n_reg:>4}   /{{county}}/{{service}}/")

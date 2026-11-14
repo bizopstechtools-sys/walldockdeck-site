@@ -518,7 +518,8 @@ and a failed one often shows up as a wall leaning toward the water or a cap that
 that includes new or replacement anchors should say how many, at what spacing, of what material, and the
 unit price for any extra anchors found to be needed once work starts.</p>""",
          sources=[],
-         related=[("Quote comparison worksheet", "/free/templates/contractor-quote-comparison/"),
+         related=[("Tie-back repair: what sets the price", "/articles/seawall-tie-back-repair-cost/"),
+                  ("Quote comparison worksheet", "/free/templates/contractor-quote-comparison/"),
                   ("Signs a seawall is failing", "/resources/failing-seawall/")],
          see=["deadman-anchor", "seawall-cap"]),
 
